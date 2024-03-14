@@ -101,12 +101,12 @@ div.error {
 input.error {
   border: 1px solid var(--error);
 }
-
 /* navbar */
 nav {
   display: flex;
   align-items: center;
 }
+
 nav a {
   margin-left: 10px;
 }
@@ -124,10 +124,29 @@ nav button {
 }
 
 /* auth forms */
-form.signup, form.login {
+form.signup,
+form.login {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
   background: #fff;
   border-radius: 4px;
+}
+
+.user-info {
+  display: flex; /* Ensure both badge and button are in the same line */
+  align-items: center; /* Align items vertically center */
+}
+
+.user-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  background-color: white;
+  color: #43e192;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  margin-right: 10px;
 }

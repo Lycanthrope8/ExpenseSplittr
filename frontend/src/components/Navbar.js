@@ -17,15 +17,20 @@ const Navbar = () => {
         </Link>
         <nav>
           {user && (
-            <div>
-              <span>{user.email}</span>
+            <div className="user-info">
+              <button className="user-badge">
+                {user.email.charAt(0).toUpperCase()}
+              </button>
               <button onClick={handleClick}>Log out</button>
             </div>
           )}
-          {!user &&(<div>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
-          </div>)}
+
+          {!user && (
+            <div>
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Signup</Link>
+            </div>
+          )}
         </nav>
       </div>
     </header>
