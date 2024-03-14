@@ -1,12 +1,18 @@
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import ProfileBadge from "./ProfileBadge";
 
 const Navbar = () => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
+
   const handleClick = () => {
     logout();
+  };
+
+  const handleProfileBadge = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -18,9 +24,7 @@ const Navbar = () => {
         <nav>
           {user && (
             <div className="user-info">
-              <button className="user-badge">
-                {user.email.charAt(0).toUpperCase()}
-              </button>
+              <ProfileBadge user={user} />
               <button onClick={handleClick}>Log out</button>
             </div>
           )}
