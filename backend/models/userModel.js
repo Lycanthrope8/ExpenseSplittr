@@ -22,6 +22,8 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
+  avatar: { type: String,
+  default: "" },
 });
 
 // static signup method
