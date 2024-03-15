@@ -18,6 +18,18 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
+  age: {
+    type: Number, 
+    default: 0,
+  },
+  gender: {
+    type: String,
+    default: "",
+  },
+  phone: {
+    type: String,
+    default: "",
+  },
   address: {
     type: String,
     default: "",

@@ -11,9 +11,7 @@ const Navbar = () => {
     logout();
   };
 
-  const handleProfileBadge = (e) => {
-    e.preventDefault();
-  };
+  
 
   return (
     <header>

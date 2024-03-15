@@ -27,7 +27,10 @@ function App() {
               path="/signup"
               element={!user ? <Signup /> : <Navigate to="/" />}
             />
-            <Route path="/profile/:userId" element={<Profile />} />
+            <Route
+              path="/profile/:userId"
+              element={user ? <Profile /> : <Navigate to="/login" />}
+            />
           </Routes>
         </div>
       </BrowserRouter>
