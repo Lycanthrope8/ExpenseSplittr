@@ -15,11 +15,11 @@ const getUserProfile = async (req, res) => {
 // Update User
 const updateUserProfile = async (req, res) => {
   const userId = req.params.userId;
-  const { name, address, avatar } = req.body;
+  const { name, age, gender, phone, address, avatar } = req.body;
   try {
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { name, address, avatar },
+      { name, age, gender, phone, address, avatar },
       { new: true }
     );
     res.status(200).json(updatedUser);
