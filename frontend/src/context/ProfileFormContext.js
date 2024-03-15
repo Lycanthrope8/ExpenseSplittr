@@ -6,6 +6,7 @@ export const profileFormContext = createContext();
 export const profileFormReducer = (state, action) => {
     switch (action.type) {
         case 'SET_USER':
+            console.log('SET_USER action.payload:', action.payload);
             return {
                 ...state,
                 user: action.payload

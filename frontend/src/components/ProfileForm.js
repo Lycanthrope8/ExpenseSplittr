@@ -43,7 +43,7 @@ const ProfileForm = () => {
       setPhone(json.phone || "");
       setAddress(json.address || "");
       // Dispatch action to update context
-      dispatch({ type: "SET_PROFILE", payload: json });
+      dispatch({ type: "UPDATE_USE R", payload: json });
     }
   };
 
