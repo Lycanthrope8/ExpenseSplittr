@@ -1,16 +1,17 @@
 import { useState } from "react";
+import { useProfileForm } from "../hooks/useProfileForm";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProfileForm = () => {
-    const [error, setError] = useState(null);
-    const [emptyFields, setEmptyFields] = useState([]);
-    const { user } = useAuthContext();
-    console.log('user:', user)
-    const [name, setName] = useState(user.name || ''); 
-    const [age, setAge] = useState(user.age || ''); 
-    const [gender, setGender] = useState(user.gender || '');
-    const [phone, setPhone] = useState(user.phone || '');
-    const [address, setAddress] = useState(user.address || '');
+  const { dispatch } = useProfileForm();
+  const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
+  const { user } = useAuthContext();
+  const [name, setName] = useState(user.name || "");
+  const [age, setAge] = useState(user.age || "");
+  const [gender, setGender] = useState(user.gender || "");
+  const [phone, setPhone] = useState(user.phone || "");
+  const [address, setAddress] = useState(user.address || "");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,16 +32,18 @@ const ProfileForm = () => {
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);
-      setEmptyFields(json.emptyFields || []);
+      setEmptyFields(json.emptyFields);
     } else {
       setEmptyFields([]);
       setError(null);
-      // Clear form inputs after successful submission
-      setName("");
-      setAge("");
-      setGender("");
-      setPhone("");
-      setAddress("");
+      // Update state variables with new values
+      setName(json.name || "");
+      setAge(json.age || "");
+      setGender(json.gender || "");
+      setPhone(json.phone || "");
+      setAddress(json.address || "");
+      // Dispatch action to update context
+      dispatch({ type: "SET_PROFILE", payload: json });
     }
   };
 
@@ -65,7 +68,7 @@ const ProfileForm = () => {
         Age:
         <input
           type="number"
-          value={age || ''} // Ensure empty string if age is not available
+          value={age || ""} // Ensure empty string if age is not available
           onChange={(e) => setAge(parseInt(e.target.value))}
           className={emptyFields.includes("age") ? "error" : ""}
         />

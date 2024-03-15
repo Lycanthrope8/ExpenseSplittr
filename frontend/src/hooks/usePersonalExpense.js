@@ -7,6 +7,5 @@ export const usePersonalExpense = () => {
   if(!context) {
     throw Error('usePersonalExpense must be used inside a PersonalExpenseProvider')
   }
-
   return context
 }
