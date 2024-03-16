@@ -2,7 +2,8 @@ import { usePersonalExpense } from '../hooks/usePersonalExpense'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 // date fns
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+// import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { format } from 'date-fns';
 
 const ExpenseDetails = ({ expense }) => {
   const { dispatch } = usePersonalExpense()
@@ -25,12 +26,14 @@ const ExpenseDetails = ({ expense }) => {
       dispatch({type: 'DELETE_EXPENSE', payload: json})
     }
   }
+  const formattedDate = format(new Date(expense.createdAt), "MMMM dd, yyyy 'at' HH:mm");
 
   return (
     <div className="expense-details">
       <h4>{expense.title}</h4>
       <p><strong>Amount: </strong>{expense.amount}</p>
-      <p>{formatDistanceToNow(new Date(expense.createdAt), { addSuffix: true })}</p>
+      {/* <p>{formatDistanceToNow(new Date(expense.createdAt), { addSuffix: true })}</p> */}
+      <p>{formattedDate}</p>
       <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
     </div>
   )

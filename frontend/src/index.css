@@ -150,3 +150,24 @@ form.login {
   font-size: 20px;
   margin-right: 10px;
 }
+
+/* Sort button */
+.sort-button {
+  background-color: var(--primary); /* Primary color */
+  color: #fff; /* White text */
+  border: none; /* No border */
+  padding: 5px 10px; /* Padding */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Cursor on hover */
+  font-family: "Poppins"; /* Font family */
+  font-size: 0.9em; /* Font size */
+  position: absolute; /* Position absolute */
+  top: 10px; /* Distance from top */
+  right: 10px; /* Distance from right */
+}
+
+
+
+.sort-button:hover {
+  background-color: #2e8b57; /* Darker shade on hover */
+}
