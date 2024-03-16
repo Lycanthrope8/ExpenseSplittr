@@ -1,12 +1,25 @@
-import ProfileForm from "../components/ProfileForm";
-import { useState } from "react";
-import ProfilePicture from "../components/ProfilePicture";
-import { ProfileContextProvider } from "../context/ProfileContext";
+// Profile.js
+
+import React, { useState, useContext, useEffect } from 'react';
+import ProfileForm from '../components/ProfileForm';
+import ProfilePicture from '../components/ProfilePicture';
+import { ProfileContext } from '../context/ProfileContext';
 
 const Profile = () => {
-  const [profilePictureUrl, setProfilePictureUrl] = useState(
-    "http://localhost:4000/uploads/profilePictures/default.jpg"
-  );
+  const { profile } = useContext(ProfileContext);
+  const [loading, setLoading] = useState(true);
+  const [profilePictureUrl, setProfilePictureUrl] = useState('');
+
+  useEffect(() => {
+    if (profile) {
+      setLoading(false);
+      setProfilePictureUrl(profile.avatar || 'http://localhost:4000/uploads/profilePictures/default.jpg');
+    }
+  }, [profile]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const handlePictureChange = (newPictureUrl) => {
     setProfilePictureUrl(newPictureUrl);
@@ -15,10 +28,8 @@ const Profile = () => {
   return (
     <div>
       <h1>This is Profile Page</h1>
-      <ProfileContextProvider>
-        <ProfilePicture imageUrl={profilePictureUrl} />
-        <ProfileForm onPictureChange={handlePictureChange} />
-      </ProfileContextProvider>
+      <ProfilePicture imageUrl={profilePictureUrl} />
+      <ProfileForm onPictureChange={handlePictureChange} />
     </div>
   );
 };

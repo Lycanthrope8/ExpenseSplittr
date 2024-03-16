@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
+import { ProfileContextProvider } from "./context/ProfileContext";
 
 function App() {
   const { user } = useAuthContext();
@@ -29,7 +30,15 @@ function App() {
             />
             <Route
               path="/profile/:userId"
-              element={user ? <Profile /> : <Navigate to="/login" />}
+              element={
+                user ? (
+                  <ProfileContextProvider>
+                    <Profile />
+                  </ProfileContextProvider>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
             />
           </Routes>
         </div>
