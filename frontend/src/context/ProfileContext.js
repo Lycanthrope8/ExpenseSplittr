@@ -33,18 +33,17 @@ export const ProfileContextProvider = ({ children }) => {
         }
 
         const profileData = await response.json();
-        console.log('Profile data:', profileData);
+        // console.log('Profile data:', profileData);
         dispatch({ type: 'SET_PROFILE', payload: profileData });
       } catch (error) {
         console.error('Error fetching profile:', error);
-        // Optionally, dispatch an action to handle error state
       }
     };
 
     fetchProfile();
   }, []) // Empty dependency array ensures this effect runs only once
 
-  console.log('ProfileContext state:', state)
+//   console.log('ProfileContext state:', state)
   
   return (
     <ProfileContext.Provider value={{ ...state, dispatch }}>

@@ -1,14 +1,26 @@
-import { useState } from "react";
-import { useProfileContext } from "../hooks/useProfileContext";
+import { useState, useEffect, useContext } from "react";
+import { ProfileContext } from "../context/ProfileContext"; // Update the path accordingly
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProfileForm = () => {
-  // const { dispatch } = useProfileContext();
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { user } = useAuthContext();
-  const {profile} = useProfileContext();
-  console.log('ProfileForm profile:', profile)
+  const { profile, dispatch } = useContext(ProfileContext);
+
+  useEffect(() => {
+    if (profile) {
+      setLoading(false);
+      // Set form input values when profile changes
+      setName(profile.name || "");
+      setAge(profile.age || "");
+      setGender(profile.gender || "");
+      setPhone(profile.phone || "");
+      setAddress(profile.address || "");
+    }
+  }, [profile]);
+
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
@@ -38,16 +50,13 @@ const ProfileForm = () => {
     } else {
       setEmptyFields([]);
       setError(null);
-      // Update state variables with new values
-      setName(json.name || "");
-      setAge(json.age || "");
-      setGender(json.gender || "");
-      setPhone(json.phone || "");
-      setAddress(json.address || "");
-      // Dispatch action to update context
-      // dispatch({ type: "SET_PROFILE", payload: json });
+      dispatch({ type: "SET_PROFILE", payload: json });
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -70,7 +79,7 @@ const ProfileForm = () => {
         Age:
         <input
           type="number"
-          value={age || ""} // Ensure empty string if age is not available
+          value={age || ""}
           onChange={(e) => setAge(parseInt(e.target.value))}
           className={emptyFields.includes("age") ? "error" : ""}
         />
