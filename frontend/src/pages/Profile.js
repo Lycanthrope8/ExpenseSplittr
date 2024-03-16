@@ -1,13 +1,13 @@
 import ProfileForm from "../components/ProfileForm";
-import { ProfileFormProvider } from "../context/ProfileFormContext";
+import { ProfileContextProvider } from "../context/ProfileContext";
 
 const Profile = () => {
   return (
     <div>
       <h1>This is Profile Page</h1>
-      <ProfileFormProvider>
+      <ProfileContextProvider>
         <ProfileForm />
-      </ProfileFormProvider>
+      </ProfileContextProvider>
     </div>
   );
 };

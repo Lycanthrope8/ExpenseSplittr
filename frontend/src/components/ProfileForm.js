@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { useProfileForm } from "../hooks/useProfileForm";
+import { useProfileContext } from "../hooks/useProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProfileForm = () => {
-  const { profile, dispatch } = useProfileForm();
+  // const { dispatch } = useProfileContext();
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
   const { user } = useAuthContext();
-  const [name, setName] = useState(profile.name || "");
-  const [age, setAge] = useState(profile.age || "");
-  const [gender, setGender] = useState(profile.gender || "");
-  const [phone, setPhone] = useState(profile.phone || "");
-  const [address, setAddress] = useState(profile.address || "");
+  const {profile} = useProfileContext();
+  console.log('ProfileForm profile:', profile)
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +45,7 @@ const ProfileForm = () => {
       setPhone(json.phone || "");
       setAddress(json.address || "");
       // Dispatch action to update context
-      dispatch({ type: "UPDATE_PROFILE", payload: json });
+      // dispatch({ type: "SET_PROFILE", payload: json });
     }
   };
 

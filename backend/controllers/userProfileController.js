@@ -1,24 +1,43 @@
-const User = require("../models/userModel");
+const UserProfile = require("../models/userProfileModel");
 
-
-// Get User Profile
+// Get UserProfile Profile
 const getUserProfile = async (req, res) => {
   const userId = req.params.userId;
   try {
-    const user = await User.findById(userId);
+    const user = await UserProfile.findOne({userId});
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-// Update User
+//Create UserProfile
+const createUserProfile = async (req, res) => {
+  const userId = req.params.userId;
+  const { name, age, gender, phone, address, avatar} = req.body;
+  try {
+    const newUser = await UserProfile.create({
+      name,
+      age,
+      gender,
+      phone,
+      address,
+      avatar,
+      userId,
+    });
+    res.status(200).json(newUser);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// Update UserProfile
 const updateUserProfile = async (req, res) => {
   const userId = req.params.userId;
   const { name, age, gender, phone, address, avatar } = req.body;
   try {
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
+    const updatedUser = await UserProfile.findOneAndUpdate(
+      {userId: userId},
       { name, age, gender, phone, address, avatar },
       { new: true }
     );
@@ -28,4 +47,4 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
-module.exports = {getUserProfile, updateUserProfile };
+module.exports = { getUserProfile, createUserProfile, updateUserProfile };
