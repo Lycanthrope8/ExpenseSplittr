@@ -37,7 +37,6 @@ const updateUserProfile = async (req, res) => {
   const userId = req.params.userId;
   const { name, age, gender, phone, address } = req.body;
   const avatar = req.file ? req.file.path : ''; 
-  console.log(avatar)
   try {
     const updatedUser = await UserProfile.findOneAndUpdate(
       { userId: userId },

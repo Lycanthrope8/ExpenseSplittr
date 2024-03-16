@@ -2,13 +2,17 @@ const multer = require('multer');
 
 // Multer configuration
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/profilePictures'); // Destination folder where the images will be stored
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname); // File naming: timestamp-originalname
-  }
-});
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/profilePictures'); // Destination folder where the images will be stored
+    },
+    filename: function (req, file, cb) {
+      // Get the userId from the request parameters
+      const userId = req.params.userId;
+      // Construct the filename with pp_ prefix and userId
+      const filename = `pp_${userId}`;
+      cb(null, filename); // Use the custom filename
+    }
+  });
 
 const fileFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image/')) {
@@ -18,6 +22,14 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-const upload = multer({ storage: storage, fileFilter: fileFilter });
-
-module.exports = upload;
+const upload = multer({ 
+    storage: storage,
+    fileFilter: fileFilter,
+    onError: function(err, next) {
+      console.error('Multer error:', err);
+      next(err);
+    },
+    overwrite: true // Overwrite existing files with the same name
+  });
+  
+  module.exports = upload;

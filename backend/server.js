@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
+const path = require('path');
 const personalExpenseRoutes = require('./routes/personalExpenses')
 const userRoutes = require('./routes/user')
 const userProfileRoutes = require('./routes/userProfile')
@@ -18,10 +19,15 @@ app.use((req, res, next) => {
   next()
 })
 
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+
 // routes
 app.use('/api/personalExpenses', personalExpenseRoutes)
 app.use('/api/user', userRoutes)
 app.use('/profile/', userProfileRoutes)
+
+
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)

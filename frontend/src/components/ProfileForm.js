@@ -2,7 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-const ProfileForm = () => {
+const ProfileForm = ({ onPictureChange }) => {
+  // Add onPictureChange as a prop
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,26 +34,25 @@ const ProfileForm = () => {
       setError("You must be logged in to update your profile");
       return;
     }
-    
-    const formData = new FormData(); // Create a FormData object
-    
-    // Append form fields to FormData object
-    formData.append('name', name);
-    formData.append('age', age);
-    formData.append('gender', gender);
-    formData.append('phone', phone);
-    formData.append('address', address);
-    formData.append('avatar', avatar); // Append the file
-    
+
+    const formData = new FormData(); 
+
+    formData.append("name", name);
+    formData.append("age", age);
+    formData.append("gender", gender);
+    formData.append("phone", phone);
+    formData.append("address", address);
+    formData.append("avatar", avatar); 
+
     try {
       const response = await fetch(`/profile/${user.userId}`, {
         method: "PATCH",
-        body: formData, // Pass FormData object as body
+        body: formData, 
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
-  
+
       const json = await response.json();
       if (!response.ok) {
         setError(json.error);
@@ -61,12 +61,16 @@ const ProfileForm = () => {
         setEmptyFields([]);
         setError(null);
         dispatch({ type: "SET_PROFILE", payload: json });
+
+        // Update profile picture URL if a new picture is uploaded
+        if (json.avatar) {
+          onPictureChange(json.avatar);
+        }
       }
     } catch (error) {
       setError("Error updating profile");
     }
   };
-  
 
   if (loading) {
     return <div>Loading...</div>;
