@@ -41,7 +41,7 @@ export const ProfileContextProvider = ({ children }) => {
     };
 
     fetchProfile();
-  }, []) // Empty dependency array ensures this effect runs only once
+  }, []) 
 
 //   console.log('ProfileContext state:', state)
   

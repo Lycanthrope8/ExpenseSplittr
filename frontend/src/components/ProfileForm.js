@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { ProfileContext } from "../context/ProfileContext"; // Update the path accordingly
+import { ProfileContext } from "../context/ProfileContext"; 
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProfileForm = () => {
@@ -12,7 +12,6 @@ const ProfileForm = () => {
   useEffect(() => {
     if (profile) {
       setLoading(false);
-      // Set form input values when profile changes
       setName(profile.name || "");
       setAge(profile.age || "");
       setGender(profile.gender || "");
@@ -60,6 +59,7 @@ const ProfileForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      
       <label>
         Name:
         <input
