@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { ProfileContext } from "../context/ProfileContext"; 
+import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const ProfileForm = () => {
@@ -20,6 +20,7 @@ const ProfileForm = () => {
     }
   }, [profile]);
 
+  const [avatar, setAvatar] = useState(null);
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
@@ -32,26 +33,40 @@ const ProfileForm = () => {
       setError("You must be logged in to update your profile");
       return;
     }
-    const profileInformation = { name, age, gender, phone, address };
-    const response = await fetch(`/profile/${user.userId}`, {
-      method: "PATCH",
-      body: JSON.stringify(profileInformation),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-
-    const json = await response.json();
-    if (!response.ok) {
-      setError(json.error);
-      setEmptyFields(json.emptyFields);
-    } else {
-      setEmptyFields([]);
-      setError(null);
-      dispatch({ type: "SET_PROFILE", payload: json });
+    
+    const formData = new FormData(); // Create a FormData object
+    
+    // Append form fields to FormData object
+    formData.append('name', name);
+    formData.append('age', age);
+    formData.append('gender', gender);
+    formData.append('phone', phone);
+    formData.append('address', address);
+    formData.append('avatar', avatar); // Append the file
+    
+    try {
+      const response = await fetch(`/profile/${user.userId}`, {
+        method: "PATCH",
+        body: formData, // Pass FormData object as body
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+  
+      const json = await response.json();
+      if (!response.ok) {
+        setError(json.error);
+        setEmptyFields(json.emptyFields);
+      } else {
+        setEmptyFields([]);
+        setError(null);
+        dispatch({ type: "SET_PROFILE", payload: json });
+      }
+    } catch (error) {
+      setError("Error updating profile");
     }
   };
+  
 
   if (loading) {
     return <div>Loading...</div>;
@@ -59,7 +74,15 @@ const ProfileForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      
+      <label>
+        Avatar:
+        <input
+          type="file"
+          onChange={(e) => setAvatar(e.target.files[0])}
+          accept="profilePictures/*"
+        />
+      </label>
+
       <label>
         Name:
         <input

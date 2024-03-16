@@ -4,17 +4,18 @@ const UserProfile = require("../models/userProfileModel");
 const getUserProfile = async (req, res) => {
   const userId = req.params.userId;
   try {
-    const user = await UserProfile.findOne({userId});
+    const user = await UserProfile.findOne({ userId });
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-//Create UserProfile
+// Create UserProfile
 const createUserProfile = async (req, res) => {
   const userId = req.params.userId;
-  const { name, age, gender, phone, address, avatar} = req.body;
+  const { name, age, gender, phone, address } = req.body;
+  const avatar = req.file ? req.file.path : ''; 
   try {
     const newUser = await UserProfile.create({
       name,
@@ -22,7 +23,7 @@ const createUserProfile = async (req, res) => {
       gender,
       phone,
       address,
-      avatar,
+      avatar, // Save avatar path to the database
       userId,
     });
     res.status(200).json(newUser);
@@ -34,10 +35,12 @@ const createUserProfile = async (req, res) => {
 // Update UserProfile
 const updateUserProfile = async (req, res) => {
   const userId = req.params.userId;
-  const { name, age, gender, phone, address, avatar } = req.body;
+  const { name, age, gender, phone, address } = req.body;
+  const avatar = req.file ? req.file.path : ''; 
+  console.log(avatar)
   try {
     const updatedUser = await UserProfile.findOneAndUpdate(
-      {userId: userId},
+      { userId: userId },
       { name, age, gender, phone, address, avatar },
       { new: true }
     );
