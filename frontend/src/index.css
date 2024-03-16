@@ -151,23 +151,20 @@ form.login {
   margin-right: 10px;
 }
 
-/* Sort button */
 .sort-button {
-  background-color: var(--primary); /* Primary color */
-  color: #fff; /* White text */
-  border: none; /* No border */
-  padding: 5px 10px; /* Padding */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Cursor on hover */
-  font-family: "Poppins"; /* Font family */
-  font-size: 0.9em; /* Font size */
-  position: absolute; /* Position absolute */
-  top: 10px; /* Distance from top */
-  right: 10px; /* Distance from right */
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Poppins";
+  font-size: 0.9em;
+  position: absolute;
+  top: 116px; /* Updated */
+  right: 690px; /* Updated */
 }
 
-
-
 .sort-button:hover {
-  background-color: #2e8b57; /* Darker shade on hover */
+  background-color: #2e8b57;
 }
