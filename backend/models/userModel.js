@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+const UserProfile = require('./userProfileModel'); // Import UserProfile model
+
 
 const Schema = mongoose.Schema;
 
@@ -38,6 +40,9 @@ userSchema.statics.signup = async function (email, password) {
   const hashedPassword = await bcrypt.hash(password, salt);
 
   const user = await this.create({ email, password: hashedPassword });
+  // Create UserProfile instance
+  await UserProfile.create({ userId: user._id.toString() });
+
   return user;
 };
 
