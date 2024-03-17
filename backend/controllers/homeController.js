@@ -3,7 +3,7 @@ const Home = require("../models/homeModel");
 const UserProfile = require("../models/userProfileModel");
 const { nanoid } = require('nanoid');
 
-
+// Create a new home
 const createHome = async (req, res) => {
   try {
     const {

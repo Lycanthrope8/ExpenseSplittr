@@ -1,11 +1,16 @@
 const express = require('express');
 const upload = require('../middleware/profileMulterMiddleware');
 const path = require('path');
+const requireAuth = require('../middleware/requireAuth')
 
 // Controller functions
 const { getUserProfile, createUserProfile, updateUserProfile } = require('../controllers/userProfileController');
 
-const router = express.Router();
+
+const router = express.Router()
+
+// requireAuth middleware is used to protect the routes
+router.use(requireAuth)
 
 // User Profile Route
 router.get('/:userId', getUserProfile);

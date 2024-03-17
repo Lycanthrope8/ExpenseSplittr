@@ -1,7 +1,7 @@
 import React from 'react';
 import Personal from './Personal';
 
-const Home = () => {
+const LandingPage = () => {
     return (
         <div>
             <Personal/>
@@ -9,4 +9,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default LandingPage;
