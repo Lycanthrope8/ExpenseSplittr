@@ -9,6 +9,11 @@ const { getUserProfile, createUserProfile, updateUserProfile } = require('../con
 
 const router = express.Router()
 
+// Serve avatar images
+router.get('/uploads/profilePictures/:filename', (req, res) => {
+  const filename = req.params.filename;
+    res.sendFile(path.resolve(`uploads/profilePictures/${filename}`));
+});
 // requireAuth middleware is used to protect the routes
 router.use(requireAuth)
 
@@ -21,10 +26,6 @@ router.post('/:userId', upload.single('avatar'), createUserProfile);
 // Update User Profile Route with avatar upload
 router.patch('/:userId', upload.single('avatar'), updateUserProfile);
 
-// Serve avatar images
-router.get('/uploads/profilePictures/:filename', (req, res) => {
-  const filename = req.params.filename;
-    res.sendFile(path.resolve(`uploads/profilePictures/${filename}`));
-});
+
 
 module.exports = router;
