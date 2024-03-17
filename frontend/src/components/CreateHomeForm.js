@@ -79,8 +79,9 @@ const CreateHomeForm = () => {
     try {
       const response = await fetch(`/home/createHome`, {
         method: "POST",
-        body: formData, 
+        body: JSON.stringify(formData), 
         headers: {
+         "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
       });

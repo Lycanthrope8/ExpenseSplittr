@@ -23,8 +23,6 @@ const createHome = async (req, res) => {
       owner_id,
     } = req.body;
 
-    
-
     const home_id = nanoid(8);
 
     // Create a new home object
