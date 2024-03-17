@@ -27,7 +27,7 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>This is Profile Page</h1>
+      <h1 className="block text-center text-zinc-100 text-2xl ml-0">Profile Page</h1>
       <ProfilePicture imageUrl={profilePictureUrl} />
       <ProfileForm onPictureChange={handlePictureChange} />
     </div>

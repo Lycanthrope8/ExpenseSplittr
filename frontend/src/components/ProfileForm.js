@@ -77,74 +77,69 @@ const ProfileForm = ({ onPictureChange }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Avatar:
+    <form className="grid grid-cols-2 m-4" onSubmit={handleSubmit}>
+      <div>
+        <label className="block text-zinc-100 text-xl ml-0">Avatar:</label>
         <input
           type="file"
           onChange={(e) => setAvatar(e.target.files[0])}
           accept="profilePictures/*"
+          className="block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
-      </label>
+      </div>
 
-      <label>
-        Name:
+      <div>
+        <label className="block text-zinc-100 text-xl ml-0">Name:</label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className={emptyFields.includes("name") ? "error" : ""}
+          className={emptyFields.includes("name") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
         />
-      </label>
-      <br />
-      <label>
-        Email:<h3>{user.email}</h3>
-      </label>
-
-      <br />
-      <label>
-        Age:
+      </div>
+      <label className="block text-zinc-100 text-xl ml-0">Email: {user.email}</label>
+      <div>
+        <label className="block text-zinc-100 text-xl ml-0">Age:</label>
         <input
           type="number"
           value={age || ""}
           onChange={(e) => setAge(parseInt(e.target.value))}
-          className={emptyFields.includes("age") ? "error" : ""}
+          className={emptyFields.includes("age") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
         />
-      </label>
-      <br />
-      <label>
-        Gender:
-        <select
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          className={emptyFields.includes("gender") ? "error" : ""}
-        >
-          <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </label>
-      <br />
-      <label>
-        Phone:
+      </div>
+      <div>
+        <label className="block text-zinc-100 text-xl ml-0">
+          Gender:
+          <select
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            className={emptyFields.includes("gender") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <label className="block text-zinc-100 text-xl ml-0">Phone:</label>
         <input
           type="text"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className={emptyFields.includes("phone") ? "error" : ""}
+          className={emptyFields.includes("phone") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
         />
-      </label>
-      <br />
-      <label>
-        Address:
+      </div>
+      <div>
+        <label className="block text-zinc-100 text-xl ml-0">Address:</label>
         <input
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
-          className={emptyFields.includes("address") ? "error" : ""}
+          className={emptyFields.includes("address") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
         />
-      </label>
-      <button type="submit">Update Profile</button>
+      </div>
+      <button className="col-span-2 mt-2 p-2 bg-accent text-zinc-800 rounded-2xl w-full hover:opacity-90" type="submit">Update Profile</button>
       {error && <div className="error">{error}</div>}
     </form>
   );

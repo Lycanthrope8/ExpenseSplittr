@@ -35,7 +35,7 @@ const Signup = () => {
         />
       </div>
 
-      <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl w-full hover:bg-half-transparent" disabled={isLoading}>Sign up</button>
+      <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl w-full hover:opacity-90" disabled={isLoading}>Sign up</button>
       {error && <div className="error">{error}</div>}
     </form>
   )
