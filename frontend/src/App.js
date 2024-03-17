@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import { ProfileContextProvider } from "./context/ProfileContext";
 import LandingPage from "./pages/LandingPage";
+import { CreateHome } from "./pages/CreateHome";
 
 function App() {
   const { user } = useAuthContext();
@@ -17,6 +18,10 @@ function App() {
         <Navbar />
         <div className="pages">
           <Routes>
+           <Route 
+              path="/home/createHome/"
+              element={user ? <CreateHome /> : <Navigate to="/" />}   
+              />
             <Route
               path="/"
               element={user ? <LandingPage /> : <Navigate to="/login" />}
