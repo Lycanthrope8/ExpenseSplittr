@@ -6,6 +6,7 @@ const path = require('path');
 const personalExpenseRoutes = require('./routes/personalExpenses')
 const userRoutes = require('./routes/user')
 const userProfileRoutes = require('./routes/userProfile')
+const homeRoutes = require('./routes/home')
 const cors = require('cors')
 // express app
 const app = express()
@@ -26,6 +27,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 app.use('/api/personalExpenses', personalExpenseRoutes)
 app.use('/api/user', userRoutes)
 app.use('/profile/', userProfileRoutes)
+app.use('/home/', homeRoutes)
 
 
 

@@ -16,7 +16,6 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  
 });
 
 // static signup method

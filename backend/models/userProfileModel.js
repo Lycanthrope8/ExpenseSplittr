@@ -32,6 +32,10 @@ const userProfileSchema = new Schema(
       type: String,
       required: true,
     },
+    homeId: {
+      type: String,
+      default: "",
+    },
   },
 );
 

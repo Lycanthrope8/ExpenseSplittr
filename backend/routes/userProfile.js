@@ -1,5 +1,5 @@
 const express = require('express');
-const upload = require('../middleware/multerMiddleware');
+const upload = require('../middleware/profileMulterMiddleware');
 const path = require('path');
 
 // Controller functions
