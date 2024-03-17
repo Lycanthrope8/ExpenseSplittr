@@ -50,25 +50,27 @@ const Personal = () => {
   };
   
   return (
-    <div className="home">
-  <SortButton onSort={handleSort}/>
-  <div className="expenses">
-    {sortedExpenses && sortedExpenses.length > 0 ? (
-      sortedExpenses.map((expense) => (
-        <div className="expense-details-wrapper" key={expense._id}>
-          <ExpenseDetails expense={expense} />
-        </div>
-      ))
-    ) : (
-      expenses && expenses.map((expense) => (
-        <div className="expense-details-wrapper" key={expense._id}>
-          <ExpenseDetails expense={expense} />
-        </div>
-      ))
-    )}
+  <div className="home grid grid-cols-3 gap-4 mx-4">
+    <div className="col-span-2 relative">
+      <SortButton onSort={handleSort}/>
+      <div className="expenses">
+        {sortedExpenses && sortedExpenses.length > 0 ? (
+          sortedExpenses.map((expense) => (
+            <div className="expense-details-wrapper" key={expense._id}>
+              <ExpenseDetails expense={expense} />
+            </div>
+          ))
+        ) : (
+          expenses && expenses.map((expense) => (
+            <div className="expense-details-wrapper" key={expense._id}>
+              <ExpenseDetails expense={expense} />
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+    <PersonalExpenseForm />
   </div>
-  <PersonalExpenseForm />
-</div>
 
   );
 };

@@ -44,28 +44,31 @@ const PersonalExpenseForm = () => {
   };
 
   return (
-    <form className="create" onSubmit={handleSubmit}>
-      <h3>Add a New Expense</h3>
+    <form className="create flex flex-col h-72 bg-secondary-dark-bg text-white p-4 rounded-2xl" onSubmit={handleSubmit}>
+      <h1 className="mb-2 text-xl font-bold text-center">Add a New Expense</h1>
+      <div className="grid grid-cols-5 h-10 mb-4">
+        <label className="align-middle mr-4 text-xl">Title:</label>
+        <input
+          type="text"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          className={emptyFields.includes("title") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
+        />
+      </div>
 
-      <label>Title:</label>
-      <input
-        type="text"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-        className={emptyFields.includes("title") ? "error" : ""}
-      />
-
-      <label>Amount:</label>
-      <input
-        type="number"
-        onChange={(e) => setAmount(e.target.value)}
-        value={amount}
-        className={emptyFields.includes("amount") ? "error" : ""}
-      />
+      <div className="grid grid-cols-5 h-10 mb-4">
+        <label className="align-middle mr-4 text-xl">Amount:</label>
+        <input
+          type="number"
+          onChange={(e) => setAmount(e.target.value)}
+          value={amount}
+          className={emptyFields.includes("amount") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
+        />
+      </div>
 
   
 
-      <button>Add Expense</button>
+      <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl">Add Expense</button>
       {error && <div className="error">{error}</div>}
     </form>
   );

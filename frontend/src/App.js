@@ -12,7 +12,7 @@ import Home from "./pages/Home";
 function App() {
   const { user } = useAuthContext();
   return (
-    <div className="App">
+    <div className="App bg-main-dark-bg h-screen">
       <BrowserRouter>
         <Navbar />
         <div className="pages">

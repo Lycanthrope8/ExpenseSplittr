@@ -29,7 +29,7 @@ const ExpenseDetails = ({ expense }) => {
   const formattedDate = format(new Date(expense.createdAt), "MMMM dd, yyyy 'at' HH:mm");
 
   return (
-    <div className="expense-details">
+    <div className="expense-details flex flex-col text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
       <h4>{expense.title}</h4>
       <p><strong>Amount: </strong>{expense.amount}</p>
       {/* <p>{formatDistanceToNow(new Date(expense.createdAt), { addSuffix: true })}</p> */}
