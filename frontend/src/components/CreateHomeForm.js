@@ -58,23 +58,23 @@ const CreateHomeForm = () => {
       return;
     }
 
-    const formData = new FormData(); 
+    const formData = {name, location, accommodationType, bedrooms, bathrooms, rentAmount, utilitiesIncluded, furnished, petsAllowed, smokingsAllowed, moveInDate, images, houseRules, owner_id: user.userId}
 
-    formData.append("name", name);
-    formData.append("location", location);  
-    formData.append("accommodationType", accommodationType);
-    formData.append("bedrooms", bedrooms);
-    formData.append("bathrooms", bathrooms);
-    formData.append("rentAmount", rentAmount);
-    formData.append("utilitiesIncluded", utilitiesIncluded);
-    formData.append("furnished", furnished);
-    formData.append("petsAllowed", petsAllowed);
-    formData.append("smokingAllowed", smokingsAllowed);
-    formData.append("moveInDate", moveInDate);
-    formData.append("images", images);
-    formData.append("owner_id", user.userId);
-    formData.append("houseRules", houseRules);
-    
+    // formData.append("name", name);
+    // formData.append("location", location);  
+    // formData.append("accommodationType", accommodationType);
+    // formData.append("bedrooms", bedrooms);
+    // formData.append("bathrooms", bathrooms);
+    // formData.append("rentAmount", rentAmount);
+    // formData.append("utilitiesIncluded", utilitiesIncluded);
+    // formData.append("furnished", furnished);
+    // formData.append("petsAllowed", petsAllowed);
+    // formData.append("smokingAllowed", smokingsAllowed);
+    // formData.append("moveInDate", moveInDate);
+    // formData.append("images", images);
+    // formData.append("owner_id", user.userId);
+    // formData.append("houseRules", houseRules);
+    console.log(formData);
 
     try {
       const response = await fetch(`/home/createHome`, {
@@ -92,7 +92,7 @@ const CreateHomeForm = () => {
       } else {
         setEmptyFields([]);
         setError(null);
-        // dispatch({ type: "SET_PROFILE", payload: json });
+         dispatch({ type: "CREATE_HOME", payload: json });
 
         // Update profile picture URL if a new picture is uploaded
         
@@ -139,7 +139,7 @@ const CreateHomeForm = () => {
         <div>
             <label className="block text-zinc-100 text-xl ml-0">Bedrooms:</label>
             <input
-            type="text"
+            type="number"
             value={bedrooms}
             onChange={(e) => setBedrooms(e.target.value)}
             // className={emptyFields.includes("bedrooms") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
@@ -148,7 +148,7 @@ const CreateHomeForm = () => {
         <div>
             <label className="block text-zinc-100 text-xl ml-0">Bathrooms:</label>
             <input
-            type="text"
+            type="number"
             value={bathrooms}
             onChange={(e) => setBathrooms(e.target.value)}
             // className={emptyFields.includes("bathrooms") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
@@ -157,7 +157,7 @@ const CreateHomeForm = () => {
         <div>
             <label className="block text-zinc-100 text-xl ml-0">Rent Amount:</label>
             <input
-            type="text"
+            type="number"
             value={rentAmount}
             onChange={(e) => setRentAmount(e.target.value)}
             // className={emptyFields.includes("rentAmount") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
@@ -166,7 +166,7 @@ const CreateHomeForm = () => {
         <div>
             <label className="block text-zinc-100 text-xl ml-0">Utilities Included:</label>
             <input
-            type="text"
+            type="boolean"
             value={utilitiesIncluded}
             onChange={(e) => setUtilitiesIncluded(e.target.value)}
             // className={emptyFields.includes("utilitiesIncluded") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
@@ -175,7 +175,7 @@ const CreateHomeForm = () => {
         <div>
             <label className="block text-zinc-100 text-xl ml-0">Furnished:</label>
             <input
-            type="text"
+            type="boolean"
             value={furnished}
             onChange={(e) => setFurnished(e.target.value)}
             // className={emptyFields.includes("furnished") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
@@ -184,7 +184,7 @@ const CreateHomeForm = () => {
         <div>
             <label className="block text-zinc-100 text-xl ml-0">Pets Allowed:</label>
             <input
-            type="text"
+            type="boolean"
             value={petsAllowed}
             onChange={(e) => setPetsAllowed(e.target.value)}
             // className={emptyFields.includes("petsAllowed") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
@@ -193,7 +193,7 @@ const CreateHomeForm = () => {
         <div>
             <label className="block text-zinc-100 text-xl ml-0">Smoking Allowed:</label>
             <input
-            type="text"
+            type="boolean"
             value={smokingsAllowed}
             onChange={(e) => setSmokingAllowed(e.target.value)}
             // className={emptyFields.includes("smokingsAllowed") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
@@ -202,7 +202,7 @@ const CreateHomeForm = () => {
         <div>
             <label className="block text-zinc-100 text-xl ml-0">Move In Date:</label>
             <input
-            type="text"
+            type="date"
             value={moveInDate}
             onChange={(e) => setMoveInDate(e.target.value)}
             // className={emptyFields.includes("moveInDate") ? "error" : "block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
