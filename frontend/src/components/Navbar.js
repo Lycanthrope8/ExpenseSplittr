@@ -30,9 +30,9 @@ const Navbar = () => {
         </Link>
         <nav>
           {user && (
-            <div className="user-info">
+            <div className="user-info grid grid-cols-2">
               <ProfileBadge user={user} />
-              <button onClick={handleClick}>Log out</button>
+              <button className="material-symbols-outlined text-5xl align-middle hover:text-red-500" onClick={handleClick}>Logout</button>
             </div>
           )}
 
