@@ -1,5 +1,5 @@
 import React from 'react';
-import Personal from './Personal';
+import Personal from '../components/Personal';
 
 const LandingPage = () => {
     return (

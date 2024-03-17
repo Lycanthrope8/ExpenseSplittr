@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { usePersonalExpense } from "../hooks/usePersonalExpense";
 import { useAuthContext } from "../hooks/useAuthContext";
-import ExpenseDetails from "../components/PersonalExpenseDetails";
-import PersonalExpenseForm from "../components/PersonalExpenseForm";
-import SortButton from "../components/SortButton";
+import ExpenseDetails from "./PersonalExpenseDetails";
+import PersonalExpenseForm from "./PersonalExpenseForm";
+import SortButton from "./SortButton";
 
 const Personal = () => {
   const { expenses, dispatch } = usePersonalExpense();
