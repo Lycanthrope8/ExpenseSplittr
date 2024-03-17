@@ -37,9 +37,9 @@ const Navbar = () => {
           )}
 
           {!user && (
-            <div>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Signup</Link>
+            <div className="grid grid-cols-2">
+              <Link className="rounded-xl text-center p-2 hover:text-main-dark-bg hover:bg-zinc-200" to="/login">Login</Link>
+              <Link className="rounded-xl text-center p-2 hover:text-main-dark-bg hover:bg-zinc-200" to="/signup">Signup</Link>
             </div>
           )}
         </nav>

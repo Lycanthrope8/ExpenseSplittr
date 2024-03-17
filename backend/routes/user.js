@@ -1,5 +1,5 @@
 const express = require('express');
-const requireAuth = require('../middleware/requireAuth')
+// const requireAuth = require('../middleware/requireAuth')
 
 //Controller functions
 const {loginUser, signupUser} = require('../controllers/userController');
@@ -8,7 +8,7 @@ const {loginUser, signupUser} = require('../controllers/userController');
 const router = express.Router()
 
 // requireAuth middleware is used to protect the routes
-router.use(requireAuth)
+// router.use(requireAuth)
 
 
 // Login Route
