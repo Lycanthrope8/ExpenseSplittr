@@ -1,7 +1,11 @@
 import React from 'react';
+import CreateHomeForm from '../components/CreateHomeForm';
+import { CreateHomeContextProvider } from '../context/CreateHomeContext';
 
 export const CreateHome = () => {
   return (
-    <div>CreateHome</div>
+    <CreateHomeContextProvider>
+      <CreateHomeForm />
+    </CreateHomeContextProvider>
   )
 }
