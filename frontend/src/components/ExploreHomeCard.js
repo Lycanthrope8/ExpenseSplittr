@@ -1,9 +1,16 @@
-// ExploreHomeCard.js
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 const ExploreHomeCard = ({ home }) => {
+  const navigate = useNavigate();
+  
+  const handleClick = () => {
+    console.log(home.home_id); 
+    navigate(`/home/${home.home_id}`); 
+  };
+  
   return (
-    <div style={{ border: '1px solid #ccc', margin: '10px', padding: '15px', width: '300px' }}>
+    <div style={{ border: '1px solid #ccc', margin: '10px', padding: '15px', width: '300px', cursor: 'pointer' }} onClick={handleClick}>
       <h2>{home.name}</h2>
       <p>Location: {home.location}</p>
       <p>Accommodation Type: {home.accommodationType}</p>
@@ -11,7 +18,6 @@ const ExploreHomeCard = ({ home }) => {
       <p>Rent Amount: ${home.rentAmount}</p>
       <p>Utilities Included: {home.utilitiesIncluded ? 'Yes' : 'No'}</p>
       <p>Move In Date: {new Date(home.moveInDate).toLocaleDateString()}</p>
-      {/* Optionally display images if any */}
       {home.images && home.images.length > 0 && (
         <div>
           {home.images.map((image, index) => (

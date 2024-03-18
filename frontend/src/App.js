@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 // pages & components
 
+
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Navbar from "./components/Navbar";
@@ -10,6 +11,7 @@ import { ProfileContextProvider } from "./context/ProfileContext";
 import LandingPage from "./pages/LandingPage";
 import { CreateHome } from "./pages/CreateHome";
 import { ExploreAllHome } from "./pages/ExploreAllHome";
+import { HomeDetails } from "./pages/HomeDetails";
 
 function App() {
   const { user } = useAuthContext();
@@ -27,6 +29,10 @@ function App() {
               path="/home/exploreHomes/"
               element={user ? <ExploreAllHome /> : <Navigate to="/" />}   
               />
+            <Route  path="/home/:id"
+             element={user ? <HomeDetails /> : <Navigate to="/" />}
+            />
+              
             <Route
               path="/"
               element={user ? <LandingPage /> : <Navigate to="/login" />}
