@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useState,  useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
@@ -9,9 +9,8 @@ const CreateHomeForm = () => {
   const [buttonLabel, setButtonLabel] = useState("Create Home"); // State for button label
   const { user } = useAuthContext();
   const { dispatch } = useContext(ProfileContext);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [accommodationType, setAccommodationType] = useState("");
@@ -57,7 +56,7 @@ const CreateHomeForm = () => {
         body: JSON.stringify(formData),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${user.token}`,
+          Authorization: `Bearer ${user.token}`,
         },
       });
 
@@ -69,7 +68,10 @@ const CreateHomeForm = () => {
       } else {
         setEmptyFields([]);
         setError(null);
-        dispatch({ type: "UPDATE_PROFILE", payload: { homeId : json.savedHome.home_id} });
+        dispatch({
+          type: "UPDATE_PROFILE",
+          payload: { homeId: json.savedHome.home_id },
+        });
         navigate("/"); // Redirect to home page after successful creation
       }
     } catch (error) {
@@ -162,7 +164,7 @@ const CreateHomeForm = () => {
           type="checkbox"
           name="furnished"
           checked={furnished}
-          onChange={(e) => setUtilitiesIncluded(e.target.checked)}
+          onChange={(e) => setFurnished(e.target.checked)}
         />
       </div>
       {/* Pets Allowed */}
