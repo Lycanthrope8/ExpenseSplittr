@@ -1,7 +1,7 @@
 import { CreateHomeContext } from "../context/CreateHomeContext"
 import { useContext } from "react"
 
-export const usePersonalExpense = () => {
+export const useCreateHomeContext = () => {
   const context = useContext(CreateHomeContext)
 
   if(!context) {
