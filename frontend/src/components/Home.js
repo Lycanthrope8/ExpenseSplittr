@@ -26,7 +26,7 @@ export const Home = () => {
             <>
               <Link to="/home/createHome">Create</Link>
               <button>Join</button>
-              <button>Explore</button>
+              <Link to="/home/exploreHome">Explore</Link>
             </>
           )}
         </div>
