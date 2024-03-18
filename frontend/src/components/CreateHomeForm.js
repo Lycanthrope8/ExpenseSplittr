@@ -1,12 +1,15 @@
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import { CreateHomeContext } from "../context/CreateHomeContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const CreateHomeForm = () => {
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const [buttonLabel, setButtonLabel] = useState("Create Home"); // State for button label
   const { user } = useAuthContext();
   const { CreateHome, dispatch } = useContext(CreateHomeContext);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     if (CreateHome) {
@@ -46,6 +49,7 @@ const CreateHomeForm = () => {
       setError("You must be logged in to create your Home");
       return;
     }
+    setButtonLabel("Creating"); // Change button label to "Creating"
     const userId = user.userId;
     const formData = {
       name,
@@ -63,25 +67,7 @@ const CreateHomeForm = () => {
       houseRules,
       owner_id: userId,
     };
-    // console.log("Form Data:", formData);
-
-    
-    // const formData = new FormData();
-    // formData.append("name", name);
-    // formData.append("location", location);
-    // formData.append("accommodationType", accommodationType);
-    // formData.append("bedrooms", bedrooms);
-    // formData.append("bathrooms", bathrooms);
-    // formData.append("rentAmount", rentAmount);
-    // formData.append("utilitiesIncluded", utilitiesIncluded);
-    // formData.append("furnished", furnished);
-    // formData.append("petsAllowed", petsAllowed);
-    // formData.append("smokingAllowed", smokingAllowed);
-    // formData.append("moveInDate", moveInDate);
-    // images.forEach((image) => formData.append("images", image));
-    // formData.append("owner_id", userId);
-    // houseRules.forEach((rule) => formData.append("houseRules", rule));
-    
+    console.log(formData);
     try {
       const response = await fetch(`/home/createHome`, {
         method: "POST",
@@ -96,13 +82,16 @@ const CreateHomeForm = () => {
       if (!response.ok) {
         setError(json.error);
         setEmptyFields(json.emptyFields);
+        setButtonLabel("Create Home"); // Change button label back to "Create Home"
       } else {
         setEmptyFields([]);
         setError(null);
-        dispatch({ type: "CREATE_HOME", payload: json });
+        // dispatch({ type: "CREATE_HOME", payload: json });
+        navigate("/"); // Redirect to home page after successful creation
       }
     } catch (error) {
       setError("Error creating Home");
+      setButtonLabel("Create Home"); // Change button label back to "Create Home" in case of error
     }
   };
 
@@ -254,8 +243,9 @@ const CreateHomeForm = () => {
       <button
         className="col-span-2 mt-2 p-2 bg-accent text-zinc-800 rounded-2xl w-full hover:opacity-90"
         type="submit"
+        disabled={buttonLabel === "Creating"} // Disable button when creating
       >
-        Create Home
+        {buttonLabel}
       </button>
 
       {/* Error Message */}

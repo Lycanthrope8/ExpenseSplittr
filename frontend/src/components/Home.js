@@ -24,7 +24,7 @@ export const Home = () => {
             <h1>You are in a home</h1>
           ) : (
             <>
-              <Link to="/home/createHome">Create a home</Link>
+              <Link to="/home/createHome">Create</Link>
               <button>Join</button>
               <button>Explore</button>
             </>
