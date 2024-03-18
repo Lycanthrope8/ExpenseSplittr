@@ -1,40 +1,59 @@
-// import React from 'react';
-// import { useAuthContext } from '../hooks/useAuthContext';
-// import { format } from 'date-fns';
+import { useState , useEffect } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext'
 
-// const ExploreAllHomes = ({ homelist }) => {
-//   const { user } = useAuthContext();
+// date fns
+// import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { format } from 'date-fns';
 
-//   const handleClick = async () => {
-//     if (!user) {
-//       return;
-//     }
-//   };
+const HomeList = ({ homes }) => {
+  const [loading, setLoading] = useState(true);
+  const { user } = useAuthContext()
 
-//   return (
-//     <div>
-//       {homelist.map((home, index) => (
-        
-//         <div
-//           key={index}
-//           className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl"
-//         >
-//           <div className="flex flex-col">
-//             <h4 className="text-3xl border-b-1 mb-2">{home.homeId}</h4>
-            
-//           </div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
+  useEffect(() => {
+    try{
+      const fetchHomes = async () => {
+        const response = await fetch('/home/all', {
+          headers: { Authorization: `Bearer ${user.token}` }
+        })
+        const json = await response.json()
 
-// export default ExploreAllHomes;
+        if(response.ok){
+          setLoading(false)
+          console.log(json)
+        }
+      }
+      if(user){
+        fetchHomes()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    const fetchHomes = async () => {
+      const response = await fetch("/home/all", {
+        headers: { Authorization: `Bearer ${user.token}` },
+      });
+      const json = await response.json();
 
-import React from 'react'
+      if (response.ok) {
+        setLoading(false);
+        console.log(json)
+      }
+    };
+    if (user) {
+      fetchHomes();
+    }
+  }, []);
 
-export const ExploreAllHomes = () => {
+
   return (
-    <div>all home list</div>
+    <div className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
+
+      <div className='flex flex-col'>
+        
+      </div>
+      
+    </div>
   )
 }
+
+export default HomeList

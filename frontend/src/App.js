@@ -9,7 +9,7 @@ import Profile from "./pages/Profile";
 import { ProfileContextProvider } from "./context/ProfileContext";
 import LandingPage from "./pages/LandingPage";
 import { CreateHome } from "./pages/CreateHome";
-import { ExploreHome } from "./pages/ExploreHome";
+import { ExploreHome } from "./pages/ExploreAllHome";
 
 function App() {
   const { user } = useAuthContext();
@@ -24,7 +24,7 @@ function App() {
               element={user ? <CreateHome /> : <Navigate to="/" />}   
               />
             <Route 
-              path="/home/exploreHome/"
+              path="/home/exploreHomes/"
               element={user ? <ExploreHome /> : <Navigate to="/" />}   
               />
             <Route
