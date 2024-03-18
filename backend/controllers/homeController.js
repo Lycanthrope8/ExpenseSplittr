@@ -5,6 +5,7 @@ const { nanoid } = require('nanoid');
 
 // Create a new home
 const createHome = async (req, res) => {
+  console.log(req.body)
   try {
     const {
       name,

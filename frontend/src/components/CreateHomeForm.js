@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import { CreateHomeContext } from "../context/CreateHomeContext";
+import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const CreateHomeForm = () => {
@@ -8,27 +8,10 @@ const CreateHomeForm = () => {
   const [emptyFields, setEmptyFields] = useState([]);
   const [buttonLabel, setButtonLabel] = useState("Create Home"); // State for button label
   const { user } = useAuthContext();
-  const { CreateHome, dispatch } = useContext(CreateHomeContext);
+  const { dispatch } = useContext(ProfileContext);
   const navigate = useNavigate(); 
 
-  useEffect(() => {
-    if (CreateHome) {
-      setName(CreateHome.name || "");
-      setLocation(CreateHome.location || "");
-      setAccommodationType(CreateHome.accommodationType || "");
-      setBedrooms(CreateHome.bedrooms || 0);
-      setBathrooms(CreateHome.bathrooms || 0);
-      setRentAmount(CreateHome.rentAmount || 0);
-      setUtilitiesIncluded(CreateHome.utilitiesIncluded || false);
-      setFurnished(CreateHome.furnished || false);
-      setPetsAllowed(CreateHome.petsAllowed || false);
-      setSmokingAllowed(CreateHome.smokingAllowed || false);
-      setMoveInDate(CreateHome.moveInDate || "");
-      setImages(CreateHome.images || []);
-      setHouseRules(CreateHome.houseRules || []);
-    }
-  }, [CreateHome]);
-
+  
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [accommodationType, setAccommodationType] = useState("");
@@ -86,7 +69,7 @@ const CreateHomeForm = () => {
       } else {
         setEmptyFields([]);
         setError(null);
-        // dispatch({ type: "CREATE_HOME", payload: json });
+        dispatch({ type: "UPDATE_PROFILE", payload: { homeId : json.savedHome.home_id} });
         navigate("/"); // Redirect to home page after successful creation
       }
     } catch (error) {
