@@ -43,7 +43,7 @@ const createHome = async (req, res) => {
       houseRules,
       owner_id,
     });
-
+    
     // Save the new home to the database
     const savedHome = await newHome.save();
     console.log("Home Created Successfully");

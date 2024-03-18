@@ -17,7 +17,7 @@ const homeSchema = new Schema({
   },
   accommodationType: {
     type: String,
-    enum: ["Apartment", "House", "Condo", "Townhouse"],
+
     required: true,
   },
   bedrooms: {
