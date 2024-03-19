@@ -1,12 +1,12 @@
 import React from "react";
 import PersonalDashboard from "../components/dashboards/PersonalDashboard";
-import { Home } from "../components/Home";
+import { HomeLess } from "../components/HomeLess";
 
 const LandingPage = () => {
   return (
     <div>
       <PersonalDashboard />
-      <Home />
+      <HomeLess />
       
     </div>
   );

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import HomeDashBoard from "../components/dashboards/HomeDashBoard";
+import HomeDashBoard from "./dashboards/HomeDashBoard";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useProfileContext } from "../hooks/useProfileContext";
 import { useNavigate } from "react-router-dom";
-export const Home = () => {
+export const HomeLess = () => {
   const { user } = useAuthContext();
   const { profile } = useProfileContext();
   const [loading, setLoading] = useState(true);
@@ -34,7 +34,6 @@ export const Home = () => {
         <div>
           {profile.homeId ? (
             <>
-              <h1>You are not homeless anymore!</h1>
               <HomeDashBoard />
             </>
           ) : (
