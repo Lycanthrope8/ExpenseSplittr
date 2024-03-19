@@ -20,13 +20,13 @@ const LandingPage = () => {
   };
 
   return (
-    <div>
-      {!showHome && (
+    <div className="grid grid-rows-2 gap-8">
+      {!showHome && !showPersonal && (
         <div onClick={handleProfileDashboardClick}>
           <PersonalDashboard />
         </div>
       )}
-      {!showPersonal && (
+      {!showPersonal && !showHome && (
         <div onClick={handleHomeLessClick}>
           <HomeLess />
         </div>
