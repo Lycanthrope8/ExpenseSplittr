@@ -10,7 +10,7 @@ const ExploreHomeCard = ({ home }) => {
   };
   
   return (
-    <div style={{ border: '1px solid #ccc', margin: '10px', padding: '15px', width: '300px', cursor: 'pointer' }} onClick={handleClick}>
+    <div className='col-span-1 p-8 rounded-3xl bg-[#b9c1b6]' onClick={handleClick}>
       <h2>{home.name}</h2>
       <p>Location: {home.location}</p>
       <p>Accommodation Type: {home.accommodationType}</p>

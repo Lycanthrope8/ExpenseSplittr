@@ -4,10 +4,9 @@ import { HomeLess } from "../components/HomeLess";
 
 const LandingPage = () => {
   return (
-    <div>
+    <div className="grid grid-rows-2 gap-8">
       <PersonalDashboard />
       <HomeLess />
-      
     </div>
   );
 };
