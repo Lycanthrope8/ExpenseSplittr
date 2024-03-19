@@ -128,7 +128,10 @@ const deleteHomeById = async (req, res) => {
 
 const joinReqHome = async (req, res) => {
   try {
-    const { userId, homeId } = req.body;
+    console.log(req.body)
+    // const { userId, homeId } = req.body;
+    const userId = req.body.userId
+    const homeId = req.body.id
     if (!userId || !homeId) {
       return res.status(400).json({ error: 'userId and homeId are required' });
     }

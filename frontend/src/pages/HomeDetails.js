@@ -1,17 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 export const HomeDetails = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
-  const [home, setHome] = useState([]); // Add this line
+  const [home, setHome] = useState([]);
   const { user } = useAuthContext();
-  
-  const handleJoin = () => {
-    return;
+  const [error, setError] = useState();
+  const [requestSending, setRequestSending] = useState(false); 
+  const [requestSent, setRequestSent] = useState(false); 
+
+  const handleJoinReq = async (e) => {
+    e.preventDefault();
+    if (!user) {
+      setError("You must be logged in to add an expense");
+      return;
+    }
+    setRequestSending(true); 
+    const userId = user.userId;
+    const payload = { userId, id };
+    const response = await fetch("/home/joinReqHome", {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+    const json = await response.json();
+
+    setRequestSending(false); 
+    if (!response.ok) {
+      setError(json.error);
+    } else {
+      setRequestSent(true); 
+    }
   };
+
   useEffect(() => {
     const fetchhome = async () => {
       try {
@@ -22,13 +49,12 @@ export const HomeDetails = () => {
         const json = await response.json();
 
         if (response.ok) {
-          // console.log(json);
-          setHome(json); // Update home state
+          setHome(json); 
           setLoading(false);
         }
       } catch (error) {
         console.error(error);
-        setLoading(false); // Ensure loading is set to false even if there is an error
+        setLoading(false); 
       }
     };
     if (user) {
@@ -88,10 +114,12 @@ export const HomeDetails = () => {
       <div className="grid grid-cols-2">
         <button
           className="rounded-xl text-center p-2 hover:text-main-dark-bg hover:bg-zinc-200"
-          onClick={handleJoin}
+          onClick={handleJoinReq}
+          disabled={requestSending || requestSent} // Disable button when request is sending or already sent
         >
-          Join Home
+          {requestSending ? "Sending Request..." : requestSent ? "Cancel Request" : "Request to Join"}
         </button>
+        {error && <div className="error">{error}</div>}
       </div>
     </div>
   );
