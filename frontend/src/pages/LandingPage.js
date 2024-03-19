@@ -3,7 +3,7 @@ import PersonalDashboard from "../components/dashboards/PersonalDashboard";
 import HomeDashBoard from "../components/dashboards/HomeDashBoard";
 import { HomeLess } from "../components/HomeLess";
 import { Personal } from "../components/Personal";
-import { Home } from "../components/Home"
+import { Home } from "../components/Home";
 
 const LandingPage = () => {
   const [showPersonal, setShowPersonal] = useState(false);
@@ -13,20 +13,28 @@ const LandingPage = () => {
     setShowHome(false);
     setShowPersonal(true);
   };
-  const handleHomeDashboardClick = () => {
-    setShowPersonal(false);
+
+  const handleHomeLessClick = () => {
     setShowHome(true);
+    setShowPersonal(false);
   };
 
   return (
-    <div className="grid grid-rows-2 gap-8">
-      {!showPersonal && <div onClick={handleProfileDashboardClick}><PersonalDashboard/></div>}
+    <div>
+      {!showHome && (
+        <div onClick={handleProfileDashboardClick}>
+          <PersonalDashboard />
+        </div>
+      )}
+      {!showPersonal && (
+        <div onClick={handleHomeLessClick}>
+          <HomeLess />
+        </div>
+      )}
       {showPersonal && <Personal />}
-      {!showHome && <div onClick={handleHomeDashboardClick}><HomeLess /></div>}
       {showHome && <Home />}
     </div>
   );
 };
 
 export default LandingPage;
-
