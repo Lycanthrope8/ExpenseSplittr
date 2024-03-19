@@ -12,6 +12,7 @@ import LandingPage from "./pages/LandingPage";
 import { CreateHome } from "./pages/CreateHome";
 import { ExploreAllHome } from "./pages/ExploreAllHome";
 import { HomeDetails } from "./pages/HomeDetails";
+import PersonalDashboard from "./components/dashboards/PersonalDashboard";
 
 function App() {
   const { user } = useAuthContext();
@@ -21,6 +22,9 @@ function App() {
         <Navbar />
         <div className="pages">
           <Routes>
+            <Route
+            path="/dashboard/personalDashboard"
+            element={user ? <PersonalDashboard /> : <Navigate to="/" />} />
            <Route 
               path="/home/createHome/"
               element={user ? <CreateHome /> : <Navigate to="/" />}   

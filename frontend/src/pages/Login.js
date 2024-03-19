@@ -33,7 +33,7 @@ const Login = () => {
         />
       </div>
 
-      <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl w-full hover:opacity-90 " disabled={isLoading}>Log in</button>
+      <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl w-full hover:opacity-90" disabled={isLoading}>Log in</button>
         {error && <div className="error">{error}</div>}
     </form>
   );

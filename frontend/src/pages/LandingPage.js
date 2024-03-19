@@ -1,12 +1,13 @@
 import React from "react";
-import Personal from "../components/Personal";
+import PersonalDashboard from "../components/dashboards/PersonalDashboard";
 import { Home } from "../components/Home";
 
 const LandingPage = () => {
   return (
     <div>
-      <Personal />
+      <PersonalDashboard />
       <Home />
+      
     </div>
   );
 };

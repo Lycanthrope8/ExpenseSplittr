@@ -91,6 +91,7 @@ const CreateHomeForm = () => {
           name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Location */}
@@ -101,6 +102,7 @@ const CreateHomeForm = () => {
           name="location"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
+          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Accommodation Type */}
@@ -113,6 +115,7 @@ const CreateHomeForm = () => {
           name="accommodationType"
           value={accommodationType}
           onChange={(e) => setAccommodationType(e.target.value)}
+          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Bedrooms */}
@@ -123,6 +126,7 @@ const CreateHomeForm = () => {
           name="bedrooms"
           value={bedrooms}
           onChange={(e) => setBedrooms(e.target.value)}
+          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Bathrooms */}
@@ -133,6 +137,7 @@ const CreateHomeForm = () => {
           name="bathrooms"
           value={bathrooms}
           onChange={(e) => setBathrooms(e.target.value)}
+          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Rent Amount */}
@@ -143,6 +148,7 @@ const CreateHomeForm = () => {
           name="rentAmount"
           value={rentAmount}
           onChange={(e) => setRentAmount(e.target.value)}
+          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Utilities Included */}
@@ -155,6 +161,7 @@ const CreateHomeForm = () => {
           name="utilitiesIncluded"
           checked={utilitiesIncluded}
           onChange={(e) => setUtilitiesIncluded(e.target.checked)}
+          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Furnished */}
@@ -165,6 +172,7 @@ const CreateHomeForm = () => {
           name="furnished"
           checked={furnished}
           onChange={(e) => setFurnished(e.target.checked)}
+          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Pets Allowed */}
@@ -177,6 +185,7 @@ const CreateHomeForm = () => {
           name="petsAllowed"
           checked={petsAllowed}
           onChange={(e) => setPetsAllowed(e.target.checked)}
+          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Smoking Allowed */}
@@ -189,6 +198,7 @@ const CreateHomeForm = () => {
           name="smokingAllowed"
           checked={smokingAllowed}
           onChange={(e) => setSmokingAllowed(e.target.checked)}
+          className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
         />
       </div>
       {/* Move In Date */}
@@ -201,6 +211,7 @@ const CreateHomeForm = () => {
           name="moveInDate"
           value={moveInDate}
           onChange={(e) => setMoveInDate(e.target.value)}
+          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Images */}
@@ -211,6 +222,7 @@ const CreateHomeForm = () => {
           name="images"
           multiple
           onChange={(e) => setImages(e.target.files)}
+          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* House Rules */}
