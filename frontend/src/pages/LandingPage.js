@@ -10,16 +10,16 @@ const LandingPage = () => {
   const [showHome, setShowHome] = useState(false);
 
   const handleProfileDashboardClick = () => {
-    setShowHome(false)
+    setShowHome(false);
     setShowPersonal(true);
   };
   const handleHomeDashboardClick = () => {
-    setShowPersonal(false)
+    setShowPersonal(false);
     setShowHome(true);
   };
 
   return (
-    <div>
+    <div className="grid grid-rows-2 gap-8">
       {!showPersonal && <div onClick={handleProfileDashboardClick}><PersonalDashboard/></div>}
       {showPersonal && <Personal />}
       {!showHome && <div onClick={handleHomeDashboardClick}><HomeLess /></div>}
@@ -29,3 +29,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
