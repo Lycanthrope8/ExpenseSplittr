@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-
+const UserProfile = require("../models/userProfileModel");
 const homeSchema = new Schema({
   name: {
     type: String,
@@ -69,7 +69,29 @@ const homeSchema = new Schema({
   },
 });
 
-// Create a model from the schema
+
+homeSchema.statics.joinReqHome = async function (userId, homeId) {
+  try {
+    const home = await this.findOne({ home_id: homeId });
+    if (!home) {
+      throw new Error("Home not found");
+    }
+    if (home.pendingMembers.includes(userId)) {
+      throw new Error("You already requested to join this home");
+    }
+    const user = await UserProfile.findOne({ userId : userId });
+    if (!user) {
+      throw new Error("User not found");
+    }
+    home.pendingMembers.push(userId);
+    await home.save();
+    return home;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 const Home = mongoose.model("Home", homeSchema);
 
 module.exports = Home;
