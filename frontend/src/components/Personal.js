@@ -5,7 +5,7 @@ import ExpenseDetails from "./PersonalExpenseDetails";
 import PersonalExpenseForm from "./PersonalExpenseForm";
 import SortButton from "./SortButton";
 
-const Personal = () => {
+export const Personal = () => {
   const { expenses, dispatch } = usePersonalExpense();
   const { user } = useAuthContext();
   const [sortedExpenses, setSortedExpenses] = useState([]);
@@ -75,4 +75,4 @@ const Personal = () => {
   );
 };
 
-export default Personal;
+// export default Personal;
