@@ -126,10 +126,33 @@ const deleteHomeById = async (req, res) => {
   }
 };
 
+
+const joinReqHome = async (req, res) => {
+  try {
+    console.log(req.body)
+    // const { userId, homeId } = req.body;
+    const userId = req.body.userId
+    const homeId = req.body.id
+    if (!userId || !homeId) {
+      return res.status(400).json({ error: 'userId and homeId are required' });
+    }
+
+    const home = await Home.joinReqHome(userId, homeId);
+
+    // If successful, send a success response
+    res.status(200).json({ message: 'Request Sent SuccessFullu', home });
+  } catch (error) {
+    // If there's an error, send an error response
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
 module.exports = {
   createHome,
   getAllHomes,
   getHomeById,
   updateHomeById,
   deleteHomeById,
+  joinReqHome,
 };
