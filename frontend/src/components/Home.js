@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import HomeDashBoard from "../components/dashboards/HomeDashBoard";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useProfileContext } from "../hooks/useProfileContext";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +33,10 @@ export const Home = () => {
       ) : (
         <div>
           {profile.homeId ? (
-            <h1>You are not homeless anymore!</h1>
+            <>
+              <h1>You are not homeless anymore!</h1>
+              <HomeDashBoard />
+            </>
           ) : (
             <>
 
@@ -46,7 +50,8 @@ export const Home = () => {
                   <input
                   type="text" placeholder="Enter Code"
                   onChange={(e) => setCodeText(e.target.value)}
-                  className="mr-4 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"/>
+                  className="mr-4 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+                  required/>
                   <button
                   onClick={handleSeeDetails}
                   className="p-2 text-sm bg-accent text-zinc-800 rounded-lg hover:opacity-80">

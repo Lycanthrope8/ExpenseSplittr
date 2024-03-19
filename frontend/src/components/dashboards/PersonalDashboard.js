@@ -1,15 +1,16 @@
 import React from 'react'
+import TaskSummary from './dashComponents/taskSummary'
+import Spent from './dashComponents/spent'
 
 const PersonalDashboard = () => {
   return (
-    <>
-    <div className='flex justify-between'>
-        <div>Task Summary </div>
-        <div>Personal </div>
-        <div>Personal </div>
+    <div className='grid grid-cols-3 gap-4 px-16'>
+        <TaskSummary />
+        <Spent />
+
     </div>
-    </>
   )
 }
+
 
 export default PersonalDashboard
