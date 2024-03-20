@@ -13,6 +13,7 @@ import { CreateHome } from "./pages/CreateHome";
 import { ExploreAllHome } from "./pages/ExploreAllHome";
 import { HomeDetails } from "./pages/HomeDetails";
 import PersonalDashboard from "./components/dashboards/PersonalDashboard";
+import { JoinedHomeDetails } from "./pages/JoinedHomeDetails";
 
 function App() {
   const { user } = useAuthContext();
@@ -36,7 +37,10 @@ function App() {
             <Route  path="/home/:id"
              element={user ? <HomeDetails /> : <Navigate to="/" />}
             />
-              
+            <Route
+              path="/homedetails/:id"
+              element={user ? <JoinedHomeDetails /> : <Navigate to="/" />}
+              />
             <Route
               path="/"
               element={user ? <LandingPage /> : <Navigate to="/login" />}
