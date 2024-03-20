@@ -5,7 +5,7 @@ const ProfilePicture = ({ imageUrl }) => {
   return (
     <div className="block text-zinc-100 text-xl ml-0">
       {imageUrl ? (
-        <img src={imageUrl} alt="Profile" style={{ maxWidth: "200px" }} />
+        <img className="rounded-full max-w-48" src={imageUrl} alt="Profile"/>
       ) : (
         <p>No profile picture available</p>
       )}

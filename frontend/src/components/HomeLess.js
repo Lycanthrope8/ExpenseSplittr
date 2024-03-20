@@ -4,6 +4,8 @@ import HomeDashBoard from "./dashboards/HomeDashBoard";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useProfileContext } from "../hooks/useProfileContext";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from '@mui/material/CircularProgress';
+
 export const HomeLess = () => {
   const { user } = useAuthContext();
   const { profile } = useProfileContext();
@@ -29,7 +31,11 @@ export const HomeLess = () => {
   return (
     <div>
       {loading ? (
-        <p>Loading...</p>
+        <div className='flex h-screen items-center'>
+          <p className='flex w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg '>
+          <CircularProgress className="mr-4" />
+          Loading...</p>
+        </div>
       ) : (
         <div>
           {profile.homeId ? (

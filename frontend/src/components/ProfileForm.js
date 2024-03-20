@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const ProfileForm = ({ onPictureChange }) => {
   // Add onPictureChange as a prop
@@ -73,7 +74,11 @@ const ProfileForm = ({ onPictureChange }) => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='flex h-screen items-center'>
+    <p className='flex w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg '>
+    <CircularProgress className="mr-4" />
+    Loading...</p>
+  </div>;
   }
 
   return (

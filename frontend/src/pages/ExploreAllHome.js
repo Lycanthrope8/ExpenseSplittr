@@ -2,6 +2,7 @@ import React from 'react'
 import ExploreHomeCard from '../components/ExploreHomeCard'
 import { useState, useEffect } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext'
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const ExploreAllHome = () => {
     const [loading, setLoading] = useState(true);
@@ -35,7 +36,12 @@ export const ExploreAllHome = () => {
 
     return (
       loading ? (
-        <p>Loading...</p>
+        <div className='flex h-screen items-center'>
+          <p className='flex items-center w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg '>
+          <CircularProgress className="mr-4 " />
+          Loading...</p>
+        </div>
+          
       ) : (
         <div>
           {homes.map(home => (

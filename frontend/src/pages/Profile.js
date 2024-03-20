@@ -4,6 +4,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import ProfileForm from '../components/ProfileForm';
 import ProfilePicture from '../components/ProfilePicture';
 import { ProfileContext } from '../context/ProfileContext';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const Profile = () => {
   const { profile } = useContext(ProfileContext);
@@ -18,7 +19,11 @@ const Profile = () => {
   }, [profile]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className='flex h-screen items-center'>
+    <p className='flex w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg '>
+    <CircularProgress className="mr-4" />
+    Loading...</p>
+  </div>;
   }
 
   const handlePictureChange = (newPictureUrl) => {
