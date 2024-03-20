@@ -2,14 +2,13 @@ import { useState } from "react";
 import { usePersonalExpense } from "../hooks/usePersonalExpense";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-const PersonalExpenseForm = ({ expenses, setSortedExpenses }) => {
+const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
   const { dispatch } = usePersonalExpense();
   const { user } = useAuthContext();
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
-  const [sortOption, setSortOption] = useState("date-recent"); // Add sortOption state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
