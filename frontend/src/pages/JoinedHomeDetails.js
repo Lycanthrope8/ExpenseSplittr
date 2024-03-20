@@ -34,7 +34,7 @@ export const JoinedHomeDetails = () => {
     if (user) {
       fetchhome();
     }
-  }, [user]);
+  }, [user, id]);
 
   return loading ? (
     <p>Loading...</p>

@@ -85,7 +85,8 @@ export const Personal = () => {
               ))}
         </div>
       </div>
-      <PersonalExpenseForm />
+      <PersonalExpenseForm expenses={expenses} setSortedExpenses={setSortedExpenses} />
+
     </div>
   );
 };

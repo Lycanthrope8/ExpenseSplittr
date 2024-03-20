@@ -2,19 +2,19 @@ import { useState } from "react";
 import { usePersonalExpense } from "../hooks/usePersonalExpense";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-
-const PersonalExpenseForm = () => {
+const PersonalExpenseForm = ({ expenses, setSortedExpenses }) => {
   const { dispatch } = usePersonalExpense();
   const { user } = useAuthContext();
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const [sortOption, setSortOption] = useState("date-recent"); // Add sortOption state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
-      setError("You must be logged in to add a expense");
+      setError("You must be logged in to add an expense");
       return;
     }
 
@@ -33,13 +33,34 @@ const PersonalExpenseForm = () => {
     if (!response.ok) {
       setError(json.error);
       setEmptyFields(json.emptyFields);
-    }
-    if (response.ok) {
+    } else {
       setEmptyFields([]);
       setError(null);
       setTitle("");
       setAmount("");
+
+      // Dispatch the action to create expense
       dispatch({ type: "CREATE_EXPENSE", payload: json });
+
+      // Sort the expenses based on the current sort option
+      let sorted;
+      switch (sortOption) {
+        case "amount-low-high":
+          sorted = [json, ...expenses].sort((a, b) => a.amount - b.amount);
+          break;
+        case "amount-high-low":
+          sorted = [json, ...expenses].sort((a, b) => b.amount - a.amount);
+          break;
+        case "date-recent":
+          sorted = [json, ...expenses].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+          break;
+        case "date-least-recent":
+          sorted = [json, ...expenses].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+          break;
+        default:
+          sorted = [json, ...expenses];
+      }
+      setSortedExpenses(sorted);
     }
   };
 
@@ -65,8 +86,6 @@ const PersonalExpenseForm = () => {
           className={emptyFields.includes("amount") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
         />
       </div>
-
-  
 
       <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl">Add Expense</button>
       {error && <div className="error">{error}</div>}

@@ -60,7 +60,7 @@ export const HomeDetails = () => {
     if (user) {
       fetchhome();
     }
-  }, [user]);
+  }, [user, id]);
 
   return loading ? (
     <p>Loading...</p>
