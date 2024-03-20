@@ -1,19 +1,22 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useProfileContext } from "../hooks/useProfileContext";
 
 export const JoinedHomeDetails = () => {
-  const { id } = useParams();
+  const { profile } = useProfileContext();
+  // console.log(profile);
   const [loading, setLoading] = useState(true);
   const [home, setHome] = useState([]);
   const { user } = useAuthContext();
+  const id = profile.homeId;
 
 
   useEffect(() => {
     const fetchhome = async () => {
       try {
-        console.log(id);
+        // console.log(id);
         const response = await fetch(`/home/${id}`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
