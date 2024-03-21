@@ -2,39 +2,37 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 
-// Multer configuration
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    // Ensure that uploads/homes directory exists
-    const uploadDir = 'uploads/homes';
+    const homeId = req.body.home_id;
+    const uploadDir = `uploads/homes/${homeId}`;
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir);
     }
     cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
-    // Get the homeId from the request body
     const homeId = req.body.home_id;
-    // Ensure that the home's directory exists
+    
     const homeDir = `uploads/homes/${homeId}`;
     if (!fs.existsSync(homeDir)) {
       fs.mkdirSync(homeDir);
     }
-    // Construct the filename with the original file name
+   
     const filename = `${file.originalname}`;
-    cb(null, filename); // Use the original filename
+    cb(null, filename); 
   }
 });
 
 const fileFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image/')) {
-    cb(null, true); // Accept image files only
+    cb(null, true); 
   } else {
     cb(new Error('Only images are allowed'), false);
   }
 };
 
-// Multer middleware for multiple file upload
 const upload = multer({ 
   storage: storage,
   fileFilter: fileFilter,
@@ -42,7 +40,7 @@ const upload = multer({
     console.error('Multer error:', err);
     next(err);
   },
-  overwrite: true // Overwrite existing files with the same name
-}).array('images', 5); // Allow uploading up to 5 files with the field name 'images'
+  overwrite: true 
+}).array('images', 5); 
 
 module.exports = upload;

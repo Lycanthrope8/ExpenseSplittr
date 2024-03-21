@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 const UploadImagesHome = () => {
   const location = useLocation();
   const homeId = location.state.homeId;
   const { user } = useAuthContext();
   const [selectedFiles, setSelectedFiles] = useState([]);
-
+  const navigate = useNavigate();
   const handleFileChange = (e) => {
     const filesArray = Array.from(e.target.files);
     setSelectedFiles(filesArray);
@@ -38,6 +39,8 @@ const UploadImagesHome = () => {
   
       if (response.ok) {
         console.log("Photos uploaded successfully");
+        navigate(`/`);
+
       } else {
         console.error("Failed to upload photos");
       }
