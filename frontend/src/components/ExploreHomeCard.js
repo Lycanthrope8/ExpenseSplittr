@@ -21,7 +21,7 @@ const ExploreHomeCard = ({ home }) => {
       {home.images && home.images.length > 0 && (
         <div>
           {home.images.map((image, index) => (
-            <img key={index} src={image} alt={`Home ${home.name}`} style={{ maxWidth: '100px', marginRight: '10px' }} />
+            <img key={index} src={`/${image}`} alt={`Home ${home.name}`} style={{ maxWidth: '100px', marginRight: '10px' }} />
           ))}
         </div>
       )}

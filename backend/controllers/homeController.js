@@ -99,7 +99,7 @@ const getHomeById = async (req, res) => {
 const updateHomeById = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("Updating Home with ID: ", id," with data: ", req.body);
+    // console.log("Updating Home with ID: ", id," with data: ", req.body);
 
     // Handle file uploads
     upload(req, res, async (err) => {

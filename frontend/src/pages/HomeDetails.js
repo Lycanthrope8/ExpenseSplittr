@@ -102,7 +102,7 @@ export const HomeDetails = () => {
             {home.images.map((image, index) => (
               <img
                 key={index}
-                src={image}
+                src={`/${image}`}
                 alt={`Home ${home.name}`}
                 style={{
                   maxWidth: "100px",
