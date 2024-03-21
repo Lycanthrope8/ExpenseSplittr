@@ -1,16 +1,28 @@
 const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 
 // Multer configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/profilePictures'); // Destination folder where the images will be stored
+    // Ensure that uploads/homes directory exists
+    const uploadDir = 'uploads/homes';
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir);
+    }
+    cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
-    // Get the userId from the request parameters
-    const userId = req.params.userId;
-    // Construct the filename with pp_ prefix, userId, and original file extension
-    const filename = `pp_${userId}_${Date.now()}${getFileExtension(file.originalname)}`;
-    cb(null, filename); // Use the custom filename
+    // Get the homeId from the request body
+    const homeId = req.body.home_id;
+    // Ensure that the home's directory exists
+    const homeDir = `uploads/homes/${homeId}`;
+    if (!fs.existsSync(homeDir)) {
+      fs.mkdirSync(homeDir);
+    }
+    // Construct the filename with the original file name
+    const filename = `${file.originalname}`;
+    cb(null, filename); // Use the original filename
   }
 });
 
@@ -20,11 +32,6 @@ const fileFilter = (req, file, cb) => {
   } else {
     cb(new Error('Only images are allowed'), false);
   }
-};
-
-// Get file extension from the original filename
-const getFileExtension = (filename) => {
-  return '.' + filename.split('.').pop();
 };
 
 // Multer middleware for multiple file upload

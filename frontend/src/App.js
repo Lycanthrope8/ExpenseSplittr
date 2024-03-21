@@ -14,6 +14,7 @@ import { HomeDetails } from "./pages/HomeDetails";
 import { Personal } from "./components/Personal";
 import { JoinedHomeDetails } from "./pages/JoinedHomeDetails";
 import { Home } from "./components/Home";
+import UploadImagesHome from "./components/UploadImagesHome";
 
 function App() {
   const { user } = useAuthContext();
@@ -24,16 +25,20 @@ function App() {
         <div className="pages">
           <Routes>
             <Route
-              path="/personalDashboard"
+              path="/personalDashboard/"
               element={user ? <Personal /> : <Navigate to="/" />}
             />
             <Route
-              path="/homeDashboard"
+              path="/homeDashboard/"
               element={user ? <Home /> : <Navigate to="/" />}
             />
             <Route
               path="/home/createHome/"
               element={user ? <CreateHome /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/home/createHome/uploadImages/"
+              element={user ? <UploadImagesHome/> : <Navigate to="/" />}
             />
             <Route
               path="/home/exploreHomes/"

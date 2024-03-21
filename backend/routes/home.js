@@ -12,7 +12,7 @@ const { getHomeById, createHome, getAllHomes, updateHomeById, joinReqHome } = re
 router.post('/createHome', createHome);
 router.get('/all', getAllHomes);
 router.get('/:id', getHomeById);
-router.patch('/:id', updateHomeById);
+router.patch('/uploadImages/:id', updateHomeById);
 router.post('/joinReqHome', joinReqHome)
 
 
