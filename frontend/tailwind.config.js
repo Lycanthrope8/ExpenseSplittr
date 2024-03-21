@@ -2,11 +2,14 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: 'class',
   theme: {
-    fontFamily: {
-      display: ['Open Sans', 'sans-serif'],
-      body: ['Open Sans', 'sans-serif'],
-    },
     extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+        opensans: ['Open sans', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+        axiforma: ['Axiforma Regular'],
+      },
       fontSize: {
         14: '14px',
       },

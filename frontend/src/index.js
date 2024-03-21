@@ -6,6 +6,7 @@ import App from "./App";
 import { PersonalExpenseProvider } from "./context/PersonalExpenseContext";
 import { AuthContextProvider } from "./context/AuthContext";
 import { ProfileContextProvider } from "./context/ProfileContext";
+import { PersonalTaskProvider } from "./context/PersonalTaskContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,7 +14,9 @@ root.render(
     <AuthContextProvider>
       <ProfileContextProvider>
         <PersonalExpenseProvider>
-          <App />
+          <PersonalTaskProvider>
+            <App />
+          </PersonalTaskProvider>
         </PersonalExpenseProvider>
       </ProfileContextProvider>
     </AuthContextProvider>
