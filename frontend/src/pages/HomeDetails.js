@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const HomeDetails = () => {
   const { id } = useParams();
@@ -63,7 +64,11 @@ export const HomeDetails = () => {
   }, [user, id]);
 
   return loading ? (
-    <p>Loading...</p>
+    <div className='flex h-screen items-center'>
+      <p className='flex w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg '>
+      <CircularProgress className="mr-4" />
+      Loading...</p>
+    </div>
   ) : (
     <div className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
       <div className="flex flex-col">

@@ -24,7 +24,7 @@ const Navbar = () => {
 
   return (
     <header>
-      <div className="flex items-center justify-between p-6 text-zinc-100 text-2xl">
+      <div className="flex items-center justify-between p-6 text-gray-100 text-2xl">
         <Link to="/">
           <h1>ExpenseSplittr</h1>
         </Link>
