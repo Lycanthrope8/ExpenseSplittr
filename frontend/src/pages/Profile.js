@@ -31,11 +31,15 @@ const Profile = () => {
   };
 
   return (
-    <div>
-      <h1 className="block text-center text-zinc-100 text-2xl ml-0">Profile Page</h1>
-      <ProfilePicture imageUrl={profilePictureUrl} />
-      <ProfileForm onPictureChange={handlePictureChange} />
-    </div>
+    <>
+      <h1 className="block text-center text-zinc-100 font-bold text-4xl mb-20">Profile Page</h1>
+      <div className='flex sm:flex-col lg:flex-row w-full items-center justify-evenly'>
+        <div className='rounded-lg size-96'>
+          <ProfilePicture imageUrl={profilePictureUrl} />
+        </div>
+        <ProfileForm onPictureChange={handlePictureChange} />
+      </div>
+    </>
   );
 };
 

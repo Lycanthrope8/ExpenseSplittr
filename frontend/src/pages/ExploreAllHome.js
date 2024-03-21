@@ -38,7 +38,7 @@ export const ExploreAllHome = () => {
       loading ? (
         <div className='flex h-screen items-center'>
           <p className='flex items-center w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg '>
-          <CircularProgress className="mr-4 " />
+          <CircularProgress className="mr-4" />
           Loading...</p>
         </div>
           
