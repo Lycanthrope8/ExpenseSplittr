@@ -11,7 +11,7 @@ import LandingPage from "./pages/LandingPage";
 import { CreateHome } from "./pages/CreateHome";
 import { ExploreAllHome } from "./pages/ExploreAllHome";
 import { HomeDetails } from "./pages/HomeDetails";
-import { Personal } from "./components/Personal";
+import { PersonalDashboard } from "./pages/PersonalDashboard";
 import { JoinedHomeDetails } from "./pages/JoinedHomeDetails";
 import { Home } from "./components/Home";
 
@@ -24,8 +24,9 @@ function App() {
         <div className="pages">
           <Routes>
             <Route
-              path="/personalDashboard"
-              element={user ? <Personal /> : <Navigate to="/" />}
+              path="/dashboard/personal"
+              // element={user ? <PersonalDashboard /> : <Navigate to="/" />}
+              element={<PersonalDashboard />}
             />
             <Route
               path="/homeDashboard"

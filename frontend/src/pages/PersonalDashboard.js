@@ -1,10 +1,8 @@
 import React from 'react'
 
 
-const PersonalDashboard = () => {
+export const PersonalDashboard = () => {
   return (
-    <div>ashdkasda</div>
+    <div>ashdkdfdfasda</div>
   )
 }
-
-export default PersonalDashboard
