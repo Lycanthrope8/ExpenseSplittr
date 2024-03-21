@@ -25,9 +25,8 @@ function App() {
         <div className="pages">
           <Routes>
             <Route
-              path="/dashboard/personal"
-              // element={user ? <PersonalDashboard /> : <Navigate to="/" />}
-              element={<PersonalDashboard />}
+              path="/personalDashboard/"
+              element={user ? <PersonalDashboard /> : <Navigate to="/" />}
             />
             <Route
               path="/homeDashboard/"
