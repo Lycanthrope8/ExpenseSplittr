@@ -70,7 +70,7 @@ export const Personal = () => {
     <div className="home grid grid-cols-3 gap-4 mx-4">
       <div className="col-span-2 relative">
         <SortButton onSort={handleSort} />
-        <div className="expenses">
+        <div>
           {sortedExpenses && sortedExpenses.length > 0
             ? sortedExpenses.map((expense) => (
                 <div className="expense-details-wrapper" key={expense._id}>
