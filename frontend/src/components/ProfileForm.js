@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Toaster, toast } from 'sonner';
 
 const ProfileForm = ({ onPictureChange }) => {
   // Add onPictureChange as a prop
@@ -34,6 +35,12 @@ const ProfileForm = ({ onPictureChange }) => {
     if (!user) {
       setError("You must be logged in to update your profile");
       return;
+    } else {
+      toast.success('Profile updated successfully!', {
+        classNames: {
+          toast: 'bg-green-300',
+        },
+      });;
     }
   
     const formData = new FormData();
@@ -93,99 +100,80 @@ const ProfileForm = ({ onPictureChange }) => {
   }
 
   return (
-    <form
+    <>
+      <form
       className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1"
-      onSubmit={handleSubmit}
-    >
-      <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
-        <label className="text-zinc-100 text-2xl mr-4">Avatar:</label>
-        <input
-          type="file"
-          onChange={(e) => setAvatar(e.target.files[0])}
-          accept="profilePictures/*"
-          className="w-10/12 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-        />
-      </div>
+      onSubmit={handleSubmit}>
+        <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
+          <label className="text-zinc-100 text-2xl mr-4">Avatar:</label>
+          <input
+            type="file"
+            onChange={(e) => setAvatar(e.target.files[0])}
+            accept="profilePictures/*"
+            className="w-10/12 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+          />
+        </div>
 
-      <div className="flex items-center justify-between col-span-1">
-        <label className="text-zinc-100 text-2xl mr-4">Name:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className={
-            emptyFields.includes("name")
-              ? "error"
-              : "w-2/3 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-          }
-        />
-      </div>
-      <label className="flex text-zinc-100 text-2xl ml-0 items-center justify-between">
-        Email: {user.email}
-      </label>
-      <div className="flex items-center justify-between col-span-1">
-        <label className="text-zinc-100 text-2xl mr-4">Age:</label>
-        <input
-          type="number"
-          value={age || ""}
-          onChange={(e) => setAge(parseInt(e.target.value))}
-          className={
-            emptyFields.includes("age")
-              ? "error"
-              : "w-2/3 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-          }
-        />
-      </div>
-      <div className="flex items-center justify-between col-span-1">
-        <label className="text-zinc-100 text-2xl mr-4">Gender:</label>
-        <select
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          className={
-            emptyFields.includes("gender")
-              ? "error"
-              : "w-2/3 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-          }
-        >
-          <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </div>
-      <div className="flex items-center justify-between col-span-1">
-        <label className="text-zinc-100 text-2xl mr-4">Phone:</label>
-        <input
-          type="text"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className={
-            emptyFields.includes("phone")
-              ? "error"
-              : "w-2/3 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-          }
-        />
-      </div>
-      <div className="flex items-center justify-between col-span-1">
-        <label className="text-zinc-100 text-2xl mr-4">Address:</label>
-        <input
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          className={
-            emptyFields.includes("address")
-              ? "error"
-              : "w-2/3 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-          }
-        />
-      </div>
-      <button
-        className="col-span-2 mt-2 p-2 bg-accent text-zinc-800 rounded-2xl w-full hover:opacity-90"
-        type="submit"
-      >
-        Update Profile
-      </button>
-      {error && <div className="error">{error}</div>}
-    </form>
+        <div className="flex items-center justify-between col-span-1">
+          <label className="text-zinc-100 text-2xl mr-4">Name:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={emptyFields.includes("name") ? "error" : "w-2/3 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
+          />
+        </div>
+        <label className="flex text-zinc-100 text-2xl ml-0 items-center justify-between">Email: {user.email}</label>
+        <div className="flex items-center justify-between col-span-1">
+          <label className="text-zinc-100 text-2xl mr-4">Age:</label>
+          <input
+            type="number"
+            value={age || ""}
+            onChange={(e) => setAge(parseInt(e.target.value))}
+            className={emptyFields.includes("age") ? "error" : "w-2/3 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
+          />
+        </div>
+        <div className="flex items-center justify-between col-span-1">
+          <label className="text-zinc-100 text-2xl mr-4">
+            Gender:
+          </label>
+          <select
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            className={emptyFields.includes("gender") ? "error" : "w-2/3 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div className="flex items-center justify-between col-span-1">
+          <label className="text-zinc-100 text-2xl mr-4">Phone:</label>
+          <input
+            type="text"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className={emptyFields.includes("phone") ? "error" : "w-2/3 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
+          />
+        </div>
+        <div className="flex items-center justify-between col-span-1">
+          <label className="text-zinc-100 text-2xl mr-4">Address:</label>
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            className={emptyFields.includes("address") ? "error" : "w-2/3 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"}
+          />
+        </div>
+        <button
+          className="col-span-2 mt-2 p-2 bg-accent text-zinc-800 rounded-2xl w-full hover:opacity-90"
+          type="submit">Update Profile</button>
+        {error && <div className="error">{error}</div>}
+        <div className="col-span-1">
+          <Toaster />
+        </div>
+      </form>
+    </>
   );
 };
 
