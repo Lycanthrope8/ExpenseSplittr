@@ -25,7 +25,7 @@ export const Personal = () => {
     if (user) {
       fetchExpenses();
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, sortOption]);
   
   const handleDelete = (deletedExpenseId) => {
     // Filter out the deleted expense from sortedExpenses

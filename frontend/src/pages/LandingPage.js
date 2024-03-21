@@ -1,38 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useProfileContext } from "../hooks/useProfileContext";
 import PersonalDashboard from "../components/dashboards/PersonalDashboard";
-import HomeDashBoard from "../components/dashboards/HomeDashBoard";
+import HomeDashboard from "../components/dashboards/HomeDashBoard";
 import { HomeLess } from "../components/HomeLess";
-import { Personal } from "../components/Personal";
-import { Home } from "../components/Home";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
-  const [showPersonal, setShowPersonal] = useState(false);
-  const [showHome, setShowHome] = useState(false);
+  const { user } = useAuthContext();
+  const { profile } = useProfileContext();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (user && profile) {
+      setIsLoading(false);
+    }
+  }, [user, profile]);
 
   const handleProfileDashboardClick = () => {
-    setShowHome(false);
-    setShowPersonal(true);
+    navigate("/personalDashboard");
   };
 
   const handleHomeLessClick = () => {
-    setShowHome(true);
-    setShowPersonal(false);
+    navigate("/homeDashboard");
   };
 
   return (
     <div className="grid grid-rows-2 gap-8">
-      {!showHome && !showPersonal && (
-        <div onClick={handleProfileDashboardClick}>
-          <PersonalDashboard />
-        </div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <div onClick={handleProfileDashboardClick}>
+            <PersonalDashboard />
+          </div>
+          {profile.homeId ? (
+            <div onClick={handleHomeLessClick}>
+              <HomeDashboard />
+            </div>
+          ) : (
+            <div>
+              <HomeLess />
+            </div>
+          )}
+        </>
       )}
-      {!showPersonal && !showHome && (
-        <div onClick={handleHomeLessClick}>
-          <HomeLess />
-        </div>
-      )}
-      {showPersonal && <Personal />}
-      {showHome && <Home />}
     </div>
   );
 };

@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 // pages & components
 
-
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Navbar from "./components/Navbar";
@@ -12,8 +11,9 @@ import LandingPage from "./pages/LandingPage";
 import { CreateHome } from "./pages/CreateHome";
 import { ExploreAllHome } from "./pages/ExploreAllHome";
 import { HomeDetails } from "./pages/HomeDetails";
-import PersonalDashboard from "./components/dashboards/PersonalDashboard";
+import { Personal } from "./components/Personal";
 import { JoinedHomeDetails } from "./pages/JoinedHomeDetails";
+import { Home } from "./components/Home";
 
 function App() {
   const { user } = useAuthContext();
@@ -24,23 +24,29 @@ function App() {
         <div className="pages">
           <Routes>
             <Route
-            path="/dashboard/personalDashboard"
-            element={user ? <PersonalDashboard /> : <Navigate to="/" />} />
-           <Route 
+              path="/personalDashboard"
+              element={user ? <Personal /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/homeDashboard"
+              element={user ? <Home /> : <Navigate to="/" />}
+            />
+            <Route
               path="/home/createHome/"
-              element={user ? <CreateHome /> : <Navigate to="/" />}   
-              />
-            <Route 
+              element={user ? <CreateHome /> : <Navigate to="/" />}
+            />
+            <Route
               path="/home/exploreHomes/"
-              element={user ? <ExploreAllHome /> : <Navigate to="/" />}   
-              />
-            <Route  path="/home/:id"
-             element={user ? <HomeDetails /> : <Navigate to="/" />}
+              element={user ? <ExploreAllHome /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/home/:id"
+              element={user ? <HomeDetails /> : <Navigate to="/" />}
             />
             <Route
               path="/homedetails/:id"
               element={user ? <JoinedHomeDetails /> : <Navigate to="/" />}
-              />
+            />
             <Route
               path="/"
               element={user ? <LandingPage /> : <Navigate to="/login" />}
