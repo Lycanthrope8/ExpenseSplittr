@@ -32,21 +32,26 @@ const createUserProfile = async (req, res) => {
   }
 };
 
-// Update UserProfile
 const updateUserProfile = async (req, res) => {
   const userId = req.params.userId;
   const { name, age, gender, phone, address } = req.body;
-  const avatar = req.file ? req.file.path : ''; 
+  let updateFields = { name, age, gender, phone, address };
+  if (req.file) {
+    updateFields.avatar = req.file.path;
+  }
+
   try {
     const updatedUser = await UserProfile.findOneAndUpdate(
       { userId: userId },
-      { name, age, gender, phone, address, avatar },
+      { $set: updateFields },
       { new: true }
     );
+
     res.status(200).json(updatedUser);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 module.exports = { getUserProfile, createUserProfile, updateUserProfile };

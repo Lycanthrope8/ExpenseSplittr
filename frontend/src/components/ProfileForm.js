@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 import { Toaster, toast } from 'sonner';
 
 const ProfileForm = ({ onPictureChange }) => {
@@ -42,25 +42,32 @@ const ProfileForm = ({ onPictureChange }) => {
         },
       });;
     }
-
-    const formData = new FormData(); 
-
+  
+    const formData = new FormData();
+  
     formData.append("name", name);
     formData.append("age", age);
     formData.append("gender", gender);
     formData.append("phone", phone);
     formData.append("address", address);
-    formData.append("avatar", avatar); 
-
+  
+    // Only append avatar if it's not null
+    if (avatar !== null) {
+      formData.append("avatar", avatar);
+    } else {
+      // If avatar is null, add a field to indicate that the avatar should not be updated
+      formData.append("keep_avatar", true); // This can be any field name to indicate the avatar should be kept
+    }
+  
     try {
       const response = await fetch(`/profile/${user.userId}`, {
         method: "PATCH",
-        body: formData, 
+        body: formData,
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       });
-
+  
       const json = await response.json();
       if (!response.ok) {
         setError(json.error);
@@ -69,7 +76,7 @@ const ProfileForm = ({ onPictureChange }) => {
         setEmptyFields([]);
         setError(null);
         dispatch({ type: "SET_PROFILE", payload: json });
-
+  
         // Update profile picture URL if a new picture is uploaded
         if (json.avatar) {
           onPictureChange(json.avatar);
@@ -79,20 +86,27 @@ const ProfileForm = ({ onPictureChange }) => {
       setError("Error updating profile");
     }
   };
+  
 
   if (loading) {
-    return <div className='flex h-screen items-center justify-between'>
-    <p className='flex w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg '>
-    <CircularProgress className="mr-4" />
-    Loading...</p>
-  </div>;
+    return (
+      <div className="flex h-screen items-center justify-between">
+        <p className="flex w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg ">
+          <CircularProgress className="mr-4" />
+          Loading...
+        </p>
+      </div>
+    );
   }
 
   return (
     <>
       <form
-        className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1"
-        onSubmit={handleSubmit}>
+       
+      className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1"
+       
+      onSubmit={handleSubmit}
+    >
         <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
           <label className="text-zinc-100 text-2xl mr-4">Avatar:</label>
           <input
