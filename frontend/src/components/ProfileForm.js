@@ -38,7 +38,7 @@ const ProfileForm = ({ onPictureChange }) => {
     } else {
       toast.success('Profile updated successfully!', {
         classNames: {
-          toast: 'bg-green-400',
+          toast: 'bg-green-300',
         },
       });;
     }
@@ -102,11 +102,8 @@ const ProfileForm = ({ onPictureChange }) => {
   return (
     <>
       <form
-       
       className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1"
-       
-      onSubmit={handleSubmit}
-    >
+      onSubmit={handleSubmit}>
         <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
           <label className="text-zinc-100 text-2xl mr-4">Avatar:</label>
           <input

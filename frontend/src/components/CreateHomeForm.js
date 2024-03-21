@@ -2,6 +2,8 @@ import { useState,  useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { Checkbox } from "@mui/material";
+import yellow from "@mui/material/colors/yellow";
 
 const CreateHomeForm = () => {
   const [error, setError] = useState(null);
@@ -78,33 +80,35 @@ const CreateHomeForm = () => {
   };
 
   return (
-    <form className="grid grid-cols-2 m-4" onSubmit={handleSubmit}>
+    <form
+    className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1"
+    onSubmit={handleSubmit}>
       {/* Input fields */}
       {/* Name */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">Name:</label>
+      <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">Name:</label>
         <input
           type="text"
           name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+          className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Location */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">Location:</label>
+      <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">Location:</label>
         <input
           type="text"
           name="location"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+          className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Accommodation Type */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">
+      <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">
           Accommodation Type:
         </label>
         <input
@@ -112,95 +116,115 @@ const CreateHomeForm = () => {
           name="accommodationType"
           value={accommodationType}
           onChange={(e) => setAccommodationType(e.target.value)}
-          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+          className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Bedrooms */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">Bedrooms:</label>
+      <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">Bedrooms:</label>
         <input
           type="number"
           name="bedrooms"
           value={bedrooms}
           onChange={(e) => setBedrooms(e.target.value)}
-          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+          className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Bathrooms */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">Bathrooms:</label>
+      <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">Bathrooms:</label>
         <input
           type="number"
           name="bathrooms"
           value={bathrooms}
           onChange={(e) => setBathrooms(e.target.value)}
-          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+          className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Rent Amount */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">Rent Amount:</label>
+      <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">Rent:</label>
         <input
           type="number"
           name="rentAmount"
           value={rentAmount}
           onChange={(e) => setRentAmount(e.target.value)}
-          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+          className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Utilities Included */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">
-          Utilities Included:
+      <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">
+          Utilities:
         </label>
-        <input
-          type="checkbox"
-          name="utilitiesIncluded"
-          checked={utilitiesIncluded}
-          onChange={(e) => setUtilitiesIncluded(e.target.checked)}
-          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-        />
+        <div className="w-4/6 text-center">
+          <Checkbox
+            type="checkbox"
+            name="utilitiesIncluded"
+            checked={utilitiesIncluded}
+            sx={{color: yellow[300],
+              '&.Mui-checked': {
+              color: yellow[300],}}}
+            size="large"
+            onChange={(e) => setUtilitiesIncluded(e.target.checked)}
+          />
+        </div>
       </div>
       {/* Furnished */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">Furnished:</label>
-        <input
-          type="checkbox"
-          name="furnished"
-          checked={furnished}
-          onChange={(e) => setFurnished(e.target.checked)}
-          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-        />
+      <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">Furnished:</label>
+        <div className="w-4/6 text-center">
+          <Checkbox
+            type="checkbox"
+            name="furnished"
+            checked={furnished}
+            sx={{color: yellow[300],
+              '&.Mui-checked': {
+              color: yellow[300],}}}
+            size="large"
+            onChange={(e) => setFurnished(e.target.checked)}
+          />
+        </div>
       </div>
       {/* Pets Allowed */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">
-          Pets Allowed:
+      <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">
+          Pets:
         </label>
-        <input
-          type="checkbox"
-          name="petsAllowed"
-          checked={petsAllowed}
-          onChange={(e) => setPetsAllowed(e.target.checked)}
-          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-        />
+        <div className="w-4/6 text-center">
+          <Checkbox
+            type="checkbox"
+            name="petsAllowed"
+            checked={petsAllowed}
+            sx={{color: yellow[300],
+              '&.Mui-checked': {
+              color: yellow[300],}}}
+            size="large"
+            onChange={(e) => setPetsAllowed(e.target.checked)}
+          />
+        </div>
       </div>
       {/* Smoking Allowed */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">
-          Smoking Allowed:
+      <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">
+          Smoking:
         </label>
-        <input
-          type="checkbox"
-          name="smokingAllowed"
-          checked={smokingAllowed}
-          onChange={(e) => setSmokingAllowed(e.target.checked)}
-          className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-        />
+        <div className="w-4/6 text-center">
+          <Checkbox
+            type="checkbox"
+            name="smokingAllowed"
+            checked={smokingAllowed}
+            sx={{color: yellow[300],
+              '&.Mui-checked': {
+              color: yellow[300],}}}
+            size="large"
+            onChange={(e) => setSmokingAllowed(e.target.checked)}
+          />
+        </div>
       </div>
       {/* Move In Date */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">
+      <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">
           Move In Date:
         </label>
         <input
@@ -208,28 +232,29 @@ const CreateHomeForm = () => {
           name="moveInDate"
           value={moveInDate}
           onChange={(e) => setMoveInDate(e.target.value)}
-          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+          className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* Images */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">Images:</label>
+      <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">Images:</label>
         <input
           type="file"
           name="images"
           multiple
           onChange={(e) => setImages(e.target.files)}
-          className="bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+          className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
       {/* House Rules */}
-      <div>
-        <label className="block text-zinc-100 text-xl ml-0">House Rules:</label>
+      <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
+        <label className="text-zinc-100 text-2xl mr-4">House Rules:</label>
         <input
           type="text"
           name="houseRules"
           value={houseRules}
           onChange={(e) => setHouseRules(e.target.value)}
+          className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
         />
       </div>
 
