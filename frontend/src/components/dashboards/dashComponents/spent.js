@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../../hooks/useAuthContext';
+import { AnimatedCounter } from  'react-animated-counter';
 
 const Spent = () => {
   const [expenses, setExpenses] = useState([]);
@@ -53,12 +54,27 @@ const Spent = () => {
     <div className='col-span-2 grid grid-cols-2 gap-4'>
         <div className='p-8 flex flex-col justify-between rounded-3xl bg-[#b0d2c1]'>
             <h1 className='text-2xl font-bold'>Total weekly expense</h1>
-            <p  className='text-6xl text-zinc-600'>৳{weeklySum}</p>
-            {/* <p className='text-6xl text-zinc-600'>৳1487</p> */}
+            <div className='flex ml-0 text-6xl text-zinc-600'>
+              <div className='flex space-x-4'><span>৳</span>
+                <AnimatedCounter
+                  value={weeklySum}
+                  delay={0}
+                  fontSize='60px'
+                  color='#52525b'/>
+              </div>
+            </div>
         </div>
         <div className='p-8 flex flex-col justify-between rounded-3xl bg-[#bab6c1]'>
-            <h1 className='text-2xl font-bold'>Total monthly expense</h1>
-            <p className='text-6xl text-zinc-600'>৳{monthlySum}</p>
+          <h1 className='text-2xl font-bold'>Total monthly expense</h1>
+          <div className='flex ml-0 text-6xl text-zinc-600'>
+              <div className='flex space-x-4'><span>৳</span>
+                <AnimatedCounter
+                  value={monthlySum}
+                  delay={0}
+                  fontSize='60px'
+                  color='#52525b'/>
+              </div>
+            </div>
         </div>
     </div>
   )
