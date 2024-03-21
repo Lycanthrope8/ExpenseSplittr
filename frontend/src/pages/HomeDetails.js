@@ -43,7 +43,7 @@ export const HomeDetails = () => {
   useEffect(() => {
     const fetchhome = async () => {
       try {
-        console.log(id);
+        // console.log(id);
         const response = await fetch(`/home/${id}`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });

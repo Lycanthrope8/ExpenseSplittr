@@ -13,6 +13,7 @@ import { ExploreAllHome } from "./pages/ExploreAllHome";
 import { HomeDetails } from "./pages/HomeDetails";
 import { PersonalDashboard } from "./pages/PersonalDashboard";
 import { JoinedHomeDetails } from "./pages/JoinedHomeDetails";
+import { HomeDetailsOwner } from "./pages/HomeDetailsOwner";
 import { Home } from "./components/Home";
 import UploadImagesHome from "./components/UploadImagesHome";
 
@@ -51,6 +52,10 @@ function App() {
             <Route
               path="/homedetails/:id"
               element={user ? <JoinedHomeDetails /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/homedetailsOwner/:id"
+              element={user ? <HomeDetailsOwner /> : <Navigate to="/" />}
             />
             <Route
               path="/"
