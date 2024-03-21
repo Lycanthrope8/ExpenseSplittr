@@ -7,6 +7,7 @@ import yellow from "@mui/material/colors/yellow";
 
 const CreateHomeForm = () => {
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
   const [buttonLabel, setButtonLabel] = useState("Create Home"); // State for button label
   const { user } = useAuthContext();
   const { dispatch } = useContext(ProfileContext);
@@ -64,6 +65,7 @@ const CreateHomeForm = () => {
       const json = await response.json();
       if (!response.ok) {
         setError(json.error);
+        setEmptyFields(json.emptyFields);
         setButtonLabel("Create Home"); // Change button label back to "Create Home"
       } else {
         setError(null);
@@ -71,7 +73,7 @@ const CreateHomeForm = () => {
           type: "UPDATE_PROFILE",
           payload: { homeId: json.savedHome.home_id },
         });
-        navigate("/"); // Redirect to home page after successful creation
+        navigate("/home/createHome/uploadImages", { state: { homeId: json.savedHome.home_id } });  // Redirect to home page after successful creation
       }
     } catch (error) {
       setError("Error creating Home");
@@ -237,17 +239,7 @@ const CreateHomeForm = () => {
             className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
           />
         </div>
-        {/* Images */}
-        <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">Images:</label>
-          <input
-            type="file"
-            name="images"
-            multiple
-            onChange={(e) => setImages(e.target.files)}
-            className="w-10/12 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-          />
-        </div>
+        
         {/* House Rules */}
         <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
           <label className="text-zinc-100 text-2xl mr-4">House Rules:</label>

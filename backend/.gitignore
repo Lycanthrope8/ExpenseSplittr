@@ -3,3 +3,4 @@
 .env.test.local
 .env.production.local
 uploads/profilePictures/
+uploads/homes/

@@ -1,7 +1,8 @@
 
-const mongoose = require("mongoose");
 const Home = require("../models/homeModel");
 const UserProfile = require("../models/userProfileModel");
+const upload = require("../middleware/homeMulterMiddleware");
+
 const { nanoid } = require('nanoid');
 
 // Create a new home
@@ -95,18 +96,34 @@ const getHomeById = async (req, res) => {
   }
 };
 
-// Update a home by ID
 const updateHomeById = async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedHome = await Home.findOneAndUpdate({ home_id: id }, req.body, { new: true });
+    console.log("Updating Home with ID: ", id," with data: ", req.body);
 
-    if (updatedHome) {
-      res.status(200).json(updatedHome);
-    } else {
-      res.status(404).json({ error: "Home not found" });
-    }
+    // Handle file uploads
+    upload(req, res, async (err) => {
+      if (err) {
+        console.error("Error uploading files:", err);
+        return res.status(500).json({ error: "Failed to upload files" });
+      }
+
+      // Files are uploaded, update the home object with image paths
+      const images = req.files.map(file => file.path);
+      const updatedHome = await Home.findOneAndUpdate(
+        { home_id: id },
+        { $push: { images: { $each: images } } }, // Add the new images to the existing array
+        { new: true }
+      );
+      
+      if (updatedHome) {
+        res.status(200).json(updatedHome);
+      } else {
+        res.status(404).json({ error: "Home not found" });
+      }
+    });
   } catch (error) {
+    console.error("Error updating home:", error);
     res.status(500).json({ error: "Failed to update home" });
   }
 };
