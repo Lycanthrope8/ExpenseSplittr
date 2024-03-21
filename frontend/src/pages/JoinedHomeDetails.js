@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useProfileContext } from "../hooks/useProfileContext";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 
 export const JoinedHomeDetails = () => {
   const { profile } = useProfileContext();
@@ -12,7 +12,6 @@ export const JoinedHomeDetails = () => {
   const [home, setHome] = useState([]);
   const { user } = useAuthContext();
   const id = profile.homeId;
-
 
   useEffect(() => {
     const fetchhome = async () => {
@@ -24,12 +23,12 @@ export const JoinedHomeDetails = () => {
         const json = await response.json();
 
         if (response.ok) {
-          setHome(json); 
+          setHome(json);
           setLoading(false);
         }
       } catch (error) {
         console.error(error);
-        setLoading(false); 
+        setLoading(false);
       }
     };
     if (user) {
@@ -38,10 +37,11 @@ export const JoinedHomeDetails = () => {
   }, [user, id]);
 
   return loading ? (
-    <div className='flex h-screen items-center'>
-      <p className='flex w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg '>
-      <CircularProgress className="mr-4" />
-      Loading...</p>
+    <div className="flex h-screen items-center">
+      <p className="flex w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg ">
+        <CircularProgress className="mr-4" />
+        Loading...
+      </p>
     </div>
   ) : (
     <div className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
@@ -76,7 +76,7 @@ export const JoinedHomeDetails = () => {
             {home.images.map((image, index) => (
               <img
                 key={index}
-                src={image}
+                src={`/${image}`}
                 alt={`Home ${home.name}`}
                 style={{
                   maxWidth: "100px",

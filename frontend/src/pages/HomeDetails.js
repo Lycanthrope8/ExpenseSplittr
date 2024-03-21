@@ -43,7 +43,7 @@ export const HomeDetails = () => {
   useEffect(() => {
     const fetchhome = async () => {
       try {
-        console.log(id);
+        // console.log(id);
         const response = await fetch(`/home/${id}`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
@@ -102,7 +102,7 @@ export const HomeDetails = () => {
             {home.images.map((image, index) => (
               <img
                 key={index}
-                src={image}
+                src={`/${image}`}
                 alt={`Home ${home.name}`}
                 style={{
                   maxWidth: "100px",
