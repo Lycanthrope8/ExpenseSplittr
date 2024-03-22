@@ -72,7 +72,7 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
   };
 
   return (
-    <form className="create flex flex-col h-72 bg-secondary-dark-bg text-white p-4 rounded-2xl" onSubmit={handleSubmit}>
+    <form className="create flex flex-col h-max bg-secondary-dark-bg text-white p-4 rounded-2xl" onSubmit={handleSubmit}>
         <h1 className="mb-2 text-xl font-bold text-center">Add a New Task</h1>
         <div className="grid grid-cols-5 h-10 mb-4">
             <label className="flex items-center mr-4 text-xl">Title:</label>
