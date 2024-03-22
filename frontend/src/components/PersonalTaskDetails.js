@@ -33,12 +33,14 @@ const TaskDetails = ({ task, onDelete }) => {
 
   return (
     <div className="task-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
-      <div className='flex flex-col'>
+      <div className='flex flex-col w-full'>
         <h4 className='text-3xl border-b-1 mb-2'>{task.title}</h4>
-        <p className="text-lg mb-4"><strong>Description: </strong>{task.description}</p>
+        <p className="text-lg mb-4">{task.description}</p>
         <p className="text-lg mb-4"><strong>Deadline: </strong>{formattedDeadline}</p>
-        <p className="text-lg mb-4"><strong>Completed: </strong>{task.completed ? 'Yes' : 'No'}</p>
-        <p className="text-sm">{formattedDate}</p>
+        <div className='flex justify-between'>
+          <p className="text-lg mb-4"><strong>Completed: </strong>{task.completed ? 'Yes' : 'No'}</p>
+          <p className="text-sm">{formattedDate}</p>
+        </div>
       </div>
       <span className="material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" onClick={handleClick}>delete</span>
     </div>
