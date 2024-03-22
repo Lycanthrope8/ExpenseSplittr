@@ -7,7 +7,7 @@ import { PersonalTasks } from '../components/PersonalTasks';
 export const PersonalDashboard = () => {
   
   return (
-    <div className='flex flex-row space-y-10'>
+    <div className='flex space-y-10'>
       <Personal />
       <PersonalTasks />
     </div>

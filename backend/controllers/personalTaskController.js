@@ -41,8 +41,8 @@ const createTask = async (req, res) => {
   if (!deadline) {
     emptyFields.push('deadline')
   }
-  if (emptyFields.length > 1) {
-    return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
+  if (emptyFields.includes('title')  ) {
+    return res.status(400).json({ error: 'Title is required', emptyFields })
   }
 
   // add to the database
@@ -84,6 +84,7 @@ const updateTask = async (req, res) => {
   const task = await PersonalTask.findOneAndUpdate({_id: id}, {
     ...req.body
   })
+  console.log(task);
 
   if (!task) {
     return res.status(400).json({error: 'No such task'})
