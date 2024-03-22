@@ -29,13 +29,14 @@ const TaskDetails = ({ task, onDelete }) => {
   };
 
   const formattedDate = format(new Date(task.createdAt), "MMMM dd, yyyy 'at' HH:mm");
+  const formattedDeadline = format(new Date(task.deadline), "MMMM dd, yyyy");
 
   return (
     <div className="task-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
       <div className='flex flex-col'>
         <h4 className='text-3xl border-b-1 mb-2'>{task.title}</h4>
         <p className="text-lg mb-4"><strong>Description: </strong>{task.description}</p>
-        <p className="text-lg mb-4"><strong>Deadline: </strong>{task.deadline}</p>
+        <p className="text-lg mb-4"><strong>Deadline: </strong>{formattedDeadline}</p>
         <p className="text-lg mb-4"><strong>Completed: </strong>{task.completed ? 'Yes' : 'No'}</p>
         <p className="text-sm">{formattedDate}</p>
       </div>
