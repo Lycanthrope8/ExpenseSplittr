@@ -20,9 +20,9 @@ const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
       setError("You must be logged in to add an expense");
       return;
     }
-
-    const expense = { title, amount };
-
+    
+    const expense = { title, amount , tag: selectedTag };
+    // console.log(expense);
     const response = await fetch("/api/personalExpenses/", {
       method: "POST",
       body: JSON.stringify(expense),
@@ -41,6 +41,7 @@ const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
       setError(null);
       setTitle("");
       setAmount("");
+      setSelectedTag("");
 
       // Dispatch the action to create expense
       dispatch({ type: "CREATE_EXPENSE", payload: json });

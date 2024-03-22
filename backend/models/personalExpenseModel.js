@@ -11,6 +11,10 @@ const personalExpenseSchema = new Schema({
     type: Number,
     required: true
   },
+  tag: {
+    type: String,
+    required: true
+  },
   user_id: {
     type: String,
     required: true
