@@ -45,28 +45,29 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
       dispatch({ type: "CREATE_TASK", payload: json });
 
       // Sort the tasks based on the current sort option
-      let sortedTasks;
-      if (Array.isArray(tasks)) {
-        switch (sortOption) {
-          case "deadline-low-high":
-            sortedTasks = [json, ...tasks].sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
-            break;
-          case "deadline-high-low":
-            sortedTasks = [json, ...tasks].sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
-            break;
-          case "date-recent":
-            sortedTasks = [json, ...tasks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-            break;
-          case "date-least-recent":
-            sortedTasks = [json, ...tasks].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-            break;
-          default:
-            sortedTasks = [json, ...tasks];
-        }
-      } else {
-        sortedTasks = [json];
-      }
-      setSortedTasks(sortedTasks);
+      // let sortedTasks;
+      // if (Array.isArray(tasks)) {
+      //   switch (sortOption) {
+      //     case "deadline-low-high":
+      //       sortedTasks = [json, ...tasks].sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+      //       break;
+      //     case "deadline-high-low":
+      //       sortedTasks = [json, ...tasks].sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
+      //       break;
+      //     case "date-recent":
+      //       sortedTasks = [json, ...tasks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      //       break;
+      //     case "date-least-recent":
+      //       sortedTasks = [json, ...tasks].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      //       break;
+      //     default:
+      //       sortedTasks = [json, ...tasks];
+      //   }
+      // } else {
+      //   sortedTasks = [json];
+      // }
+      // setSortedTasks(sortedTasks);
+      // console.log(sortedTasks);
     }
   };
 
@@ -74,7 +75,7 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
     <form className="create flex flex-col h-72 bg-secondary-dark-bg text-white p-4 rounded-2xl" onSubmit={handleSubmit}>
         <h1 className="mb-2 text-xl font-bold text-center">Add a New Task</h1>
         <div className="grid grid-cols-5 h-10 mb-4">
-            <label className="align-middle mr-4 text-xl">Title:</label>
+            <label className="flex items-center mr-4 text-xl">Title:</label>
             <input
             type="text"
             onChange={(e) => setTitle(e.target.value)}
@@ -83,7 +84,7 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
             />
         </div>
         <div className="grid grid-cols-5 h-10 mb-4">
-            <label className="align-middle mr-4 text-xl">Description:</label>
+            <label className="flex items-center mr-4 text-xl">Description:</label>
             <input
             type="text"
             onChange={(e) => setDescription(e.target.value)}
@@ -92,7 +93,7 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
             />
         </div>
         <div className="grid grid-cols-5 h-10 mb-4">
-            <label className="align-middle mr-4 text-xl">Deadline:</label>
+            <label className="flex items-center mr-4 text-xl">Deadline:</label>
             <input
             type="date"
             onChange={(e) => setDeadline(e.target.value)}
@@ -101,7 +102,7 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
             />
         </div>
         <div className="grid grid-cols-5 h-10 mb-4">
-            <label className="align-middle mr-4 text-xl">Completed:</label>
+            <label className="flex items-center mr-4 text-xl">Completed:</label>
             <input
             type="checkbox"
             onChange={(e) => setCompleted(e.target.checked)}

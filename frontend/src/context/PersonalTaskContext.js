@@ -12,6 +12,10 @@ export const personalTaskReducer = (state, action) => {
       return {
         tasks: [action.payload, ...state.tasks]
       }
+    case 'EDIT_TASK':
+      return {
+        tasks: state.tasks.map((w) => w._id === action.payload._id ? action.payload : w)
+      }
     case 'DELETE_TASK':
       return {
         tasks: state.tasks.filter((w) => w._id !== action.payload._id)

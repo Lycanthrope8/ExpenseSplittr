@@ -27,6 +27,13 @@ export const PersonalTasks = () => {
     }
   }, [dispatch, user, sortOption]);
   
+  const handleEdit = (editedTask) => {
+    const updatedSortedTasks = sortedTasks.map((task) =>
+      task._id === editedTask._id ? editedTask : task
+    );
+    setSortedTasks(updatedSortedTasks);
+  }; 
+
   const handleDelete = (deletedTaskId) => {
     // Filter out the deleted task from sortedTasks
     const updatedSortedTasks = sortedTasks.filter(
@@ -65,6 +72,7 @@ export const PersonalTasks = () => {
         sorted = tasks;
     }
     setSortedTasks(sorted);
+    console.log(sorted);
   };
   return (
     <div className="home grid grid-cols-3 gap-4 mx-4">
@@ -74,7 +82,7 @@ export const PersonalTasks = () => {
           {sortedTasks && sortedTasks.length > 0
             ? sortedTasks.map((task) => (
                 <div className="task-details-wrapper" key={task._id}>
-                  <TaskDetails task={task} onDelete={handleDelete} />
+                  <TaskDetails task={task} onEdit={handleEdit} onDelete={handleDelete} />
                 </div>
               ))
             : tasks &&

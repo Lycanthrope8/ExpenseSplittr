@@ -3,7 +3,7 @@ import React from 'react';
 const ExpenseTagDropdown = ({ expenseTags, selectedTag, setSelectedTag }) => {
   return (
     <div className="mb-4">
-      <label htmlFor="expenseTag" className="text-xl">Select Tag:</label>
+      <label htmlFor="expenseTag" className="mr-4 text-xl">Select Tag:</label>
       <select
         id="expenseTag"
         value={selectedTag}

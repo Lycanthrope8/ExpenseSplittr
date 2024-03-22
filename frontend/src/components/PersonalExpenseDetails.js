@@ -34,7 +34,7 @@ const ExpenseDetails = ({ expense, onDelete }) => {
     <div className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
       <div className='flex flex-col'>
         <h4 className='text-3xl border-b-1 mb-2'>{expense.title}</h4>
-        <p >{expense.tag}</p>
+        <p className="text-lg mb-4">{expense.tag}</p>
         <p className="text-lg mb-4"><strong>Amount: </strong>{expense.amount}</p>
         <p className="text-sm">{formattedDate}</p>
       </div>

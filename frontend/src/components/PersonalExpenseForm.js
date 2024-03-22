@@ -77,7 +77,7 @@ const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
         setSelectedTag={setSelectedTag}
       />
       <div className="grid grid-cols-5 h-10 mb-4">
-        <label className="align-middle mr-4 text-xl">Title:</label>
+        <label className="flex items-center mr-4 text-xl">Title:</label>
         <input
           type="text"
           onChange={(e) => setTitle(e.target.value)}
@@ -86,7 +86,7 @@ const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
         />
       </div>
       <div className="grid grid-cols-5 h-10 mb-4">
-        <label className="align-middle mr-4 text-xl">Amount:</label>
+        <label className="flex items-center mr-4 text-xl">Amount:</label>
         <input
           type="number"
           onChange={(e) => setAmount(e.target.value)}

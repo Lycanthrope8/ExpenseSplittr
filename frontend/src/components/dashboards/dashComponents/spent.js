@@ -51,7 +51,7 @@ const Spent = () => {
   });
 
   return (
-    <div className='font-axiforma col-span-2 grid grid-cols-2 gap-8'>
+    <div className='font-roboto col-span-2 grid grid-cols-2 gap-8'>
         <div className='p-8 flex flex-col justify-between rounded-3xl bg-[#b0d2c1]'>
             <h1 className='text-3xl font-bold'>Total weekly expense</h1>
             <div className='flex ml-0 text-5xl text-zinc-600'>

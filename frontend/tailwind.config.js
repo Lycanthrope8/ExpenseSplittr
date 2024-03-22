@@ -8,7 +8,7 @@ module.exports = {
         montserrat: ['Montserrat', 'sans-serif'],
         opensans: ['Open sans', 'sans-serif'],
         roboto: ['Roboto', 'sans-serif'],
-        axiforma: ['Axiforma Regular'],
+        // axiforma: ['Axiforma Regular'],
       },
       fontSize: {
         14: '14px',
