@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { usePersonalTask } from "../hooks/usePersonalTask";
 import { useAuthContext } from "../hooks/useAuthContext";
+import moment from "moment";
 
 const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
   const { dispatch } = usePersonalTask();
   const { user } = useAuthContext();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [deadline, setDeadline] = useState("");
+  const [deadline, setDeadline] = useState(moment().format("YYYY-MM-DD"));
   const [completed, setCompleted] = useState(false);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
@@ -19,7 +20,7 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
       return;
     }
 
-    const task = { title, deadline };
+    const task = { title, description, deadline, completed };
 
     const response = await fetch("/api/personalTasks/", {
       method: "POST",
@@ -39,8 +40,7 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
         setError(null);
         setTitle("");
         setDescription("");
-        setCompleted(false);
-        setDeadline("");
+        setDeadline(moment().format("YYYY-MM-DD"));
 
       // Dispatch the action to create task
       dispatch({ type: "CREATE_TASK", payload: json });

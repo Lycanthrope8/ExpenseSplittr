@@ -37,7 +37,7 @@ const createTask = async (req, res) => {
   if (!deadline) {
     emptyFields.push('deadline')
   }
-  if (emptyFields.length > 1) {
+  if (emptyFields.length > 0) {
     return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
   }
 
