@@ -39,11 +39,11 @@ export const PersonalTasks = () => {
     setSortOption(option);
     let sorted;
     switch (option) {
-      case "amount-low-high":
-        sorted = tasks.slice().sort((a, b) => a.amount - b.amount);
+      case "deadline-low-high":
+        sorted = tasks.slice().sort((a, b) => a.deadline - b.deadline);
         break;
-      case "amount-high-low":
-        sorted = tasks.slice().sort((a, b) => b.amount - a.amount);
+      case "deadline-high-low":
+        sorted = tasks.slice().sort((a, b) => b.deadline - a.deadline);
         break;
       case "date-recent":
         sorted = tasks
