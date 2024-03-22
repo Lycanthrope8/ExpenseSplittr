@@ -41,6 +41,7 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
         setTitle("");
         setDescription("");
         setDeadline(moment().format("YYYY-MM-DD"));
+        setCompleted(false);
 
       // Dispatch the action to create task
       dispatch({ type: "CREATE_TASK", payload: json });
@@ -101,7 +102,7 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
             <label className="align-middle mr-4 text-xl">Completed:</label>
             <input
             type="checkbox"
-            onChange={(e) => setCompleted(e.target.value)}
+            onChange={(e) => setCompleted(e.target.checked)}
             value={completed}
             className={emptyFields.includes("completed") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
             />

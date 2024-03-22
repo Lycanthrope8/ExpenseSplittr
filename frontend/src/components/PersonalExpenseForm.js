@@ -75,7 +75,6 @@ const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
           className={emptyFields.includes("title") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
         />
       </div>
-
       <div className="grid grid-cols-5 h-10 mb-4">
         <label className="align-middle mr-4 text-xl">Amount:</label>
         <input
