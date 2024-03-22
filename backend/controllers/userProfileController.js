@@ -54,4 +54,48 @@ const updateUserProfile = async (req, res) => {
 };
 
 
-module.exports = { getUserProfile, createUserProfile, updateUserProfile };
+// Add Tag to UserProfile
+const addTagToUserProfile = async (req, res) => {
+  const userId = req.params.userId;
+  const { tag } = req.body;
+
+  try {
+    const userProfile = await UserProfile.findOne({ userId });
+    if (!userProfile) {
+      return res.status(404).json({ error: "User profile not found" });
+    }
+
+    await userProfile.addExpenseTags([tag]); // Call addExpenseTags method
+    res.status(200).json(userProfile);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+// Remove Tag from UserProfile
+const removeTagFromUserProfile = async (req, res) => {
+  const userId = req.params.userId;
+  const { tag } = req.body;
+
+  try {
+    const userProfile = await UserProfile.findOne({ userId });
+    if (!userProfile) {
+      return res.status(404).json({ error: "User profile not found" });
+    }
+
+    await userProfile.removeExpenseTags([tag]); // Call removeExpenseTags method
+    res.status(200).json(userProfile);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
+module.exports = { 
+  getUserProfile, 
+  createUserProfile, 
+  updateUserProfile, 
+  addTagToUserProfile, 
+  removeTagFromUserProfile 
+};
+

@@ -36,8 +36,23 @@ const userProfileSchema = new Schema(
       type: String,
       default: "",
     },
+    expenseTags: {
+      type: [],
+      default: ["Food", "Transportation", "Housing", "Entertainment", "Utilities"],
+    },
   },
 );
+
+userProfileSchema.methods.addExpenseTags = function(tags) {
+  this.expenseTags.push(...tags);
+  return this.save();
+}
+
+userProfileSchema.methods.removeExpenseTags = function(tags) {
+  this.expenseTags = this.expenseTags.filter(tag => !tags.includes(tag));
+  return this.save();
+}
+
 
 
 module.exports = mongoose.model('UserProfile', userProfileSchema)
