@@ -1,12 +1,16 @@
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import { usePersonalExpense } from "../hooks/usePersonalExpense";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { ProfileContext } from '../context/ProfileContext';
+import ExpenseTagDropdown from './ExpenseTagDropdown';
 
 const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
   const { dispatch } = usePersonalExpense();
   const { user } = useAuthContext();
+  const { profile } = useContext(ProfileContext);
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
 
@@ -66,6 +70,11 @@ const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
   return (
     <form className="create flex flex-col h-72 bg-secondary-dark-bg text-white p-4 rounded-2xl" onSubmit={handleSubmit}>
       <h1 className="mb-2 text-xl font-bold text-center">Add a New Expense</h1>
+      <ExpenseTagDropdown
+        expenseTags={profile.expenseTags}
+        selectedTag={selectedTag}
+        setSelectedTag={setSelectedTag}
+      />
       <div className="grid grid-cols-5 h-10 mb-4">
         <label className="align-middle mr-4 text-xl">Title:</label>
         <input
@@ -84,11 +93,11 @@ const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
           className={emptyFields.includes("amount") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
         />
       </div>
-
       <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl">Add Expense</button>
       {error && <div className="error">{error}</div>}
     </form>
   );
 };
+
 
 export default PersonalExpenseForm;
