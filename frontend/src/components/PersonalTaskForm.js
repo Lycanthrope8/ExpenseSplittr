@@ -36,35 +36,37 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
       setError(json.error);
       setEmptyFields(json.emptyFields);
     } else {
-        setEmptyFields([]);
-        setError(null);
-        setTitle("");
-        setDescription("");
-        setDeadline(moment().format("YYYY-MM-DD"));
-        setCompleted(false);
+      setEmptyFields([]);
+      setError(null);
+      setTitle("");
+      setDescription("");
 
       // Dispatch the action to create task
       dispatch({ type: "CREATE_TASK", payload: json });
 
       // Sort the tasks based on the current sort option
-      let sorted;
-      switch (sortOption) {
-        case "deadline-low-high":
-          sorted = [json, ...tasks].sort((a, b) => a.deadline - b.deadline);
-          break;
-        case "deadline-high-low":
-          sorted = [json, ...tasks].sort((a, b) => b.deadline - a.deadline);
-          break;
-        case "date-recent":
-          sorted = [json, ...tasks].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-          break;
-        case "date-least-recent":
-          sorted = [json, ...tasks].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-          break;
-        default:
-          sorted = [json, ...tasks];
+      let sortedTasks;
+      if (Array.isArray(tasks)) {
+        switch (sortOption) {
+          case "deadline-low-high":
+            sortedTasks = [json, ...tasks].sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+            break;
+          case "deadline-high-low":
+            sortedTasks = [json, ...tasks].sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
+            break;
+          case "date-recent":
+            sortedTasks = [json, ...tasks].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            break;
+          case "date-least-recent":
+            sortedTasks = [json, ...tasks].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+            break;
+          default:
+            sortedTasks = [json, ...tasks];
+        }
+      } else {
+        sortedTasks = [json];
       }
-      setSortedTasks(sorted);
+      setSortedTasks(sortedTasks);
     }
   };
 

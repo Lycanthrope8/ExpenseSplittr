@@ -8,7 +8,7 @@ const getTasks = async (req, res) => {
   res.status(200).json(tasks)
 }
 
-// get a single expense
+// get a single task
 const getTask = async (req, res) => {
   const { id } = req.params
 
@@ -17,6 +17,7 @@ const getTask = async (req, res) => {
   }
 
   const task = await PersonalTask.findById(id)
+  console.log(task)
 
   if (!task) {
     return res.status(404).json({error: 'No such task'})
@@ -25,19 +26,22 @@ const getTask = async (req, res) => {
   res.status(200).json(task)
 }
 
-// create a new expense
+// create a new task
 const createTask = async (req, res) => {
-  const {title, deadline} = req.body
+  const {title, description, deadline, completed} = req.body
 
   let emptyFields = []
 
   if (!title) {
     emptyFields.push('title')
   }
+  if (!description) {
+    emptyFields.push('description')
+  }
   if (!deadline) {
     emptyFields.push('deadline')
   }
-  if (emptyFields.length > 0) {
+  if (emptyFields.length > 1) {
     return res.status(400).json({ error: 'Please fill in all fields', emptyFields })
   }
 
