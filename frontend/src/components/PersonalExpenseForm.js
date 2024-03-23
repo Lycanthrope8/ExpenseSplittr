@@ -70,28 +70,28 @@ const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
 
   return (
     <form className="create flex flex-col h-max bg-secondary-dark-bg text-white p-4 rounded-2xl" onSubmit={handleSubmit}>
-      <h1 className="mb-2 text-xl font-bold text-center">Add a New Expense</h1>
+      <h1 className="mb-4 text-xl font-bold text-center">Add a New Expense</h1>
       <ExpenseTagDropdown
         expenseTags={profile.expenseTags}
         selectedTag={selectedTag}
         setSelectedTag={setSelectedTag}
       />
-      <div className="grid grid-cols-5 h-10 mb-4">
-        <label className="flex items-center mr-4 text-xl">Title:</label>
+      <div className="grid grid-cols-8 h-10 mb-4">
+        <label className="flex items-center mr-4 text-xl col-span-2">Title:</label>
         <input
           type="text"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
-          className={emptyFields.includes("title") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
+          className={emptyFields.includes("title") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
         />
       </div>
-      <div className="grid grid-cols-5 h-10 mb-4">
-        <label className="flex items-center mr-4 text-xl">Amount:</label>
+      <div className="grid grid-cols-8 h-10 mb-4">
+        <label className="flex items-center mr-4 text-xl col-span-2">Amount:</label>
         <input
           type="number"
           onChange={(e) => setAmount(e.target.value)}
           value={amount}
-          className={emptyFields.includes("amount") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
+          className={emptyFields.includes("amount") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
         />
       </div>
       <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl">Add Expense</button>

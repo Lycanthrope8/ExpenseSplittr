@@ -20,7 +20,7 @@ import UploadImagesHome from "./components/UploadImagesHome";
 function App() {
   const { user } = useAuthContext();
   return (
-    <div className="App bg-main-dark-bg h-full overflow-hidden ">
+    <div className="App">
       <BrowserRouter>
         <Navbar />
         <div className="pages">

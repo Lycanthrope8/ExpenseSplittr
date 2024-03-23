@@ -2,6 +2,8 @@ import { useState } from "react";
 import { usePersonalTask } from "../hooks/usePersonalTask";
 import { useAuthContext } from "../hooks/useAuthContext";
 import moment from "moment";
+import { Checkbox } from "@mui/material";
+import yellow from "@mui/material/colors/yellow";
 
 const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
   const { dispatch } = usePersonalTask();
@@ -73,42 +75,47 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
 
   return (
     <form className="create flex flex-col h-max bg-secondary-dark-bg text-white p-4 rounded-2xl" onSubmit={handleSubmit}>
-        <h1 className="mb-2 text-xl font-bold text-center">Add a New Task</h1>
-        <div className="grid grid-cols-5 h-10 mb-4">
-            <label className="flex items-center mr-4 text-xl">Title:</label>
+        <h1 className="mb-4 text-xl font-bold text-center">Add a New Task</h1>
+        <div className="grid grid-cols-8 h-10 mb-4">
+            <label className="flex items-center mr-4 text-xl col-span-2">Title:</label>
             <input
             type="text"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
-            className={emptyFields.includes("title") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
+            className={emptyFields.includes("title") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
             />
         </div>
-        <div className="grid grid-cols-5 h-10 mb-4">
-            <label className="flex items-center mr-4 text-xl">Description:</label>
+        <div className="grid grid-cols-8 h-10 mb-4">
+            <label className="flex items-center mr-4 text-xl col-span-2">Description:</label>
             <input
             type="text"
             onChange={(e) => setDescription(e.target.value)}
             value={description}
-            className={emptyFields.includes("description") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
+            className={emptyFields.includes("description") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
             />
         </div>
-        <div className="grid grid-cols-5 h-10 mb-4">
-            <label className="flex items-center mr-4 text-xl">Deadline:</label>
+        <div className="grid grid-cols-8 h-10 mb-4">
+            <label className="flex items-center mr-4 text-xl col-span-2">Deadline:</label>
             <input
             type="date"
             onChange={(e) => setDeadline(e.target.value)}
             value={deadline}
-            className={emptyFields.includes("deadline") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
+            className={emptyFields.includes("deadline") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
             />
         </div>
-        <div className="grid grid-cols-5 h-10 mb-4">
-            <label className="flex items-center mr-4 text-xl">Completed:</label>
-            <input
-            type="checkbox"
-            onChange={(e) => setCompleted(e.target.checked)}
-            value={completed}
-            className={emptyFields.includes("completed") ? "error" : "col-span-4 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
-            />
+        <div className="grid grid-cols-8 h-10 mb-8">
+            <label className="flex items-center mr-4 text-xl col-span-2">Completed:</label>
+            <div className="col-span-6 text-center p-2 text-zinc-200 rounded-xl">
+              <Checkbox
+                type="checkbox"
+                checked={completed}
+                sx={{color: yellow[300],
+                  '&.Mui-checked': {
+                  color: yellow[300],}}}
+                size="large"
+                onChange={(e) => setCompleted(e.target.checked)}
+              />
+            </div>
         </div>
 
       <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl">Add Task</button>
