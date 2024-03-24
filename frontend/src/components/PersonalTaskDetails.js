@@ -7,6 +7,7 @@ import moment from 'moment';
 const TaskDetails = ({ task, onDelete, onEdit }) => {
   const { dispatch } = usePersonalTask();
   const { user } = useAuthContext();
+  const [completeStatus, setCompleteStatus] = useState(task.completed);
   const [isEditing, setEditing] = useState(false);
   const [newTitle, setNewTitle] = useState();
   const [newDescription, setNewDescription] = useState();
@@ -18,6 +19,8 @@ const TaskDetails = ({ task, onDelete, onEdit }) => {
     if (!user) {
       return;
     }
+
+    completeStatus ? setCompleteStatus(false) : setCompleteStatus(true);
 
     const response = await fetch('/api/personalTasks/' + task._id, {
       method: 'PATCH',
@@ -97,12 +100,12 @@ const TaskDetails = ({ task, onDelete, onEdit }) => {
         <input className="text-lg mb-4 bg-secondary-dark-bg text-zinc-200 outline-none" placeholder={task.description} onChange={(e) => setNewDescription(e.target.value)}/>
         <input type="date" className='text-lg mb-4 bg-secondary-dark-bg text-zinc-200' placeholder={task.deadline} onChange={(e) => setNewDeadline(e.target.value)}/>
         <div className='flex justify-between items-center'>
-          <button onClick={changeCompleteStatus} className={task.completed ? 'text-gray-800 align-middle px-4 py-2 rounded-xl bg-green-300' : 'text-gray-800 align-middle px-4 py-2 rounded-xl bg-red-300'}>{task.completed ? 'Completed' : 'Incomplete'}</button>
+          <button onClick={changeCompleteStatus} className={completeStatus ? 'text-gray-800 align-middle px-4 py-2 rounded-xl bg-green-300' : 'text-gray-800 align-middle px-4 py-2 rounded-xl bg-red-300'}>{completeStatus ? 'Completed' : 'Incomplete'}</button>
           <p className="text-sm">Created: {formattedDate}</p>
         </div>
         </div>
         <div className='flex'>
-        <button form='editingForm' className="basis-2/12 inline-block material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" type='submit'>save</button>
+        <button form='editingForm' className="basis-2/12 material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" type='submit'>save</button>
         <button className="material-symbols-outlined text-red-500 text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg " onClick={handleDelete}>delete</button>
         </div>
       </form>

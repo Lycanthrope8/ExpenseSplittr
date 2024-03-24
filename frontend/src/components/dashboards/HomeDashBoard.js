@@ -1,5 +1,5 @@
 import React from 'react'
-import TaskSummary from './dashComponents/taskSummary'
+import {TaskSummary} from './dashComponents/taskSummary'
 import Spent from './dashComponents/spent'
 
 const HomeDashboard = () => {
