@@ -4,6 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path');
 const personalExpenseRoutes = require('./routes/personalExpenses')
+const homeExpenseRoutes = require('./routes/homeExpenses')
 const personalTaskRoutes = require('./routes/personalTasks')
 const userRoutes = require('./routes/user')
 const userProfileRoutes = require('./routes/userProfile')
@@ -30,6 +31,7 @@ app.use('/api/personalTasks', personalTaskRoutes)
 app.use('/api/user', userRoutes)
 app.use('/profile/', userProfileRoutes)
 app.use('/home/', homeRoutes)
+app.use('/api/homeExpense', homeExpenseRoutes)
 
 
 

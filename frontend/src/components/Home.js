@@ -3,7 +3,8 @@
 import { useNavigate } from "react-router-dom";
 import { useProfileContext } from "../hooks/useProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import  HomeExpenseForm  from "./HomeExpenseForm";
+import { HomeExpenseProvider } from "../context/HomeExpenseContext";
 export const Home = () => {
   const navigate = useNavigate();
   const { profile } = useProfileContext();
@@ -33,8 +34,14 @@ export const Home = () => {
   };
   
   return (
+    <>
     <div onClick={handleClick}>
       <h1>See Home details</h1>
     </div>
+    <HomeExpenseProvider>
+    <HomeExpenseForm/>
+    </HomeExpenseProvider>
+    
+    </>
   );
 };
