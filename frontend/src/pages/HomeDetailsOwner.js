@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useProfileContext } from "../hooks/useProfileContext";
+import { useNavigate } from "react-router-dom";
 
 export const HomeDetailsOwner = () => {
+  const navigate = useNavigate();
   const { profile } = useProfileContext();
   const [loading, setLoading] = useState(true);
   const [home, setHome] = useState({});
@@ -48,6 +50,10 @@ export const HomeDetailsOwner = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleUploadClick = () => {
+    navigate("/home/createHome/uploadImages", { state: { homeId: id } });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Send formData to update the home details
@@ -79,112 +85,135 @@ export const HomeDetailsOwner = () => {
       </p>
     </div>
   ) : (
-    <div>
-    <form onSubmit={handleSubmit} className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1">
+    <>
       <h4 className="text-3xl border-b-1 mb-2">Home Details</h4>
-      <label>
-        Name:
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Location:
-        <input
-          type="text"
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Accommodation Type:
-        <input
-          type="text"
-          name="accommodationType"
-          value={formData.accommodationType}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Bedrooms:
-        <input
-          type="number"
-          name="bedrooms"
-          value={formData.bedrooms}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Bathrooms:
-        <input
-          type="number"
-          name="bathrooms"
-          value={formData.bathrooms}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Rent Amount:
-        <input
-          type="number"
-          name="rentAmount"
-          value={formData.rentAmount}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Utilities Included:
-        <input
-          type="checkbox"
-          name="utilitiesIncluded"
-          checked={formData.utilitiesIncluded}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Furnished:
-        <input
-          type="checkbox"
-          name="furnished"
-          checked={formData.furnished}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Pets Allowed:
-        <input
-          type="checkbox"
-          name="petsAllowed"
-          checked={formData.petsAllowed}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Smoking Allowed:
-        <input
-          type="checkbox"
-          name="smokingAllowed"
-          checked={formData.smokingAllowed}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Move In Date:
-        <input
-          type="date"
-          name="moveInDate"
-          value={formData.moveInDate}
-          onChange={handleChange}
-        />
-      </label>
-      {/* Add other fields as needed */}
-      <button type="submit">Update</button>
-    </form>
-  </div>
-  
+      {home.images && home.images.length > 0 && (
+        <div>
+          {home.images.map((image, index) => (
+            <img
+              key={index}
+              src={`/${image}`}
+              alt={`Home ${home.name}`}
+              style={{
+                maxWidth: "100px",
+                marginRight: "10px",
+                border: "none",
+                margin: "0",
+                padding: "0",
+              }}
+            />
+          ))}
+        </div>
+      )}
+      <button onClick={handleUploadClick}> Upload Images </button>
+      <div>
+        <form
+          onSubmit={handleSubmit}
+          className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1"
+        >
+          <label>
+            Name:
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Location:
+            <input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Accommodation Type:
+            <input
+              type="text"
+              name="accommodationType"
+              value={formData.accommodationType}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Bedrooms:
+            <input
+              type="number"
+              name="bedrooms"
+              value={formData.bedrooms}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Bathrooms:
+            <input
+              type="number"
+              name="bathrooms"
+              value={formData.bathrooms}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Rent Amount:
+            <input
+              type="number"
+              name="rentAmount"
+              value={formData.rentAmount}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Utilities Included:
+            <input
+              type="checkbox"
+              name="utilitiesIncluded"
+              checked={formData.utilitiesIncluded}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Furnished:
+            <input
+              type="checkbox"
+              name="furnished"
+              checked={formData.furnished}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Pets Allowed:
+            <input
+              type="checkbox"
+              name="petsAllowed"
+              checked={formData.petsAllowed}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Smoking Allowed:
+            <input
+              type="checkbox"
+              name="smokingAllowed"
+              checked={formData.smokingAllowed}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Move In Date:
+            <input
+              type="date"
+              name="moveInDate"
+              value={formData.moveInDate}
+              onChange={handleChange}
+            />
+          </label>
+          {/* Add other fields as needed */}
+          <button type="submit">Update</button>
+        </form>
+      </div>
+    </>
   );
 };

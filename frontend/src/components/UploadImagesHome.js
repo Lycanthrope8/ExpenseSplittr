@@ -9,6 +9,7 @@ const UploadImagesHome = () => {
   const { user } = useAuthContext();
   const [selectedFiles, setSelectedFiles] = useState([]);
   const navigate = useNavigate();
+  
   const handleFileChange = (e) => {
     const filesArray = Array.from(e.target.files);
     setSelectedFiles(filesArray);
