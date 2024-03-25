@@ -3,7 +3,7 @@ import { usePersonalExpense } from '../hooks/usePersonalExpense';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { format } from 'date-fns';
 
-const PersonalExpenseDetails = ({ expense, onDelete }) => {
+const HomeExpenseDetails = ({ expense, onDelete }) => {
   const { dispatch } = usePersonalExpense();
   const { user } = useAuthContext();
 
@@ -12,7 +12,7 @@ const PersonalExpenseDetails = ({ expense, onDelete }) => {
       return;
     }
 
-    const response = await fetch('/api/personalExpenses/' + expense._id, {
+    const response = await fetch('/api/homeExpenses/' + expense._id, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${user.token}`
@@ -43,4 +43,4 @@ const PersonalExpenseDetails = ({ expense, onDelete }) => {
   );
 };
 
-export default PersonalExpenseDetails;
+export default HomeExpenseDetails;

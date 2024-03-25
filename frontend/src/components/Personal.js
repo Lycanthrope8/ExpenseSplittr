@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { usePersonalExpense } from "../hooks/usePersonalExpense";
 import { useAuthContext } from "../hooks/useAuthContext";
-import ExpenseDetails from "./PersonalExpenseDetails";
+import PersonalExpenseDetails from "./PersonalExpenseDetails";
 import PersonalExpenseForm from "./PersonalExpenseForm";
 import SortButton from "./SortButton";
 
@@ -74,13 +74,13 @@ export const Personal = () => {
           {sortedExpenses && sortedExpenses.length > 0
             ? sortedExpenses.map((expense) => (
                 <div className="expense-details-wrapper" key={expense._id}>
-                  <ExpenseDetails expense={expense} onDelete={handleDelete} />
+                  <PersonalExpenseDetails expense={expense} onDelete={handleDelete} />
                 </div>
               ))
             : expenses &&
               expenses.map((expense) => (
                 <div className="expense-details-wrapper" key={expense._id}>
-                  <ExpenseDetails expense={expense} />
+                  <PersonalExpenseDetails expense={expense} />
                 </div>
               ))}
         </div>
