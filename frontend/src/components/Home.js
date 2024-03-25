@@ -75,13 +75,18 @@ export const Home = () => {
   return (
     <>
       <div onClick={handleClick}>
-        <h1>See Home details</h1>
+        <h1 className='text-zinc-400 text-4xl'>See Home details</h1>
       </div>
-      <HomeExpenseProvider>
-        <HomeExpenseForm />
         {/* Render other components related to home expenses */}
-        <HomeExpenseDetails expense={expenses} onDelete={handleDelete} />
-      </HomeExpenseProvider>
+      <div className="home grid grid-cols-3 gap-4 mx-4">
+      <div className="col-span-2 relative">
+        {expenses && expenses.map((expense) => (
+            <div key={expense._id}>
+              <HomeExpenseDetails expense={expense} />
+            </div>))}
+      </div>
+        <HomeExpenseForm />
+      </div>
     </>
   );
 };
