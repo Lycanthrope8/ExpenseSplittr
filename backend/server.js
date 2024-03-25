@@ -31,7 +31,7 @@ app.use('/api/personalTasks', personalTaskRoutes)
 app.use('/api/user', userRoutes)
 app.use('/profile/', userProfileRoutes)
 app.use('/home/', homeRoutes)
-app.use('/api/homeExpense', homeExpenseRoutes)
+app.use('/api/homeExpenses', homeExpenseRoutes)
 
 
 

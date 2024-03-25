@@ -21,9 +21,9 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
       return;
     }
     
-    const expense = { title, amount , tag: selectedTag };
-    // console.log(expense);
-    const response = await fetch("/api/homeExpense/", {
+    const expense = { title, amount , tag: selectedTag, home_id: profile.homeId, user_id: user.userId};
+    console.log(expense);
+    const response = await fetch("/api/homeExpenses/", {
       method: "POST",
       body: JSON.stringify(expense),
       headers: {
@@ -82,7 +82,7 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
           type="text"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
-          className={emptyFields.includes("title") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
+          // className={emptyFields.includes("title") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
         />
       </div>
       <div className="grid grid-cols-8 h-10 mb-4">
@@ -91,7 +91,7 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
           type="number"
           onChange={(e) => setAmount(e.target.value)}
           value={amount}
-          className={emptyFields.includes("amount") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
+          // className={emptyFields.includes("amount") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
         />
       </div>
       <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl">Add Expense</button>

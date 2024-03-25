@@ -18,6 +18,10 @@ const homeExpenseSchema = new Schema({
   user_id: {
     type: String,
     required: true
+  },
+  home_id: {
+    type: String,
+    required: true
   }
 }, { timestamps: true })
 

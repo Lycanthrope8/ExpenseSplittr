@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 
 // get all expenses
 const getExpenses = async (req, res) => {
-  const user_id = req.user._id
-  const expenses = await HomeExpense.find({user_id}).sort({createdAt: -1})
+  const home_id = req.body.homeId
+  const expenses = await HomeExpense.find({home_id}).sort({createdAt: -1})
   res.status(200).json(expenses)
 }
 
@@ -27,8 +27,9 @@ const getExpense = async (req, res) => {
 
 // create a new expense
 const createExpense = async (req, res) => {
-  const {title, amount, tag} = req.body
-
+  console.log(req.body)
+  const {title, amount, tag, home_id, user_id} = req.body
+  
   let emptyFields = []
 
   if (!title) {
@@ -47,8 +48,7 @@ const createExpense = async (req, res) => {
   // add to the database
 
   try {
-    const user_id = req.user._id
-    const expense = await HomeExpense.create({ title, amount, tag, user_id })
+    const expense = await HomeExpense.create({ title, amount, tag, user_id, home_id })
     res.status(200).json(expense)
   } catch (error) {
     res.status(400).json({ error: error.message })
