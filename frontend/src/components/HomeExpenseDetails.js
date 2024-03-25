@@ -33,7 +33,7 @@ const HomeExpenseDetails = ({ expense, onDelete }) => {
     }
   };
 
-  const formattedDate = moment(expense.createdAt).format("MMMM dd, yyyy 'at' HH:mm");
+  const formattedDate = moment(expense.createdAt).format(`MMMM D, yyyy [at] HH:mm`);
 
 
   return (
