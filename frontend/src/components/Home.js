@@ -92,9 +92,12 @@ export const Home = () => {
     }
   };
 
-  const handleDelete = (expenseId) => {
-    // Implement delete functionality
-    console.log("Deleting expense with ID:", expenseId);
+  const handleDelete = (deletedExpenseId) => {
+    // Filter out the deleted expense from sortedExpenses
+    const updatedSortedExpenses = sortedExpenses.filter(
+      (expense) => expense._id !== deletedExpenseId
+    );
+    setSortedExpenses(updatedSortedExpenses);
   };
 
   return (
