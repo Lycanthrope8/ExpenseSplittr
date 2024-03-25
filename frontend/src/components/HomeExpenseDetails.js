@@ -7,7 +7,6 @@ import moment from 'moment';
 const HomeExpenseDetails = ({ expense, onDelete }) => {
   const { dispatch } = useHomeExpense();
   const { user } = useAuthContext();
-
   const handleClick = async () => {
     if (!user) {
       return;

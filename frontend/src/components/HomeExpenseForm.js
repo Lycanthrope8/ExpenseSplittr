@@ -22,7 +22,7 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
     }
     
     const expense = { title, amount , tag: selectedTag, home_id: profile.homeId, user_id: user.userId};
-    console.log(expense);
+    // console.log(expense);
     const response = await fetch("/api/homeExpenses/", {
       method: "POST",
       body: JSON.stringify(expense),
@@ -46,25 +46,25 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
       // Dispatch the action to create expense
       dispatch({ type: "CREATE_EXPENSE", payload: json });
 
-      // // Sort the expenses based on the current sort option
-      // let sorted;
-      // switch (sortOption) {
-      //   case "amount-low-high":
-      //     sorted = [json, ...expenses].sort((a, b) => a.amount - b.amount);
-      //     break;
-      //   case "amount-high-low":
-      //     sorted = [json, ...expenses].sort((a, b) => b.amount - a.amount);
-      //     break;
-      //   case "date-recent":
-      //     sorted = [json, ...expenses].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-      //     break;
-      //   case "date-least-recent":
-      //     sorted = [json, ...expenses].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-      //     break;
-      //   default:
-      //     // sorted = [json, ...expenses];
-      // }
-      // setSortedExpenses(sorted);
+      // Sort the expenses based on the current sort option
+      let sorted;
+      switch (sortOption) {
+        case "amount-low-high":
+          sorted = [json, ...expenses].sort((a, b) => a.amount - b.amount);
+          break;
+        case "amount-high-low":
+          sorted = [json, ...expenses].sort((a, b) => b.amount - a.amount);
+          break;
+        case "date-recent":
+          sorted = [json, ...expenses].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+          break;
+        case "date-least-recent":
+          sorted = [json, ...expenses].sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+          break;
+        default:
+          sorted = [json, ...expenses];
+      }
+      setSortedExpenses(sorted);
     }
   };
 

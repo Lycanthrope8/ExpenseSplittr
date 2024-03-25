@@ -53,7 +53,7 @@ export const HomeDetailsOwner = () => {
     // Send formData to update the home details
     try {
       const response = await fetch(`/home/${id}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
