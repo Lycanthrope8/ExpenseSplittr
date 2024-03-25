@@ -34,6 +34,7 @@ const HomeExpenseDetails = ({ expense, onDelete }) => {
 
   const formattedDate = format(new Date(expense.createdAt), "MMMM dd, yyyy 'at' HH:mm");
 
+
   return (
     <div className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
       <div className='flex flex-col'>

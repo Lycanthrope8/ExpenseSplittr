@@ -1,7 +1,8 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProfileContext } from '../hooks/useProfileContext';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useHomeExpense } from '../hooks/useHomeExpense';
 import HomeExpenseForm from './HomeExpenseForm';
 import { HomeExpenseProvider } from '../context/homeExpenseContext';
 import HomeExpenseDetails from './HomeExpenseDetails';
@@ -10,7 +11,32 @@ export const Home = () => {
   const navigate = useNavigate();
   const { profile } = useProfileContext();
   const { user } = useAuthContext();
+  const { expenses, dispatch } = useHomeExpense();
 
+
+  useEffect(() => {
+    const fetchExpenses = async () => {
+      if (!user || !profile.homeId) {
+        return; // If user or homeId is not available, exit early
+      }
+  
+      const url = `/api/homeExpenses?homeId=${profile.homeId}`;
+      const response = await fetch(url, {
+        headers: { Authorization: `Bearer ${user.token}` },
+      });
+  
+      if (response.ok) {
+        const json = await response.json();
+        console.log(json);  
+        // dispatch({ type: "SET_EXPENSES", payload: json });
+      } else {
+        console.error('Failed to fetch home expenses');
+      }
+    };
+  
+    fetchExpenses();
+  }, [user, profile.homeId]); // Include user and profile.homeId in dependencies
+  
   const handleClick = async () => {
     const homeId = await profile.homeId;
 
@@ -54,7 +80,7 @@ export const Home = () => {
       <HomeExpenseProvider>
         <HomeExpenseForm />
         {/* Render other components related to home expenses */}
-        <HomeExpenseDetails expense={sampleExpenseData} onDelete={handleDelete} />
+        <HomeExpenseDetails expense={expenses} onDelete={handleDelete} />
       </HomeExpenseProvider>
     </>
   );
