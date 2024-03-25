@@ -1,7 +1,8 @@
 import React from 'react';
 import { useHomeExpense } from '../hooks/useHomeExpense';
 import { useAuthContext } from '../hooks/useAuthContext';
-import { format } from 'date-fns';
+// import { format } from 'date-fns';
+import moment from 'moment';
 
 const HomeExpenseDetails = ({ expense, onDelete }) => {
   const { dispatch } = useHomeExpense();
@@ -32,7 +33,7 @@ const HomeExpenseDetails = ({ expense, onDelete }) => {
     }
   };
 
-  const formattedDate = format(new Date(expense.createdAt), "MMMM dd, yyyy 'at' HH:mm");
+  const formattedDate = moment(expense.createdAt).format("MMMM dd, yyyy 'at' HH:mm");
 
 
   return (

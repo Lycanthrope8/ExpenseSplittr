@@ -2,8 +2,9 @@ import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
-import LinearProgress from "@mui/material/LinearProgress";
 import { Toaster, toast } from 'sonner';
+// import LinearProgress from "@mui/material/LinearProgress";
+// import Box from "@mui/material/Box";
 
 const ProfileForm = ({ onPictureChange }) => {
   // Add onPictureChange as a prop
@@ -105,6 +106,9 @@ const ProfileForm = ({ onPictureChange }) => {
       <form
       className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1"
       onSubmit={handleSubmit}>
+        {/* <Box sx={{width: '100%'}}>
+          <LinearProgressWithLabel value={value} />
+        </Box> */}
         <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
           <label className="text-zinc-100 text-2xl mr-4">Avatar:</label>
           <input
