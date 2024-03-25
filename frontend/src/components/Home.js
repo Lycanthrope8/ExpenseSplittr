@@ -4,7 +4,7 @@ import { useProfileContext } from '../hooks/useProfileContext';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useHomeExpense } from '../hooks/useHomeExpense';
 import HomeExpenseForm from './HomeExpenseForm';
-import { HomeExpenseProvider } from '../context/homeExpenseContext';
+import { HomeExpenseProvider } from '../context/HomeExpenseContext';
 import HomeExpenseDetails from './HomeExpenseDetails';
 
 export const Home = () => {

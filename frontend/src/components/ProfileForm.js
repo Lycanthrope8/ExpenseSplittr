@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
+import LinearProgress from "@mui/material/LinearProgress";
 import { Toaster, toast } from 'sonner';
 
 const ProfileForm = ({ onPictureChange }) => {

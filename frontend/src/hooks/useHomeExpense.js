@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { HomeExpenseContext } from "../context/homeExpenseContext";
+import { HomeExpenseContext } from "../context/HomeExpenseContext";
 
 
 export const useHomeExpense = () => {
