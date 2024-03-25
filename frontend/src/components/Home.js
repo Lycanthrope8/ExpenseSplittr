@@ -36,7 +36,7 @@ export const Home = () => {
     };
 
     fetchExpenses();
-  }, [user, profile.homeId]); // Include user and profile.homeId in dependencies
+  }, [user, dispatch, profile.homeId]); // Include user and profile.homeId in dependencies
 
   const handleSort = (option) => {
     setSortOption(option);

@@ -99,7 +99,7 @@ const getHomeById = async (req, res) => {
 const updateHomeById = async (req, res) => {
   try {
     const { id } = req.params;
-    // console.log("Updating Home with ID: ", id," with data: ", req.body);
+    let updatedFields = {};
 
     // Handle file uploads
     upload(req, res, async (err) => {
@@ -108,14 +108,24 @@ const updateHomeById = async (req, res) => {
         return res.status(500).json({ error: "Failed to upload files" });
       }
 
-      // Files are uploaded, update the home object with image paths
-      const images = req.files.map(file => file.path);
+      // If files are uploaded, update the home object with image paths
+      if (req.files && req.files.length > 0) {
+        const images = req.files.map(file => file.path);
+        updatedFields.images = { $each: images }; // Add the new images to the existing array
+      }
+
+      // Update other home details if formData is present
+      if (Object.keys(req.body).length > 0) {
+        updatedFields = { ...updatedFields, ...req.body };
+      }
+
+      // Update the home object with new data
       const updatedHome = await Home.findOneAndUpdate(
         { home_id: id },
-        { $push: { images: { $each: images } } }, // Add the new images to the existing array
+        { $set: updatedFields },
         { new: true }
       );
-      
+
       if (updatedHome) {
         res.status(200).json(updatedHome);
       } else {

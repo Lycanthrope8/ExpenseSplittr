@@ -52,7 +52,7 @@ export const HomeDetailsOwner = () => {
     e.preventDefault();
     // Send formData to update the home details
     try {
-      const response = await fetch(`/home/${id}`, {
+      const response = await fetch(`/home/updateHome/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +62,6 @@ export const HomeDetailsOwner = () => {
       });
       if (response.ok) {
         // Handle successful update
-        console.log("Home details updated successfully");
       } else {
         // Handle update failure
         console.error("Failed to update home details");

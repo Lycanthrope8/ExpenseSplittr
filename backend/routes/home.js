@@ -13,7 +13,9 @@ router.post('/createHome', createHome);
 router.get('/all', getAllHomes);
 router.get('/:id', getHomeById);
 router.patch('/uploadImages/:id', updateHomeById);
+router.patch('/updateHome/:id', updateHomeById);
 router.post('/joinReqHome', joinReqHome)
+
 
 
 
