@@ -1,11 +1,12 @@
-import { HomeExpenseContext } from "../context/HomeExpenseContext"
-import { useContext } from "react"
+import { useContext } from 'react';
+import { HomeExpenseContext } from "../context/homeExpenseContext";
+
 
 export const useHomeExpense = () => {
-  const context = useContext(HomeExpenseContext)
+  const context = useContext(HomeExpenseContext);
 
-  if(!context) {
-    throw Error('useHomeExpense must be used inside a HomeExpenseProvider')
+  if (!context) {
+    throw Error('useHomeExpense must be used inside a HomeExpenseProvider');
   }
-  return context
-}
+  return context;
+};

@@ -1,10 +1,10 @@
 import React from 'react';
-import { usePersonalExpense } from '../hooks/usePersonalExpense';
+import { useHomeExpense } from '../hooks/useHomeExpense';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { format } from 'date-fns';
 
 const HomeExpenseDetails = ({ expense, onDelete }) => {
-  const { dispatch } = usePersonalExpense();
+  const { dispatch } = useHomeExpense();
   const { user } = useAuthContext();
 
   const handleClick = async () => {
@@ -12,19 +12,23 @@ const HomeExpenseDetails = ({ expense, onDelete }) => {
       return;
     }
 
-    const response = await fetch('/api/homeExpenses/' + expense._id, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${user.token}`
-      }
-    });
-    const json = await response.json();
+    try {
+      const response = await fetch(`/api/homeExpenses/${expense._id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      const json = await response.json();
 
-    if (response.ok) {
-      dispatch({ type: 'DELETE_EXPENSE', payload: json });
-      if (onDelete) {
-        onDelete(expense._id);
-    }
+      if (response.ok) {
+        dispatch({ type: 'DELETE_EXPENSE', payload: json });
+        if (onDelete) {
+          onDelete(expense._id);
+        }
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
