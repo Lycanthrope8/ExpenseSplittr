@@ -32,6 +32,7 @@ const LandingPage = () => {
         <div>Loading...</div>
       ) : (
         <>
+        <button onClick={() => navigate("/admin")}>Admin</button>
           <div onClick={handleProfileDashboardClick}>
             <PersonalDashboard />
           </div>
