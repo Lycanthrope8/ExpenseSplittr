@@ -1,7 +1,7 @@
 const express = require('express');
 
 //Controller functions
-const {loginUser, signupUser} = require('../controllers/userController');
+const {loginUser, signupUser, getAllUsers} = require('../controllers/userController');
 
 
 const router = express.Router()
@@ -16,6 +16,8 @@ router.post('/login', loginUser);
 // Signup Route
 router.post('/signup', signupUser);
 
+// Get All Users Route
+router.get('/getalluser', getAllUsers);
 
 
 

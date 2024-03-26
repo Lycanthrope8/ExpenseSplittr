@@ -16,6 +16,7 @@ import { JoinedHomeDetails } from "./pages/JoinedHomeDetails";
 import { HomeDetailsOwner } from "./pages/HomeDetailsOwner";
 import { Home } from "./components/Home";
 import UploadImagesHome from "./components/UploadImagesHome";
+import { Admin } from "./pages/Admin";
 
 function App() {
   const { user } = useAuthContext();
@@ -80,6 +81,10 @@ function App() {
                   <Navigate to="/login" />
                 )
               }
+            />
+            <Route path="/admin" 
+              element={user ? <Admin /> : <Navigate to="/" />}
+
             />
           </Routes>
         </div>
