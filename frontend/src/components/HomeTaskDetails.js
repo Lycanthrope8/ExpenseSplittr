@@ -69,7 +69,7 @@ const HomeTaskDetails = ({ task, onDelete, onEdit }) => {
       return;
     }
 
-    const response = await fetch('/api/personalTasks/' + task._id, {
+    const response = await fetch('/api/homeTasks/' + task._id, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${user.token}`

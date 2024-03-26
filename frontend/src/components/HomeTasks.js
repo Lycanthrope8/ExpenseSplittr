@@ -13,7 +13,7 @@ export const HomeTasks = () => {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const response = await fetch("/api/homeTasks",  {
+      const response = await fetch("/api/homeTasks", {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       const json = await response.json();

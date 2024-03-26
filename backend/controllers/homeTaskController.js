@@ -1,12 +1,13 @@
 const HomeTask = require('../models/homeTaskModel')
 const mongoose = require('mongoose')
 
-// get all expenses
+// get all tasks
 const getTasks = async (req, res) => {
-  const {homeId} = req.query
-  const tasks = await HomeTask.find({home_id: homeId} ).sort({createdAt: -1})
-  res.status(200).json(tasks)
-}
+  const { homeId } = req.query;
+  const tasks = await HomeTask.find({home_id: homeId}).sort({createdAt: -1});
+  console.log(tasks);
+  res.status(200).json(tasks);
+};
 
 // get a single task
 const getTask = async (req, res) => {
@@ -41,6 +42,7 @@ const createTask = async (req, res) => {
   if (!deadline) {
     emptyFields.push('deadline')
   }
+
   if (emptyFields.includes('title')  ) {
     return res.status(400).json({ error: 'Title is required', emptyFields })
   }
@@ -49,7 +51,7 @@ const createTask = async (req, res) => {
 
   try {
     const user_id = req.user._id
-    const task = await HomeTask.create({ title, description, deadline, completed, user_id, home_id })
+    const task = await HomeTask.create({ title, description, deadline, completed, user_id, home_id})
     res.status(200).json(task)
   } catch (error) {
     res.status(400).json({ error: error.message })

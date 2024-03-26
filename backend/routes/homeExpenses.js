@@ -14,19 +14,19 @@ const router = express.Router()
 // requireAuth middleware is used to protect the routes
 router.use(requireAuth)
 
-// GET all workouts
+// GET all expenses
 router.get('/', getExpenses)
 
-// GET a single workout
+// GET a single expense
 router.get('/:id', getExpense)
 
-// POST a new workout
+// POST a new expense
 router.post('/', createExpense)
 
-// DELETE a workout
+// DELETE a expense
 router.delete('/:id', deleteExpense)
 
-// UPDATE a workout
+// UPDATE a expense
 router.patch('/:id', updateExpense)
 
 module.exports = router

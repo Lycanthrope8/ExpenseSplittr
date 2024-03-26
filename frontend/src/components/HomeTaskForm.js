@@ -24,7 +24,7 @@ const HomeTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
       return;
     }
 
-    const task = { title, description, deadline, completed, home_id: profile.homeId, user_id: user.userId};
+    const task = { title, description, deadline, completed, home_id: profile.homeId};
     console.log(task);
     const response = await fetch("/api/homeTasks/", {
       method: "POST",

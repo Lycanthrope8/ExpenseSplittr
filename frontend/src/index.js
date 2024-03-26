@@ -16,17 +16,17 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <ProfileContextProvider>
-        <PersonalExpenseProvider>
-          <PersonalTaskProvider>
-            <HomeTaskProvider>
-            <HomeContextProvider>
-              <HomeExpenseProvider>
-                <App />
-              </HomeExpenseProvider>
-            </HomeContextProvider>
-            </HomeTaskProvider>
-          </PersonalTaskProvider>
-        </PersonalExpenseProvider>
+          <HomeContextProvider>
+            <PersonalExpenseProvider>
+              <PersonalTaskProvider>
+                <HomeTaskProvider>
+                  <HomeExpenseProvider>
+                    <App />
+                  </HomeExpenseProvider>
+                </HomeTaskProvider>
+              </PersonalTaskProvider>
+            </PersonalExpenseProvider>
+          </HomeContextProvider>
       </ProfileContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
