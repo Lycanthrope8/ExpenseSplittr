@@ -6,6 +6,7 @@ import { useHomeExpense } from "../hooks/useHomeExpense";
 import HomeExpenseForm from "./HomeExpenseForm";
 import HomeExpenseDetails from "./HomeExpenseDetails";
 import SortButton from "./SortButton";
+import { HomeTasks }from "./HomeTasks";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -103,7 +104,7 @@ export const Home = () => {
   return (
     <>
       <div onClick={handleClick}>
-        <h1 className="text-zinc-400 text-4xl">See Home details</h1>
+        <h1 className="text-text text-4xl text-center mb-4 hover:text-zinc-300 cursor-pointer">See Home details</h1>
       </div>
 
       <div className="home grid grid-cols-3 gap-4 mx-4">
@@ -126,6 +127,7 @@ export const Home = () => {
         </div>
         <HomeExpenseForm expenses={expenses} setSortedExpenses={setSortedExpenses} />
       </div>
+      <HomeTasks />
     </>
   );
 };
