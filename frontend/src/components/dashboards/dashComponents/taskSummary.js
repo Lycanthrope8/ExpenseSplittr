@@ -1,30 +1,9 @@
 
-import {useEffect, useState } from 'react';
-import { useAuthContext } from '../../../hooks/useAuthContext';
+
 import moment from 'moment';
 
 
-export const TaskSummary = () => {
-  const [ tasks, setTasks ] = useState(null);
-  const { user } = useAuthContext();
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      const response = await fetch("/api/personalTasks", {
-
-        headers: { Authorization: `Bearer ${user.token}` },
-      });
-      const json = await response.json();
-
-      if (response.ok) {
-        // dispatch({ type: "SET_TASKS", payload: json });
-        setTasks(json);
-      }
-    };
-    if (user) {
-      fetchTasks();
-    }
-  }, [setTasks, user]);
+export const TaskSummary = ({tasks}) => {
 
   return (
     <div className='col-span-1 p-8 rounded-3xl bg-[#b9c1b6] h-[268px] overflow-hidden'>

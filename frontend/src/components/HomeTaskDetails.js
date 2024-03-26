@@ -22,7 +22,7 @@ const HomeTaskDetails = ({ task, onDelete, onEdit }) => {
 
     completeStatus ? setCompleteStatus(false) : setCompleteStatus(true);
 
-    const response = await fetch('/api/personalTasks/' + task._id, {
+    const response = await fetch('/api/homeTasks/' + task._id, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const HomeTaskDetails = ({ task, onDelete, onEdit }) => {
     if (!user) {
       return;
     }
-    const response = await fetch('/api/personalTasks/' + task._id, {
+    const response = await fetch('/api/homeTasks/' + task._id, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

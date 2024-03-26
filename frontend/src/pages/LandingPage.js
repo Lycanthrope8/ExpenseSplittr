@@ -27,12 +27,13 @@ const LandingPage = () => {
   };
 
   return (
+    <>
+    <button className="text-text text-4xl" onClick={() => navigate("/admin")}>Admin</button>
     <div className="grid grid-rows-2 gap-8">
       {isLoading ? (
         <div>Loading...</div>
       ) : (
         <>
-        <button onClick={() => navigate("/admin")}>Admin</button>
           <div onClick={handleProfileDashboardClick}>
             <PersonalDashboard />
           </div>
@@ -48,6 +49,7 @@ const LandingPage = () => {
         </>
       )}
     </div>
+    </>
   );
 };
 
