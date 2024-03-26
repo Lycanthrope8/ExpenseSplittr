@@ -14,11 +14,11 @@ module.exports = {
         14: '14px',
       },
       textColor: {
-        'main-dark-bg': '#20232a',
+        'text': 'hsl(0, 0, 98%)',
       },
       backgroundColor: {
         'main-bg': '#FAFBFB',
-        'main-dark-bg': '#20232A',
+        'main-dark-bg': '#09090B',
         'secondary-dark-bg': '#33373E',
         'tertiary-dark-bg': '#5b636e',
         'light-gray': '#F7F7F7',
@@ -29,7 +29,7 @@ module.exports = {
         1: '1px',
       },
       borderColor: {
-        color: 'rgba(0, 0, 0, 0.1)',
+        'border': 'hsl(240, 3.7%, 15.9%)',
       },
       width: {
         400: '400px',

@@ -5,21 +5,48 @@ import { useProfileContext } from "../hooks/useProfileContext";
 import { useHomeContext } from "../hooks/useHomeContext";
 import HomePendingRequests from "../components/HomePendingRequests";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 export const HomeDetailsOwner = () => {
   const navigate = useNavigate();
   const { profile } = useProfileContext();
   const [loading, setLoading] = useState(false);
   const [showPendingRequests, setShowPendingRequests] = useState(false);
-  const [formData, setFormData] = useState({});
+  // const [formData, setFormData] = useState({});
   const { user } = useAuthContext();
   const { home, dispatch } = useHomeContext();
   const id = profile.homeId;
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const [name , setName] = useState(home.name);
+  const [location , setLocation] = useState(home.location);
+  const [accommodationType , setAccommodationType] = useState(home.accommodationType);
+  const [bedrooms , setBedrooms] = useState(home.bedrooms);
+  const [bathrooms , setBathrooms] = useState(home.bathrooms);
+  const [rentAmount , setRentAmount] = useState(home.rentAmount);
+  const [utilitiesIncluded , setUtilitiesIncluded] = useState(home.utilitiesIncluded);
+  const [furnished , setFurnished] = useState(home.furnished);
+  const [petsAllowed , setPetsAllowed] = useState(home.petsAllowed);
+  const [smokingAllowed , setSmokingAllowed] = useState(home.smokingAllowed);
+  const [moveInDate , setMoveInDate] = useState(moment(home.moveInDate).format("YYYY-MM-DD"));
+
+  const formData = {
+    name,
+    location,
+    accommodationType,
+    bedrooms,
+    bathrooms,
+    rentAmount,
+    utilitiesIncluded,
+    furnished,
+    petsAllowed,
+    smokingAllowed,
+    moveInDate,
   };
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData({ ...formData, [name]: value });
+  // };
 
   const handleUploadClick = () => {
     navigate("/home/createHome/uploadImages", { state: { homeId: id } });
@@ -56,7 +83,7 @@ export const HomeDetailsOwner = () => {
 
   return (
     <>
-      <div>
+      <div className="text-text text-2xl">
         <button onClick={handleShowPendingRequests}>
           {showPendingRequests ? "Show Home Details" : "Pending Requests"}
         </button>
@@ -97,111 +124,117 @@ export const HomeDetailsOwner = () => {
             )}
           </div>
           <button onClick={handleUploadClick}>Upload Images</button>
-          <div>
+          <div className="flex flex-col justify-center">
             <form
               onSubmit={handleSubmit}
-              className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1"
+              className="grid lg:grid-cols-2 m-4 gap-8 lg:w-2/3 sm:w-3/4 sm:grid-cols-1 mx-auto"
             >
-              <label>
+              <label  className="text-zinc-100 text-2xl mr-4">
                 Name:
                 <input
                   type="text"
                   name="name"
-                  value={formData.name || home.name}
-                  onChange={handleChange}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
                 />
               </label>
-              <label>
+              <label className="text-zinc-100 text-2xl mr-4">
                 Location:
                 <input
                   type="text"
                   name="location"
-                  value={formData.location || home.location}
-                  onChange={handleChange}
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
                 />
               </label>
-              <label>
+              <label className="text-zinc-100 text-2xl mr-4">
                 Accommodation Type:
                 <input
                   type="text"
                   name="accommodationType"
-                  value={formData.accommodationType || home.accommodationType}
-                  onChange={handleChange}
+                  value={accommodationType}
+                  onChange={(e) => setAccommodationType(e.target.value)}
+                  className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
                 />
               </label>
-              <label>
+              <label className="text-zinc-100 text-2xl mr-4">
                 Bedrooms:
                 <input
                   type="number"
                   name="bedrooms"
-                  value={formData.bedrooms || home.bedrooms}
-                  onChange={handleChange}
+                  value={bedrooms}
+                  onChange={(e) => setBedrooms(e.target.value)}
+                  className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
                 />
               </label>
-              <label>
+              <label className="text-zinc-100 text-2xl mr-4">
                 Bathrooms:
                 <input
                   type="number"
                   name="bathrooms"
-                  value={formData.bathrooms || home.bathrooms}
-                  onChange={handleChange}
+                  value={bathrooms}
+                  onChange={(e) => setBathrooms(e.target.value)}
+                  className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
                 />
               </label>
-              <label>
+              <label className="text-zinc-100 text-2xl mr-4">
                 Rent Amount:
                 <input
                   type="number"
                   name="rentAmount"
-                  value={formData.rentAmount || home.rentAmount}
-                  onChange={handleChange}
+                  value={rentAmount}
+                  onChange={(e) => setRentAmount(e.target.value)}
+                  className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
                 />
               </label>
-              <label>
+              <label  className="text-zinc-100 text-2xl mr-4">
                 Utilities Included:
                 <input
                   type="checkbox"
                   name="utilitiesIncluded"
-                  checked={formData.utilitiesIncluded || home.utilitiesIncluded}
-                  onChange={handleChange}
+                  checked={utilitiesIncluded}
+                  onChange={(e) => setUtilitiesIncluded(e.target.checked)}
+                  className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
                 />
               </label>
-              <label>
+              <label  className="text-zinc-100 text-2xl mr-4">
                 Furnished:
                 <input
                   type="checkbox"
                   name="furnished"
-                  checked={formData.furnished || home.furnished}
-                  onChange={handleChange}
+                  checked={furnished}
+                  onChange={(e) => setFurnished(e.target.checked)}
+                  className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
                 />
               </label>
-              <label>
+              <label className="text-zinc-100 text-2xl mr-4">
                 Pets Allowed:
                 <input
                   type="checkbox"
                   name="petsAllowed"
-                  checked={formData.petsAllowed || home.petsAllowed}
-                  onChange={handleChange}
+                  checked={petsAllowed}
+                  onChange={(e) => setPetsAllowed(e.target.checked)}
                 />
               </label>
-              <label>
+              <label className="text-zinc-100 text-2xl mr-4">
                 Smoking Allowed:
                 <input
                   type="checkbox"
                   name="smokingAllowed"
-                  checked={formData.smokingAllowed || home.smokingAllowed}
-                  onChange={handleChange}
+                  checked={smokingAllowed}
+                  onChange={(e) => setSmokingAllowed(e.target.checked)}
                 />
               </label>
-              <label>
+              <label className="text-zinc-100 text-2xl mr-4">
                 Move In Date:
                 <input
                   type="date"
                   name="moveInDate"
-                  value={
-                    formData.moveInDate ||
-                    new Date(home.moveInDate).toISOString().substr(0, 10)
-                  }
-                  onChange={handleChange}
+                  value={moveInDate}
+                  onChange={(e) => setMoveInDate(e.target.value)}
+                  className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
                 />
               </label>
               <button type="submit">Update</button>

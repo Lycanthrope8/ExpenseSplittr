@@ -180,7 +180,7 @@ const acceptUserRequest = async (req, res) => {
   try {
     const result = await Home.acceptUserRequest(userId, homeId);
     console.log(result.message);
-    return result;
+    res.status(200).json(result);
   } catch (error) {
     console.error("Error accepting user request:", error);
     throw error;
@@ -192,7 +192,7 @@ const rejectUserRequest = async (req,res) => {
   try {
     const result = await Home.rejectUserRequest(userId, homeId);
     console.log(result.message);
-    return result;
+    res.status(200).json(result);
   } catch (error) {
     console.error("Error rejecting user request:", error);
     throw error;
