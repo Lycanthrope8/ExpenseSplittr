@@ -92,6 +92,60 @@ homeSchema.statics.joinReqHome = async function (userId, homeId) {
 };
 
 
+
+homeSchema.statics.acceptUserRequest = async function (userId, homeId) {
+  try {
+    const home = await this.findOne({ home_id: homeId });
+    if (!home) {
+      throw new Error("Home not found");
+    }
+
+    // Remove the user from pendingMembers
+    home.pendingMembers = home.pendingMembers.filter(member => member !== userId);
+
+    // Add the user to currentMembers
+    home.currentMembers.push(userId);
+
+    // Save the updated home
+    await home.save();
+
+    // Update the user's userProfile with the homeId
+    const userProfile = await UserProfile.findOne({ userId });
+    if (!userProfile) {
+      throw new Error("User profile not found");
+    }
+    userProfile.homeId = homeId;
+    await userProfile.save();
+
+    return { message: "User request accepted successfully" };
+  } catch (error) {
+    throw error;
+  }
+};
+
+homeSchema.statics.rejectUserRequest = async function (userId, homeId) {
+  try {
+    const home = await this.findOne({ home_id: homeId });
+    if (!home) {
+      throw new Error("Home not found");
+    }
+
+    // Remove the user from pendingMembers
+    home.pendingMembers = home.pendingMembers.filter(member => member !== userId);
+
+    // Save the updated home
+    await home.save();
+
+    return { message: "User request rejected successfully" };
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+
+
 const Home = mongoose.model("Home", homeSchema);
 
 module.exports = Home;

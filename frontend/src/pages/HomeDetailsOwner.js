@@ -97,7 +97,7 @@ export const HomeDetailsOwner = () => {
           </p>
         </div>
       ) : showPendingRequests ? (
-        <HomePendingRequests pendingMembers={pendingMembers} />
+        <HomePendingRequests pendingMembers={pendingMembers} homeId = {id} />
       ) : (
         <>
           <h4 className="text-3xl border-b-1 mb-2">Home Details</h4>

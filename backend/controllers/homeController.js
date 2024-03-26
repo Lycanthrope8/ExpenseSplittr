@@ -175,6 +175,32 @@ const joinReqHome = async (req, res) => {
 };
 
 
+const acceptUserRequest = async (req, res) => {
+  const { userId, homeId } = req.body;
+  try {
+    const result = await Home.acceptUserRequest(userId, homeId);
+    console.log(result.message);
+    return result;
+  } catch (error) {
+    console.error("Error accepting user request:", error);
+    throw error;
+  }
+};
+
+const rejectUserRequest = async (req,res) => {
+  const { userId, homeId } = req.body;
+  try {
+    const result = await Home.rejectUserRequest(userId, homeId);
+    console.log(result.message);
+    return result;
+  } catch (error) {
+    console.error("Error rejecting user request:", error);
+    throw error;
+  }
+};
+
+
+
 module.exports = {
   createHome,
   getAllHomes,
@@ -182,4 +208,6 @@ module.exports = {
   updateHomeById,
   deleteHomeById,
   joinReqHome,
+  acceptUserRequest,
+  rejectUserRequest,
 };
