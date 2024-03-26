@@ -111,7 +111,7 @@ const updateHomeById = async (req, res) => {
       // If files are uploaded, update the home object with image paths
       if (req.files && req.files.length > 0) {
         const images = req.files.map(file => file.path);
-        updatedFields.images = { $each: images }; // Add the new images to the existing array
+        updatedFields.images = images;
       }
 
       // Update other home details if formData is present
