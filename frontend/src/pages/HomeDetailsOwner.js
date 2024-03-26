@@ -1,51 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useProfileContext } from "../hooks/useProfileContext";
+import { useHomeContext } from "../hooks/useHomeContext";
 import HomePendingRequests from "../components/HomePendingRequests";
 import { useNavigate } from "react-router-dom";
 
 export const HomeDetailsOwner = () => {
   const navigate = useNavigate();
   const { profile } = useProfileContext();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [showPendingRequests, setShowPendingRequests] = useState(false);
-  const [home, setHome] = useState({});
   const [formData, setFormData] = useState({});
   const { user } = useAuthContext();
+  const { home, dispatch } = useHomeContext();
   const id = profile.homeId;
-  const [pendingMembers, setPendingMembers] = useState([]);
-  useEffect(() => {
-    const fetchHome = async () => {
-      try {
-        const response = await fetch(`/home/${id}`, {
-          headers: { Authorization: `Bearer ${user.token}` },
-        });
-        const json = await response.json();
-        setPendingMembers(json.pendingMembers);
-        if (response.ok) {
-          setHome(json);
-          setFormData({
-            name: json.name,
-            location: json.location,
-            accommodationType: json.accommodationType,
-            bedrooms: json.bedrooms,
-            bathrooms: json.bathrooms,
-            rentAmount: json.rentAmount,
-            utilitiesIncluded: json.utilitiesIncluded,
-            moveInDate: new Date(json.moveInDate).toISOString().substr(0, 10),
-          });
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-      }
-    };
-    if (user) {
-      fetchHome();
-    }
-  }, [user, id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,7 +31,7 @@ export const HomeDetailsOwner = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Send formData to update the home details
+    setLoading(true);
     try {
       const response = await fetch(`/home/updateHome/${id}`, {
         method: "PATCH",
@@ -73,23 +42,26 @@ export const HomeDetailsOwner = () => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        // Handle successful update
+        const updatedHomeData = await response.json();
+        dispatch({ type: "UPDATE_HOME", payload: updatedHomeData });
       } else {
-        // Handle update failure
         console.error("Failed to update home details");
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
       <div>
-        <button onClick={handleShowPendingRequests}>{showPendingRequests? ("Show Home Details"):("Pending Requests")}</button>
+        <button onClick={handleShowPendingRequests}>
+          {showPendingRequests ? "Show Home Details" : "Pending Requests"}
+        </button>
       </div>
       {loading ? (
-        // Loading spinner
         <div className="flex h-screen items-center">
           <p className="flex w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg ">
             <CircularProgress className="mr-4" />
@@ -97,28 +69,33 @@ export const HomeDetailsOwner = () => {
           </p>
         </div>
       ) : showPendingRequests ? (
-        <HomePendingRequests pendingMembers={pendingMembers} homeId = {id} />
+        <HomePendingRequests
+          pendingMembers={home.pendingMembers}
+          homeId={id}
+        />
       ) : (
         <>
           <h4 className="text-3xl border-b-1 mb-2">Home Details</h4>
-          {home.images && home.images.length > 0 && (
-            <div>
-              {home.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={`/${image}`}
-                  alt={`Home ${home.name}`}
-                  style={{
-                    maxWidth: "100px",
-                    marginRight: "10px",
-                    border: "none",
-                    margin: "0",
-                    padding: "0",
-                  }}
-                />
-              ))}
-            </div>
-          )}
+          <div>
+            {home.images && home.images.length > 0 && (
+              <div>
+                {home.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={`/${image}`}
+                    alt={`Home ${home.name}`}
+                    style={{
+                      maxWidth: "100px",
+                      marginRight: "10px",
+                      border: "none",
+                      margin: "0",
+                      padding: "0",
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
           <button onClick={handleUploadClick}>Upload Images</button>
           <div>
             <form
@@ -130,7 +107,7 @@ export const HomeDetailsOwner = () => {
                 <input
                   type="text"
                   name="name"
-                  value={formData.name}
+                  value={formData.name || home.name}
                   onChange={handleChange}
                 />
               </label>
@@ -139,7 +116,7 @@ export const HomeDetailsOwner = () => {
                 <input
                   type="text"
                   name="location"
-                  value={formData.location}
+                  value={formData.location || home.location}
                   onChange={handleChange}
                 />
               </label>
@@ -148,7 +125,7 @@ export const HomeDetailsOwner = () => {
                 <input
                   type="text"
                   name="accommodationType"
-                  value={formData.accommodationType}
+                  value={formData.accommodationType || home.accommodationType}
                   onChange={handleChange}
                 />
               </label>
@@ -157,7 +134,7 @@ export const HomeDetailsOwner = () => {
                 <input
                   type="number"
                   name="bedrooms"
-                  value={formData.bedrooms}
+                  value={formData.bedrooms || home.bedrooms}
                   onChange={handleChange}
                 />
               </label>
@@ -166,7 +143,7 @@ export const HomeDetailsOwner = () => {
                 <input
                   type="number"
                   name="bathrooms"
-                  value={formData.bathrooms}
+                  value={formData.bathrooms || home.bathrooms}
                   onChange={handleChange}
                 />
               </label>
@@ -175,7 +152,7 @@ export const HomeDetailsOwner = () => {
                 <input
                   type="number"
                   name="rentAmount"
-                  value={formData.rentAmount}
+                  value={formData.rentAmount || home.rentAmount}
                   onChange={handleChange}
                 />
               </label>
@@ -184,7 +161,7 @@ export const HomeDetailsOwner = () => {
                 <input
                   type="checkbox"
                   name="utilitiesIncluded"
-                  checked={formData.utilitiesIncluded}
+                  checked={formData.utilitiesIncluded || home.utilitiesIncluded}
                   onChange={handleChange}
                 />
               </label>
@@ -193,7 +170,7 @@ export const HomeDetailsOwner = () => {
                 <input
                   type="checkbox"
                   name="furnished"
-                  checked={formData.furnished}
+                  checked={formData.furnished || home.furnished}
                   onChange={handleChange}
                 />
               </label>
@@ -202,7 +179,7 @@ export const HomeDetailsOwner = () => {
                 <input
                   type="checkbox"
                   name="petsAllowed"
-                  checked={formData.petsAllowed}
+                  checked={formData.petsAllowed || home.petsAllowed}
                   onChange={handleChange}
                 />
               </label>
@@ -211,7 +188,7 @@ export const HomeDetailsOwner = () => {
                 <input
                   type="checkbox"
                   name="smokingAllowed"
-                  checked={formData.smokingAllowed}
+                  checked={formData.smokingAllowed || home.smokingAllowed}
                   onChange={handleChange}
                 />
               </label>
@@ -220,7 +197,10 @@ export const HomeDetailsOwner = () => {
                 <input
                   type="date"
                   name="moveInDate"
-                  value={formData.moveInDate}
+                  value={
+                    formData.moveInDate ||
+                    new Date(home.moveInDate).toISOString().substr(0, 10)
+                  }
                   onChange={handleChange}
                 />
               </label>
@@ -231,5 +211,4 @@ export const HomeDetailsOwner = () => {
       )}
     </>
   );
-
 };
