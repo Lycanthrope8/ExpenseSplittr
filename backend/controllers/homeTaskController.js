@@ -1,10 +1,11 @@
 const HomeTask = require('../models/homeTaskModel')
 const mongoose = require('mongoose')
 
+
 // get all tasks
 const getTasks = async (req, res) => {
-  const { homeId } = req.query;
-  const tasks = await HomeTask.find({home_id: homeId}).sort({createdAt: -1});
+  const user_id = req.user._id;
+  const tasks = await HomeTask.find({user_id}).sort({createdAt: -1});
   console.log(tasks);
   res.status(200).json(tasks);
 };
@@ -29,7 +30,8 @@ const getTask = async (req, res) => {
 
 // create a new task
 const createTask = async (req, res) => {
-  const {title, description, deadline, completed, home_id} = req.body
+    console.log(req.body)
+  const {title, description, deadline, completed, user_id, home_id} = req.body
 
   let emptyFields = []
 

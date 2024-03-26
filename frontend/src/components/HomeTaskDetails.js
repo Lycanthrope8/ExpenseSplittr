@@ -13,7 +13,6 @@ const HomeTaskDetails = ({ task, onDelete, onEdit }) => {
   const [newDescription, setNewDescription] = useState();
   const [newDeadline, setNewDeadline] = useState();
 
-  
 
   const changeCompleteStatus = async () => {
     if (!user) {
