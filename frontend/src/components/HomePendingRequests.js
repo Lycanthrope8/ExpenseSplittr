@@ -1,10 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useHomeContext } from "../hooks/useHomeContext";
 
 const HomePendingRequests = ({ pendingMembers }) => {
   const homeId = useParams().id;
   const { user } = useAuthContext();
+  const { dispatch } = useHomeContext();
+
   const handleAccept = async (userId, homeId) => {
     try {
       // Send a PATCH request to accept the user request
@@ -19,11 +22,13 @@ const HomePendingRequests = ({ pendingMembers }) => {
         },
       });
 
+      const data = await response.json();
       if (response.ok) {
-        console.log(`User request accepted successfully for user ${userId}`);
+        dispatch({ type: "ACCEPT_USER_REQUEST", payload: data });
       } else {
         console.error("Failed to accept user request");
       }
+
     } catch (error) {
       console.error("Error accepting user request:", error);
     }
@@ -40,9 +45,10 @@ const HomePendingRequests = ({ pendingMembers }) => {
           Authorization: `Bearer ${user.token}`,
         },
       });
-
+      
+      const data = await response.json();
       if (response.ok) {
-        console.log(`User request rejected successfully for user ${userId}`);
+        dispatch({ type: "REJECT_USER_REQUEST", payload: data });
       } else {
         console.error("Failed to reject user request");
       }
@@ -53,10 +59,10 @@ const HomePendingRequests = ({ pendingMembers }) => {
 
   return (
     <div>
-      <h2>Pending Requests</h2>
+      <h2 className="text-text text-4xl mb-4">Pending Requests</h2>
       <ul>
-        {pendingMembers.map((member, index) => (
-          <li key={index}>
+        {pendingMembers && pendingMembers.map((member, index) => (
+          <li className="text-text text-2xl" key={index}>
             {member} {/* Assuming member has a userId property */}
             <button onClick={() => handleAccept(member, homeId)}>Accept</button>
             <button onClick={() => handleReject(member, homeId)}>Reject</button>

@@ -81,7 +81,7 @@ const TaskDetails = ({ task, onDelete, onEdit }) => {
       dispatch({ type: 'DELETE_TASK', payload: json });
       if (onDelete) {
         onDelete(task._id);
-    }
+      }
     }
   };
 

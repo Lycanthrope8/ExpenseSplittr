@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { usePersonalExpense } from "../hooks/usePersonalExpense";
 import { useAuthContext } from "../hooks/useAuthContext";
-import PersonalExpenseDetails from "./PersonalExpenseDetails";
+import {PersonalExpenseDetails} from "./PersonalExpenseDetails";
 import PersonalExpenseForm from "./PersonalExpenseForm";
 import SortButton from "./SortButton";
 
@@ -71,18 +71,31 @@ export const Personal = () => {
       <div className="col-span-2 relative">
         <SortButton onSort={handleSort} />
         <div>
-          {sortedExpenses && sortedExpenses.length > 0
-            ? sortedExpenses.map((expense) => (
-                <div className="expense-details-wrapper" key={expense._id}>
-                  <PersonalExpenseDetails expense={expense} onDelete={handleDelete} />
-                </div>
-              ))
-            : expenses &&
-              expenses.map((expense) => (
-                <div className="expense-details-wrapper" key={expense._id}>
-                  <PersonalExpenseDetails expense={expense} />
-                </div>
-              ))}
+          <table className='text-text w-full'>
+              <thead className='text-text'>
+                <tr className=''>
+                  <th>Title</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody className='text-text text-center'>
+            {sortedExpenses && sortedExpenses.length > 0
+              ? sortedExpenses.map((expense) => (
+                  <tr className="w-full" key={expense._id}>
+                    <PersonalExpenseDetails expense={expense} onDelete={handleDelete} />
+                  </tr>
+                ))
+              : expenses &&
+                expenses.map((expense) => (
+                  <tr className="w-full" key={expense._id}>
+                    <PersonalExpenseDetails expense={expense} />
+                  </tr>
+                ))
+            }
+            </tbody>
+          </table>
         </div>
       </div>
       <PersonalExpenseForm expenses={expenses} setSortedExpenses={setSortedExpenses} />
