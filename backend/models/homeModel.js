@@ -102,6 +102,13 @@ homeSchema.statics.acceptUserRequest = async function (userId, homeId) {
 
     // Remove the user from pendingMembers
     home.pendingMembers = home.pendingMembers.filter(member => member !== userId);
+
+    // Add the user to currentMembers
+    home.currentMembers.push(userId);
+
+    // Save the updated home
+    await home.save();
+
     // Update the user's userProfile with the homeId
     const userProfile = await UserProfile.findOne({ userId });
     if (!userProfile) {
@@ -109,17 +116,12 @@ homeSchema.statics.acceptUserRequest = async function (userId, homeId) {
     }
     userProfile.homeId = homeId;
     await userProfile.save();
-    // Add the user to currentMembers
-    home.currentMembers.push({userId, name: userProfile.name});
 
-    // Save the updated home
-    await home.save();
     return { message: "User request accepted successfully" };
   } catch (error) {
     throw error;
   }
 };
-
 
 homeSchema.statics.rejectUserRequest = async function (userId, homeId) {
   try {
