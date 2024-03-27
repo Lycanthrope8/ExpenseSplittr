@@ -4,8 +4,8 @@ const mongoose = require('mongoose')
 
 // get all expenses
 const getExpenses = async (req, res) => {
-  const { homeId } = req.query; // Retrieve homeId from query parameters
-  const expenses = await HomeExpense.find({ home_id: homeId }).sort({ createdAt: -1 });
+  const home_id = req.params.id; // Retrieve homeId from query parameters
+  const expenses = await HomeExpense.find({ home_id}).sort({ createdAt: -1 });
   // console.log(expenses);
   res.status(200).json(expenses);
 };

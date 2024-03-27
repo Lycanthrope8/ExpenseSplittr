@@ -22,7 +22,7 @@ export const Home = () => {
         return; // If user or homeId is not available, exit early
       }
 
-      const url = `/api/homeExpenses?homeId=${profile.homeId}`;
+      const url = `/api/homeExpenses/${profile.homeId}`;
       const response = await fetch(url, {
         headers: { Authorization: `Bearer ${user.token}` },
       });

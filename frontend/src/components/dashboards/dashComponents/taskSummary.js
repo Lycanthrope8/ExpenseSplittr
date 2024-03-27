@@ -1,10 +1,7 @@
-
-
 import moment from 'moment';
 
 
 export const TaskSummary = ({tasks}) => {
-
   return (
     <div className='col-span-1 p-8 rounded-3xl bg-[#b9c1b6] h-[268px] overflow-hidden'>
       <h1 className='mb-4 text-3xl font-bold bg-[#b9c1b6]'>Task Summary</h1>

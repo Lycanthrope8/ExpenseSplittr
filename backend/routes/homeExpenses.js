@@ -15,7 +15,7 @@ const router = express.Router()
 router.use(requireAuth)
 
 // GET all expenses
-router.get('/', getExpenses)
+router.get('/:id', getExpenses)
 
 // GET a single expense
 router.get('/:id', getExpense)
