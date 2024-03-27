@@ -123,7 +123,7 @@ export const HomeDetailsOwner = () => {
               </div>
             )}
           </div>
-          <button onClick={handleUploadClick}>Upload Images</button>
+          <button className="text-text" onClick={handleUploadClick}>Upload Images</button>
           <div className="flex flex-col justify-center">
             <form
               onSubmit={handleSubmit}
@@ -237,7 +237,7 @@ export const HomeDetailsOwner = () => {
                   className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
                 />
               </label>
-              <button type="submit">Update</button>
+              <button className="text-text" type="submit">Update</button>
             </form>
           </div>
         </>
