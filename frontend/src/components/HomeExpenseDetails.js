@@ -24,6 +24,7 @@ const HomeExpenseDetails = ({ expense, onDelete }) => {
       console.error(error);
     }
   };
+  
 
   const { dispatch } = useHomeExpense();
   const { user } = useAuthContext();

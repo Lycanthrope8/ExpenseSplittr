@@ -15,7 +15,7 @@ const router = express.Router()
 router.use(requireAuth)
 
 // GET all tasks
-router.get('/', getTasks)
+router.get('/:id', getTasks)
 
 // GET a single task
 router.get('/:id', getTask)

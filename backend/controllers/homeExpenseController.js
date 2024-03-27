@@ -1,3 +1,4 @@
+const e = require('express');
 const HomeExpense = require('../models/homeExpenseModel')
 const mongoose = require('mongoose')
 
@@ -12,7 +13,7 @@ const getExpenses = async (req, res) => {
 
 // get a single expense
 const getExpense = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({error: 'No such expense'})

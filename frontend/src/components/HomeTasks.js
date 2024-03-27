@@ -4,16 +4,18 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import TaskDetails from "./HomeTaskDetails";
 import HomeTaskForm from "./HomeTaskForm";
 import SortButton from "./SortButton";
+import { useProfileContext } from "../hooks/useProfileContext";
 
 export const HomeTasks = () => {
   const { tasks, dispatch } = useHomeTask();
   const { user } = useAuthContext();
+  const { profile } = useProfileContext();
   const [sortedTasks, setSortedTasks] = useState([]);
   const [sortOption, setSortOption] = useState("date-recent");
-
+  
   useEffect(() => {
     const fetchTasks = async () => {
-      const response = await fetch("/api/homeTasks", {
+      const response = await fetch(`/api/homeTasks/${profile.homeId}`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       const json = await response.json();

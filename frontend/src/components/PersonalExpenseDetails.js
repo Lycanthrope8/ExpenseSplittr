@@ -9,35 +9,9 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
  
-// import {
-//   Table,
-//   TableBody,
-//   TableCell,
-//   TableHead,
-//   TableHeader,
-//   TableRow,
-// } from "@/components/ui/table" 
- 
 export const PersonalExpenseDetails = ({ expense, onDelete }) => {
   const { dispatch } = usePersonalExpense();
   const { user } = useAuthContext();
-  // const [data, setData] = useState([]);
-
-  // useEffect (() => {
-  //   const fetchExpenses = async () => {
-  //     const response = await fetch("/api/personalExpenses", {
-  //       headers: { Authorization: `Bearer ${user.token}` },
-  //     });
-  //     const json = await response.json();
-  //     if (response.ok) {
-  //       dispatch({ type: "SET_EXPENSES", payload: json });
-  //     }
-  //   };
-  //   if (user) {
-  //     fetchExpenses();
-  //   }
-  //   setData([expense]);
-  // }, []);
   
   const handleClick = async () => {
     if (!user) {

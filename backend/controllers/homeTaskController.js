@@ -4,9 +4,9 @@ const mongoose = require('mongoose')
 
 // get all tasks
 const getTasks = async (req, res) => {
-  const user_id = req.user._id;
-  const tasks = await HomeTask.find({user_id}).sort({createdAt: -1});
-  console.log(tasks);
+  const home_id = req.params.id;
+  const tasks = await HomeTask.find({home_id}).sort({createdAt: -1});
+//   console.log(req.body);
   res.status(200).json(tasks);
 };
 

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import {TaskSummary} from './dashComponents/taskSummary'
 import { useAuthContext } from '../../hooks/useAuthContext'
+import {useProfileContext} from '../../hooks/useProfileContext'
 import Spent from './dashComponents/spent'
 
 const HomeDashboard = () => {
   const [ tasks, setTasks ] = useState(null);
   const { user } = useAuthContext();
+  const { profile } = useProfileContext();
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const response = await fetch("/api/homeTasks", {
+      const response = await fetch(`/api/homeTasks/${profile.homeId}`, {
 
         headers: { Authorization: `Bearer ${user.token}` },
       });
