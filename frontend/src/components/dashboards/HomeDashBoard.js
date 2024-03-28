@@ -72,8 +72,8 @@ const HomeDashboard = () => {
   }, [profile.homeId, setTasks, user]);
 
   return (
-    <div className='border-1 border-slate-400 border-opacity-40 rounded-xl p-2'>
-        <h1 className='mb-4 font-bold text-slate-400 text-center text-4xl'>Home Dashboard</h1>
+    <div className='border-2 border-border rounded-xl p-2'>
+        <h1 className='mb-4 font-bold text-text text-center text-4xl'>Home Dashboard</h1>
         <div className='grid grid-cols-3 gap-8 px-16'>
             <TaskSummary tasks={tasks} />
             <Spent weeklySum={weeklySum} monthlySum={monthlySum}/>

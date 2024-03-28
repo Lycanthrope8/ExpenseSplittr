@@ -10,7 +10,7 @@ const SortButton = ({ onSort }) => {
 
   return (
     <div className='sort-button flex justify-end end-0 h-8 mb-4'>
-      <select className='rounded-lg px-2 bg-secondary-dark-bg text-zinc-100 focus:outline-none' value={selectedOption} onChange={(e) => handleSort(e.target.value)}>
+      <select className='rounded-lg px-2 bg-secondary text-text focus:outline-none' value={selectedOption} onChange={(e) => handleSort(e.target.value)}>
         <option value=''>Sort By</option>
         <option value='amount-low-high'>Amount: Low to High</option>
         <option value='amount-high-low'>Amount: High to Low</option>

@@ -1,20 +1,27 @@
 import React from 'react';
+// import { Box, InputLabel, Option, FormControl, Select, colors } from '@mui/material'
+import { Select, Option } from "@material-tailwind/react"
 
 const ExpenseTagDropdown = ({ expenseTags, selectedTag, setSelectedTag }) => {
+  // const primary = purple[500];
   return (
-    <div className="grid grid-cols-8 mb-4">
-      <label htmlFor="expenseTag" className="flex items-center mr-4 text-xl col-span-2">Select Tag:</label>
-      <select
-        id="expenseTag"
-        value={selectedTag}
-        onChange={(e) => setSelectedTag(e.target.value)}
-        className="col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"
-      >
-        <option value="">Select a tag</option>
+    <div className="flex flex-col gap-6 mb-4 bg-transparent [&_label]:text-text [&_label]:w-28 [&_label]:after:bg-main [&_label]:before:border-0 [&_label]:after:border-0 [&_ul]:bg-secondary [&_ul]:border-none [&_li]:bg-secondary [&_li]:text-text">
+      {/* <FormControl fullWidth color='secondary'> */}
+        {/* <InputLabel className='text-slate-500' id="expenseTag">Select Tag</InputLabel>   */}
+        <Select
+          id = "expenseTag"
+          value = {selectedTag}
+          variant='outlined'
+          label = "Select a tag"
+          onChange = {(e) => setSelectedTag(e.target.value)}
+          className = "p-2 h-10 w-full border-1 border-border rounded-md"
+        >
+        <Option className='text-text hover:bg-secondary/80' >Select a tag</Option>
         {expenseTags.map((tag, index) => (
-          <option key={index} value={tag}>{tag}</option>
+          <Option className='hover:bg-secondary/80' key={index} value={tag}>{tag}</Option>
         ))}
-      </select>
+        </Select>
+      {/* </FormControl> */}
     </div>
   );
 };
