@@ -131,7 +131,7 @@ const TaskDetails = ({ task, onDelete, onEdit }) => {
   );
   
   return (
-    <div className="task-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
+    <div className="flex justify-between text-text p-4 rounded-lg">
         {isEditing ? editingTemplate : viewTemplate}
     </div>
   );

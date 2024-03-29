@@ -32,8 +32,8 @@ const Profile = () => {
 
   return (
     <>
-      <h1 className="block text-center text-zinc-100 font-bold text-4xl mb-20">Profile Page</h1>
-      <div className='flex sm:flex-col lg:flex-row w-full items-center justify-evenly'>
+      <h1 className="block text-center text-text font-bold text-4xl mb-20">Profile Page</h1>
+      <div className='flex sm:flex-col lg:flex-row w-full items-center justify-evenly text-text'>
         <div className='rounded-lg size-96'>
           <ProfilePicture imageUrl={profilePictureUrl} />
         </div>

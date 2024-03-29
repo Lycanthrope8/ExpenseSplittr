@@ -27,7 +27,7 @@ body {
     ::-webkit-scrollbar-thumb:hover {
     background: rgb(77, 77, 77)
     }
-
+::-webkit-calendar-picker-indicator { filter: invert(100%) }
 
 @tailwind base;
 @tailwind components;

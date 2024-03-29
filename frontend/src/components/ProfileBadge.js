@@ -24,7 +24,7 @@ const ProfileBadge = ({ user }) => {
   ) : (
     <Link
       to={`/profile/${user.userId}`}
-      className="relative inline-flex items-center justify-center w-12 h-12 mr-4 overflow-hidden ring-2 ring-zinc-500 bg-secondary-dark-bg rounded-full"
+      className="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden ring-2 ring-zinc-500 bg-secondary-dark-bg rounded-full"
     >
       <Avatar
         alt={user.email.charAt(0).toUpperCase()}

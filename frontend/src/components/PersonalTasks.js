@@ -81,13 +81,13 @@ export const PersonalTasks = () => {
         <div>
           {sortedTasks && sortedTasks.length > 0
             ? sortedTasks.map((task) => (
-                <div className="task-details-wrapper" key={task._id}>
+                <div className="border-1 border-border rounded-lg mb-4 [&_div]:last:mb-0" key={task._id}>
                   <TaskDetails task={task} onEdit={handleEdit} onDelete={handleDelete} />
                 </div>
               ))
             : tasks &&
               tasks.map((task) => (
-                <div className="task-details-wrapper" key={task._id}>
+                <div className="border-1 border-border rounded-lg mb-4 [&_div]:last:mb-0" key={task._id}>
                   <TaskDetails task={task} />
                 </div>
               ))}

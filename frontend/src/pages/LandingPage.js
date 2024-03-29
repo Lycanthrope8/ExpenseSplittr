@@ -28,7 +28,7 @@ const LandingPage = () => {
 
   return (
     <>
-    <button className="text-text text-4xl" onClick={() => navigate("/admin")}>Admin</button>
+    
     <div className="grid grid-rows-2 gap-8">
       {isLoading ? (
         <div>Loading...</div>
