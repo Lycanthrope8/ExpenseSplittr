@@ -16,7 +16,7 @@ const ExpenseTagDropdown = ({ expenseTags, selectedTag, setSelectedTag }) => {
         >
         {/* <Option className='text-text hover:bg-secondary/80'>Select a tag</Option> */}
         {expenseTags.map((tag, index) => (
-          <Option className='text-text hover:bg-secondary/80' key={index} value={tag}>{tag}</Option>
+          <Option className='mb-2 hover:bg-secondary/80' key={index} value={tag}>{tag}</Option>
         ))}
         </Select>
     </div>

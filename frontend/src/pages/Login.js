@@ -11,31 +11,36 @@ const Login = () => {
   };
 
   return (
-    <form className="login flex flex-col items-center justify-center min-h-full px-4 py-8 bg-secondary-dark-bg w-1/4 mx-auto rounded-2xl" onSubmit={handleSubmit}>
-      <h3 className="text-zinc-100 text-4xl mb-12">Log In</h3>
+    <div className="w-full absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-70%]">
+    {/* <div className="h-screen grid place-items-center"> */}
+      <form className="flex flex-col items-center w-3/12 h-max justify-center px-4 py-8 bg-transparent border-2 border-border text-text mx-auto rounded-lg" onSubmit={handleSubmit}>
+        <h3 className="font-bold text-4xl mb-24">Log In</h3>
 
-      <div className="space-y-2 w-full mb-8">
-        <label className="block text-zinc-100 text-xl ml-0">Email:</label>
-        <input
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          className="block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-        />
-      </div>
-      <div className="space-y-2 w-full mb-8">
-        <label className="block text-zinc-100 text-xl ml-0">Password:</label>
-        <input
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          className="block w-full bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
-        />
-      </div>
+        <div className="space-y-2 w-full mb-12">
+          <label className="block text-xl ml-0">Email:</label>
+          <input
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            // placeholder="Email"
+            className="block w-full bg-transparent border-2 border-border rounded-lg p-2"
+          />
+        </div>
+        <div className="space-y-2 w-full mb-8">
+          <label className="block text-xl ml-0">Password:</label>
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            // placeholder="Password"
+            className="block w-full bg-transparent border-2 border-border rounded-lg p-2 focus:outline-none"
+          />
+        </div>
 
-      <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl w-full hover:opacity-90" disabled={isLoading}>Log in</button>
-        {error && <div className="error">{error}</div>}
-    </form>
+        <button className="mt-2 p-2 bg-transparent border-2 border-border rounded-lg w-full hover:bg-secondary/40 transition-colors" disabled={isLoading}>Log in</button>
+          {error && <div className="error">{error}</div>}
+      </form>
+    </div>
   );
 };
 

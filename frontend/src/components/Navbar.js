@@ -23,7 +23,7 @@ const Navbar = () => {
   
 
   return (
-    <header>
+    // <header className="absolute w-full top-0">
       <div className="flex items-center justify-between p-6 text-gray-100 text-2xl">
         <Link to="/">
           <h1>ExpenseSplittr</h1>
@@ -44,7 +44,7 @@ const Navbar = () => {
           )}
         </nav>
       </div>
-    </header>
+    // </header>
   );
 };
 

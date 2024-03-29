@@ -3,7 +3,7 @@ import { usePersonalTask } from "../hooks/usePersonalTask";
 import { useAuthContext } from "../hooks/useAuthContext";
 import moment from "moment";
 import { Checkbox } from "@mui/material";
-import yellow from "@mui/material/colors/yellow";
+import grey from "@mui/material/colors/grey";
  
 
 const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
@@ -107,15 +107,15 @@ const PersonalTaskForm = ({ tasks, setSortedTasks, sortOption }) => {
             />
             
         </div>
-        <div className="h-10 mb-8">
-            {/* <label className="flex items-center mr-4 text-xl col-span-2">Completed:</label> */}
+        <div className="grid grid-cols-8 h-10 mb-8">
+            <label className="flex items-center mr-4 text-xl col-span-2">Completed:</label>
             <div className="col-span-6 text-center p-2 text-zinc-200 rounded-xl">
               <Checkbox
                 type="checkbox"
                 checked={completed}
-                sx={{color: yellow[300],
+                sx={{color: grey[500],
                   '&.Mui-checked': {
-                  color: yellow[300],}}}
+                  color: grey[500],}}}
                 size="large"
                 onChange={(e) => setCompleted(e.target.checked)}
               />
