@@ -106,7 +106,7 @@ const TaskDetails = ({ task, onDelete, onEdit }) => {
         </div>
         <div className='flex'>
         <button form='editingForm' className="basis-2/12 material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" type='submit'>save</button>
-        <button className="material-symbols-outlined text-red-500 text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg " onClick={handleDelete}>delete</button>
+        <button className="material-symbols-outlined text-text text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:text-red-300 hover:bg-secondary " onClick={handleDelete}>delete</button>
         </div>
       </form>
     </>  
@@ -121,12 +121,12 @@ const TaskDetails = ({ task, onDelete, onEdit }) => {
           <p className='text-lg mb-4'>Due: {formattedDeadline}</p>}
         <div className='flex justify-between items-center'>
           {/* <p className="text-lg mb-4"><strong>Completed: </strong>{task.completed ? 'Yes' : 'No'}</p> */}
-          <button onClick={changeCompleteStatus} className={task.completed ? 'text-gray-800 align-middle px-4 py-2 rounded-xl bg-green-300' : 'text-gray-800 align-middle px-4 py-2 rounded-xl bg-red-300'}>{task.completed ? 'Completed' : 'Incomplete'}</button>
+          <button onClick={changeCompleteStatus} className={task.completed ? 'text-text align-middle px-4 py-2 border-1 border-green-300 rounded-md hover:shadow-[inset_0_0_6px_0_rgba(0,0,0,0.05)] hover:shadow-green-300 transition-shadow' : 'text-text align-middle px-4 py-2 border-1 border-red-300 rounded-md hover:shadow-[inset_0_0_6px_0_rgba(0,0,0,0.05)] hover:shadow-red-300 transition-shadow'}>{task.completed ? 'Completed' : 'Incomplete'}</button>
           <p className="text-sm">Created: {formattedDate}</p>
         </div>
       </div>
       <button className="material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" onClick={() => setEditing(true)}>edit</button>
-      <button className="material-symbols-outlined text-red-500 text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg " onClick={handleDelete}>delete</button>
+      <button className="material-symbols-outlined text-text text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:text-red-300 hover:bg-secondary " onClick={handleDelete}>delete</button>
     </>
   );
   
