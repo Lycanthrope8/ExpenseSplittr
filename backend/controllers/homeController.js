@@ -200,6 +200,28 @@ const rejectUserRequest = async (req,res) => {
 };
 
 
+const homeMateRetrival = async (req, res) => {
+  const { homeId } = req.query; // Retrieve homeId from query parameters
+  try {
+    const home = await Home.findOne({ home_id: homeId });
+    if (!home) {
+      return res.status(404).json({ error: "Home not found" });
+    }
+
+    const currentMembersIds = home.currentMembers;
+    const userProfiles = await UserProfile.find({ userId: { $in: currentMembersIds } });
+
+    const currentMembersNames = userProfiles.map(profile => profile.name);
+    return res.status(200).json({ currentMembers: currentMembersNames });
+  } catch (error) {
+    console.error("Error:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+
+
 
 module.exports = {
   createHome,
@@ -210,4 +232,5 @@ module.exports = {
   joinReqHome,
   acceptUserRequest,
   rejectUserRequest,
+  homeMateRetrival,
 };

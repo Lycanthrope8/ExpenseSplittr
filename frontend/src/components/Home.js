@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useProfileContext } from "../hooks/useProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useHomeExpense } from "../hooks/useHomeExpense";
+import useHomeMateRetriever from "../hooks/useHomeMateRetriever";
 import HomeExpenseForm from "./HomeExpenseForm";
 import HomeExpenseDetails from "./HomeExpenseDetails";
 import SortButton from "./SortButton";
@@ -15,6 +16,9 @@ export const Home = () => {
   const { expenses, dispatch } = useHomeExpense();
   const [sortedExpenses, setSortedExpenses] = useState([]);
   const [sortOption, setSortOption] = useState("date-recent");
+  const { currentMembers } = useHomeMateRetriever(profile.homeId);
+  console.log("Current members:", currentMembers);
+
 
   useEffect(() => {
     const fetchExpenses = async () => {
@@ -35,10 +39,10 @@ export const Home = () => {
         console.error("Failed to fetch home expenses");
       }
     };
-
     fetchExpenses();
-  }, [user, dispatch, profile.homeId]); // Include user and profile.homeId in dependencies
+   
 
+  }, [user, dispatch, profile.homeId, currentMembers]); 
   const handleSort = (option) => {
     setSortOption(option);
     let sorted;

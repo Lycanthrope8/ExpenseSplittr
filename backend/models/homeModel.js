@@ -69,7 +69,6 @@ const homeSchema = new Schema({
   },
 });
 
-
 homeSchema.statics.joinReqHome = async function (userId, homeId) {
   try {
     const home = await this.findOne({ home_id: homeId });
@@ -79,7 +78,7 @@ homeSchema.statics.joinReqHome = async function (userId, homeId) {
     if (home.pendingMembers.includes(userId)) {
       throw new Error("You already requested to join this home");
     }
-    const user = await UserProfile.findOne({ userId : userId });
+    const user = await UserProfile.findOne({ userId: userId });
     if (!user) {
       throw new Error("User not found");
     }
@@ -91,8 +90,6 @@ homeSchema.statics.joinReqHome = async function (userId, homeId) {
   }
 };
 
-
-
 homeSchema.statics.acceptUserRequest = async function (userId, homeId) {
   try {
     const home = await this.findOne({ home_id: homeId });
@@ -101,7 +98,9 @@ homeSchema.statics.acceptUserRequest = async function (userId, homeId) {
     }
 
     // Remove the user from pendingMembers
-    home.pendingMembers = home.pendingMembers.filter(member => member !== userId);
+    home.pendingMembers = home.pendingMembers.filter(
+      (member) => member !== userId
+    );
 
     // Add the user to currentMembers
     home.currentMembers.push(userId);
@@ -131,7 +130,9 @@ homeSchema.statics.rejectUserRequest = async function (userId, homeId) {
     }
 
     // Remove the user from pendingMembers
-    home.pendingMembers = home.pendingMembers.filter(member => member !== userId);
+    home.pendingMembers = home.pendingMembers.filter(
+      (member) => member !== userId
+    );
 
     // Save the updated home
     await home.save();
@@ -142,9 +143,26 @@ homeSchema.statics.rejectUserRequest = async function (userId, homeId) {
   }
 };
 
+// homeSchema.statics.homeMateRetrival = async function (homeId) {
 
+//   Home.findOne({ home_id: homeId })
+//     .then((home) => {
+//       if (!home) {
+//         throw new Error("Home not found");
+//       }
+//       const currentMembersIds = home.currentMembers;
 
-
+//       return UserProfile.find({ userId: { $in: currentMembersIds } });
+//     })
+//     .then((userProfiles) => {
+//       // Extract names from user profiles
+//       const currentMembersNames = userProfiles.map((profile) => profile.name);
+//       console.log("Current members of the home:", currentMembersNames);
+//     })
+//     .catch((error) => {
+//       console.error("Error:", error);
+//     });
+// };
 
 const Home = mongoose.model("Home", homeSchema);
 
