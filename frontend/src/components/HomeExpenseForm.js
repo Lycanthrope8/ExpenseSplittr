@@ -4,13 +4,14 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { ProfileContext } from '../context/ProfileContext';
 import ExpenseTagDropdown from './ExpenseTagDropdown';
 
-const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
+const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers }) => {
   const { dispatch } = useHomeExpense();
   const { user } = useAuthContext();
   const { profile } = useContext(ProfileContext);
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [selectedTag, setSelectedTag] = useState("");
+  const [selectedMembers, setSelectedMembers] = useState([]);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
 
@@ -21,8 +22,8 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
       return;
     }
     
-    const expense = { title, amount , tag: selectedTag, home_id: profile.homeId, user_id: user.userId};
-    // console.log(expense);
+    const expense = { title, amount , tag: selectedTag, home_id: profile.homeId, user_id: user.userId, members: selectedMembers };
+    
     const response = await fetch("/api/homeExpenses/", {
       method: "POST",
       body: JSON.stringify(expense),
@@ -42,6 +43,7 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
       setTitle("");
       setAmount("");
       setSelectedTag("");
+      setSelectedMembers([]);
 
       // Dispatch the action to create expense
       dispatch({ type: "CREATE_EXPENSE", payload: json });
@@ -66,6 +68,12 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
       }
       setSortedExpenses(sorted);
     }
+  };
+
+  const handleMemberChange = (e) => {
+    const selectedOptions = Array.from(e.target.selectedOptions).map(option => JSON.parse(option.value));
+    setSelectedMembers(selectedOptions);
+    // console.log(selectedMembers);
   };
 
   return (
@@ -94,11 +102,18 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
           className={emptyFields.includes("amount") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
         />
       </div>
+      <div className="grid grid-cols-8 h-10 mb-4">
+        <label className="flex items-center mr-4 text-xl col-span-2">Select Members:</label>
+        <select multiple onChange={handleMemberChange} className="col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl">
+          {homeMembers.map((member) => (
+            <option key={member.userId} value={JSON.stringify(member)}>{member.name}</option>
+          ))}
+        </select>
+      </div>
       <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl">Add Expense</button>
       {error && <div className="error">{error}</div>}
     </form>
   );
 };
-
 
 export default HomeExpenseForm;
