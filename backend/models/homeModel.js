@@ -59,10 +59,10 @@ const homeSchema = new Schema({
     required: true,
     unique: true,
   },
-  currentMembers: {
-    type: [String],
-    default: [],
-  },
+  currentMembers: [{
+    userId: String,
+    name: String
+  }],
   pendingMembers: {
     type: [String],
     default: [],
@@ -102,14 +102,15 @@ homeSchema.statics.acceptUserRequest = async function (userId, homeId) {
       (member) => member !== userId
     );
 
+    const userProfile = await UserProfile.findOne({ userId });
     // Add the user to currentMembers
-    home.currentMembers.push(userId);
+    console.log("userProfile", userProfile);
+    home.currentMembers.push({userId: userProfile.userId, name: userProfile.name});
 
     // Save the updated home
     await home.save();
 
     // Update the user's userProfile with the homeId
-    const userProfile = await UserProfile.findOne({ userId });
     if (!userProfile) {
       throw new Error("User profile not found");
     }
