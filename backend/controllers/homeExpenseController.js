@@ -1,6 +1,7 @@
 const e = require('express');
 const HomeExpense = require('../models/homeExpenseModel')
 const DebtorCreditor = require('../models/debtorCreditorModel')
+const UserProfile = require('../models/userProfileModel')
 const mongoose = require('mongoose')
 
 // get all expenses
@@ -33,7 +34,7 @@ const getExpense = async (req, res) => {
 const createExpense = async (req, res) => {
   // console.log(req.body)
   const {title, amount, tag, home_id, user_id, beneficiaries} = req.body
-  
+  const userProfile = await UserProfile.findOne({ userId: user_id });
   let emptyFields = []
 
   if (!title) {
@@ -55,11 +56,13 @@ const createExpense = async (req, res) => {
     const amountPerBeneficiary = amount / beneficiaries.length;
     const expense = await HomeExpense.create({ title, amount, tag, user_id, home_id, beneficiaries })
     const debtorCreditor = beneficiaries.map(async (beneficiary) => {
-      const creditor = user_id;
-      const debtor = beneficiary.userId;
+      const creditor = {userId: user_id, name: userProfile.name};
+      const debtor = beneficiary;
       const expenseId = expense._id;
+      const title = expense.title;
+      const tag = expense.tag;
       const amount = amountPerBeneficiary;
-      const debtorCreditor = await DebtorCreditor.create({ creditor, debtor, expense: expenseId, amount })
+      const debtorCreditor = await DebtorCreditor.create({ creditor, debtor, expense: expenseId,title,tag, amount })
       return debtorCreditor;
     })
     console.log(debtorCreditor)

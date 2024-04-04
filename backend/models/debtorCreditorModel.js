@@ -5,18 +5,36 @@ const Schema = mongoose.Schema;
 
 const debtorCreditorSchema = new Schema({
   creditor: {
-    type: String,
-    ref: 'UserProfile',
-    required: true,
+    userId: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
   },
   debtor: {
-    type: String,
-    ref: 'UserProfile',
-    required: true,
+    userId: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
   },
   expense: {
     type: String,
     ref: 'HomeExpense',
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  tag: {
+    type: String,
     required: true,
   },
   amount: {
