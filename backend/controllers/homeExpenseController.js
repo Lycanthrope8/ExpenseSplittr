@@ -1,5 +1,6 @@
 const e = require('express');
 const HomeExpense = require('../models/homeExpenseModel')
+const DebtorCreditor = require('../models/debtorCreditorModel')
 const mongoose = require('mongoose')
 
 // get all expenses
@@ -51,7 +52,17 @@ const createExpense = async (req, res) => {
   // add to the database
 
   try {
+    const amountPerBeneficiary = amount / beneficiaries.length;
     const expense = await HomeExpense.create({ title, amount, tag, user_id, home_id, beneficiaries })
+    const debtorCreditor = beneficiaries.map(async (beneficiary) => {
+      const creditor = user_id;
+      const debtor = beneficiary.userId;
+      const expenseId = expense._id;
+      const amount = amountPerBeneficiary;
+      const debtorCreditor = await DebtorCreditor.create({ creditor, debtor, expense: expenseId, amount })
+      return debtorCreditor;
+    })
+    console.log(debtorCreditor)
     res.status(200).json(expense)
   } catch (error) {
     res.status(400).json({ error: error.message })
