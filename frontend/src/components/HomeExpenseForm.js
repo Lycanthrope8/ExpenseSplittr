@@ -17,6 +17,7 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers 
   const [emptyFields, setEmptyFields] = useState([]);
 
   const handleSubmit = async (e) => {
+    console.log("selectedMembers: ", selectedMembers);
     e.preventDefault();
     if (!user) {
       setError("You must be logged in to add an expense");
@@ -76,11 +77,11 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers 
     const isChecked = e.target.checked;
 
     if (isChecked) {
-      setSelectedMembers([...selectedMembers, memberId]);
+      setSelectedMembers(prevMembers => [...prevMembers, homeMembers.find(member => member.userId === memberId)]);
     } else {
-      setSelectedMembers(selectedMembers.filter(id => id !== memberId));
+      setSelectedMembers(prevMembers => prevMembers.filter(member => member.userId !== memberId));
     }
-    console.log(selectedMembers);
+    // console.log(setSelectedMembers);
   };
 
   return (
@@ -110,12 +111,12 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers 
         />
       </div>
       <div className="grid grid-cols-8 h-10 mb-4">
-        <label className="flex items-center mr-4 text-xl col-span-2">Beneficiaries:</label>
+        <label className="flex items-center mr-4 text-xl col-span-2">Select Members:</label>
         <div className="col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl">
           {homeMembers.map((member) => (
             <div key={member.userId} className="mb-2">
               <Checkbox
-                checked={selectedMembers.includes(member.userId)}
+                checked={selectedMembers.some(selected => selected.userId === member.userId)}
                 onChange={handleMemberChange}
                 value={member.userId}
               />
