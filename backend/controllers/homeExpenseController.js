@@ -30,8 +30,8 @@ const getExpense = async (req, res) => {
 
 // create a new expense
 const createExpense = async (req, res) => {
-  console.log(req.body)
-  const {title, amount, tag, home_id, user_id} = req.body
+  // console.log(req.body)
+  const {title, amount, tag, home_id, user_id, beneficiaries} = req.body
   
   let emptyFields = []
 
@@ -51,7 +51,7 @@ const createExpense = async (req, res) => {
   // add to the database
 
   try {
-    const expense = await HomeExpense.create({ title, amount, tag, user_id, home_id })
+    const expense = await HomeExpense.create({ title, amount, tag, user_id, home_id, beneficiaries })
     res.status(200).json(expense)
   } catch (error) {
     res.status(400).json({ error: error.message })

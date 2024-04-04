@@ -22,7 +22,11 @@ const homeExpenseSchema = new Schema({
   home_id: {
     type: String,
     required: true
-  }
+  },
+  beneficiaries: [{
+    userId: String,
+    name: String
+  }],
 }, { timestamps: true })
 
 module.exports = mongoose.model('HomeExpense', homeExpenseSchema)

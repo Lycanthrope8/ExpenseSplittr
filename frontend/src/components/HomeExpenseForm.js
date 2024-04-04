@@ -17,14 +17,14 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers 
   const [emptyFields, setEmptyFields] = useState([]);
 
   const handleSubmit = async (e) => {
-    console.log("selectedMembers: ", selectedMembers);
+    // console.log("selectedMembers: ", selectedMembers);
     e.preventDefault();
     if (!user) {
       setError("You must be logged in to add an expense");
       return;
     }
     
-    const expense = { title, amount , tag: selectedTag, home_id: profile.homeId, user_id: user.userId, members: selectedMembers };
+    const expense = { title, amount , tag: selectedTag, home_id: profile.homeId, user_id: user.userId, beneficiaries: selectedMembers };
     
     const response = await fetch("/api/homeExpenses/", {
       method: "POST",
