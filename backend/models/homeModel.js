@@ -104,7 +104,7 @@ homeSchema.statics.acceptUserRequest = async function (userId, homeId) {
 
     const userProfile = await UserProfile.findOne({ userId });
     // Add the user to currentMembers
-    console.log("userProfile", userProfile);
+    // console.log("userProfile", userProfile);
     home.currentMembers.push({userId: userProfile.userId, name: userProfile.name});
 
     // Save the updated home

@@ -27,7 +27,7 @@ const createHome = async (req, res) => {
     } = req.body;
 
     const home_id = nanoid(8);
-
+    const userProfile = await UserProfile.findOne({ userId: owner_id });
     // Create a new home object
     const newHome = new Home({
       name,
@@ -45,11 +45,14 @@ const createHome = async (req, res) => {
       images,
       houseRules,
       owner_id,
+      currentMembers: {userId: userProfile.userId, name: userProfile.name}
     });
     
+
     // Save the new home to the database
     const savedHome = await newHome.save();
     console.log("Home Created Successfully");
+    
     
     // Updating the user's userProfile with the homeId
     const user = await UserProfile.findOne({ userId: owner_id });

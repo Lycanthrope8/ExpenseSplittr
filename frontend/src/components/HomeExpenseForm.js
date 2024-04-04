@@ -3,6 +3,7 @@ import { useHomeExpense } from "../hooks/useHomeExpense";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { ProfileContext } from '../context/ProfileContext';
 import ExpenseTagDropdown from './ExpenseTagDropdown';
+import { Checkbox } from "@mui/material";
 
 const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers }) => {
   const { dispatch } = useHomeExpense();
@@ -71,9 +72,15 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers 
   };
 
   const handleMemberChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map(option => JSON.parse(option.value));
-    setSelectedMembers(selectedOptions);
-    // console.log(selectedMembers);
+    const memberId = e.target.value;
+    const isChecked = e.target.checked;
+
+    if (isChecked) {
+      setSelectedMembers([...selectedMembers, memberId]);
+    } else {
+      setSelectedMembers(selectedMembers.filter(id => id !== memberId));
+    }
+    console.log(selectedMembers);
   };
 
   return (
@@ -103,12 +110,19 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers 
         />
       </div>
       <div className="grid grid-cols-8 h-10 mb-4">
-        <label className="flex items-center mr-4 text-xl col-span-2">Select Members:</label>
-        <select multiple onChange={handleMemberChange} className="col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl">
+        <label className="flex items-center mr-4 text-xl col-span-2">Beneficiaries:</label>
+        <div className="col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl">
           {homeMembers.map((member) => (
-            <option key={member.userId} value={JSON.stringify(member)}>{member.name}</option>
+            <div key={member.userId} className="mb-2">
+              <Checkbox
+                checked={selectedMembers.includes(member.userId)}
+                onChange={handleMemberChange}
+                value={member.userId}
+              />
+              <span>{member.name}</span>
+            </div>
           ))}
-        </select>
+        </div>
       </div>
       <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl">Add Expense</button>
       {error && <div className="error">{error}</div>}
