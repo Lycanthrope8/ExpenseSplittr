@@ -28,6 +28,7 @@
     "react-minimal-pie-chart": "^8.4.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-select": "^5.8.0",
     "sonner": "^1.4.32",
     "web-vitals": "^2.1.4"
   },
