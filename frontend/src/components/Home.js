@@ -61,7 +61,7 @@ export const Home = () => {
     setSortedExpenses(sorted);
   };
 
-  const handleClick = async () => {
+  const handleHomeDetails = async () => {
     const homeId = await profile.homeId;
 
     try {
@@ -81,6 +81,14 @@ export const Home = () => {
       console.error(error);
     }
   };
+  const handleDebtorCreditorDetails = async () => {
+    const userId = await user.userId;
+    try {
+      navigate(`/api/debtorCreditor/${userId}`);
+    }catch(error){
+      console.error(error)
+    }
+  }
 
   const handleDelete = (deletedExpenseId) => {
     const updatedSortedExpenses = sortedExpenses.filter((expense) => expense._id !== deletedExpenseId);
@@ -89,8 +97,11 @@ export const Home = () => {
 
   return (
     <>
-      <div onClick={handleClick}>
+      <div onClick={handleHomeDetails}>
         <h1 className="text-text text-4xl text-center mb-4 hover:text-zinc-300 cursor-pointer">See Home details</h1>
+      </div>
+      <div onClick={handleDebtorCreditorDetails}>
+        <h1 className="text-text text-4xl text-center mb-4 hover:text-zinc-300 cursor-pointer">See DebtorCreditor details</h1>
       </div>
 
       <div className="grid grid-cols-3 gap-4 mx-4">
