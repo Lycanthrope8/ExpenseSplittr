@@ -17,7 +17,7 @@ return (
             <Select
                 id="beneficiaries"
                 isMulti
-                options={homeMembers.map((member) => ({ value: member.userId, label: member.name }))}
+                options={homeMembers.map((member) => ({ userId: member.userId, name: member.name }))}
                 value={selectedMembers}
                 onChange={handleChange}
                 styles={{
