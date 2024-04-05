@@ -7,7 +7,7 @@ const { nanoid } = require('nanoid');
 
 // Create a new home
 const createHome = async (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   try {
     const {
       name,
@@ -27,7 +27,7 @@ const createHome = async (req, res) => {
     } = req.body;
 
     const home_id = nanoid(8);
-
+    const userProfile = await UserProfile.findOne({ userId: owner_id });
     // Create a new home object
     const newHome = new Home({
       name,
@@ -45,11 +45,14 @@ const createHome = async (req, res) => {
       images,
       houseRules,
       owner_id,
+      currentMembers: {userId: userProfile.userId, name: userProfile.name}
     });
     
+
     // Save the new home to the database
     const savedHome = await newHome.save();
     console.log("Home Created Successfully");
+    
     
     // Updating the user's userProfile with the homeId
     const user = await UserProfile.findOne({ userId: owner_id });
@@ -200,6 +203,28 @@ const rejectUserRequest = async (req,res) => {
 };
 
 
+const homeMateRetrival = async (req, res) => {
+  const { homeId } = req.query; // Retrieve homeId from query parameters
+  try {
+    const home = await Home.findOne({ home_id: homeId });
+    if (!home) {
+      return res.status(404).json({ error: "Home not found" });
+    }
+
+    const currentMembersIds = home.currentMembers;
+    const userProfiles = await UserProfile.find({ userId: { $in: currentMembersIds } });
+
+    const currentMembersNames = userProfiles.map(profile => profile.name);
+    return res.status(200).json({ currentMembers: currentMembersNames });
+  } catch (error) {
+    console.error("Error:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+
+
 
 module.exports = {
   createHome,
@@ -210,4 +235,5 @@ module.exports = {
   joinReqHome,
   acceptUserRequest,
   rejectUserRequest,
+  homeMateRetrival,
 };

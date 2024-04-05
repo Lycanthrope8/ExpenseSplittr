@@ -1,0 +1,1 @@
+1. If user is in a home then It should not be accepted

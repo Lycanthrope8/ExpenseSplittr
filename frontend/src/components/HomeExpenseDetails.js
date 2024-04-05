@@ -62,6 +62,7 @@ const HomeExpenseDetails = ({ expense, onDelete }) => {
         <p className="text-sm">By: {spendBy}</p>
         <p className="text-lg mb-4">{expense.tag}</p>
         <p className="text-lg mb-4"><strong>Amount: </strong>{expense.amount}</p>
+        <p className="text-lg mb-4"><strong>Beneficiaries: </strong>{expense.beneficiaries.map(member => member.name).join(', ')}</p>
         <p className="text-sm">{formattedDate}</p>
       </div>
       <span className="material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" onClick={handleClick}>delete</span>
