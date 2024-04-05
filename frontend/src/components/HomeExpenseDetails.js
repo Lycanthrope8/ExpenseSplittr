@@ -65,8 +65,9 @@ const HomeExpenseDetails = ({ expense, onDelete }) => {
         <p className="text-lg mb-4"><strong>Beneficiaries: </strong>{expense.beneficiaries.map(member => member.name).join(', ')}</p>
         <p className="text-sm">{formattedDate}</p>
       </div>
-      <span className="material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" onClick={handleClick}>delete</span>
-    </div>
+      
+      {user.userId === expense.user_id &&<span className="material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" onClick={handleClick}>delete</span>}
+    </div> 
   );
 };
 

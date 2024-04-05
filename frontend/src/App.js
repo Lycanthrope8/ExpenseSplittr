@@ -14,6 +14,7 @@ import { HomeDetails } from "./pages/HomeDetails";
 import { PersonalDashboard } from "./pages/PersonalDashboard";
 import { JoinedHomeDetails } from "./pages/JoinedHomeDetails";
 import { HomeDetailsOwner } from "./pages/HomeDetailsOwner";
+import { DebtorCreditor } from "./pages/DebtorCreditor";
 import { Home } from "./components/Home";
 import UploadImagesHome from "./components/UploadImagesHome";
 import { Admin } from "./pages/Admin";
@@ -59,6 +60,10 @@ function App() {
               element={user ? <HomeDetailsOwner /> : <Navigate to="/" />}
             />
             <Route
+              path="/api/debtorCreditor/:id"
+              element={user ? <DebtorCreditor /> : <Navigate to="/" />}
+            />
+            <Route
               path="/"
               element={user ? <LandingPage /> : <Navigate to="/login" />}
             />
@@ -84,7 +89,6 @@ function App() {
             />
             <Route path="/admin" 
               element={user ? <Admin /> : <Navigate to="/" />}
-
             />
           </Routes>
         </div>
