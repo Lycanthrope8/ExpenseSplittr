@@ -5,9 +5,10 @@ import Select from 'react-select';
 
 const BeneficiariesDropdown = ({ homeMembers, selectedMembers, setSelectedMembers }) => {
   // const primary = purple[500];
+
   const handleChange = (selectedMember) => {
     setSelectedMembers(selectedMember);
-    console.log(selectedMembers);
+    console.log(selectedMember);
 };
 
 return (
@@ -17,7 +18,9 @@ return (
             <Select
                 id="beneficiaries"
                 isMulti
-                options={homeMembers.map((member) => ({ userId: member.userId, name: member.name }))}
+                options={homeMembers.map((member) => ({ userId: member._id, name: member.name }))}
+                getOptionLabel={(option) => option.name}
+                getOptionValue={(option) => option.userId}
                 value={selectedMembers}
                 onChange={handleChange}
                 styles={{
