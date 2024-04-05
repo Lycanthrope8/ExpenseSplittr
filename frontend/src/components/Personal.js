@@ -67,7 +67,7 @@ export const Personal = () => {
     setSortedExpenses(sorted);
   };
   return (
-    <div className="home grid grid-cols-3 gap-4 mx-4">
+    <div className="grid grid-cols-3 gap-4 mx-4">
       <div className="col-span-2 relative">
         <SortButton onSort={handleSort} />
         <div className="border-1 border-border rounded-xl p-4">

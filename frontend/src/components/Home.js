@@ -93,25 +93,44 @@ export const Home = () => {
         <h1 className="text-text text-4xl text-center mb-4 hover:text-zinc-300 cursor-pointer">See Home details</h1>
       </div>
 
-      <div className="home grid grid-cols-3 gap-4 mx-4">
+      <div className="grid grid-cols-3 gap-4 mx-4">
         <div className="col-span-2 relative">
           <SortButton onSort={handleSort} />
-          <div>
+          <div className="border-1 border-border rounded-xl p-4">
+          <table className='text-text w-full'>
+              <colgroup>
+                <col className="w-[700px]"/>
+                <col className="w-[200px]" />
+                <col className="w-[300px]" />
+                <col className="w-[200px]" />
+              </colgroup>
+              <thead className='text-zinc-300 [&_tr]:border-b'>
+                <tr className='text-left align-middle border-border text-md'>
+                  <th className="pb-4">Title</th>
+                  <th className="pb-4">Amount</th>
+                  <th className="pb-4">Date</th>
+                  <th className="text-center pb-4">Action</th>
+                </tr>
+              </thead>
+              <tbody className='text-text [&_tr:last-child]:border-0'>
             {sortedExpenses && sortedExpenses.length > 0
               ? sortedExpenses.map((expense) => (
-                <div className="expense-details-wrapper" key={expense._id}>
+                <tr className="w-full border-b border-border" key={expense._id}>
                   <HomeExpenseDetails expense={expense} onDelete={handleDelete} />
-                </div>
+                </tr>
               ))
               : expenses &&
               expenses.map((expense) => (
-                <div className="expense-details-wrapper" key={expense._id}>
+                <tr className="w-full border-b border-border" key={expense._id}>
                   <HomeExpenseDetails expense={expense} />
-                </div>
-              ))}
-          </div>
+                </tr>
+              ))
+            }
+            </tbody>
+          </table>
         </div>
-        <HomeExpenseForm expenses={expenses} setSortedExpenses={setSortedExpenses} homeMembers={home.currentMembers} />
+      </div>
+      <HomeExpenseForm expenses={expenses} setSortedExpenses={setSortedExpenses} homeMembers={home.currentMembers} />
       </div>
       <HomeTasks />
     </>

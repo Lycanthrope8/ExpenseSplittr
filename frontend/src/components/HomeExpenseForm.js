@@ -3,6 +3,7 @@ import { useHomeExpense } from "../hooks/useHomeExpense";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { ProfileContext } from '../context/ProfileContext';
 import ExpenseTagDropdown from './ExpenseTagDropdown';
+import BeneficiariesDropdown from './BeneficiariesDropdown';
 import { Checkbox } from "@mui/material";
 
 const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers }) => {
@@ -17,6 +18,7 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers 
   const [emptyFields, setEmptyFields] = useState([]);
 
   const handleSubmit = async (e) => {
+    console.log(profile.expenseTags);
     // console.log("selectedMembers: ", selectedMembers);
     e.preventDefault();
     if (!user) {
@@ -72,47 +74,37 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers 
     }
   };
 
-  const handleMemberChange = (e) => {
-    const memberId = e.target.value;
-    const isChecked = e.target.checked;
-
-    if (isChecked) {
-      setSelectedMembers(prevMembers => [...prevMembers, homeMembers.find(member => member.userId === memberId)]);
-    } else {
-      setSelectedMembers(prevMembers => prevMembers.filter(member => member.userId !== memberId));
-    }
-    // console.log(setSelectedMembers);
-  };
-
   return (
-    <form className="create flex flex-col h-max bg-secondary-dark-bg text-white p-4 rounded-2xl" onSubmit={handleSubmit}>
+    <form className="flex flex-col h-max border-1 border-border text-text p-4 rounded-2xl" onSubmit={handleSubmit}>
       <h1 className="mb-4 text-xl font-bold text-center">Add a New Expense</h1>
       <ExpenseTagDropdown
         expenseTags={profile.expenseTags}
         selectedTag={selectedTag}
         setSelectedTag={setSelectedTag}
       />
-      <div className="grid grid-cols-8 h-10 mb-4">
-        <label className="flex items-center mr-4 text-xl col-span-2">Title:</label>
+      <div className="h-10 mb-4">
+        {/* <label className="flex items-center mr-4 text-xl col-span-2">Title:</label> */}
         <input
           type="text"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
-          className={emptyFields.includes("title") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
+          placeholder="Title"
+          className={emptyFields.includes("title") ? "error" : "p-2 bg-transparent text-text w-full border-1 border-border rounded-md"}
         />
       </div>
-      <div className="grid grid-cols-8 h-10 mb-4">
-        <label className="flex items-center mr-4 text-xl col-span-2">Amount:</label>
+      <div className="h-10 mb-4">
+        {/* <label className="flex items-center mr-4 text-xl col-span-2">Amount:</label> */}
         <input
           type="number"
           onChange={(e) => setAmount(e.target.value)}
           value={amount}
-          className={emptyFields.includes("amount") ? "error" : "col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl"}
+          placeholder="Amount"
+          className={emptyFields.includes("amount") ? "error" : "p-2 bg-transparent text-text w-full border-1 border-border rounded-md"}
         />
       </div>
-      <div className="grid grid-cols-8 h-10 mb-4">
+      {/* <div className="h-10 mb-4">
         <label className="flex items-center mr-4 text-xl col-span-2">Select Members:</label>
-        <div className="col-span-6 p-2 bg-tertiary-dark-bg text-zinc-200 rounded-xl">
+        <div className="rounded-xl">
           {homeMembers.map((member) => (
             <div key={member.userId} className="mb-2">
               <Checkbox
@@ -124,8 +116,13 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers 
             </div>
           ))}
         </div>
-      </div>
-      <button className="mt-2 p-2 bg-accent text-zinc-800 rounded-2xl">Add Expense</button>
+      </div> */}
+      <BeneficiariesDropdown 
+        homeMembers={homeMembers}
+        selectedMembers={selectedMembers}
+        setSelectedMembers={setSelectedMembers}
+      />
+      <button className="mt-2 p-2 bg-secondary text-text rounded-md hover:bg-secondary/80 transition-colors">Add Expense</button>
       {error && <div className="error">{error}</div>}
     </form>
   );

@@ -56,17 +56,25 @@ const HomeExpenseDetails = ({ expense, onDelete }) => {
   const formattedDate = moment(expense.createdAt).format(`MMMM D, yyyy [at] HH:mm`);
 
   return (
-    <div className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
-      <div className='flex flex-col'>
-        <h4 className='text-3xl border-b-1 mb-2'>{expense.title}</h4>
-        <p className="text-sm">By: {spendBy}</p>
-        <p className="text-lg mb-4">{expense.tag}</p>
-        <p className="text-lg mb-4"><strong>Amount: </strong>{expense.amount}</p>
-        <p className="text-lg mb-4"><strong>Beneficiaries: </strong>{expense.beneficiaries.map(member => member.name).join(', ')}</p>
-        <p className="text-sm">{formattedDate}</p>
-      </div>
-      <span className="material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" onClick={handleClick}>delete</span>
-    </div>
+    // <div className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
+    //   <div className='flex flex-col'>
+    //     <h4 className='text-3xl border-b-1 mb-2'>{expense.title}</h4>
+    //     <p className="text-sm">By: {spendBy}</p>
+    //     <p className="text-lg mb-4">{expense.tag}</p>
+    //     <p className="text-lg mb-4"><strong>Amount: </strong>{expense.amount}</p>
+    //     <p className="text-lg mb-4"><strong>Beneficiaries: </strong>{expense.beneficiaries.map(member => member.name).join(', ')}</p>
+    //     <p className="text-sm">{formattedDate}</p>
+    //   </div>
+    //   <span className="material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" onClick={handleClick}>delete</span>
+    // </div>
+    <>
+
+    <td className='align-middle py-4'><div className='flex space-x-4'><div className='font-semibold border-2 border-border rounded-md px-2.5 py-0.5 text-xs'>{expense.tag}</div> <span>{expense.title}</span></div></td>
+    <td className='text-left align-middle py-4'>{expense.amount}</td>
+    <td className='text-left align-middle py-4'>{formattedDate}</td>
+    <td className='py-2'><div className='flex items-center justify-center'><span className="material-symbols-outlined text-2xl w-10 h-10 flex justify-center items-center rounded-full hover:cursor-pointer hover:bg-secondary hover:text-red-400 transition-colors" onClick={handleClick}>delete</span></div></td>
+    </>
+
   );
 };
 

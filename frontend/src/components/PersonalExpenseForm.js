@@ -69,7 +69,7 @@ const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
   };
 
   return (
-    <form className="create flex flex-col h-max border-1 border-border text-text p-4 rounded-2xl" onSubmit={handleSubmit}>
+    <form className="flex flex-col h-max border-1 border-border text-text p-4 rounded-2xl" onSubmit={handleSubmit}>
       <h1 className="mb-4 text-xl font-bold text-center">Add a New Expense</h1>
       <ExpenseTagDropdown
         expenseTags={profile.expenseTags}

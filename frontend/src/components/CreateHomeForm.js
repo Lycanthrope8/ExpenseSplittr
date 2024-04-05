@@ -223,13 +223,13 @@ const CreateHomeForm = () => {
         </div>
         {/* Move In Date */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
-          {/* <label className="text-text text-2xl mr-4">Move In Date:</label> */}
+          <label className="text-text text-2xl mr-4">Move In Date:</label>
           <input
             type="date"
             name="moveInDate"
             value={moveInDate}
             onChange={(e) => setMoveInDate(e.target.value)}
-            className="w-4/6 bg-tertiary-dark-bg rounded-xl p-2 focus:outline-none"
+            className="w-4/6 p-2 bg-transparent text-text border-1 border-border rounded-md"
           />
         </div>
         
@@ -241,7 +241,7 @@ const CreateHomeForm = () => {
             name="houseRules"
             value={houseRules}
             onChange={(e) => setHouseRules(e.target.value)}
-            className="w-10/12 bg-tertiary-dark-bg rounded-xl p-2 focus:outline-none"
+            className="w-10/12 p-2 bg-transparent text-text border-1 border-border rounded-md"
           />
         </div>
 
