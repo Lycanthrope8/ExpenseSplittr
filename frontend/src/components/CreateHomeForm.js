@@ -82,85 +82,84 @@ const CreateHomeForm = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center">
-      <h1 className="text-center text-4xl text-zinc-200 font-bold mb-8">Create Home</h1>
+    <div className="flex flex-col justify-center text-text">
+      <h1 className="text-center text-4xl font-bold mb-8">Create Home</h1>
       <form
       className="grid lg:grid-cols-2 m-4 gap-8 lg:w-2/3 sm:w-3/4 sm:grid-cols-1 mx-auto"
       onSubmit={handleSubmit}>
         {/* Input fields */}
         {/* Name */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">Name:</label>
+          {/* <label className="text-text text-2xl mr-4">Name:</label> */}
           <input
             type="text"
             name="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+            placeholder="Name"
+            className="w-full p-2 bg-transparent text-text border-1 border-border rounded-md"
           />
         </div>
         {/* Location */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">Location:</label>
+          {/* <label className="text-text text-2xl mr-4">Location:</label> */}
           <input
             type="text"
             name="location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+            placeholder="Location"
+            className="w-full p-2 bg-transparent text-text border-1 border-border rounded-md"
           />
         </div>
         {/* Accommodation Type */}
         <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">
-            Accommodation Type:
-          </label>
+          {/* <label className="text-text text-2xl mr-4"> Accommodation Type:</label> */}
           <input
             type="text"
             name="accommodationType"
             value={accommodationType}
             onChange={(e) => setAccommodationType(e.target.value)}
-            className="w-9/12 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+            placeholder="Accomodation Type"
+            className="w-full p-2 bg-transparent text-text border-1 border-border rounded-md autofill:text-red-300"
           />
         </div>
         {/* Bedrooms */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">Bedrooms:</label>
+          <label className="text-text text-2xl mr-4">Bedrooms:</label>
           <input
             type="number"
             name="bedrooms"
             value={bedrooms}
             onChange={(e) => setBedrooms(e.target.value)}
-            className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+            className="w-4/6 p-2 bg-transparent text-text border-1 border-border rounded-md"
           />
         </div>
         {/* Bathrooms */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">Bathrooms:</label>
+          <label className="text-text text-2xl mr-4">Bathrooms:</label>
           <input
             type="number"
             name="bathrooms"
             value={bathrooms}
             onChange={(e) => setBathrooms(e.target.value)}
-            className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+            className="w-4/6 p-2 bg-transparent text-text border-1 border-border rounded-md"
           />
         </div>
         {/* Rent Amount */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">Rent:</label>
+          <label className="text-text text-2xl mr-4">Rent:</label>
           <input
             type="number"
             name="rentAmount"
             value={rentAmount}
             onChange={(e) => setRentAmount(e.target.value)}
-            className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+            className="w-4/6 p-2 bg-transparent text-text border-1 border-border rounded-md"
           />
         </div>
         {/* Utilities Included */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">
-            Utilities:
-          </label>
+          <label className="text-text text-2xl mr-4">Utilities:</label>
           <div className="w-4/6 text-center">
             <Checkbox
               type="checkbox"
@@ -176,7 +175,7 @@ const CreateHomeForm = () => {
         </div>
         {/* Furnished */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">Furnished:</label>
+          <label className="text-text text-2xl mr-4">Furnished:</label>
           <div className="w-4/6 text-center">
             <Checkbox
               type="checkbox"
@@ -192,9 +191,7 @@ const CreateHomeForm = () => {
         </div>
         {/* Pets Allowed */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">
-            Pets:
-          </label>
+          <label className="text-text text-2xl mr-4">Pets:</label>
           <div className="w-4/6 text-center">
             <Checkbox
               type="checkbox"
@@ -210,9 +207,7 @@ const CreateHomeForm = () => {
         </div>
         {/* Smoking Allowed */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">
-            Smoking:
-          </label>
+          <label className="text-text text-2xl mr-4">Smoking:</label>
           <div className="w-4/6 text-center">
             <Checkbox
               type="checkbox"
@@ -228,27 +223,25 @@ const CreateHomeForm = () => {
         </div>
         {/* Move In Date */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">
-            Move In Date:
-          </label>
+          {/* <label className="text-text text-2xl mr-4">Move In Date:</label> */}
           <input
             type="date"
             name="moveInDate"
             value={moveInDate}
             onChange={(e) => setMoveInDate(e.target.value)}
-            className="w-4/6 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+            className="w-4/6 bg-tertiary-dark-bg rounded-xl p-2 focus:outline-none"
           />
         </div>
         
         {/* House Rules */}
         <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
-          <label className="text-zinc-100 text-2xl mr-4">House Rules:</label>
+          <label className="text-text text-2xl mr-4">House Rules:</label>
           <input
             type="text"
             name="houseRules"
             value={houseRules}
             onChange={(e) => setHouseRules(e.target.value)}
-            className="w-10/12 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+            className="w-10/12 bg-tertiary-dark-bg rounded-xl p-2 focus:outline-none"
           />
         </div>
 
