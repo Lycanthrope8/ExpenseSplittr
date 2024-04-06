@@ -9,6 +9,7 @@ const DebtCredit = () => {
     const [totalDebt, setTotalDebt] = useState(0);
     const [totalCredit, setTotalCredit] = useState(0);
     const [formattedDebtors, setFormattedDebtors] = useState([]);
+    const [formattedCreditors, setFormattedCreditors] = useState([]);
 
     useEffect(() => {
         const fetchDebtCredit = async () => {
@@ -29,6 +30,16 @@ const DebtCredit = () => {
                     return debtors;
                 }, []);
                 setFormattedDebtors(formattedDebtors);
+
+                // Format creditors
+                const formattedCreditors = json.debts.reduce((creditors, debt) => {
+                    const creditor = debt.creditor;
+                    if (!creditors.some(item => item.userId === creditor.userId)) {
+                        creditors.push(creditor);
+                    }
+                    return creditors;
+                }, []);
+                setFormattedCreditors(formattedCreditors);
             } catch (error) {
                 console.error(error);
             }
@@ -36,40 +47,30 @@ const DebtCredit = () => {
         fetchDebtCredit();
     }, [profile.userId]);
 
-    const handleSettleDebt = async (debtorId, creditorId) => {
-        try {
-            const response = await fetch(`/api/debtorCreditor/${profile.homeId}`, {
-                method: 'POST',
-                body: JSON.stringify({ debtorId, creditorId }),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-            const json = await response.json();
-            setDebts(json.debts);
-            setCredits(json.credits);
-            setTotalDebt(json.totalDebt);
-            setTotalCredit(json.totalCredit);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
     return (
         <div className='text-text'>
-            <h2>You owe money from</h2>
+            <h2>You owe money to</h2>
+            <ul>
+                {formattedCreditors.map(creditor => (
+                    <li key={creditor.userId}>
+                        <span>Name: {creditor.name}</span>
+                        <span>Title: {debts.find(debt => debt.creditor.userId === creditor.userId)?.title || "N/A"}</span>
+                        <span>Tag: {debts.find(debt => debt.creditor.userId === creditor.userId)?.tag || "N/A"}</span>
+                        <span>Amount: {debts.find(debt => debt.creditor.userId === creditor.userId)?.amount || "N/A"}</span>
+                    </li>
+                ))}
+            </ul>
+            <h2>You are owed money from</h2>
             <ul>
                 {formattedDebtors.map(debtor => (
                     <li key={debtor.userId}>
                         <span>Name: {debtor.name}</span>
-                        <span>Title: {credits.find(credit => credit.debtor.userId === debtor.userId).title}</span>
-                        <span>Tag: {credits.find(credit => credit.debtor.userId === debtor.userId).tag}</span>
-                        <span>Amount: {credits.find(credit => credit.debtor.userId === debtor.userId).amount}</span>
-                        {/* <button onClick={() => handleSettleDebt(debtor.userId, profile.userId)}>Settle Debt</button> */}
+                        <span>Title: {credits.find(credit => credit.debtor.userId === debtor.userId)?.title || "N/A"}</span>
+                        <span>Tag: {credits.find(credit => credit.debtor.userId === debtor.userId)?.tag || "N/A"}</span>
+                        <span>Amount: {credits.find(credit => credit.debtor.userId === debtor.userId)?.amount || "N/A"}</span>
                     </li>
                 ))}
             </ul>
-            <h2>You are in debt to</h2>
         </div>
     );
 }
