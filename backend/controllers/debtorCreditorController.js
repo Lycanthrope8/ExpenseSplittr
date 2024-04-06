@@ -50,7 +50,7 @@ const updateUnderSettlementStatus = async (req, res) => {
         }
         debtorCreditor.UnderSettlement = UnderSettlement;
         await debtorCreditor.save();
-        console.log('debtorCreditor:', debtorCreditor);
+        // console.log('debtorCreditor:', debtorCreditor);
         return res.status(200).json({ message: 'UnderSettlement status updated successfully', debtorCreditor });
     } catch (error) {
         console.error('Error updating underSettlement status:', error);
