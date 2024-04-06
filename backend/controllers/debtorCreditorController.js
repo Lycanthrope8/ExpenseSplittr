@@ -19,9 +19,46 @@ const postDebtorCreditor = async (req, res) => {
     res.status(200).json({ debtor, creditor });
 }
 
-const UnderSettlement = async (req, res) => {
-    
-}
 
 
-module.exports = {getDebtorCreditor, postDebtorCreditor};
+
+const updateSettledStatus = async (req, res) => {
+    const { id } = req.params; 
+    const { settled } = req.body;
+    try {
+        const debtorCreditor = await DebtorCreditor.findById(id);
+        if (!debtorCreditor) {
+            return res.status(404).json({ message: 'Debtor-creditor entry not found' });
+        }
+        debtorCreditor.settled = settled;
+        await debtorCreditor.save();
+        return res.status(200).json({ message: 'Settled status updated successfully', debtorCreditor });
+    } catch (error) {
+        console.error('Error updating settled status:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+const updateUnderSettlementStatus = async (req, res) => {
+    const { id } = req.params; 
+    const { UnderSettlement } = req.body; 
+    try {
+        const debtorCreditor = await DebtorCreditor.findById(id);
+        if (!debtorCreditor) {
+            return res.status(404).json({ message: 'Debtor-creditor entry not found' });
+        }
+        debtorCreditor.UnderSettlement = UnderSettlement;
+        await debtorCreditor.save();
+        console.log('debtorCreditor:', debtorCreditor);
+        return res.status(200).json({ message: 'UnderSettlement status updated successfully', debtorCreditor });
+    } catch (error) {
+        console.error('Error updating underSettlement status:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+
+
+module.exports = {getDebtorCreditor, postDebtorCreditor, updateSettledStatus, updateUnderSettlementStatus};
