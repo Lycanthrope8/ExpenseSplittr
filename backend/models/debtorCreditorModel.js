@@ -5,24 +5,12 @@ const Schema = mongoose.Schema;
 
 const debtorCreditorSchema = new Schema({
   creditor: {
-    userId: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
+    userId: String,
+    name: String
   },
   debtor: {
-    userId: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
+    userId: String,
+    name: String
   },
   expense: {
     type: String,
