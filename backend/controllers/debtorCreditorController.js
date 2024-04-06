@@ -7,4 +7,17 @@ const getDebtorCreditor = async (req, res) => {
     res.status(200).json({ debts, credits });
     }
 
-module.exports = {getDebtorCreditor};
+const postDebtorCreditor = async (req, res) => {
+    const { debtorId, creditorId } = req.body;
+    const debtor = await DebtorCreditor.findById(debtorId);
+    const creditor = await DebtorCreditor.findById(creditorId);
+    const amount = Math.min(debtor.amount, creditor.amount);
+    debtor.amount -= amount;
+    creditor.amount -= amount;
+    await debtor.save();
+    await creditor.save();
+    res.status(200).json({ debtor, creditor });
+}
+
+
+module.exports = {getDebtorCreditor, postDebtorCreditor};

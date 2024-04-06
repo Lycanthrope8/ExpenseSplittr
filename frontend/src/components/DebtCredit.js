@@ -28,7 +28,7 @@ const DebtCredit = () => {
 
     const handleSettleDebt = async (debtorId, creditorId) => {
         try {
-            const response = await fetch('/api/debtCredit', {
+            const response = await fetch(`/api/debtorCreditor/${profile.homeId}`, {
                 method: 'POST',
                 body: JSON.stringify({ debtorId, creditorId }),
                 headers: {

@@ -6,8 +6,9 @@ const router = express.Router()
 
 //controller functions
 
-const { getDebtorCreditor } = require('../controllers/debtorCreditorController');
+const { getDebtorCreditor, postDebtorCreditor } = require('../controllers/debtorCreditorController');
 
 router.get('/:id', getDebtorCreditor);
+router.post('/:id', postDebtorCreditor);
 
 module.exports = router;
