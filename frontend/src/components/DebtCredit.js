@@ -2,29 +2,39 @@ import { useEffect, useState } from 'react';
 import { useProfileContext } from '../hooks/useProfileContext';
 
 const DebtCredit = () => {
-
     const { profile } = useProfileContext();
 
-    const [debtors, setDebtors] = useState([]);
-    const [creditors, setCreditors] = useState([]);
+    const [debts, setDebts] = useState([]);
+    const [credits, setCredits] = useState([]);
     const [totalDebt, setTotalDebt] = useState(0);
     const [totalCredit, setTotalCredit] = useState(0);
+    const [formattedDebtors, setFormattedDebtors] = useState([]);
 
     useEffect(() => {
         const fetchDebtCredit = async () => {
             try {
-                const response = await fetch(`/api/debtorCreditor/${profile.homeId}`);
+                const response = await fetch(`/api/debtorCreditor/${profile.userId}`);
                 const json = await response.json();
-                setDebtors(json.debtors);
-                setCreditors(json.creditors);
+                setDebts(json.debts);
+                setCredits(json.credits);
                 setTotalDebt(json.totalDebt);
                 setTotalCredit(json.totalCredit);
+
+                // Format debtors
+                const formattedDebtors = json.credits.reduce((debtors, credit) => {
+                    const debtor = credit.debtor;
+                    if (!debtors.some(item => item.userId === debtor.userId)) {
+                        debtors.push(debtor);
+                    }
+                    return debtors;
+                }, []);
+                setFormattedDebtors(formattedDebtors);
             } catch (error) {
                 console.error(error);
             }
         };
         fetchDebtCredit();
-    }, []);
+    }, [profile.userId]);
 
     const handleSettleDebt = async (debtorId, creditorId) => {
         try {
@@ -36,8 +46,8 @@ const DebtCredit = () => {
                 },
             });
             const json = await response.json();
-            setDebtors(json.debtors);
-            setCreditors(json.creditors);
+            setDebts(json.debts);
+            setCredits(json.credits);
             setTotalDebt(json.totalDebt);
             setTotalCredit(json.totalCredit);
         } catch (error) {
@@ -47,35 +57,21 @@ const DebtCredit = () => {
 
     return (
         <div className='text-text'>
-            <div className='flex justify-between'>
-                <h2>Debtors</h2>
-                <h2>Total Debt: {totalDebt}</h2>
-            </div>
-            <div className='grid grid-cols-1 gap-4'>
-                {debtors.map((debtor) => (
-                    <div key={debtor._id} className='flex justify-between'>
-                        <p>{debtor.name}</p>
-                        <p>{debtor.amount}</p>
-                    </div>
+            <h2>You owe money from</h2>
+            <ul>
+                {formattedDebtors.map(debtor => (
+                    <li key={debtor.userId}>
+                        <span>Name: {debtor.name}</span>
+                        <span>Title: {credits.find(credit => credit.debtor.userId === debtor.userId).title}</span>
+                        <span>Tag: {credits.find(credit => credit.debtor.userId === debtor.userId).tag}</span>
+                        <span>Amount: {credits.find(credit => credit.debtor.userId === debtor.userId).amount}</span>
+                        {/* <button onClick={() => handleSettleDebt(debtor.userId, profile.userId)}>Settle Debt</button> */}
+                    </li>
                 ))}
-            </div>
-            <div className='flex justify-between'>
-                <h2>Creditors</h2>
-                <h2>Total Credit: {totalCredit}</h2>
-            </div>
-            <div className='grid grid-cols-1 gap-4'>
-                {creditors.map((creditor) => (
-                    <div key={creditor._id} className='flex justify-between'>
-                        <p>{creditor.name}</p>
-                        <p>{creditor.amount}</p>
-                    </div>
-                ))}
-            </div>
-            <div className='flex justify-center'>
-                <button className='btn-primary' onClick={() => handleSettleDebt(debtors[0]._id, creditors[0]._id)}>Settle Debt</button>
-            </div>
+            </ul>
+            <h2>You are in debt to</h2>
         </div>
-    )
+    );
 }
 
-export default DebtCredit
+export default DebtCredit;
