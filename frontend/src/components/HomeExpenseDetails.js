@@ -69,8 +69,12 @@ const HomeExpenseDetails = ({ expense, onDelete }) => {
       
     // </div> 
     <>
-
     <td className='align-middle py-4'><div className='flex space-x-4'><div className='font-semibold border-2 border-border rounded-md px-2.5 py-0.5 text-xs'>{expense.tag}</div> <span>{expense.title}</span></div></td>
+    <td className='flex text-left align-middle py-4 space-x-1'>{expense.beneficiaries.map((member) => 
+
+      (<div className='flex items-center justify-center px-2 py-1 bg-secondary rounded-md'>{member.name}</div>)
+
+    )}</td>
     <td className='text-left align-middle py-4'>{expense.amount}</td>
     <td className='text-left align-middle py-4'>{formattedDate}</td>
     <td className='py-2'><div className='flex items-center justify-center'>{user.userId === expense.user_id &&<span className="material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" onClick={handleClick}>delete</span>}</div></td>

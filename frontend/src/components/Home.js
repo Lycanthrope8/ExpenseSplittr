@@ -111,6 +111,7 @@ export const Home = () => {
           <table className='text-text w-full'>
               <colgroup>
                 <col className="w-[700px]"/>
+                <col className="w-[300px]" />
                 <col className="w-[200px]" />
                 <col className="w-[300px]" />
                 <col className="w-[200px]" />
@@ -118,6 +119,7 @@ export const Home = () => {
               <thead className='text-zinc-300 [&_tr]:border-b'>
                 <tr className='text-left align-middle border-border text-md'>
                   <th className="pb-4">Title</th>
+                  <th className="pb-4">Beneficiaries</th>
                   <th className="pb-4">Amount</th>
                   <th className="pb-4">Date</th>
                   <th className="text-center pb-4">Action</th>

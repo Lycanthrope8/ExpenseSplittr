@@ -4,7 +4,6 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { ProfileContext } from '../context/ProfileContext';
 import ExpenseTagDropdown from './ExpenseTagDropdown';
 import BeneficiariesDropdown from './BeneficiariesDropdown';
-import { Checkbox } from "@mui/material";
 
 const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers }) => {
   const { dispatch } = useHomeExpense();
@@ -16,6 +15,7 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers 
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  
 
   const handleSubmit = async (e) => {
     console.log(profile.expenseTags);
