@@ -47,28 +47,45 @@ const DebtCredit = () => {
         fetchDebtCredit();
     }, [profile.userId]);
 
+    const handleSettle = async () => {
+        return;
+    }
+    const handleConfirmSettlement = async () => {
+        return;
+    }
+    const handleDeclineSettlement = async () => {
+        return;
+    }
+
     return (
         <div className='text-text'>
             <h2>You owe money to</h2>
             <ul>
                 {formattedCreditors.map(creditor => (
+                    (!creditor.settled &&
                     <li key={creditor.userId}>
                         <span>Name: {creditor.name}</span>
                         <span>Title: {debts.find(debt => debt.creditor.userId === creditor.userId)?.title || "N/A"}</span>
                         <span>Tag: {debts.find(debt => debt.creditor.userId === creditor.userId)?.tag || "N/A"}</span>
                         <span>Amount: {debts.find(debt => debt.creditor.userId === creditor.userId)?.amount || "N/A"}</span>
-                    </li>
+                        {!debts.find(debt => debt.creditor.userId === creditor.userId).UnderSettlement &&<button onClick={handleSettle}>Settle</button>}
+                    </li>)
                 ))}
             </ul>
             <h2>You are owed money from</h2>
             <ul>
                 {formattedDebtors.map(debtor => (
+                    (!debtor.settled &&
                     <li key={debtor.userId}>
                         <span>Name: {debtor.name}</span>
                         <span>Title: {credits.find(credit => credit.debtor.userId === debtor.userId)?.title || "N/A"}</span>
                         <span>Tag: {credits.find(credit => credit.debtor.userId === debtor.userId)?.tag || "N/A"}</span>
                         <span>Amount: {credits.find(credit => credit.debtor.userId === debtor.userId)?.amount || "N/A"}</span>
-                    </li>
+                        {!credits.find(credit => credit.debtor.userId === debtor.userId)?.UnderSettlement &&<div>
+                        <button onClick={handleConfirmSettlement}>Confirm Settlement</button>
+                        <button onClick={handleDeclineSettlement}>Decline Settlement</button>
+                        </div>}
+                    </li>)
                 ))}
             </ul>
         </div>

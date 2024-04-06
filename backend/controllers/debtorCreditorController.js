@@ -19,5 +19,9 @@ const postDebtorCreditor = async (req, res) => {
     res.status(200).json({ debtor, creditor });
 }
 
+const UnderSettlement = async (req, res) => {
+    
+}
+
 
 module.exports = {getDebtorCreditor, postDebtorCreditor};
