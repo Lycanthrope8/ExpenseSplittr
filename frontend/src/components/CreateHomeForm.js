@@ -247,7 +247,7 @@ const CreateHomeForm = () => {
 
         {/* Submit Button */}
         <button
-          className="col-span-2 mt-2 py-4 px-2 bg-accent text-zinc-800 rounded-2xl w-full hover:opacity-90"
+          className="col-span-2 mt-2 py-4 px-2 border-1 border-border text-text rounded-lg w-full hover:opacity-90"
           type="submit"
           disabled={buttonLabel === "Creating"} // Disable button when creating
         >

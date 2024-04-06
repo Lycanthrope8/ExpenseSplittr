@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../context/ProfileContext";
+import { HomeContext } from "../context/HomeContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Toaster, toast } from 'sonner';
@@ -13,6 +14,7 @@ const ProfileForm = ({ onPictureChange }) => {
   const [loading, setLoading] = useState(true);
   const { user } = useAuthContext();
   const { profile, dispatch } = useContext(ProfileContext);
+  const { home, homeDispatch } = useContext(HomeContext);
 
   useEffect(() => {
     if (profile) {
@@ -46,13 +48,15 @@ const ProfileForm = ({ onPictureChange }) => {
     }
   
     const formData = new FormData();
-  
+
+    
     formData.append("name", name);
     formData.append("age", age);
     formData.append("gender", gender);
     formData.append("phone", phone);
     formData.append("address", address);
-  
+    
+
     // Only append avatar if it's not null
     if (avatar !== null) {
       formData.append("avatar", avatar);
@@ -60,8 +64,8 @@ const ProfileForm = ({ onPictureChange }) => {
       // If avatar is null, add a field to indicate that the avatar should not be updated
       formData.append("keep_avatar", true); // This can be any field name to indicate the avatar should be kept
     }
-  
     try {
+
       const response = await fetch(`/profile/${user.userId}`, {
         method: "PATCH",
         body: formData,
@@ -69,7 +73,19 @@ const ProfileForm = ({ onPictureChange }) => {
           Authorization: `Bearer ${user.token}`,
         },
       });
-  
+
+      const homeResponse = await fetch(`/home/updateHome/currentMembers/${user.userId}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          userId: user.userId,
+          name: name
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+
       const json = await response.json();
       if (!response.ok) {
         setError(json.error);
@@ -84,10 +100,18 @@ const ProfileForm = ({ onPictureChange }) => {
           onPictureChange(json.avatar);
         }
       }
+
+      
+
+
     } catch (error) {
       setError("Error updating profile");
     }
+
+    
+
   };
+
   
 
   if (loading) {

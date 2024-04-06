@@ -141,6 +141,28 @@ const updateHomeById = async (req, res) => {
   }
 };
 
+const updateMembersById = async (req, res) => {
+  console.log("Updating members");
+  const userId = req.params.id;
+  try {
+    const result = await Home.findOneAndUpdate(
+      { 'currentMembers.userId' : userId },
+      { $set : { 'currentMembers.$' : req.body } },
+      { new: true }
+    );
+    console.log(result);
+    if (result) {
+      res.status(200).json(result);
+    }
+    else {
+      res.status(404).json({ error: "Member not found"});
+    }
+  } catch (error) {
+    console.error("Error updating members:", error);
+    res.status(500).json({ error: "Failed to update members" });
+  }
+};
+
 // Delete a home by ID
 const deleteHomeById = async (req, res) => {
   try {
@@ -231,6 +253,7 @@ module.exports = {
   getAllHomes,
   getHomeById,
   updateHomeById,
+  updateMembersById,
   deleteHomeById,
   joinReqHome,
   acceptUserRequest,

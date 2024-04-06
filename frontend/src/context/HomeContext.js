@@ -8,6 +8,7 @@ export const homeReducer = (state, action) => {
     case "SET_HOME":
       return { home: action.payload };
     case "UPDATE_HOME":
+      console.log(action.payload);
       return { ...state, home: action.payload };
     case "ACCEPT_USER_REQUEST":
       return { ...state, home: action.payload };
