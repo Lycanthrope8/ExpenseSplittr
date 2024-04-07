@@ -44,7 +44,7 @@ const ProfileForm = ({ onPictureChange }) => {
         classNames: {
           toast: 'bg-green-300',
         },
-      });;
+      });
     }
   
     const formData = new FormData();

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { Toaster, toast } from 'sonner';
 import CircularProgress from '@mui/material/CircularProgress';
 
 export const HomeDetails = () => {
@@ -34,7 +35,12 @@ export const HomeDetails = () => {
 
     setRequestSending(false); 
     if (!response.ok) {
-      setError(json.error);
+      toast.error('You already requested to join this home!', {
+        classNames: {
+          toast: 'bg-red-300',
+        },
+      });
+      // setError(json.error);
     } else {
       setRequestSent(true); 
     }
@@ -125,6 +131,9 @@ export const HomeDetails = () => {
           {requestSending ? "Sending Request..." : requestSent ? "Cancel Request" : "Request to Join"}
         </button>
         {error && <div className="error">{error}</div>}
+        <div className="col-span-1">
+          <Toaster />
+        </div>
       </div>
     </div>
   );

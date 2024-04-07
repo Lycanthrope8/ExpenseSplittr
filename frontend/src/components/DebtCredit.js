@@ -2,6 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { DebtCreditContext } from "../context/DebtCreditContext"; // corrected import
 import { useProfileContext } from "../hooks/useProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import DebtDetails from "./DebtDetails";
+import CreditDetails from "./CreditDetails";
 
 const DebtCredit = () => {
   const { profile } = useProfileContext();
@@ -26,102 +28,123 @@ const DebtCredit = () => {
     };
     fetchDebtCredit();
   }, [profile.userId]);
+  console.log(debts);
+  // const handleSettle = (id) => async () => {
+  //   try {
+  //     const response = await fetch(`/api/debtorCreditor/underSettlement/${id}`, {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${user.token}`,
+  //       },
+  //       body: JSON.stringify({ UnderSettlement: true }),
+  //     });
+  //     if (response.ok)
+  //     updateDebtCredit();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  const handleSettle = (id) => async () => {
-    try {
-      const response = await fetch(`/api/debtorCreditor/underSettlement/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-        body: JSON.stringify({ UnderSettlement: true }),
-      });
-      if (response.ok)
-      updateDebtCredit();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const handleConfirmSettlement = (id) => async () => {
+  //   try {
+  //     const response = await fetch(`/api/debtorCreditor/settled/${id}`, {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${user.token}`,
+  //       },
+  //       body: JSON.stringify({ settled: true }),
+  //     });
+  //     if(response.ok)
+  //     updateDebtCredit();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  const handleConfirmSettlement = (id) => async () => {
-    try {
-      const response = await fetch(`/api/debtorCreditor/settled/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-        body: JSON.stringify({ settled: true }),
-      });
-      if(response.ok)
-      updateDebtCredit();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleDeclineSettlement = (id) => async () => {
-    try {
-      const response = await fetch(`/api/debtorCreditor/underSettlement/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-        body: JSON.stringify({ UnderSettlement: false }),
-      });
-      if (response.ok)
-      updateDebtCredit();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const handleDeclineSettlement = (id) => async () => {
+  //   try {
+  //     const response = await fetch(`/api/debtorCreditor/underSettlement/${id}`, {
+  //       method: "PATCH",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${user.token}`,
+  //       },
+  //       body: JSON.stringify({ UnderSettlement: false }),
+  //     });
+  //     if (response.ok)
+  //     updateDebtCredit();
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
-    <div className="text-text">
-      <h2>You owe money to</h2>
-      <ul>
-        {debts.map((debt) => (
-          !debt.settled && (
-            <li key={debt._id}>
-              <span>Name: {debt.creditor.name}</span>
-              <span>Title: {debt.title || "N/A"}</span>
-              <span>Tag: {debt.tag || "N/A"}</span>
-              <span>Amount: {debt.amount || "N/A"}</span>
-              {!debt.UnderSettlement ? (
-                <button onClick={handleSettle(debt._id)}>Settle</button>
-              ) : (
-                <button>Waiting for Confirmation</button>
-              )}
-            </li>
-          )
-        ))}
-      </ul>
-      <h2>You are owed money from</h2>
-      <ul>
-        {credits.map((credit) => (
-          !credit.settled && (
-            <li key={credit._id}>
-              <span>Name: {credit.debtor.name}</span>
-              <span>Title: {credit.title || "N/A"}</span>
-              <span>Tag: {credit.tag || "N/A"}</span>
-              <span>Amount: {credit.amount || "N/A"}</span>
-              {credit.UnderSettlement ? (
-                <div>
-                  <button onClick={handleConfirmSettlement(credit._id)}>Confirm Settlement</button>
-                  <button onClick={handleDeclineSettlement(credit._id)}>Decline Settlement</button>
-                </div>
-              ) : (
-                <div>
-                  <button>Waiting for Settlement</button>
-                </div>
-              )}
-            </li>
-          )
-        ))}
-      </ul>
+    <>
+    <div className="text-text p-4">
+      <h2 className="text-4xl text-center mb-2">Debts</h2>
+      
+      <div className="border-1 border-border rounded-xl p-4 mb-4">
+          <table className='text-text w-full'>
+              <colgroup>
+                <col className="w-[400px]"/>
+                <col className="w-[300px]" />
+                <col className="w-[200px]" />
+                <col className="w-[200px]" />
+                <col className="w-[400px]" />
+              </colgroup>
+              <thead className='text-zinc-300 [&_tr]:border-b'>
+                <tr className='text-left align-middle border-border text-md'>
+                  <th className="pb-4">Name</th>
+                  <th className="pb-4">Title</th>
+                  <th className="pb-4">Tag</th>
+                  <th className="pb-4">Amount</th>
+                  <th className="text-center pb-4">Action</th>
+                </tr>
+              </thead>
+              <tbody className='text-text [&_tr:last-child]:border-0'>
+              {debts ? debts.map((debt) => (
+                !debt.settled && (
+                <tr className="w-full border-b border-border" key={debt._id}>
+                  <DebtDetails debt={debt}/>
+                </tr>
+              ))) : <tr><h1>No debts Found</h1></tr>}
+            </tbody>
+          </table>
+        </div>
+      <h2 className="text-4xl text-center mb-2">Creditors</h2>
+      
+      <div className="border-1 border-border rounded-xl p-4">
+          <table className='text-text w-full'>
+              <colgroup>
+                <col className="w-[400px]"/>
+                <col className="w-[300px]" />
+                <col className="w-[200px]" />
+                <col className="w-[200px]" />
+                <col className="w-[400px]" />
+              </colgroup>
+              <thead className='text-zinc-300 [&_tr]:border-b'>
+                <tr className='text-left align-middle border-border text-md'>
+                  <th className="pb-4">Name</th>
+                  <th className="pb-4">Title</th>
+                  <th className="pb-4">Tag</th>
+                  <th className="pb-4">Amount</th>
+                  <th className="text-center pb-4">Action</th>
+                </tr>
+              </thead>
+              <tbody className='text-text [&_tr:last-child]:border-0'>
+              {credits.map((credit) => (
+                !credit.settled && (
+                <tr className="w-full border-b border-border" key={credit._id}>
+                  <CreditDetails credit={credit} />
+                </tr>
+              )))}
+            </tbody>
+          </table>
+        </div>
     </div>
+    </>
   );  
 };
 

@@ -21,36 +21,36 @@ export const HomeLess = () => {
     <div>
       <div className="p-8 flex items-center justify-evenly">
         <Link
-          className="px-28 py-16 text-2xl bg-accent text-zinc-800 rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
+          className="px-28 py-20 text-2xl font-bold bg-secondary text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
           to="/home/createHome"
         >
           Create Home
         </Link>
         <button
-          className="px-28 py-16 text-2xl bg-accent text-zinc-800 rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
+          className="px-28 py-20 text-2xl font-bold bg-secondary text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
           onClick={handleJoinClick}
         >
           Join Home
         </button>
         <Link
-          className="px-28 py-16 text-2xl bg-accent text-zinc-800 rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
+          className="px-28 py-20 text-2xl font-bold bg-secondary text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
           to="/home/exploreHomes/"
         >
           Explore Homes
         </Link>
       </div>
       {enteredCode && (
-        <div className="flex justify-center space-2">
+        <div className="flex justify-center">
           <input
             type="text"
             placeholder="Enter Code"
             onChange={(e) => setCodeText(e.target.value)}
-            className="mr-4 bg-tertiary-dark-bg text-zinc-200 rounded-xl p-2 focus:outline-none"
+            className="w-60 mr-2 border-2 border-border bg-transparent text-text text-lg rounded-md p-2 focus:outline-none"
             required
           />
           <button
             onClick={handleSeeDetails}
-            className="p-2 text-sm bg-accent text-zinc-800 rounded-lg hover:opacity-80"
+            className="px-2 py-1 text-sm bg-secondary text-text text-secondary rounded-lg hover:opacity-80"
           >
             See Details
           </button>
