@@ -11,24 +11,29 @@ const DebtCredit = () => {
   const { state, updateDebtCredit } = useContext(DebtCreditContext);
   const { debts, credits } = state.debtCredit; // Updated to access debts and credits directly
   
+  const updateHandler = async () => {
+    await updateDebtCredit();
+  };
+
+
   useEffect(() => {
     updateDebtCredit();
   }, [profile.userId]);
 
-  useEffect(() => {
-    const fetchDebtCredit = async () => {
-      try {
-        const response = await fetch(`/api/debtorCreditor/${profile.userId}`);
-        const json = await response.json();
-        // setDebts(json.debts);
-        // setCredits(json.credits);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchDebtCredit();
-  }, [profile.userId]);
-  console.log(debts);
+  // useEffect(() => {
+  //   const fetchDebtCredit = async () => {
+  //     try {
+  //       const response = await fetch(`/api/debtorCreditor/${profile.userId}`);
+  //       const json = await response.json();
+  //       // setDebts(json.debts);
+  //       // setCredits(json.credits);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   fetchDebtCredit();
+  // }, [profile.userId]);
+  // console.log(debts);
   // const handleSettle = (id) => async () => {
   //   try {
   //     const response = await fetch(`/api/debtorCreditor/underSettlement/${id}`, {
@@ -107,7 +112,7 @@ const DebtCredit = () => {
               {debts ? debts.map((debt) => (
                 !debt.settled && (
                 <tr className="w-full border-b border-border" key={debt._id}>
-                  <DebtDetails debt={debt}/>
+                  <DebtDetails debt={debt} updateHandler={updateHandler}/>
                 </tr>
               ))) : <tr><h1>No debts Found</h1></tr>}
             </tbody>
@@ -137,7 +142,7 @@ const DebtCredit = () => {
               {credits.map((credit) => (
                 !credit.settled && (
                 <tr className="w-full border-b border-border" key={credit._id}>
-                  <CreditDetails credit={credit} />
+                  <CreditDetails credit={credit} updateHandler={updateHandler} />
                 </tr>
               )))}
             </tbody>

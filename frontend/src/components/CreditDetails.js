@@ -2,28 +2,13 @@
 // import { useProfileContext } from "../hooks/useProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-const CreditDetails = ({credit}) => {
+const CreditDetails = ({credit, updateHandler}) => {
 
 
     const { user } = useAuthContext();
     
 
-    const handleSettle = (id) => {
-        return async () => {
-        //   console.log("id: ", id);
-        const response = await fetch(
-            `/api/debtorCreditor/underSettlement/${id}`,
-            {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${user.token}`,
-            },
-            body: JSON.stringify({ UnderSettlement: true }),
-            }
-        );
-        };
-    };
+    
 
     const handleConfirmSettlement = (id) => {
         return async () => {
@@ -39,6 +24,9 @@ const CreditDetails = ({credit}) => {
             body: JSON.stringify({ settled: true }),
             }
         );
+        if (response.ok) {
+            await updateHandler(); // Call updateHandler after successful action
+          }
         };
     };
 
@@ -56,6 +44,9 @@ const CreditDetails = ({credit}) => {
             body: JSON.stringify({ UnderSettlement: false }),
             }
         );
+        if (response.ok) {
+            await updateHandler(); // Call updateHandler after successful action
+          }
         };
     };
     
