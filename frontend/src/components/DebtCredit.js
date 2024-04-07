@@ -1,198 +1,117 @@
-import { useEffect } from "react";
-import { useDebtCreditContext } from "../hooks/useDebtCreditContext";
+import { useEffect, useState } from "react";
 import { useProfileContext } from "../hooks/useProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const DebtCredit = () => {
   const { profile } = useProfileContext();
   const { user } = useAuthContext();
-  const { state, dispatch } = useDebtCreditContext();
+  const [debts, setDebts] = useState([]);
+  const [credits, setCredits] = useState([]);
 
   useEffect(() => {
     const fetchDebtCredit = async () => {
       try {
         const response = await fetch(`/api/debtorCreditor/${profile.userId}`);
         const json = await response.json();
-
-        dispatch({ type: 'SET_DEBTS', payload: json.debts });
-        dispatch({ type: 'SET_CREDITS', payload: json.credits });
-
-        // Format debtors
-        const formattedDebtors = json.credits.reduce((debtors, credit) => {
-          const debtor = credit.debtor;
-          if (!debtors.some((item) => item.userId === debtor.userId)) {
-            debtors.push(debtor);
-          }
-          return debtors;
-        }, []);
-        dispatch({ type: 'SET_FORMATTED_DEBTORS', payload: formattedDebtors });
-
-        // Format creditors
-        const formattedCreditors = json.debts.reduce((creditors, debt) => {
-          const creditor = debt.creditor;
-          if (!creditors.some((item) => item.userId === creditor.userId)) {
-            creditors.push(creditor);
-          }
-          return creditors;
-        }, []);
-        dispatch({ type: 'SET_FORMATTED_CREDITORS', payload: formattedCreditors });
+        setDebts(json.debts);
+        setCredits(json.credits);
       } catch (error) {
         console.error(error);
       }
     };
     fetchDebtCredit();
-  }, [profile.userId, dispatch]);
+  }, [profile.userId]);
 
-  const handleSettle = (id) => {
-    return async () => {
-      const response = await fetch(
-        `/api/debtorCreditor/underSettlement/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-          body: JSON.stringify({ UnderSettlement: true }),
-        }
-      );
-    };
+  const handleSettle = (id) => async () => {
+    try {
+      const response = await fetch(`/api/debtorCreditor/underSettlement/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({ UnderSettlement: true }),
+      });
+      // Handle response
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleConfirmSettlement = (id) => {
-    return async () => {
-      const response = await fetch(
-        `/api/debtorCreditor/settled/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-          body: JSON.stringify({ settled: true }),
-        }
-      );
-    };
+  const handleConfirmSettlement = (id) => async () => {
+    try {
+      const response = await fetch(`/api/debtorCreditor/settled/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({ settled: true }),
+      });
+      // Handle response
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleDeclineSettlement = (id) => {
-    return async () => {
-      const response = await fetch(
-        `/api/debtorCreditor/underSettlement/${id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-          body: JSON.stringify({ UnderSettlement: false }),
-        }
-      );
-    };
+  const handleDeclineSettlement = (id) => async () => {
+    try {
+      const response = await fetch(`/api/debtorCreditor/underSettlement/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({ UnderSettlement: false }),
+      });
+      // Handle response
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <div className="text-text">
       <h2>You owe money to</h2>
       <ul>
-        {state.formattedCreditors.map(
-          (creditor) =>
-            !state.debts.find(
-                (debt) => debt.creditor.userId === creditor.userId
-              )?.settled && (
-              <li key={creditor.userId}>
-                <span>Name: {creditor.name}</span>
-                <span>
-                  Title:{" "}
-                  {state.debts.find(
-                    (debt) => debt.creditor.userId === creditor.userId
-                  )?.title || "N/A"}
-                </span>
-                <span>
-                  Tag:{" "}
-                  {state.debts.find(
-                    (debt) => debt.creditor.userId === creditor.userId
-                  )?.tag || "N/A"}
-                </span>
-                <span>
-                  Amount:{" "}
-                  {state.debts.find(
-                    (debt) => debt.creditor.userId === creditor.userId
-                  )?.amount || "N/A"}
-                </span>
-                {!state.debts.find((debt) => debt.creditor.userId === creditor.userId)
-                  .UnderSettlement ? (
-                  <button
-                    onClick={handleSettle(
-                      state.debts.find(
-                        (debt) => debt.creditor.userId === creditor.userId
-                      )?._id
-                    )}
-                  >
-                    Settle
-                  </button>
-                ) : (
-                  <button>Waiting for Confirmation</button>
-                )}
-              </li>
-            )
-        )}
+        {debts.map((debt) => (
+          !debt.settled && (
+            <li key={debt._id}>
+              <span>Name: {debt.creditor.name}</span>
+              <span>Title: {debt.title || "N/A"}</span>
+              <span>Tag: {debt.tag || "N/A"}</span>
+              <span>Amount: {debt.amount || "N/A"}</span>
+              {!debt.UnderSettlement ? (
+                <button onClick={handleSettle(debt._id)}>Settle</button>
+              ) : (
+                <button>Waiting for Confirmation</button>
+              )}
+            </li>
+          )
+        ))}
       </ul>
       <h2>You are owed money from</h2>
       <ul>
-        {state.formattedDebtors.map((debtor) => (
-          !state.credits.find(
-              (credit) => credit.debtor.userId === debtor.userId
-          )?.settled && (
-              <li key={debtor.userId}>
-                  <span>Name: {debtor.name}</span>
-                  <span>
-                      Title:{" "}
-                      {state.credits.find(
-                          (credit) => credit.debtor.userId === debtor.userId
-                      )?.title || "N/A"}
-                  </span>
-                  <span>
-                      Tag:{" "}
-                      {state.credits.find(
-                          (credit) => credit.debtor.userId === debtor.userId
-                      )?.tag || "N/A"}
-                  </span>
-                  <span>
-                      Amount:{" "}
-                      {state.credits.find(
-                          (credit) => credit.debtor.userId === debtor.userId
-                      )?.amount || "N/A"}
-                  </span>
-                  {state.credits.find((credit) => credit.debtor.userId === debtor.userId)?.UnderSettlement ? (
-                      <div>
-                          <button
-                              onClick={handleConfirmSettlement(
-                                  state.credits.find(
-                                      (credit) => credit.debtor.userId === debtor.userId
-                                  )?._id
-                              )}
-                          >
-                              Confirm Settlement
-                          </button>
-                          <button
-                              onClick={handleDeclineSettlement(
-                                  state.credits.find(
-                                      (credit) => credit.debtor.userId === debtor.userId
-                                  )?._id
-                              )}
-                          >
-                              Decline Settlement
-                          </button>
-                      </div>
-                  ) : (
-                      <div>
-                          <button>Waiting for Settlement</button>
-                      </div>
-                  )}
-              </li>
+        {credits.map((credit) => (
+          !credit.settled && (
+            <li key={credit._id}>
+              <span>Name: {credit.debtor.name}</span>
+              <span>Title: {credit.title || "N/A"}</span>
+              <span>Tag: {credit.tag || "N/A"}</span>
+              <span>Amount: {credit.amount || "N/A"}</span>
+              {credit.UnderSettlement ? (
+                <div>
+                  <button onClick={handleConfirmSettlement(credit._id)}>Confirm Settlement</button>
+                  <button onClick={handleDeclineSettlement(credit._id)}>Decline Settlement</button>
+                </div>
+              ) : (
+                <div>
+                  <button>Waiting for Settlement</button>
+                </div>
+              )}
+            </li>
           )
-      ))}
+        ))}
       </ul>
     </div>
   );

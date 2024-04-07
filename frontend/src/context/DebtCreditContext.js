@@ -1,5 +1,4 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-// import { useProfileContext } from '../hooks/useProfileContext';
 
 export const DebtCreditContext = createContext();
 
@@ -9,27 +8,26 @@ export const debtCreditReducer = (state, action) => {
       return { ...state, debts: action.payload };
     case 'SET_CREDITS':
       return { ...state, credits: action.payload };
-    // case 'SET_TOTAL_DEBT':
-    //   return { ...state, totalDebt: action.payload };
-    // case 'SET_TOTAL_CREDIT':
-    //   return { ...state, totalCredit: action.payload };
     case 'SET_FORMATTED_DEBTORS':
       return { ...state, formattedDebtors: action.payload };
     case 'SET_FORMATTED_CREDITORS':
       return { ...state, formattedCreditors: action.payload };
+    case 'SETTLE_DEBT':
+      return { ...state, debts: action.payload };
+    case 'CONFIRM_SETTLEMENT':
+      return { ...state, credits: action.payload };
+    case 'DECLINE_SETTLEMENT':
+      return { ...state, credits: action.payload };
     default:
       return state;
   }
 };
 
 export const DebtCreditProvider = ({ children }) => {
-    const user = JSON.parse(localStorage.getItem('user'))
-    // console.log(user);
+  const user = JSON.parse(localStorage.getItem('user'));
   const [state, dispatch] = useReducer(debtCreditReducer, {
     debts: [],
     credits: [],
-    // totalDebt: 0,
-    // totalCredit: 0,
     formattedDebtors: [],
     formattedCreditors: [],
   });
@@ -42,8 +40,6 @@ export const DebtCreditProvider = ({ children }) => {
 
         dispatch({ type: 'SET_DEBTS', payload: json.debts });
         dispatch({ type: 'SET_CREDITS', payload: json.credits });
-        // dispatch({ type: 'SET_TOTAL_DEBT', payload: json.totalDebt });
-        // dispatch({ type: 'SET_TOTAL_CREDIT', payload: json.totalCredit });
 
         const formattedDebtors = json.credits.reduce((debtors, credit) => {
           const debtor = credit.debtor;
@@ -75,4 +71,3 @@ export const DebtCreditProvider = ({ children }) => {
     </DebtCreditContext.Provider>
   );
 };
-
