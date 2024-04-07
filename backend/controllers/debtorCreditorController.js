@@ -32,7 +32,7 @@ const updateSettledStatus = async (req, res) => {
         }
         debtorCreditor.settled = settled;
         await debtorCreditor.save();
-        return res.status(200).json({ message: 'Settled status updated successfully', debtorCreditor });
+        res.status(200).json({ debts, credits });
     } catch (error) {
         console.error('Error updating settled status:', error);
         return res.status(500).json({ message: 'Internal server error' });
@@ -51,7 +51,7 @@ const updateUnderSettlementStatus = async (req, res) => {
         debtorCreditor.UnderSettlement = UnderSettlement;
         await debtorCreditor.save();
         // console.log('debtorCreditor:', debtorCreditor);
-        return res.status(200).json({ message: 'UnderSettlement status updated successfully', debtorCreditor });
+        res.status(200).json({ debts, credits });
     } catch (error) {
         console.error('Error updating underSettlement status:', error);
         return res.status(500).json({ message: 'Internal server error' });

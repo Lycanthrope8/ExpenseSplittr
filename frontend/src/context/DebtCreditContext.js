@@ -4,20 +4,10 @@ export const DebtCreditContext = createContext();
 
 export const debtCreditReducer = (state, action) => {
   switch (action.type) {
-    case 'SET_DEBTS':
+    case 'SET_DEBTCREDIT':
       return { ...state, debts: action.payload };
-    case 'SET_CREDITS':
-      return { ...state, credits: action.payload };
-    case 'SET_FORMATTED_DEBTORS':
-      return { ...state, formattedDebtors: action.payload };
-    case 'SET_FORMATTED_CREDITORS':
-      return { ...state, formattedCreditors: action.payload };
-    case 'SETTLE_DEBT':
+    case 'UPDATE_DEBTCREDIT':
       return { ...state, debts: action.payload };
-    case 'CONFIRM_SETTLEMENT':
-      return { ...state, credits: action.payload };
-    case 'DECLINE_SETTLEMENT':
-      return { ...state, credits: action.payload };
     default:
       return state;
   }
@@ -28,8 +18,6 @@ export const DebtCreditProvider = ({ children }) => {
   const [state, dispatch] = useReducer(debtCreditReducer, {
     debts: [],
     credits: [],
-    formattedDebtors: [],
-    formattedCreditors: [],
   });
 
   useEffect(() => {
@@ -37,27 +25,7 @@ export const DebtCreditProvider = ({ children }) => {
       try {
         const response = await fetch(`/api/debtorCreditor/${user.userId}`);
         const json = await response.json();
-
-        dispatch({ type: 'SET_DEBTS', payload: json.debts });
-        dispatch({ type: 'SET_CREDITS', payload: json.credits });
-
-        const formattedDebtors = json.credits.reduce((debtors, credit) => {
-          const debtor = credit.debtor;
-          if (!debtors.some((item) => item.userId === debtor.userId)) {
-            debtors.push(debtor);
-          }
-          return debtors;
-        }, []);
-        dispatch({ type: 'SET_FORMATTED_DEBTORS', payload: formattedDebtors });
-
-        const formattedCreditors = json.debts.reduce((creditors, debt) => {
-          const creditor = debt.creditor;
-          if (!creditors.some((item) => item.userId === creditor.userId)) {
-            creditors.push(creditor);
-          }
-          return creditors;
-        }, []);
-        dispatch({ type: 'SET_FORMATTED_CREDITORS', payload: formattedCreditors });
+        dispatch({ type: 'SET_DEBTCREDIT', payload: json.debts });
       } catch (error) {
         console.error('Error fetching debt credit: ', error);
       }
@@ -65,8 +33,18 @@ export const DebtCreditProvider = ({ children }) => {
     fetchDebtCredit();
   }, [user.userId]);
 
+  const updateDebtCredit = async () => {
+    try {
+      const response = await fetch(`/api/debtorCreditor/${user.userId}`);
+      const json = await response.json();
+      dispatch({ type: 'UPDATE_DEBTCREDIT', payload: json.debts });
+    } catch (error) {
+      console.error('Error updating debt credit: ', error);
+    }
+  };
+
   return (
-    <DebtCreditContext.Provider value={{ state, dispatch }}>
+    <DebtCreditContext.Provider value={{ state, updateDebtCredit }}>
       {children}
     </DebtCreditContext.Provider>
   );

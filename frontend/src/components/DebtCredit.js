@@ -1,12 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { DebtCreditContext } from "../context/DebtCreditContext"; // corrected import
 import { useProfileContext } from "../hooks/useProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 const DebtCredit = () => {
   const { profile } = useProfileContext();
   const { user } = useAuthContext();
+  const { state, updateDebtCredit } = useContext(DebtCreditContext); // corrected usage
   const [debts, setDebts] = useState([]);
   const [credits, setCredits] = useState([]);
+  
+  useEffect(() => {
+    setDebts(state.debts);
+    setCredits(state.credits);
+  }, [state]);
 
   useEffect(() => {
     const fetchDebtCredit = async () => {
@@ -33,6 +40,7 @@ const DebtCredit = () => {
         body: JSON.stringify({ UnderSettlement: true }),
       });
       // Handle response
+      updateDebtCredit();
     } catch (error) {
       console.error(error);
     }
@@ -49,6 +57,7 @@ const DebtCredit = () => {
         body: JSON.stringify({ settled: true }),
       });
       // Handle response
+      updateDebtCredit();
     } catch (error) {
       console.error(error);
     }
@@ -65,6 +74,7 @@ const DebtCredit = () => {
         body: JSON.stringify({ UnderSettlement: false }),
       });
       // Handle response
+      updateDebtCredit();
     } catch (error) {
       console.error(error);
     }
