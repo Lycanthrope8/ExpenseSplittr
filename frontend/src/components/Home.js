@@ -8,6 +8,7 @@ import HomeExpenseForm from "./HomeExpenseForm";
 import HomeExpenseDetails from "./HomeExpenseDetails";
 import SortButton from "./SortButton";
 import { HomeTasks } from "./HomeTasks";
+import DebtCredit from "./DebtCredit";
 
 export const Home = () => {
   const navigate = useNavigate();
