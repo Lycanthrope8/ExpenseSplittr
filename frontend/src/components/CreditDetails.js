@@ -2,10 +2,11 @@
 // import { useProfileContext } from "../hooks/useProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-const DebtDetails = ({debtor, debt, credits}) => {
+const CreditDetails = ({credit}) => {
 
 
     const { user } = useAuthContext();
+    
 
     const handleSettle = (id) => {
         return async () => {
@@ -60,17 +61,22 @@ const DebtDetails = ({debtor, debt, credits}) => {
     
     return (
         <>
-        <td className='align-middle py-4'>{debt.creditor.name}</td>
-        <td className='text-left align-middle py-4'>{debt.title || "N/A"}</td>
-        <td className='text-left align-middle py-4'>{debt.tag || "N/A"}</td>
-        <td className='text-left align-middle py-4'>{debt.amount || "N/A"}</td>
-        <td className='text-center mx-auto py-4'>{!debt.UnderSettlement ? (
-                <button className="px-4 py-1 rounded-md bg-secondary" onClick={handleSettle(debt._id)}>Settle</button>
+            <td className='align-middle py-4'>{credit.debtor.name}</td>
+            <td className='text-left align-middle py-4'>{credit.title || "N/A"}</td>
+            <td className='text-left align-middle py-4'>{credit.tag || "N/A"}</td>
+            <td className='text-left align-middle py-4'>{credit.amount || "N/A"}</td>
+            <td className='flex items-center justify-center py-4'>{credit.UnderSettlement ? (
+                <div className="space-x-2">
+                  <button className="px-4 py-1 rounded-md border-1 border-light-green-300/50 hover:bg-light-green-300 hover:text-gray-800 transition-colors" onClick={handleConfirmSettlement(credit._id)}>Confirm Settlement</button>
+                  <button className="px-4 py-1 rounded-md border-1 border-red-300/50 hover:bg-red-300 hover:text-gray-800 transition-colors" onClick={handleDeclineSettlement(credit._id)}>Decline Settlement</button>
+                </div>
               ) : (
-                <h1 className="px-4 py-1 rounded-md border-1 border-amber-300/50">Waiting for Confirmation</h1>
+                <div>
+                  <h1 className="px-4 py-1 rounded-md border-1 border-amber-300/50">Waiting for Settlement</h1>
+                </div>
               )}</td>
         </>
-    )
+    );
 }
 
-export default DebtDetails
+export default CreditDetails

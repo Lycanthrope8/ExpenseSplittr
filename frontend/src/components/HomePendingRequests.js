@@ -58,14 +58,16 @@ const HomePendingRequests = ({ pendingMembers }) => {
   };
 
   return (
-    <div>
+    <div className="p-4">
       <h2 className="text-text text-4xl mb-4">Pending Requests</h2>
-      <ul>
+      <ul className="border-1 border-border rounded-lg p-4 mb-2">
         {pendingMembers && pendingMembers.map((member, index) => (
-          <li className="text-text text-2xl" key={index}>
-            {member} {/* Assuming member has a userId property */}
-            <button onClick={() => handleAccept(member, homeId)}>Accept</button>
-            <button onClick={() => handleReject(member, homeId)}>Reject</button>
+          <li className="text-text text-2xl flex justify-between" key={index}>
+            <h1 className="flex items-center">{member}</h1> {/* Assuming member has a userId property */}
+            <div className="flex space-x-4">
+              <button className="px-4 py-2 rounded-md hover:bg-secondary" onClick={() => handleAccept(member, homeId)}>Accept</button>
+              <button className="px-4 py-2 rounded-md hover:bg-secondary" onClick={() => handleReject(member, homeId)}>Reject</button>
+            </div>
           </li>
         ))}
       </ul>
