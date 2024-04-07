@@ -39,7 +39,7 @@ const DebtCredit = () => {
         },
         body: JSON.stringify({ UnderSettlement: true }),
       });
-      // Handle response
+      if (response.ok)
       updateDebtCredit();
     } catch (error) {
       console.error(error);
@@ -56,7 +56,7 @@ const DebtCredit = () => {
         },
         body: JSON.stringify({ settled: true }),
       });
-      // Handle response
+      if(response.ok)
       updateDebtCredit();
     } catch (error) {
       console.error(error);
@@ -73,7 +73,7 @@ const DebtCredit = () => {
         },
         body: JSON.stringify({ UnderSettlement: false }),
       });
-      // Handle response
+      if (response.ok)
       updateDebtCredit();
     } catch (error) {
       console.error(error);

@@ -11,6 +11,7 @@ import { PersonalTaskProvider } from "./context/PersonalTaskContext";
 import { HomeExpenseProvider } from "./context/HomeExpenseContext";
 import { HomeContextProvider } from "./context/HomeContext";
 import { HomeTaskProvider } from "./context/HomeTaskContext";
+import { DebtCreditProvider } from "./context/DebtCreditContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,17 +19,19 @@ root.render(
     <AuthContextProvider>
       {/* <ThemeProvider> */}
       <ProfileContextProvider>
-          <HomeContextProvider>
-            <PersonalExpenseProvider>
-              <PersonalTaskProvider>
-                <HomeTaskProvider>
-                  <HomeExpenseProvider>
+        <HomeContextProvider>
+          <PersonalExpenseProvider>
+            <PersonalTaskProvider>
+              <HomeTaskProvider>
+                <HomeExpenseProvider>
+                  <DebtCreditProvider>
                     <App />
-                  </HomeExpenseProvider>
-                </HomeTaskProvider>
-              </PersonalTaskProvider>
-            </PersonalExpenseProvider>
-          </HomeContextProvider>
+                  </DebtCreditProvider>
+                </HomeExpenseProvider>
+              </HomeTaskProvider>
+            </PersonalTaskProvider>
+          </PersonalExpenseProvider>
+        </HomeContextProvider>
       </ProfileContextProvider>
       {/* </ThemeProvider> */}
     </AuthContextProvider>
