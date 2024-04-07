@@ -6,22 +6,20 @@ import { useAuthContext } from "../hooks/useAuthContext";
 const DebtCredit = () => {
   const { profile } = useProfileContext();
   const { user } = useAuthContext();
-  const { state, updateDebtCredit } = useContext(DebtCreditContext); // corrected usage
-  const [debts, setDebts] = useState([]);
-  const [credits, setCredits] = useState([]);
+  const { state, updateDebtCredit } = useContext(DebtCreditContext);
+  const { debts, credits } = state.debtCredit; // Updated to access debts and credits directly
   
   useEffect(() => {
-    setDebts(state.debts);
-    setCredits(state.credits);
-  }, [state]);
+    updateDebtCredit();
+  }, [profile.userId]);
 
   useEffect(() => {
     const fetchDebtCredit = async () => {
       try {
         const response = await fetch(`/api/debtorCreditor/${profile.userId}`);
         const json = await response.json();
-        setDebts(json.debts);
-        setCredits(json.credits);
+        // setDebts(json.debts);
+        // setCredits(json.credits);
       } catch (error) {
         console.error(error);
       }
@@ -124,7 +122,7 @@ const DebtCredit = () => {
         ))}
       </ul>
     </div>
-  );
+  );  
 };
 
 export default DebtCredit;
