@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Checkbox } from "@mui/material";
-import yellow from "@mui/material/colors/yellow";
+import grey from "@mui/material/colors/grey";
 
 const CreateHomeForm = () => {
   const [error, setError] = useState(null);
@@ -165,9 +165,9 @@ const CreateHomeForm = () => {
               type="checkbox"
               name="utilitiesIncluded"
               checked={utilitiesIncluded}
-              sx={{color: yellow[300],
+              sx={{color: grey[300],
                 '&.Mui-checked': {
-                color: yellow[300],}}}
+                color: grey[300],}}}
               size="large"
               onChange={(e) => setUtilitiesIncluded(e.target.checked)}
             />
@@ -181,9 +181,9 @@ const CreateHomeForm = () => {
               type="checkbox"
               name="furnished"
               checked={furnished}
-              sx={{color: yellow[300],
+              sx={{color: grey[300],
                 '&.Mui-checked': {
-                color: yellow[300],}}}
+                color: grey[300],}}}
               size="large"
               onChange={(e) => setFurnished(e.target.checked)}
             />
@@ -197,9 +197,9 @@ const CreateHomeForm = () => {
               type="checkbox"
               name="petsAllowed"
               checked={petsAllowed}
-              sx={{color: yellow[300],
+              sx={{color: grey[300],
                 '&.Mui-checked': {
-                color: yellow[300],}}}
+                color: grey[300],}}}
               size="large"
               onChange={(e) => setPetsAllowed(e.target.checked)}
             />
@@ -213,9 +213,9 @@ const CreateHomeForm = () => {
               type="checkbox"
               name="smokingAllowed"
               checked={smokingAllowed}
-              sx={{color: yellow[300],
+              sx={{color: grey[500],
                 '&.Mui-checked': {
-                color: yellow[300],}}}
+                color: grey[500],}}}
               size="large"
               onChange={(e) => setSmokingAllowed(e.target.checked)}
             />

@@ -10,11 +10,8 @@ const ExploreHomeCard = ({ home }) => {
   };
 
   return (
-    <div
-      className="col-span-1 p-8 rounded-3xl bg-[#b9c1b6]"
-      onClick={handleClick}
-    >
-      <h2>{home.name}</h2>
+    <div className="w-max p-8 m-4 space-y-4 rounded-lg bg-secondary text-text"onClick={handleClick}>
+      <h2 className="text-4xl border-b-1 ">{home.name}</h2>
       <p>Location: {home.location}</p>
       <p>Accommodation Type: {home.accommodationType}</p>
       <p>
