@@ -122,7 +122,7 @@ const DebtCredit = () => {
         ))}
       </ul>
     </div>
-  );
+  );  
 };
 
 export default DebtCredit;

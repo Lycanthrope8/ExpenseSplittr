@@ -35,7 +35,7 @@ export const DebtCreditProvider = ({ children }) => {
       }
     };
     fetchDebtCredit();
-  }, [user.userId]);
+  }, []);
 
   const updateDebtCredit = async () => {
     try {
