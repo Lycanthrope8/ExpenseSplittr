@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useHomeContext } from "../hooks/useHomeContext";
 
 const HomePendingRequests = ({ pendingMembers }) => {
+  const navigate = useNavigate();
   const homeId = useParams().id;
   const { user } = useAuthContext();
   const { dispatch } = useHomeContext();
@@ -32,6 +34,11 @@ const HomePendingRequests = ({ pendingMembers }) => {
       })
     );
     setNames(namesObject);
+  };
+  const handleNameClick = (userId) => {
+    // Redirect to the user profile page when a name is clicked
+    // history.push(`/profile/${userId}`);
+    navigate(`requests/profile/${userId}`);
   };
 
   const handleAccept = async (userId, homeId) => {
@@ -90,7 +97,9 @@ const HomePendingRequests = ({ pendingMembers }) => {
         {pendingMembers &&
           pendingMembers.map((member, index) => (
             <li className="text-text text-2xl flex justify-between" key={index}>
-              <h1 className="flex items-center">{names[member] || member}</h1> {/* Display name if available, otherwise display memberId */}
+              <h1 className="flex items-center" onClick={() => handleNameClick(member)}>
+                {names[member] || member}
+              </h1>
               <div className="flex space-x-4">
                 <button className="px-4 py-2 rounded-md hover:bg-secondary" onClick={() => handleAccept(member, homeId)}>Accept</button>
                 <button className="px-4 py-2 rounded-md hover:bg-secondary" onClick={() => handleReject(member, homeId)}>Reject</button>

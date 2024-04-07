@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from "../context/ProfileContext";
-import { HomeContext } from "../context/HomeContext";
+// import { HomeContext } from "../context/HomeContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Toaster, toast } from 'sonner';
@@ -14,7 +14,7 @@ const ProfileForm = ({ onPictureChange }) => {
   const [loading, setLoading] = useState(true);
   const { user } = useAuthContext();
   const { profile, dispatch } = useContext(ProfileContext);
-  const { home, homeDispatch } = useContext(HomeContext);
+  // const { home, homeDispatch } = useContext(HomeContext);
 
   useEffect(() => {
     if (profile) {
@@ -74,17 +74,17 @@ const ProfileForm = ({ onPictureChange }) => {
         },
       });
 
-      const homeResponse = await fetch(`/home/updateHome/currentMembers/${user.userId}`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          userId: user.userId,
-          name: name
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      // const homeResponse = await fetch(`/home/updateHome/currentMembers/${user.userId}`, {
+      //   method: "PATCH",
+      //   body: JSON.stringify({
+      //     userId: user.userId,
+      //     name: name
+      //   }),
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `Bearer ${user.token}`,
+      //   },
+      // });
 
       const json = await response.json();
       if (!response.ok) {
