@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useHomeContext } from "../hooks/useHomeContext";
@@ -7,6 +7,32 @@ const HomePendingRequests = ({ pendingMembers }) => {
   const homeId = useParams().id;
   const { user } = useAuthContext();
   const { dispatch } = useHomeContext();
+  const [names, setNames] = useState({});
+
+  useEffect(() => {
+    fetchNames();
+  }, [pendingMembers]); // Fetch names whenever pendingMembers change
+
+  const fetchNames = async () => {
+    const namesObject = {};
+    await Promise.all(
+      pendingMembers.map(async (member) => {
+        try {
+          const response = await fetch(`/profile/${member}`, {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          });
+          const json = await response.json();
+          namesObject[member] = json.name;
+        } catch (error) {
+          console.error(error);
+        }
+      })
+    );
+    setNames(namesObject);
+  };
 
   const handleAccept = async (userId, homeId) => {
     try {
@@ -61,15 +87,16 @@ const HomePendingRequests = ({ pendingMembers }) => {
     <div className="p-4">
       <h2 className="text-text text-4xl mb-4">Pending Requests</h2>
       <ul className="border-1 border-border rounded-lg p-4 mb-2">
-        {pendingMembers && pendingMembers.map((member, index) => (
-          <li className="text-text text-2xl flex justify-between" key={index}>
-            <h1 className="flex items-center">{member}</h1> {/* Assuming member has a userId property */}
-            <div className="flex space-x-4">
-              <button className="px-4 py-2 rounded-md hover:bg-secondary" onClick={() => handleAccept(member, homeId)}>Accept</button>
-              <button className="px-4 py-2 rounded-md hover:bg-secondary" onClick={() => handleReject(member, homeId)}>Reject</button>
-            </div>
-          </li>
-        ))}
+        {pendingMembers &&
+          pendingMembers.map((member, index) => (
+            <li className="text-text text-2xl flex justify-between" key={index}>
+              <h1 className="flex items-center">{names[member] || member}</h1> {/* Display name if available, otherwise display memberId */}
+              <div className="flex space-x-4">
+                <button className="px-4 py-2 rounded-md hover:bg-secondary" onClick={() => handleAccept(member, homeId)}>Accept</button>
+                <button className="px-4 py-2 rounded-md hover:bg-secondary" onClick={() => handleReject(member, homeId)}>Reject</button>
+              </div>
+            </li>
+          ))}
       </ul>
     </div>
   );
