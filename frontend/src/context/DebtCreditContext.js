@@ -25,6 +25,7 @@ export const DebtCreditProvider = ({ children }) => {
       try {
         const response = await fetch(`/api/debtorCreditor/${user.userId}`);
         const json = await response.json();
+        console.log('json:', json);
         dispatch({ type: 'SET_DEBTCREDIT', payload: json.debts });
       } catch (error) {
         console.error('Error fetching debt credit: ', error);
