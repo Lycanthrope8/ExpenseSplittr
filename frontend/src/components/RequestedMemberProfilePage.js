@@ -79,33 +79,38 @@ export const RequestedMemberProfilePage = () => {
   if (!profile) {
     return <div>No profile found for this user.</div>;
   }
-
+  
   return (
-    <div className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1">
-      <div className="flex items-center justify-between col-span-1">
-        {profilePictureUrl && <img src={profilePictureUrl} alt="Avatar" className="w-24 h-24 rounded-full" />}
+    <div className="grid text-text bg-secondary mx-auto rounded-lg p-4 lg:grid-cols-2 m-4 gap-4 lg:w-1/2 sm:w-3/4 sm:grid-cols-1">
+      <div className="flex items-center col-span-1">
+        {profilePictureUrl && <img src={profilePictureUrl} alt="Avatar" className="size-72 rounded-full" />}
       </div>
-      <label className="flex text-white text-2xl ml-0 items-center justify-between">Name: {profile.name}</label>
-      <label className="flex text-white text-2xl ml-0 items-center justify-between">Email: {profile.email}</label>
-      <div className="flex items-center justify-between col-span-1">
-        <label className="text-white text-2xl mr-4">Age:</label>
-        <span className="text-white">{profile.age}</span>
+      <div className="col-span-1 text-lg">
+        <div className="flex items-center justify-between mb-4">
+          <label className="">Name:</label>
+          <div className="">{profile.name}</div>
+        </div>
+        {/* <label className="flex text-2xl items-center">Email: {userId.email}</label> */}
+        <div className="flex items-center justify-between mb-4">
+          <label className="">Age:</label>
+          <div className="">{profile.age}</div>
+        </div>
+        <div className="flex items-center justify-between mb-4">
+          <label className="">Gender:</label>
+          <div className="">{profile.gender}</div>
+        </div>
+        <div className="flex items-center justify-between mb-4">
+          <label className="">Phone:</label>
+          <div className="">{profile.phone}</div>
+        </div>
+        <div className="flex items-center justify-between mb-4">
+          <label className="">Address:</label>
+          <div className="">{profile.address}</div>
+        </div>
+      <div className="flex justify-end mt-12 gap-4">
+        <button className="px-2 py-1 rounded-md border-1 border-transparent bg-green-400 hover:border-green-400 hover:bg-transparent transition-colors" onClick={handleAccept}>Accept</button>
+        <button className="px-2 py-1 rounded-md border-1 border-transparent bg-red-400 hover:border-red-400 hover:bg-transparent transition-colors" onClick={handleReject}>Reject</button>
       </div>
-      <div className="flex items-center justify-between col-span-1">
-        <label className="text-white text-2xl mr-4">Gender:</label>
-        <span className="text-white">{profile.gender}</span>
-      </div>
-      <div className="flex items-center justify-between col-span-1">
-        <label className="text-white text-2xl mr-4">Phone:</label>
-        <span className="text-white">{profile.phone}</span>
-      </div>
-      <div className="flex items-center justify-between col-span-1">
-        <label className="text-white text-2xl mr-4">Address:</label>
-        <span className="text-white">{profile.address}</span>
-      </div>
-      <div className="flex justify-between col-span-2 mt-4">
-        <button className="px-4 py-2 rounded-md bg-green-500 text-white" onClick={handleAccept}>Accept</button>
-        <button className="px-4 py-2 rounded-md bg-red-500 text-white" onClick={handleReject}>Reject</button>
       </div>
     </div>
   );

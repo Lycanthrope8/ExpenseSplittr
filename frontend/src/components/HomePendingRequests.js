@@ -92,14 +92,16 @@ const HomePendingRequests = ({ pendingMembers }) => {
 
   return (
     <div className="p-4">
-      <h2 className="text-text text-4xl mb-4">Pending Requests</h2>
+      <h2 className="text-text text-4xl mb-4 text-center">Pending Requests</h2>
       <ul className="border-1 border-border rounded-lg p-4 mb-2">
         {pendingMembers &&
           pendingMembers.map((member, index) => (
             <li className="text-text text-2xl flex justify-between" key={index}>
-              <h1 className="flex items-center" onClick={() => handleNameClick(member)}>
+              <h1 className="flex items-center gap-16" >
                 {names[member] || member}
+                <span onClick={() => handleNameClick(member)} className="cursor-pointer border-2 border-border rounded-md px-2 py-1 text-xs">View Profile</span>
               </h1>
+
               <div className="flex space-x-4">
                 <button className="px-4 py-2 rounded-md hover:bg-secondary" onClick={() => handleAccept(member, homeId)}>Accept</button>
                 <button className="px-4 py-2 rounded-md hover:bg-secondary" onClick={() => handleReject(member, homeId)}>Reject</button>
