@@ -34,7 +34,7 @@ export const Admin = () => {
             <div className='flex flex-col'>
               <h4 className='text-3xl border-b-1 mb-2'>{user.email}</h4>
             </div>
-            <span className="material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" >delete</span>
+            {/* <span className="material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" >delete</span> */}
           </div>
         ))}
       </div>
