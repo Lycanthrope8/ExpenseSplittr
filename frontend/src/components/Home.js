@@ -98,11 +98,15 @@ export const Home = () => {
 
   return (
     <>
-      <div onClick={handleHomeDetails}>
-        <h1 className="text-text text-4xl text-center mb-4 hover:text-zinc-300 cursor-pointer">See Home details</h1>
-      </div>
-      <div onClick={handleDebtorCreditorDetails}>
-        <h1 className="text-text text-4xl text-center mb-4 hover:text-zinc-300 cursor-pointer">See DebtorCreditor details</h1>
+      <div className="grid grid-cols-2 border-b-2 border-border mb-4">
+        <div className="flex items-center justify-center p-4 hover:bg-secondary/80 rounded-md transition-colors" onClick={handleHomeDetails}>
+          <span className="material-symbols-outlined mr-8 text-text text-3xl ">home</span>
+          <h1 className="mb-[-4px] text-text text-3xl text-center cursor-pointer">View Home details</h1>
+        </div>
+        <div className="flex items-center justify-center p-4 hover:bg-secondary/80 rounded-md transition-colors" onClick={handleDebtorCreditorDetails}>
+          <span className="material-symbols-outlined mr-8 text-text text-3xl ">partner_exchange</span>
+          <h1 className="mb-[-4px] text-text text-3xl text-center cursor-pointer">View Debt/Creditor details</h1>
+        </div>
       </div>
 
       <div className="grid grid-cols-3 gap-4 mx-4">
