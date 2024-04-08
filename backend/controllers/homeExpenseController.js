@@ -112,8 +112,19 @@ const deleteExpense = async (req, res) => {
     return res.status(400).json({ error: "No such expense" });
   }
 
+  // If the deleted expense had beneficiaries, remove related entries from DebtorCreditor
+  if (expense.beneficiaries && expense.beneficiaries.length > 0) {
+    try {
+      await DebtorCreditor.deleteMany({ expense: id });
+    } catch (error) {
+      console.error("Error deleting related DebtorCreditor entries:", error);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+  }
+
   res.status(200).json(expense);
 };
+
 
 // update a expense
 const updateExpense = async (req, res) => {

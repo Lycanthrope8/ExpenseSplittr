@@ -45,7 +45,7 @@ const updateSettledStatus = async (req, res) => {
           };
           
         const addToPersonalExpense = await PersonalExpense.create(expense)
-        console.log(addToPersonalExpense)
+        // console.log(addToPersonalExpense)
         if (!addToPersonalExpense) {
             return res.status(404).json({ message: 'Failed to entry personal Expense' });
         }
