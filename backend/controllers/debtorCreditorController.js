@@ -1,4 +1,6 @@
 const DebtorCreditor = require("../models/debtorCreditorModel");
+const PersonalExpense = require('../models/personalExpenseModel')
+
 
 const getDebtorCreditor = async (req, res) => {
     const userId = req.params.id;
@@ -35,6 +37,18 @@ const updateSettledStatus = async (req, res) => {
         const debts = await DebtorCreditor.find({ "debtor.userId": debtorCreditor.debtor.userId });
         const credits = await DebtorCreditor.find({ "creditor.userId": debtorCreditor.creditor.userId });
         // console.log({ debts, credits })
+        const expense = {
+            title: `Debt paid to ${debtorCreditor.creditor.name} for ${debtorCreditor.title}`,
+            amount: debtorCreditor.amount,
+            tag: debtorCreditor.tag,
+            user_id: debtorCreditor.debtor.userId
+          };
+          
+        const addToPersonalExpense = await PersonalExpense.create(expense)
+        console.log(addToPersonalExpense)
+        if (!addToPersonalExpense) {
+            return res.status(404).json({ message: 'Failed to entry personal Expense' });
+        }
         res.status(200).json({ debts, credits });
     } catch (error) {
         console.error('Error updating settled status:', error);
