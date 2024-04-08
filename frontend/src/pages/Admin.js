@@ -25,7 +25,7 @@ export const Admin = () => {
   return (
     <>
      <div className='text-3xl border-b-1 mb-2' style={{ height: '50px', overflowY: 'auto' }}>
-    <h1 className="text-center">Admin panel</h1>
+    <h1 className="text-center">Admin Panel</h1>
     </div>
       <div className="text-center" style={{ height: '300px', overflowY: 'auto' }}>
         <h2 className='text-3xl border-b-1 mb-2'>All Users</h2>
