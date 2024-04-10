@@ -3,6 +3,7 @@ import {TaskSummary} from './dashComponents/taskSummary'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import {useProfileContext} from '../../hooks/useProfileContext'
 import Spent from './dashComponents/spent'
+import { Graph } from './dashComponents/Graph'
 
 const HomeDashboard = () => {
   const [ tasks, setTasks ] = useState(null);
@@ -12,6 +13,9 @@ const HomeDashboard = () => {
 
   const [weeklySum, setWeeklySum] = useState(0);
   const [monthlySum, setMonthlySum] = useState(0);
+
+  const [highestSpentTag, setHighestSpentTag] = useState('');
+  const [highestSpentAmount, setHighestSpentAmount] = useState(0);
 
   useEffect(() => {
     const oneWeekAgo = new Date();
@@ -34,6 +38,9 @@ const HomeDashboard = () => {
     let monthSum = lastMonthExpenses.reduce((a, b) => a + b.amount, 0);
     setWeeklySum(weekSum);
     setMonthlySum(monthSum);
+
+    setHighestSpentAmount((expenses.reduce((a, b) => a.amount > b.amount ? a : b, 0)).amount);
+    setHighestSpentTag((expenses.reduce((a, b) => a.amount > b.amount ? a : b, 0)).tag);
   }, [expenses]);
 
   useEffect(() => {
@@ -75,8 +82,9 @@ const HomeDashboard = () => {
     <div className='border-2 border-border rounded-xl p-2'>
         <h1 className='mb-4 font-bold text-text text-center text-4xl'>Home Dashboard</h1>
         <div className='grid grid-cols-3 gap-8 px-16'>
+            <Spent weeklySum={weeklySum} monthlySum={monthlySum} highestSpentTag={highestSpentTag} highestSpentAmount={highestSpentAmount}/>
+            <Graph expenses={expenses} />
             <TaskSummary tasks={tasks} />
-            <Spent weeklySum={weeklySum} monthlySum={monthlySum}/>
         </div>
     </div>
   )
