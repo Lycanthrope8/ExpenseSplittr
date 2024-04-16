@@ -16,7 +16,7 @@ const itemVariants = {
 
 export const TaskSummary = ({tasks}) => {
   return (
-    <div className='col-span-1 p-8 text-text rounded-lg bg-transparent border-1 border-border h-[268px] overflow-hidden'>
+    <div className='col-span-1 p-8 text-text rounded-lg bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900 overflow-hidden'>
       <h1 className='mb-4 text-3xl font-bold'>Task Summary</h1>
 
       
