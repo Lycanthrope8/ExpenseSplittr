@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { Toaster, toast } from 'sonner';
-import CircularProgress from '@mui/material/CircularProgress';
+import { useProfileContext } from "../hooks/useProfileContext";
+import { Toaster, toast } from "sonner";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export const HomeDetails = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [home, setHome] = useState([]);
+  const { profile } = useProfileContext();
   const { user } = useAuthContext();
   const [error, setError] = useState();
-  const [requestSending, setRequestSending] = useState(false); 
-  const [requestSent, setRequestSent] = useState(false); 
+  const [requestSending, setRequestSending] = useState(false);
+  const [requestSent, setRequestSent] = useState(false);
 
   const handleJoinReq = async (e) => {
     e.preventDefault();
@@ -20,7 +22,22 @@ export const HomeDetails = () => {
       setError("You must be logged in to add an expense");
       return;
     }
-    setRequestSending(true); 
+
+    // Check if profile is incomplete
+    const isProfileIncomplete =
+      !profile.address ||
+      !profile.age ||
+      !profile.gender ||
+      !profile.name ||
+      !profile.phone ||
+      !profile.userId;
+
+    if (isProfileIncomplete) {
+      setError("Complete your profile to be able to send a join request");
+      return;
+    }
+
+    setRequestSending(true);
     const userId = user.userId;
     const payload = { userId, id };
     const response = await fetch("/home/joinReqHome", {
@@ -33,16 +50,15 @@ export const HomeDetails = () => {
     });
     const json = await response.json();
 
-    setRequestSending(false); 
+    setRequestSending(false);
     if (!response.ok) {
-      toast.error('You already requested to join this home!', {
+      toast.error("You already requested to join this home!", {
         classNames: {
-          toast: 'bg-red-300',
+          toast: "bg-red-300",
         },
       });
-      // setError(json.error);
     } else {
-      setRequestSent(true); 
+      setRequestSent(true);
     }
   };
 
@@ -56,12 +72,12 @@ export const HomeDetails = () => {
         const json = await response.json();
 
         if (response.ok) {
-          setHome(json); 
+          setHome(json);
           setLoading(false);
         }
       } catch (error) {
         console.error(error);
-        setLoading(false); 
+        setLoading(false);
       }
     };
     if (user) {
@@ -70,10 +86,11 @@ export const HomeDetails = () => {
   }, [user, id]);
 
   return loading ? (
-    <div className='flex h-screen items-center'>
-      <p className='flex w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg '>
-      <CircularProgress className="mr-4" />
-      Loading...</p>
+    <div className="flex h-screen items-center">
+      <p className="flex w-40 mx-auto font-2xl bg-slate-200 p-4 rounded-lg ">
+        <CircularProgress className="mr-4" />
+        Loading...
+      </p>
     </div>
   ) : (
     <div className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
@@ -128,7 +145,13 @@ export const HomeDetails = () => {
           onClick={handleJoinReq}
           disabled={requestSending || requestSent} // Disable button when request is sending or already sent
         >
-          {requestSending ? "Sending Request..." : requestSent ? "Cancel Request" : "Request to Join"}
+          {requestSending
+            ? "Sending Request..."
+            : requestSent
+            ? "Cancel Request"
+            : home.pendingMembers && home.pendingMembers.includes(user.userId)
+            ? "Cancel Request"
+            : "Request to Join"}
         </button>
         {error && <div className="error">{error}</div>}
         <div className="col-span-1">
