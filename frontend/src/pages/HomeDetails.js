@@ -48,7 +48,7 @@ export const HomeDetails = () => {
         Authorization: `Bearer ${user.token}`,
       },
     });
-    const json = await response.json();
+    // const json = await response.json();
 
     setRequestSending(false);
     if (!response.ok) {
