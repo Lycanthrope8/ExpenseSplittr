@@ -3,6 +3,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 
 export const Admin = () => {
   const [data, setData] = useState([]);
+  const [activeModel, setActiveModel] = useState(null);
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -25,32 +26,62 @@ export const Admin = () => {
     fetchData();
   }, [user.token]);
 
+  const getModelDescription = (index) => {
+    switch (index) {
+      case 0:
+        return 'Users Information';
+      case 1:
+        return 'Users Login Info';
+      case 2:
+        return 'Personal Task';
+      case 3:
+        return 'Personal Expense';
+      case 4:
+        return 'Home Task';
+      case 5:
+        return 'Home Expense';
+      case 6:
+        return 'Home Information';
+      case 7:
+        return 'Debtor Creditor';
+      default:
+        return '';
+    }
+  };
+
+  const toggleModel = (index) => {
+    setActiveModel(activeModel === index ? null : index);
+  };
+
   return (
-    <>
-      <div className='text-3xl border-b-1 mb-2'>
-        <h1 className="text-center">Admin Panel</h1>
-      </div>
-      <div className="text-center" >
+    <div>
+      <h1 className="text-center text-3xl mt-4 mb-8">Admin Panel</h1>
+      <div className="container mx-auto">
         {/* Render data from all models */}
         {data.map((modelData, index) => (
           <div key={index} className='mb-4'>
-            <h2 className='text-3xl border-b-1 mb-2'>Data from Model {index + 1}</h2>
-            {modelData.map((item, itemIndex) => (
-              <div key={itemIndex} className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 rounded-2xl">
-                <div className='flex flex-col'>
-                  {Object.entries(item).map(([key, value]) => (
-                    <div key={key}>
-                      <h4 className='text-3xl border-b-1 mb-2'>{key}</h4>
-                      <pre>{JSON.stringify(value, null, 2)}</pre>
-                    </div>
-                  ))}
-                </div>
+            <h2 className='text-2xl border-b-2 cursor-pointer' style={{color: 'white' }} onClick={() => toggleModel(index)}>{getModelDescription(index)}</h2>
+            {activeModel === index && (
+              <div className="model-data mt-4">
+                {modelData.map((item, itemIndex) => (
+                  <div key={itemIndex} className="mb-4">
+                    {Object.entries(item).map(([key, value]) => (
+                      <div key={key} style={{ backgroundColor: 'silver' }}>
+                      <p className='text-lg'>
+                     <span className='font-bold'>{key}: </span>{value}
+                      </p>
+                      </div>
+
+                    ))}
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
+
 
