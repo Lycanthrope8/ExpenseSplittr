@@ -27,7 +27,7 @@ export const HomeTasks = () => {
     if (user) {
       fetchTasks();
     }
-  }, [dispatch, user, sortOption]);
+  }, [dispatch, user, sortOption, profile.homeId]);
   
   const handleEdit = (editedTask) => {
     const updatedSortedTasks = sortedTasks.map((task) =>

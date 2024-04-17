@@ -52,7 +52,7 @@ export const RequestedMemberProfilePage = () => {
 
     fetchProfile();
     fetchProfilePicture();
-  }, [userId]);
+  }, [user.token, userId]);
 
   const handleAccept = async () => {
     // Implement accept logic here
