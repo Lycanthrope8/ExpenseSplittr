@@ -1,3 +1,4 @@
+const { keyframes } = require("@emotion/react");
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 // module.exports = {
@@ -101,9 +102,9 @@ module.exports = withMT({
     },
   },
   plugins: [
-    function ({addUtilities}) {
+    function ({ addUtilities }) {
       const newUtilities = {
-        '.no-scrollbar::-webkit-scrollbar' : {
+        '.no-scrollbar::-webkit-scrollbar': {
           display: 'none',
         },
         '.no-scrollbar': {

@@ -86,7 +86,7 @@ export const Home = () => {
     const userId = await user.userId;
     try {
       navigate(`/api/debtorCreditor/${userId}`);
-    }catch(error){
+    } catch (error) {
       console.error(error)
     }
   }
@@ -113,9 +113,9 @@ export const Home = () => {
         <div className="col-span-2 relative">
           <SortButton onSort={handleSort} />
           <div className="border-1 border-border rounded-xl p-4">
-          <table className='text-text w-full'>
+            <table className='text-text w-full'>
               <colgroup>
-                <col className="w-[700px]"/>
+                <col className="w-[700px]" />
                 <col className="w-[300px]" />
                 <col className="w-[200px]" />
                 <col className="w-[300px]" />
@@ -131,26 +131,26 @@ export const Home = () => {
                 </tr>
               </thead>
               <tbody className='text-text [&_tr:last-child]:border-0'>
-            {sortedExpenses && sortedExpenses.length > 0
-              ? sortedExpenses.map((expense) => (
-                <tr className="w-full border-b border-border" key={expense._id}>
-                  <HomeExpenseDetails expense={expense} onDelete={handleDelete} />
-                </tr>
-              ))
-              : expenses &&
-              expenses.map((expense) => (
-                <tr className="w-full border-b border-border" key={expense._id}>
-                  <HomeExpenseDetails expense={expense} />
-                </tr>
-              ))
-            }
-            </tbody>
-          </table>
+                {sortedExpenses && sortedExpenses.length > 0
+                  ? sortedExpenses.map((expense) => (
+                    <tr className="w-full border-b border-border" key={expense._id}>
+                      <HomeExpenseDetails expense={expense} onDelete={handleDelete} />
+                    </tr>
+                  ))
+                  : expenses &&
+                  expenses.map((expense) => (
+                    <tr className="w-full border-b border-border" key={expense._id}>
+                      <HomeExpenseDetails expense={expense} />
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
         </div>
+        <HomeExpenseForm expenses={expenses} setSortedExpenses={setSortedExpenses} homeMembers={home.currentMembers} />
       </div>
-      <HomeExpenseForm expenses={expenses} setSortedExpenses={setSortedExpenses} homeMembers={home.currentMembers} />
-      </div>
-      <HomeTasks />
+      <HomeTasks homeMembers={home.currentMembers} />
     </>
   );
 };

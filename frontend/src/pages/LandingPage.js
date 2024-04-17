@@ -11,6 +11,7 @@ const LandingPage = () => {
   const { profile } = useProfileContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  const [homeSwitch, setHomeSwitch] = useState(true);
 
   useEffect(() => {
     if (user && profile) {
@@ -28,22 +29,38 @@ const LandingPage = () => {
 
   return (
     <>
-
-      <div className="h-screen grid grid-rows-2 gap-8">
+      <button
+        className="absolute z-50 bg-red-300 px-4 py-2 rounded-md"
+        onClick={() => setHomeSwitch((prev) => !prev)}
+      >
+        {homeSwitch ? "Switch to Profile" : "Switch to Home"}
+      </button>
+      <div className="h-screen">
         {isLoading ? (
           <div>Loading...</div>
         ) : (
           <>
-            <div onClick={handleProfileDashboardClick}>
-              <PersonalDashboard />
-            </div>
-            {profile.homeId ? (
-              <div onClick={handleHomeLessClick}>
-                {/* <HomeDashboard /> */}
+            {!homeSwitch ? (
+              <div
+                onClick={handleProfileDashboardClick}
+                className={`transition-all`}
+              >
+                <PersonalDashboard />
               </div>
             ) : (
               <div>
-                <HomeLess />
+                {profile.homeId ? (
+                  <div
+                    onClick={handleHomeLessClick}
+                    className={`transition-all`}
+                  >
+                    <HomeDashboard />
+                  </div>
+                ) : (
+                  <div>
+                    <HomeLess />
+                  </div>
+                )}
               </div>
             )}
           </>

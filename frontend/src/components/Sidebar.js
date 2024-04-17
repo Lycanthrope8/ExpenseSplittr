@@ -145,7 +145,7 @@ const Sidebar = ({ active }) => {
                 </span>
 
                 <span
-                  className={`material-symbols-rounded p-2 rounded-md hover:bg-secondary/80`}
+                  className={`material-symbols-rounded p-1 rounded-md hover:bg-secondary/80`}
                   onClick={() => setMore((curr) => !curr)}
                 >
                   more_vert

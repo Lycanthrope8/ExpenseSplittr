@@ -102,21 +102,6 @@ const HomeExpenseForm = ({ expenses, setSortedExpenses, sortOption, homeMembers 
           className={emptyFields.includes("amount") ? "error" : "p-2 bg-transparent text-text w-full border-1 border-border rounded-md"}
         />
       </div>
-      {/* <div className="h-10 mb-4">
-        <label className="flex items-center mr-4 text-xl col-span-2">Select Members:</label>
-        <div className="rounded-xl">
-          {homeMembers.map((member) => (
-            <div key={member.userId} className="mb-2">
-              <Checkbox
-                checked={selectedMembers.some(selected => selected.userId === member.userId)}
-                onChange={handleMemberChange}
-                value={member.userId}
-              />
-              <span>{member.name}</span>
-            </div>
-          ))}
-        </div>
-      </div> */}
       <BeneficiariesDropdown 
         homeMembers={homeMembers}
         selectedMembers={selectedMembers}

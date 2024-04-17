@@ -22,6 +22,7 @@ body {
   opacity: 0.8;
   background-image: radial-gradient(#202020 0.75px, #09090b 0.75px);
   background-size: 15px 15px;
+  /* overflow-y: hidden; */
 }
 
 ::-webkit-scrollbar {

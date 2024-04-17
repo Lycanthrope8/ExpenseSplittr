@@ -5,10 +5,10 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 import Spent from './dashComponents/spent'
 
 const PersonalDashboard = () => {
-  const [ tasks, setTasks ] = useState(null);
-  const [ expenses, setExpenses ] = useState([]);
+  const [tasks, setTasks] = useState(null);
+  const [expenses, setExpenses] = useState([]);
   const { user } = useAuthContext();
-  
+
   const [weeklySum, setWeeklySum] = useState(0);
   const [monthlySum, setMonthlySum] = useState(0);
 
@@ -77,12 +77,12 @@ const PersonalDashboard = () => {
   }, [setTasks, user]);
   return (
     <div className='p-2'>
-        {/* <h1 className='mb-4 font-bold text-text text-center text-4xl'>Personal Dashboard</h1> */}
-        <div className='grid grid-cols-3 gap-8 px-16'> 
-            <Spent weeklySum={weeklySum} monthlySum={monthlySum} highestSpentTag={highestSpentTag} highestSpentAmount={highestSpentAmount}/>
-            <Graph expenses={expenses}/>
-            <TaskSummary tasks={tasks}/>
-        </div>
+      {/* <h1 className='mb-4 font-bold text-text text-center text-4xl'>Personal Dashboard</h1> */}
+      <div className='grid grid-cols-3 gap-4 px-16'>
+        <Spent weeklySum={weeklySum} monthlySum={monthlySum} highestSpentTag={highestSpentTag} highestSpentAmount={highestSpentAmount} />
+        <Graph expenses={expenses} />
+        <TaskSummary tasks={tasks} />
+      </div>
     </div>
   )
 }

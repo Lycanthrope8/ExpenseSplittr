@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import {TaskSummary} from './dashComponents/taskSummary'
+import { TaskSummary } from './dashComponents/taskSummary'
 import { useAuthContext } from '../../hooks/useAuthContext'
-import {useProfileContext} from '../../hooks/useProfileContext'
+import { useProfileContext } from '../../hooks/useProfileContext'
 import Spent from './dashComponents/spent'
 import { Graph } from './dashComponents/Graph'
 
 const HomeDashboard = () => {
-  const [ tasks, setTasks ] = useState(null);
-  const [ expenses, setExpenses ] = useState([]);
+  const [tasks, setTasks] = useState(null);
+  const [expenses, setExpenses] = useState([]);
   const { user } = useAuthContext();
   const { profile } = useProfileContext();
 
@@ -79,13 +79,13 @@ const HomeDashboard = () => {
   }, [profile.homeId, setTasks, user]);
 
   return (
-    <div className='border-2 border-border rounded-xl p-2'>
-        <h1 className='mb-4 font-bold text-text text-center text-4xl'>Home Dashboard</h1>
-        <div className='grid grid-cols-3 gap-8 px-16'>
-            <Spent weeklySum={weeklySum} monthlySum={monthlySum} highestSpentTag={highestSpentTag} highestSpentAmount={highestSpentAmount}/>
-            <Graph expenses={expenses} />
-            <TaskSummary tasks={tasks} />
-        </div>
+    <div className='p-2'>
+      {/* <h1 className='mb-4 font-bold text-text text-center text-4xl'>Home Dashboard</h1> */}
+      <div className='grid grid-cols-3 gap-4 px-16'>
+        <Spent weeklySum={weeklySum} monthlySum={monthlySum} highestSpentTag={highestSpentTag} highestSpentAmount={highestSpentAmount} />
+        <Graph expenses={expenses} />
+        <TaskSummary tasks={tasks} />
+      </div>
     </div>
   )
 }

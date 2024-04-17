@@ -6,7 +6,7 @@ import HomeTaskForm from "./HomeTaskForm";
 import SortButton from "./SortButton";
 import { useProfileContext } from "../hooks/useProfileContext";
 
-export const HomeTasks = () => {
+export const HomeTasks = ({homeMembers}) => {
   const { tasks, dispatch } = useHomeTask();
   const { user } = useAuthContext();
   const { profile } = useProfileContext();
@@ -95,7 +95,7 @@ export const HomeTasks = () => {
               ))}
         </div>
       </div>
-      <HomeTaskForm tasks={tasks} setSortedTasks={setSortedTasks} />
+      <HomeTaskForm tasks={tasks} setSortedTasks={setSortedTasks} homeMembers={homeMembers} />
 
     </div>
   );
