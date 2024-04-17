@@ -13,7 +13,7 @@ const TaskDetails = ({ task, onDelete, onEdit }) => {
   const [newDescription, setNewDescription] = useState();
   const [newDeadline, setNewDeadline] = useState();
 
-  
+
 
   const changeCompleteStatus = async () => {
     if (!user) {
@@ -52,7 +52,7 @@ const TaskDetails = ({ task, onDelete, onEdit }) => {
       body: JSON.stringify({ title: newTitle, description: newDescription, deadline: newDeadline })
     });
     const json = await response.json();
-    
+
     if (response.ok) {
       dispatch({ type: 'EDIT_TASK', payload: json });
       if (onEdit) {
@@ -96,20 +96,20 @@ const TaskDetails = ({ task, onDelete, onEdit }) => {
     <>
       <form id="editingForm" className='flex w-full' onSubmit={handleEdit}>
         <div className='flex flex-col flex-1'>
-        <input className='text-3xl mb-2 border-b-1 bg-secondary-dark-bg text-zinc-200 outline-none' placeholder={task.title} onChange={(e) => setNewTitle(e.target.value)}/>
-        <input className="text-lg mb-4 bg-secondary-dark-bg text-zinc-200 outline-none" placeholder={task.description} onChange={(e) => setNewDescription(e.target.value)}/>
-        <input type="date" className='text-lg mb-4 bg-secondary-dark-bg text-zinc-200' placeholder={task.deadline} onChange={(e) => setNewDeadline(e.target.value)}/>
-        <div className='flex justify-between items-center'>
-          <button onClick={changeCompleteStatus} className={completeStatus ? 'text-gray-800 align-middle px-4 py-2 rounded-xl bg-green-300' : 'text-gray-800 align-middle px-4 py-2 rounded-xl bg-red-300'}>{completeStatus ? 'Completed' : 'Incomplete'}</button>
-          <p className="text-sm">Created: {formattedDate}</p>
-        </div>
+          <input className='text-3xl mb-2 border-b-1 bg-secondary-dark-bg text-zinc-200 outline-none' placeholder={task.title} onChange={(e) => setNewTitle(e.target.value)} />
+          <input className="text-lg mb-4 bg-secondary-dark-bg text-zinc-200 outline-none" placeholder={task.description} onChange={(e) => setNewDescription(e.target.value)} />
+          <input type="date" className='text-lg mb-4 bg-secondary-dark-bg text-zinc-200' placeholder={task.deadline} onChange={(e) => setNewDeadline(e.target.value)} />
+          <div className='flex justify-between items-center'>
+            <button onClick={changeCompleteStatus} className={completeStatus ? 'text-gray-800 align-middle px-4 py-2 rounded-xl bg-green-300' : 'text-gray-800 align-middle px-4 py-2 rounded-xl bg-red-300'}>{completeStatus ? 'Completed' : 'Incomplete'}</button>
+            <p className="text-sm">Created: {formattedDate}</p>
+          </div>
         </div>
         <div className='flex'>
-        <button form='editingForm' className="basis-2/12 material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" type='submit'>save</button>
-        <button className="material-symbols-outlined text-text text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:text-red-300 hover:bg-secondary " onClick={handleDelete}>delete</button>
+          <button form='editingForm' className="basis-2/12 material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" type='submit'>save</button>
+          <button className="material-symbols-outlined text-text text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:text-red-300 hover:bg-secondary " onClick={handleDelete}>delete</button>
         </div>
       </form>
-    </>  
+    </>
   );
   const viewTemplate = (
     <>
@@ -129,10 +129,10 @@ const TaskDetails = ({ task, onDelete, onEdit }) => {
       <button className="material-symbols-outlined text-text text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:text-red-300 hover:bg-secondary " onClick={handleDelete}>delete</button>
     </>
   );
-  
+
   return (
-    <div className="flex justify-between text-text p-4 rounded-lg">
-        {isEditing ? editingTemplate : viewTemplate}
+    <div className="flex justify-between text-text p-4 rounded-lg bg-main-dark-bg">
+      {isEditing ? editingTemplate : viewTemplate}
     </div>
   );
 };
