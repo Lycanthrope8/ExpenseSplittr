@@ -14,6 +14,7 @@ import { ExploreAllHome } from "./pages/ExploreAllHome";
 import { HomeDetails } from "./pages/HomeDetails";
 import { PersonalDashboard } from "./pages/PersonalDashboard";
 import { JoinedHomeDetails } from "./pages/JoinedHomeDetails";
+import { Chat } from "./pages/Chat";
 import { HomeDetailsOwner } from "./pages/HomeDetailsOwner";
 import { RequestedMemberProfilePage } from "./components/RequestedMemberProfilePage";
 import { DebtorCreditor } from "./pages/DebtorCreditor";
@@ -38,6 +39,10 @@ function App() {
               <Route
                 path="/homeDashboard/"
                 element={user ? <Home /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/chat/"
+                element={user ? <Chat /> : <Navigate to="/" />}
               />
               <Route
                 path="/home/createHome/"

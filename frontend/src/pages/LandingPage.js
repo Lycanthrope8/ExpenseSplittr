@@ -27,6 +27,9 @@ const LandingPage = () => {
     navigate("/homeDashboard");
   };
 
+  const handleChatClick = () => {
+    navigate("/chat");
+  };
   return (
     <>
       <button
@@ -34,6 +37,12 @@ const LandingPage = () => {
         onClick={() => setHomeSwitch((prev) => !prev)}
       >
         {homeSwitch ? "Switch to Profile" : "Switch to Home"}
+      </button>
+      <button
+        className="absolute top-20 z-50 bg-red-300 px-4 py-2 rounded-md"
+        onClick={handleChatClick}
+      >
+        CHAT
       </button>
       <div className="h-screen">
         {isLoading ? (
