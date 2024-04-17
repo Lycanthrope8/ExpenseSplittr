@@ -28,27 +28,27 @@ const LandingPage = () => {
 
   return (
     <>
-
-      <div className="h-screen grid grid-rows-2 gap-8">
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <>
-            <div onClick={handleProfileDashboardClick}>
-              <PersonalDashboard />
+    
+    <div className="grid grid-rows-2 gap-8">
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <div onClick={handleProfileDashboardClick}>
+            <PersonalDashboard />
+          </div>
+          {profile.homeId ? (
+            <div onClick={handleHomeLessClick}>
+              <HomeDashboard />
             </div>
-            {profile.homeId ? (
-              <div onClick={handleHomeLessClick}>
-                {/* <HomeDashboard /> */}
-              </div>
-            ) : (
-              <div>
-                <HomeLess />
-              </div>
-            )}
-          </>
-        )}
-      </div>
+          ) : (
+            <div>
+              <HomeLess />
+            </div>
+          )}
+        </>
+      )}
+    </div>
     </>
   );
 };

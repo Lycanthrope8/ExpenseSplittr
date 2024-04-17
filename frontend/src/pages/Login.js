@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
-import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +12,7 @@ const Login = () => {
 
   return (
     <div className="w-full absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-70%]">
-      {/* <div className="h-screen grid place-items-center"> */}
+    {/* <div className="h-screen grid place-items-center"> */}
       <form className="flex flex-col items-center w-3/12 h-max justify-center px-4 py-8 bg-transparent border-2 border-border text-text mx-auto rounded-lg" onSubmit={handleSubmit}>
         <h3 className="font-bold text-4xl mb-24">Log In</h3>
 
@@ -39,9 +38,7 @@ const Login = () => {
         </div>
 
         <button className="mt-2 p-2 bg-transparent border-2 border-border rounded-lg w-full hover:bg-secondary/40 transition-colors" disabled={isLoading}>Log in</button>
-        {/* <Link className="text-center mt-2 p-2 bg-transparent border-2 border-border rounded-lg w-full hover:bg-secondary/40 transition-colors" to="/signup">Sign up</Link> */}
-        <Link className="text-center mt-4 p-2 bg-transparent w-full" to="/signup">Don't have an account?</Link>
-        {error && <div className="error">{error}</div>}
+          {error && <div className="error">{error}</div>}
       </form>
     </div>
   );
