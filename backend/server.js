@@ -11,6 +11,7 @@ const userRoutes = require('./routes/user')
 const userProfileRoutes = require('./routes/userProfile')
 const homeRoutes = require('./routes/home')
 const debtorCreditorRoutes = require('./routes/debtorCreditor')
+const adminRoutes = require('./routes/admin')
 const cors = require('cors')
 // express app
 const app = express()
@@ -36,6 +37,7 @@ app.use('/profile/', userProfileRoutes)
 app.use('/home/', homeRoutes)
 app.use('/api/homeExpenses', homeExpenseRoutes)
 app.use('/api/debtorCreditor/', debtorCreditorRoutes)
+app.use('/admin/', adminRoutes)
 
 
 
