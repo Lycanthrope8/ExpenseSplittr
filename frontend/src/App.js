@@ -26,9 +26,9 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="flex">
-          <Sidebar />
+          {user ? <Sidebar /> : null}
           <div className="pages flex-1">
             <Routes>
               <Route
@@ -45,7 +45,7 @@ function App() {
               />
               <Route
                 path="/home/createHome/uploadImages/"
-                element={user ? <UploadImagesHome/> : <Navigate to="/" />}
+                element={user ? <UploadImagesHome /> : <Navigate to="/" />}
               />
               <Route
                 path="/home/exploreHomes/"
@@ -95,7 +95,7 @@ function App() {
                   )
                 }
               />
-              <Route path="/admin" 
+              <Route path="/admin"
                 element={user ? <Admin /> : <Navigate to="/" />}
               />
             </Routes>
