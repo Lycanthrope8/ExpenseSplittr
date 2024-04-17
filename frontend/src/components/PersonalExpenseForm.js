@@ -20,8 +20,8 @@ const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
       setError("You must be logged in to add an expense");
       return;
     }
-    
-    const expense = { title, amount , tag: selectedTag };
+
+    const expense = { title, amount, tag: selectedTag };
     // console.log(expense);
     const response = await fetch("/api/personalExpenses/", {
       method: "POST",
@@ -69,7 +69,7 @@ const PersonalExpenseForm = ({ expenses, setSortedExpenses, sortOption }) => {
   };
 
   return (
-    <form className="flex flex-col h-max border-1 border-border text-text p-4 rounded-2xl" onSubmit={handleSubmit}>
+    <form className="flex flex-col h-max border-1 border-border text-text p-4 rounded-2xl bg-main-dark-bg" onSubmit={handleSubmit}>
       <h1 className="mb-4 text-xl font-bold text-center">Add a New Expense</h1>
       <ExpenseTagDropdown
         expenseTags={profile.expenseTags}
