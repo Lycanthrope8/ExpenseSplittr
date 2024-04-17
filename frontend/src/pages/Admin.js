@@ -4,6 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 export const Admin = () => {
   const [data, setData] = useState([]);
   const [activeModel, setActiveModel] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -53,35 +54,57 @@ export const Admin = () => {
     setActiveModel(activeModel === index ? null : index);
   };
 
+  // Function to handle search query change
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <div>
-      <h1 className="text-center text-3xl mt-4 mb-8">Admin Panel</h1>
+      <h1 className="text-center text-3xl mt-4 mb-8" style={{color:"white"}}>Admin Panel</h1>
       <div className="container mx-auto">
+        {/* Search bar */}
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+          className="mb-4 p-2 border rounded-md"
+        />
         {/* Render data from all models */}
-        {data.map((modelData, index) => (
-          <div key={index} className='mb-4'>
-            <h2 className='text-2xl border-b-2 cursor-pointer' style={{color: 'white' }} onClick={() => toggleModel(index)}>{getModelDescription(index)}</h2>
-            {activeModel === index && (
-              <div className="model-data mt-4">
-                {modelData.map((item, itemIndex) => (
-                  <div key={itemIndex} className="mb-4">
-                    {Object.entries(item).map(([key, value]) => (
-                      <div key={key} style={{ backgroundColor: 'silver' }}>
-                      <p className='text-lg'>
-                     <span className='font-bold'>{key}: </span>{value}
-                      </p>
-                      </div>
+        {data.map((modelData, index) => {
+          const filteredModelData = Object.entries(modelData).filter(([_, item]) =>
+            Object.values(item).some((value) =>
+              String(value).toLowerCase().includes(searchQuery.toLowerCase())
+            )
+          );
 
+          if (filteredModelData.length > 0) {
+            return (
+              <div key={index} className='mb-4'>
+                <h2 className='text-2xl border-b-2 cursor-pointer' style={{ color: 'white' }} onClick={() => toggleModel(index)}>{getModelDescription(index)}</h2>
+                {activeModel === index && (
+                  <div className="model-data mt-4">
+                    {filteredModelData.map(([key, item], itemIndex) => (
+                      <div key={itemIndex} className="mb-4">
+                        <h3>{key}</h3>
+                        {Object.entries(item).map(([subKey, value]) => (
+                          <div key={subKey} style={{ backgroundColor: 'silver' }}>
+                            <p className='text-lg'>
+                              <span className='font-bold'>{subKey}: </span>{typeof value === 'object' ? JSON.stringify(value) : value}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
                     ))}
                   </div>
-                ))}
+                )}
               </div>
-            )}
-          </div>
-        ))}
+            );
+          }
+          return null;
+        })}
       </div>
     </div>
   );
 };
-
-
