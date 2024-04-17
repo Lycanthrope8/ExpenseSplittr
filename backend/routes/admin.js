@@ -1,14 +1,11 @@
+// admin.js
+
 const express = require('express');
 
-//Controller functions
-const {fetchWholeDatabase} = require('../controllers/adminController');
+// Controller functions
+const { fetchWholeDatabase } = require('../controllers/adminController');
 
-
-const router = express.Router()
-
-
-
-
+const router = express.Router();
 
 router.get('/geteverything', (req, res) => {
     fetchWholeDatabase()
@@ -19,9 +16,6 @@ router.get('/geteverything', (req, res) => {
         console.error('Error fetching data:', error);
         res.status(500).send('Error fetching data');
       });
-  });
-  
-
-
+});
 
 module.exports = router;

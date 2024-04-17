@@ -10,7 +10,7 @@ export const Admin = () => {
       try {
         const response = await fetch('/geteverything', {
             headers: { Authorization: `Bearer ${user.token}` }
-          }); // Assuming your backend server is running on the same host
+          }); 
         if (response.ok) {
           const data = await response.json();
           console.log('Data fetched:', data);
