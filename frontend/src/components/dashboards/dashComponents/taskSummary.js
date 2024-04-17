@@ -5,53 +5,52 @@ const itemVariants = {
   open: i => ({
     opacity: 1,
     y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 24,
-      delay: i * 0.1
-    }
+    transition: { type: "spring",
+    stiffness: 300,
+    damping: 24,
+    delay: i * 0.1
+  }
   }),
   closed: { opacity: 0, y: 20, transition: { duration: 0.2 } }
 };
 
-export const TaskSummary = ({ tasks }) => {
+export const TaskSummary = ({tasks}) => {
   return (
-    <div className='col-span-1 p-8 text-text rounded-lg bg-red-300 bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900 overflow-hidden'>
+    <div className='col-span-1 p-8 text-text rounded-lg bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900 overflow-hidden'>
       <h1 className='mb-4 text-3xl font-bold'>Task Summary</h1>
 
-
+      
       {tasks && tasks.length > 0 ? <div className='h-full overflow-y-scroll no-scrollbar'>
-        <motion.ul
-          initial="closed"
-          animate="open"
-          variants={{
-            open: {
-              // clipPath: "inset(0% 0% 0% 0% round 10px)",
-              transition: {
-                type: "spring",
-                bounce: 0,
-                duration: 0.7,
-                delayChildren: 0.3,
-                staggerChildren: 0.05
-              }
-            },
-            closed: {
-              // clipPath: "inset(10% 50% 90% 50% round 10px)",
-              transition: {
-                type: "spring",
-                bounce: 0,
-                duration: 0.3
-              }
+      <motion.ul
+        initial="closed"
+        animate="open"
+        variants={{
+          open: {
+            // clipPath: "inset(0% 0% 0% 0% round 10px)",
+            transition: {
+              type: "spring",
+              bounce: 0,
+              duration: 0.7,
+              delayChildren: 0.3,
+              staggerChildren: 0.05
             }
-          }}
+          },
+          closed: {
+            // clipPath: "inset(10% 50% 90% 50% round 10px)",
+            transition: {
+              type: "spring",
+              bounce: 0,
+              duration: 0.3
+            }
+          }
+        }}
         >
-          {tasks && tasks.map((task, i) => (
-            <motion.h3 custom={i} variants={itemVariants} key={task._id} className='p-2 mt-2 rounded-lg bg-transparent border-1 border-border flex justify-between'>
-              <p><span className='text-slate-400'>৹</span> {task.title}</p>
-              <p className='text-xs flex items-center rounded-lg bg-slate-400 px-2'>{moment(task.deadline).format('D/MM')}</p>
-            </motion.h3>
-          ))}
+        {tasks && tasks.map((task, i) => (
+          <motion.h3 custom={i} variants={itemVariants} key={task._id} className='p-2 mt-2 rounded-lg bg-transparent border-1 border-border flex justify-between'>
+            <p><span className='text-slate-400'>৹</span> {task.title}</p>
+            <p className='text-xs flex items-center rounded-lg bg-slate-400 px-2'>{moment(task.deadline).format('D/MM')}</p>
+          </motion.h3>
+        ))}
         </motion.ul>
       </div> : <p className='mt-10 text-lg text-center'>You have no pending task!</p>}
     </div>
