@@ -1,47 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import AdminShowHomes from '../components/admin/AdminShowHomes';
+import { useState, useEffect } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext'
 
 export const Admin = () => {
-  const [users, setUsers] = useState([]);
-
+  const [data, setData] = useState([]);
+  const { user } = useAuthContext()
   useEffect(() => {
-    const fetchUsers = async () => {
+    console.log('Fetching data...');
+    const fetchData = async () => {
       try {
-        const response = await fetch('/api/user/getalluser'); 
+        const response = await fetch('/geteverything', {
+            headers: { Authorization: `Bearer ${user.token}` }
+          }); // Assuming your backend server is running on the same host
         if (response.ok) {
           const data = await response.json();
-          setUsers(data);
+          console.log('Data fetched:', data);
+          setData(data);
         } else {
-          throw new Error('Failed to fetch users');
+          throw new Error('Failed to fetch data');
         }
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
-    fetchUsers();
+    fetchData();
   }, []);
+
+  console.log('Rendered component with data:', data);
 
   return (
     <>
-     <div className='text-3xl border-b-1 mb-2' style={{ height: '50px', overflowY: 'auto' }}>
-    <h1 className="text-center">Admin Panel</h1>
-    </div>
+      <div className='text-3xl border-b-1 mb-2' style={{ height: '50px', overflowY: 'auto' }}>
+        <h1 className="text-center">Admin Panel</h1>
+      </div>
       <div className="text-center" style={{ height: '300px', overflowY: 'auto' }}>
-        <h2 className='text-3xl border-b-1 mb-2'>All Users</h2>
-        {users.map(user => (
-          <div key={user._id} className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 mb-4 rounded-2xl">
-            <div className='flex flex-col'>
-              <h4 className='text-3xl border-b-1 mb-2'>{user.email}</h4>
-            </div>
-            {/* <span className="material-symbols-outlined text-3xl h-12 w-12 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-tertiary-dark-bg" >delete</span> */}
+        {/* Render data from all models */}
+        {data.map((modelData, index) => (
+          <div key={index} className='mb-4'>
+            <h2 className='text-3xl border-b-1 mb-2'>Data from Model {index + 1}</h2>
+            {Object.entries(modelData).map(([key, value]) => (
+              <div key={key} className="expense-details flex justify-between text-white bg-secondary-dark-bg p-4 rounded-2xl">
+                <div className='flex flex-col'>
+                  <h4 className='text-3xl border-b-1 mb-2'>{key}</h4>
+                  <pre>{JSON.stringify(value, null, 2)}</pre>
+                </div>
+              </div>
+            ))}
           </div>
         ))}
-      </div>
-      
-      <div className="text-center" style={{ height: '300px', overflowY: 'auto' }}>
-        <h2 className='text-3xl border-b-1 my-8'>All Homes</h2>
-        <AdminShowHomes />
       </div>
     </>
   );

@@ -37,7 +37,7 @@ app.use('/profile/', userProfileRoutes)
 app.use('/home/', homeRoutes)
 app.use('/api/homeExpenses', homeExpenseRoutes)
 app.use('/api/debtorCreditor/', debtorCreditorRoutes)
-app.use('/admin/', adminRoutes)
+// app.use('/admin/', adminRoutes)
 
 
 
