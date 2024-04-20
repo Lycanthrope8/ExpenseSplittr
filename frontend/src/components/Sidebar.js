@@ -26,7 +26,7 @@ const Sidebar = ({ active }) => {
   };
   return (
     <div
-      className="inline-flex h-screen py-2"
+      className="inline-flex h-screen py-2 z-50"
       onMouseEnter={() => setExpanded((curr) => !curr)}
       onMouseLeave={() => {
         setExpanded((curr) => !curr);

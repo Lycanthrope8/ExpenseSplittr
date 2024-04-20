@@ -44,35 +44,66 @@ const LandingPage = () => {
       >
         CHAT
       </button>
-      <div className="h-screen">
+      {/* <div
+        className={`h-screen w-screen overflow-x-scroll flex flex-row items-center gap-0 bg-blue-100 transition-transform ease-in-out ${
+          homeSwitch ? "translate-x-0" : "translate-x-[-50%]"
+        }`}
+      >
         {isLoading ? (
           <div>Loading...</div>
         ) : (
           <>
-            {!homeSwitch ? (
+            <div className="z-[-1] w-screen">
+              {profile.homeId ? (
+                <div
+                  onClick={handleHomeLessClick}
+                  className={`h-screen w-full transition-all`}
+                >
+                  <HomeDashboard />
+                </div>
+              ) : (
+                <div>
+                  <HomeLess />
+                </div>
+              )}
+            </div>
+            <div
+              onClick={handleProfileDashboardClick}
+              className={`h-screen w-screen transition-all`}
+            >
+              <PersonalDashboard />
+            </div>
+          </>
+        )}
+      </div> */}
+      <div
+        className={`h-screen grid grid-rows-2 gap-0 transition-transform ease-in-out ${
+          homeSwitch ? "translate-y-0" : "translate-y-[-100%]"
+        }`}
+      >
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <div className="">
+            {profile.homeId ? (
               <div
-                onClick={handleProfileDashboardClick}
-                className={`transition-all`}
+                className={`transition-transform ease-in-out `}
+                onClick={handleHomeLessClick}
               >
-                <PersonalDashboard />
+                <HomeDashboard />
               </div>
             ) : (
               <div>
-                {profile.homeId ? (
-                  <div
-                    onClick={handleHomeLessClick}
-                    className={`transition-all`}
-                  >
-                    <HomeDashboard />
-                  </div>
-                ) : (
-                  <div>
-                    <HomeLess />
-                  </div>
-                )}
+                <HomeLess />
               </div>
             )}
-          </>
+            <div
+              className={`transition-transform ease-in-out`}
+              onClick={handleProfileDashboardClick}
+            >
+              <PersonalDashboard />
+            </div>
+          </div>
         )}
       </div>
     </>

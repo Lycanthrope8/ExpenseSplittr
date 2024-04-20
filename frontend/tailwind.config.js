@@ -1,5 +1,7 @@
+
 const { keyframes } = require("@emotion/react");
 const withMT = require("@material-tailwind/react/utils/withMT");
+const { Translate } = require("@mui/icons-material");
 
 // module.exports = {
 //   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -98,6 +100,34 @@ module.exports = withMT({
       backgroundImage: {
         'hero-pattern':
           "url('https://demos.wrappixel.com/premium-admin-templates/react/flexy-react/main/static/media/welcome-bg-2x-svg.25338f53.svg')",
+      },
+      keyframes: {
+        moveleftpersonal: {
+          '0%': { transform: 'translateX(100%)' },
+          '50%': { transform: 'translateX(50%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        moverightpersonal: {
+          '0%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(50%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        movelefthome: {
+          '0%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        moverighthome: {
+          '0%': { transform: 'translateX(-100%)' },
+          '50%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        moveleftpersonal: 'moveleftpersonal 0.2s ease-out',
+        moverightpersonal: 'moverightpersonal 0.2s ease-out',
+        movelefthome: 'movelefthome 0.2s ease-out',
+        moverighthome: 'moverighthome 0.2s ease-out',
       },
     },
   },
