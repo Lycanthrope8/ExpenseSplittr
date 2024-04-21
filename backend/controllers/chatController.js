@@ -92,39 +92,71 @@ const fetchChats = asyncHandler(async (req, res) => {
 //@route           POST /api/chat/group
 //@access          Protected
 const createGroupChat = asyncHandler(async (req, res) => {
-  if (!req.body.users || !req.body.name) {
-    return res.status(400).send({ message: "Please Fill all the feilds" });
-  }
+    if (!req.body.users || !req.body.name) {
+        return res.status(400).send({ message: "Please Fill all the fields" });
+    }
 
-  var users = JSON.parse(req.body.users);
+    var users = JSON.parse(req.body.users);
 
-  if (users.length < 2) {
-    return res
-      .status(400)
-      .send("More than 2 users are required to form a group chat");
-  }
+    if (users.length < 2) {
+        return res.status(400).send("More than 2 users are required to form a group chat");
+    }
 
-  users.push(req.user);
+    // Fetch users excluding the password field
+    const populatedUsers = await User.find({ _id: { $in: users } }).select('-password');
 
-  try {
-    const groupChat = await Chat.create({
-      chatName: req.body.name,
-      users: users,
-      isGroupChat: true,
-      groupAdmin: req.user,
+    // Filter out the password field from the result
+    const filteredUsers = populatedUsers.map(user => {
+        const { password, ...userWithoutPassword } = user.toObject();
+        return userWithoutPassword;
     });
 
-    const fullGroupChat = await Chat.findOne({ _id: groupChat._id })
-      .populate("users", "-password")
-      .populate("groupAdmin", "-password");
+    // Add the current user to the list of users
+    filteredUsers.push(req.user);
 
-    res.status(200).json(fullGroupChat);
-  } catch (error) {
-    res.status(400);
-    throw new Error(error.message);
-  }
+    try {
+        const groupChat = await Chat.create({
+            chatName: req.body.name,
+            users: filteredUsers,
+            isGroupChat: true,
+            groupAdmin: req.user,
+        });
+        console.log(groupChat);
+        // Populate name, avatar for users
+        const userProfilePromises = groupChat.users.map(async (user) => {
+            const userProfile = await UserProfile.findOne({ userId: user._id }).select("name avatar");
+            const userEmail = await User.findOne({ _id: user._id }).select("email");
+            return {
+                _id: user._id,
+                email: userEmail.email,
+                name: userProfile ? userProfile.name : 'Unknown',
+                avatar: userProfile ? userProfile.avatar : '',
+            };
+        });
+
+        // Populate name, avatar for groupAdmin
+        const groupAdminProfile = await UserProfile.findOne({ userId: req.user._id }).select("name avatar");
+        const groupAdminEmail = await User.findOne({ _id: req.user._id }).select("email");
+        // Update groupAdmin with name, avatar
+        const fullGroupChat = {
+            ...groupChat.toObject(),
+            users: await Promise.all(userProfilePromises),
+            groupAdmin: {
+                _id: req.user._id,
+                email: groupAdminEmail.email,
+                name: groupAdminProfile ? groupAdminProfile.name : 'Unknown',
+                avatar: groupAdminProfile ? groupAdminProfile.avatar : '',
+            }
+        };
+
+        res.status(200).json(fullGroupChat);
+    } catch (error) {
+        res.status(400);
+        throw new Error(error.message);
+    }
 });
 
+          
 // @desc    Rename Group
 // @route   PUT /api/chat/rename
 // @access  Protected
