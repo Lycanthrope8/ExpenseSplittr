@@ -1,79 +1,93 @@
 const asyncHandler = require("express-async-handler");
 const Chat = require("../models/chatModel");
 const User = require("../models/userModel");
+const UserProfile = require("../models/userProfileModel");
 
 //@description     Create or fetch One to One Chat
 //@route           POST /api/chat/
 //@access          Protected
 const accessChat = asyncHandler(async (req, res) => {
-  const { userId } = req.body;
-
-  if (!userId) {
-    console.log("UserId param not sent with request");
-    return res.sendStatus(400);
-  }
-
-  var isChat = await Chat.find({
-    isGroupChat: false,
-    $and: [
-      { users: { $elemMatch: { $eq: req.user._id } } },
-      { users: { $elemMatch: { $eq: userId } } },
-    ],
-  })
-    .populate("users", "-password")
-    .populate("latestMessage");
-
-  isChat = await User.populate(isChat, {
-    path: "latestMessage.sender",
-    select: "name pic email",
-  });
-
-  if (isChat.length > 0) {
-    res.send(isChat[0]);
-  } else {
-    var chatData = {
-      chatName: "sender",
-      isGroupChat: false,
-      users: [req.user._id, userId],
-    };
-
-    try {
-      const createdChat = await Chat.create(chatData);
-      const FullChat = await Chat.findOne({ _id: createdChat._id }).populate(
-        "users",
-        "-password"
-      );
-      res.status(200).json(FullChat);
-    } catch (error) {
-      res.status(400);
-      throw new Error(error.message);
+    const { userId } = req.body;
+  
+    if (!userId) {
+      console.log("UserId param not sent with request");
+      return res.sendStatus(400);
     }
-  }
-});
-
-//@description     Fetch all chats for a user
+  
+    var isChat = await Chat.find({
+      isGroupChat: false,
+      $and: [
+        { users: { $elemMatch: { $eq: req.user._id } } },
+        { users: { $elemMatch: { $eq: userId } } },
+      ],
+    })
+      .populate("users", "-password")
+      .populate("latestMessage");
+  
+    isChat = await User.populate(isChat, {
+      path: "latestMessage.sender",
+      select: "name pic email",
+    });
+  
+    // Fetch user profile for both users
+    const userProfilePromises = isChat[0].users.map(async (user) => {
+      const userProfile = await UserProfile.findOne({ userId: user._id }).select("name avatar");
+      return {
+        _id: user._id,
+        email: user.email,
+        name: userProfile ? userProfile.name : 'Unknown',
+        avatar: userProfile ? userProfile.avatar : '',
+      };
+    });
+  
+    const usersWithProfile = await Promise.all(userProfilePromises);
+  
+    // Update chat object with users' profiles
+    const updatedChat = {
+      ...isChat[0].toObject(),
+      users: usersWithProfile,
+    };
+  
+    res.status(200).json(updatedChat);
+  });
+  //@description     Fetch all chats for a user
 //@route           GET /api/chat/
 //@access          Protected
 const fetchChats = asyncHandler(async (req, res) => {
-  try {
-    Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
-      .populate("users", "-password")
-      .populate("groupAdmin", "-password")
-      .populate("latestMessage")
-      .sort({ updatedAt: -1 })
-      .then(async (results) => {
-        results = await User.populate(results, {
-          path: "latestMessage.sender",
-          select: "name pic email",
-        });
-        res.status(200).send(results);
-      });
-  } catch (error) {
-    res.status(400);
-    throw new Error(error.message);
-  }
-});
+    try {
+        const chats = await Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+            .populate("users", "-password")
+            .populate("groupAdmin", "-password")
+            .populate("latestMessage")
+            .sort({ updatedAt: -1 });
 
+        const chatsWithProfile = await Promise.all(
+            chats.map(async (chat) => {
+                const usersWithProfile = await Promise.all(
+                    chat.users.map(async (user) => {
+                        const userProfile = await UserProfile.findOne({ userId: user._id }).select("name avatar");
+                        return {
+                            _id: user._id,
+                            email: user.email,
+                            name: userProfile ? userProfile.name : 'Unknown', // Handle null userProfile
+                            avatar: userProfile ? userProfile.avatar : '',
+                        };
+                    })
+                );
+
+                return {
+                    ...chat.toObject(),
+                    users: usersWithProfile,
+                };
+            })
+        );
+
+        res.status(200).send(chatsWithProfile);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+});
+  
 //@description     Create New Group Chat
 //@route           POST /api/chat/group
 //@access          Protected
