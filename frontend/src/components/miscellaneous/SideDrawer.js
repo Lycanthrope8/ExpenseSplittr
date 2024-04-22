@@ -1,14 +1,14 @@
-import { Button } from "@chakra-ui/button";
-import { useDisclosure } from "@chakra-ui/hooks";
-import { Input } from "@chakra-ui/input";
-import { Box, Text } from "@chakra-ui/layout";
+import { Button } from '@chakra-ui/react'
+import { useDisclosure } from '@chakra-ui/react'
+import { Input } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import {
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
-} from "@chakra-ui/menu";
+} from "@chakra-ui/react";
 import {
   Drawer,
   DrawerBody,
@@ -22,7 +22,7 @@ import { Avatar } from "@chakra-ui/avatar";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { useToast } from "@chakra-ui/toast";
+import { useToast } from "@chakra-ui/react";
 import ChatLoading from "../ChatLoading";
 import { Spinner } from "@chakra-ui/spinner";
 import ProfileModal from "./ProfileModal";
@@ -141,9 +141,7 @@ function SideDrawer() {
             </Text>
           </Button>
         </Tooltip>
-        <Text fontSize="2xl" fontFamily="Work sans">
-          Talk-A-Tive
-        </Text>
+        
         <div>
           <Menu>
             <MenuButton p={1}>

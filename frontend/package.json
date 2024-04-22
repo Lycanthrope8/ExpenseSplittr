@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -37,11 +38,11 @@
     "react-dom": "^18.1.0",
     "react-mentions": "^4.4.10",
     "react-minimal-pie-chart": "^8.4.0",
+    "react-notification-badge": "^1.5.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
-    "sonner": "^1.4.32",
-    "web-vitals": "^2.1.4"
+    "sonner": "^1.4.32"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -68,6 +69,7 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "web-vitals": "^3.5.2"
   }
 }
