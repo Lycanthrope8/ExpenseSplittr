@@ -7,29 +7,29 @@ const UserProfile = require("../models/userProfileModel");
 //@route           POST /api/chat/
 //@access          Protected
 const accessChat = asyncHandler(async (req, res) => {
-    const { userId } = req.body;
-  
-    if (!userId) {
-      console.log("UserId param not sent with request");
-      return res.sendStatus(400);
-    }
-  
-    var isChat = await Chat.find({
-      isGroupChat: false,
-      $and: [
-        { users: { $elemMatch: { $eq: req.user._id } } },
-        { users: { $elemMatch: { $eq: userId } } },
-      ],
-    })
-      .populate("users", "-password")
-      .populate("latestMessage");
-  
-    isChat = await User.populate(isChat, {
-      path: "latestMessage.sender",
-      select: "name avatar email",
-    });
-  
-    // Fetch user profile for both users
+  const { userId } = req.body;
+
+  if (!userId) {
+    console.log("UserId param not sent with request");
+    return res.sendStatus(400);
+  }
+
+  let isChat = await Chat.find({
+    isGroupChat: false,
+    $and: [
+      { users: { $elemMatch: { $eq: req.user._id } } },
+      { users: { $elemMatch: { $eq: userId } } },
+    ],
+  })
+    .populate("users", "-password")
+    .populate("latestMessage");
+
+  isChat = await User.populate(isChat, {
+    path: "latestMessage.sender",
+    select: "email",
+  });
+
+  if (isChat.length > 0) {
     const userProfilePromises = isChat[0].users.map(async (user) => {
       const userProfile = await UserProfile.findOne({ userId: user._id }).select("name avatar");
       return {
@@ -39,17 +39,53 @@ const accessChat = asyncHandler(async (req, res) => {
         avatar: userProfile ? userProfile.avatar : '',
       };
     });
-  
+
     const usersWithProfile = await Promise.all(userProfilePromises);
-  
-    // Update chat object with users' profiles
+
     const updatedChat = {
       ...isChat[0].toObject(),
       users: usersWithProfile,
     };
-  
+
     res.status(200).json(updatedChat);
-  });
+  } else {
+    const chatData = {
+      chatName: "sender",
+      isGroupChat: false,
+      users: [userId,req.user._id],
+    };
+
+    try {
+      const createdChat = await Chat.create(chatData);
+      const FullChat = await Chat.findOne({ _id: createdChat._id }).populate(
+        "users",
+        "-password"
+      );
+
+      const userProfilePromises = FullChat.users.map(async (user) => {
+        const userProfile = await UserProfile.findOne({ userId: user._id }).select("name avatar");
+        return {
+          _id: user._id,
+          email: user.email,
+          name: userProfile ? userProfile.name : 'Unknown',
+          avatar: userProfile ? userProfile.avatar : '',
+        };
+      });
+
+      const usersWithProfile = await Promise.all(userProfilePromises);
+
+      const updatedChat = {
+        ...FullChat.toObject(),
+        users: usersWithProfile,
+      };
+
+      res.status(200).json(updatedChat);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  }
+});
+
   //@description     Fetch all chats for a user
 //@route           GET /api/chat/
 //@access          Protected

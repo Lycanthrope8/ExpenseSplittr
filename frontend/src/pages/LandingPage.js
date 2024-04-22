@@ -12,7 +12,6 @@ const LandingPage = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [homeSwitch, setHomeSwitch] = useState(true);
-
   useEffect(() => {
     if (user && profile) {
       setIsLoading(false);

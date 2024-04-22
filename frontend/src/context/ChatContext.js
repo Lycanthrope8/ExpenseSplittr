@@ -13,6 +13,7 @@ export const ChatContextProvider = ({ children }) => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'))
+    
     setUser(user);
 
     if (!user) navigate("/");

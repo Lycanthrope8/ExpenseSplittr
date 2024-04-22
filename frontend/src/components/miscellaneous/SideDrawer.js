@@ -50,10 +50,7 @@ function SideDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
-  const logoutHandler = () => {
-    localStorage.removeItem("userInfo");
-    navigate("/");
-  };
+  
 
   const handleSearch = async () => {
     if (!search) {
@@ -77,9 +74,10 @@ function SideDrawer() {
       };
 
       const { data } = await axios.get(`/api/user/getalluser?search=${search}`, config);
-
+      // console.log(data);
       setLoading(false);
       setSearchResult(data);
+      // onClose();
     } catch (error) {
       toast({
         title: "Error Occured!",
@@ -204,11 +202,11 @@ function SideDrawer() {
             {loading ? (
               <ChatLoading />
             ) : (
-              searchResult?.map((users) => (
+              searchResult?.map((user) => (
                 <UserListItem
-                  key={users._id}
-                  user={users}
-                  handleFunction={() => accessChat(users._id)}
+                  key={user._id}
+                  user={user}
+                  handleFunction={() => accessChat(user._id)}
                 />
               ))
             )}
