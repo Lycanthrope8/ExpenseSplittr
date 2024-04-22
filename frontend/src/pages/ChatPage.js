@@ -14,7 +14,7 @@ export const ChatPage = () => {
     <div style={{ width: "100%" }}>
       <h1>Chat Page</h1>
       {user && <SideDrawer />}
-      <Box>
+      <Box d="flex" justifyContent="space-between" w="100%" h="91.5vh" p="10px">
         {user && <MyChats fetchAgain={fetchAgain} />}
         {user && (
           <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />

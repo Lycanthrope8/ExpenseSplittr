@@ -46,7 +46,6 @@ function SideDrawer() {
     chats,
     setChats,
   } = ChatState();
-
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
@@ -77,7 +76,7 @@ function SideDrawer() {
         },
       };
 
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
+      const { data } = await axios.get(`/api/user/getalluser?search=${search}`, config);
 
       setLoading(false);
       setSearchResult(data);
@@ -94,7 +93,7 @@ function SideDrawer() {
   };
 
   const accessChat = async (userId) => {
-    console.log(userId);
+    // console.log(userId);
 
     try {
       setLoadingChat(true);
@@ -168,7 +167,7 @@ function SideDrawer() {
               ))}
             </MenuList>
           </Menu>
-          <Menu>
+          {/* <Menu>
             <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
               <Avatar
                 size="sm"
@@ -184,7 +183,7 @@ function SideDrawer() {
               <MenuDivider />
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </MenuList>
-          </Menu>
+          </Menu> */}
         </div>
       </Box>
 
@@ -205,11 +204,11 @@ function SideDrawer() {
             {loading ? (
               <ChatLoading />
             ) : (
-              searchResult?.map((user) => (
+              searchResult?.map((users) => (
                 <UserListItem
-                  key={user._id}
-                  user={user}
-                  handleFunction={() => accessChat(user._id)}
+                  key={users._id}
+                  user={users}
+                  handleFunction={() => accessChat(users._id)}
                 />
               ))
             )}
