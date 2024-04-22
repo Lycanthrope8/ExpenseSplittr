@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 // pages & components
 
@@ -14,7 +14,7 @@ import { ExploreAllHome } from "./pages/ExploreAllHome";
 import { HomeDetails } from "./pages/HomeDetails";
 import { PersonalDashboard } from "./pages/PersonalDashboard";
 import { JoinedHomeDetails } from "./pages/JoinedHomeDetails";
-import { Chat } from "./pages/Chat";
+import { ChatPage } from "./pages/ChatPage";
 import { HomeDetailsOwner } from "./pages/HomeDetailsOwner";
 import { RequestedMemberProfilePage } from "./components/RequestedMemberProfilePage";
 import { DebtorCreditor } from "./pages/DebtorCreditor";
@@ -26,7 +26,6 @@ function App() {
   const { user } = useAuthContext();
   return (
     <div className="App">
-      <BrowserRouter>
         {/* <Navbar /> */}
         <div className="flex">
           {user ? <Sidebar /> : null}
@@ -42,7 +41,7 @@ function App() {
               />
               <Route
                 path="/chat/"
-                element={user ? <Chat /> : <Navigate to="/" />}
+                element={user ? <ChatPage /> : <Navigate to="/" />}
               />
               <Route
                 path="/home/createHome/"
@@ -106,7 +105,7 @@ function App() {
             </Routes>
           </div>
         </div>
-      </BrowserRouter>
+      
     </div>
   );
 }
