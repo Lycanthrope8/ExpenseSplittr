@@ -52,7 +52,7 @@ const accessChat = asyncHandler(async (req, res) => {
     const chatData = {
       chatName: "sender",
       isGroupChat: false,
-      users: [userId,req.user._id],
+      users: [userId, req.user._id],
     };
 
     try {
