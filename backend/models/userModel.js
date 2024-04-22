@@ -15,7 +15,6 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
-    select: false,
   },
 });
 
@@ -48,14 +47,18 @@ userSchema.statics.signup = async function (email, password) {
 
 // static login method
 userSchema.statics.login = async function (email, password) {
+
   if (!email || !password) {
     throw Error("Email and Password are required");
   }
   const user = await this.findOne({ email });
+  console.log(user)
   if (!user) {
     throw Error("Incorrect Email");
   }
+  // console.log(password, user.password);
   const match = await bcrypt.compare(password, user.password);
+  
   if (!match) {
     throw Error("Incorrect Password");
   }
