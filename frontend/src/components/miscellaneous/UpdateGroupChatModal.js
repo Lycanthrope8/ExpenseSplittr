@@ -46,7 +46,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.get(`/api/user?search=${search}`, config);
+      const { data } = await axios.get(`/api/user/getalluser?search=${search}`, config);
       console.log(data);
       setLoading(false);
       setSearchResult(data);
@@ -112,8 +112,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       });
       return;
     }
-
-    if (selectedChat.groupAdmin._id !== user._id) {
+    if (selectedChat.groupAdmin._id !== user.userId) {
       toast({
         title: "Only admins can add someone!",
         status: "error",
@@ -123,7 +122,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       });
       return;
     }
-
+    console.log("Step 2")
     try {
       setLoading(true);
       const config = {
@@ -131,6 +130,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
+      console.log(selectedChat._id, user1._id);
       const { data } = await axios.put(
         `/api/chat/groupadd`,
         {
@@ -139,7 +139,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
         config
       );
-
+      
       setSelectedChat(data);
       setFetchAgain(!fetchAgain);
       setLoading(false);
@@ -158,7 +158,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
   };
 
   const handleRemove = async (user1) => {
-    if (selectedChat.groupAdmin._id !== user._id && user1._id !== user._id) {
+    if (selectedChat.groupAdmin._id !== user.userId && user1._id !== user.userId) {
       toast({
         title: "Only admins can remove someone!",
         status: "error",
@@ -184,7 +184,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
         config
       );
-
+      
       user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
       setFetchAgain(!fetchAgain);
       fetchMessages();
