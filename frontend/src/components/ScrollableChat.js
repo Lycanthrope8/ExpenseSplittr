@@ -38,10 +38,10 @@ const ScrollableChat = ({ messages }) => {
     <ScrollableFeed>
       {messages &&
         messages.map((message, i) => {
-          console.log("Message sender ID:", message.sender._id);
-          console.log("User ID:", user.userId);
+          // console.log("Message sender ID:", message.sender._id);
+          // console.log("User ID:", user.userId);
           const style = getMessageStyle(message, i);
-          console.log("Computed style:", style);
+          // console.log("Computed style:", style);
           return (
             <div style={{ display: "flex" }} key={message._id}>
               {(isSameSender(messages, message, i, user.userId) ||
