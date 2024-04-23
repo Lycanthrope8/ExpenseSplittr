@@ -46,16 +46,16 @@ const ProfileForm = ({ onPictureChange }) => {
         },
       });
     }
-  
+
     const formData = new FormData();
 
-    
+
     formData.append("name", name);
     formData.append("age", age);
     formData.append("gender", gender);
     formData.append("phone", phone);
     formData.append("address", address);
-    
+
 
     // Only append avatar if it's not null
     if (avatar !== null) {
@@ -94,25 +94,25 @@ const ProfileForm = ({ onPictureChange }) => {
         setEmptyFields([]);
         setError(null);
         dispatch({ type: "SET_PROFILE", payload: json });
-  
+
         // Update profile picture URL if a new picture is uploaded
         if (json.avatar) {
           onPictureChange(json.avatar);
         }
       }
 
-      
+
 
 
     } catch (error) {
       setError("Error updating profile");
     }
 
-    
+
 
   };
 
-  
+
 
   if (loading) {
     return (
@@ -128,8 +128,8 @@ const ProfileForm = ({ onPictureChange }) => {
   return (
     <>
       <form
-      className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1"
-      onSubmit={handleSubmit}>
+        className="grid lg:grid-cols-2 m-4 gap-8 lg:w-1/2 sm:w-3/4 sm:grid-cols-1"
+        onSubmit={handleSubmit}>
         {/* <Box sx={{width: '100%'}}>
           <LinearProgressWithLabel value={value} />
         </Box> */}

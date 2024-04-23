@@ -91,26 +91,26 @@ const Sidebar = ({ active }) => {
             </h1>
           </li>
           <li
-            className={`flex items-center justify-evenly text-text px-4 py-4 my-1 font-medium rounded-md cursor-pointer transition-color
+            className={`flex items-center justify-evenly text-text/50 px-4 py-4 my-1 font-medium rounded-md cursor-pointer transition-color
                         ${active
                 ? "bg-blue-gray-800 text-white"
-                : "hover:bg-blue-gray-800 hover:text-white"
+                : null // "hover:bg-blue-gray-800 hover:text-white"
               }
                         `}
           >
             <span className="material-symbols-rounded text-4xl">add_task</span>
             <h1
-              className={`flex items-center text-lg overflow-hidden mb-[-8px] transition-all ${expanded ? "w-32 ml-3" : "w-0"
+              className={`flex items-center text-lg overflow-hidden mb-[-4px] transition-all ${expanded ? "w-32 ml-3" : "w-0"
                 }`}
             >
               Task
             </h1>
           </li>
           <li
-            className={`flex items-center justify-evenly text-text px-4 py-4 my-1 font-medium rounded-md cursor-pointer transition-color
+            className={`flex items-center justify-evenly text-text/50 px-4 py-4 my-1 font-medium rounded-md cursor-pointer transition-color
                         ${active
                 ? "bg-blue-gray-800 text-white"
-                : "hover:bg-blue-gray-800 hover:text-white"
+                : null // "hover:bg-blue-gray-800 hover:text-white"
               }
                         `}
           >

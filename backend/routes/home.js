@@ -7,7 +7,7 @@ const router = express.Router()
 // requireAuth middleware is used to protect the routes
 router.use(requireAuth)
 // Controller functions
-const { getHomeById, createHome, getAllHomes, updateHomeById, updateMembersById ,joinReqHome , acceptUserRequest, rejectUserRequest, homeMateRetrival } = require('../controllers/homeController');
+const { getHomeById, createHome, getAllHomes, updateHomeById, updateMembersById, joinReqHome, acceptUserRequest, rejectUserRequest, homeMateRetrival } = require('../controllers/homeController');
 
 router.post('/createHome', createHome);
 router.get('/all', getAllHomes);

@@ -78,7 +78,7 @@ const HomePendingRequests = ({ pendingMembers }) => {
           Authorization: `Bearer ${user.token}`,
         },
       });
-      
+
       const data = await response.json();
       if (response.ok) {
         dispatch({ type: "REJECT_USER_REQUEST", payload: data });
@@ -89,12 +89,11 @@ const HomePendingRequests = ({ pendingMembers }) => {
       console.error("Error rejecting user request:", error);
     }
   };
-
   return (
-    <div className="p-4">
+  <div className="p-4">
       <h2 className="text-text text-4xl mb-4 text-center">Pending Requests</h2>
       <ul className="border-1 border-border rounded-lg p-4 mb-2">
-        {pendingMembers &&
+        {(pendingMembers.length > 0) ? (
           pendingMembers.map((member, index) => (
             <li className="text-text text-2xl flex justify-between" key={index}>
               <h1 className="flex items-center gap-16" >
@@ -107,7 +106,7 @@ const HomePendingRequests = ({ pendingMembers }) => {
                 <button className="px-4 py-2 rounded-md hover:bg-secondary" onClick={() => handleReject(member, homeId)}>Reject</button>
               </div>
             </li>
-          ))}
+          ))) : (<h1 className="text-xl text-text text-center">No pending requests for now</h1>)}
       </ul>
     </div>
   );

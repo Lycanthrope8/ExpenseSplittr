@@ -98,14 +98,14 @@ export const Home = () => {
 
   return (
     <>
-      <div className="grid grid-cols-2 border-b-2 border-border mb-4">
-        <div className="flex items-center justify-center p-4 hover:bg-secondary/80 rounded-md transition-colors" onClick={handleHomeDetails}>
-          <span className="material-symbols-outlined mr-8 text-text text-3xl ">home</span>
-          <h1 className="mb-[-4px] text-text text-3xl text-center cursor-pointer">View Home details</h1>
+      <div className="grid grid-cols-2 border-b-2 border-border mb-4 pt-4">
+        <div className="flex items-center justify-center p-4 hover:bg-secondary/80 rounded-md transition-colors cursor-pointer" onClick={handleHomeDetails}>
+          <span className="material-symbols-outlined mr-8 text-text text-4xl ">home</span>
+          <h1 className="mb-[-4px] text-text text-3xl text-center ">View Home details</h1>
         </div>
-        <div className="flex items-center justify-center p-4 hover:bg-secondary/80 rounded-md transition-colors" onClick={handleDebtorCreditorDetails}>
-          <span className="material-symbols-outlined mr-8 text-text text-3xl ">partner_exchange</span>
-          <h1 className="mb-[-4px] text-text text-3xl text-center cursor-pointer">View Debt/Creditor details</h1>
+        <div className="flex items-center justify-center p-4 hover:bg-secondary/80 rounded-md transition-colors cursor-pointer" onClick={handleDebtorCreditorDetails}>
+          <span className="material-symbols-outlined mr-8 text-text text-4xl ">partner_exchange</span>
+          <h1 className="mb-[-4px] text-text text-3xl text-center ">View Debt/Creditor details</h1>
         </div>
       </div>
 
