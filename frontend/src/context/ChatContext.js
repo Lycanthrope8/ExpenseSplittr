@@ -13,12 +13,12 @@ export const ChatContextProvider = ({ children }) => {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'))
-    
+
     setUser(user);
 
     if (!user) navigate("/");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navigate]);
+  }, []);
 
   return (
     <ChatContext.Provider

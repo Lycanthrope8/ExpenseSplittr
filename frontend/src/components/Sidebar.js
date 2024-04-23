@@ -26,6 +26,7 @@ const Sidebar = ({ active }) => {
 
   const handleClick = () => {
     logout();
+    // navigate("/");
   };
   return (
     <div

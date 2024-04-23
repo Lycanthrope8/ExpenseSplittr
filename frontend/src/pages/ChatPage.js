@@ -10,8 +10,8 @@ export const ChatPage = () => {
   const { user } = ChatState();
 
   return (
-    
-    <div style={{ width: "100%" }}>
+
+    <div className='ml-[60px]'>
       <h1>Chat Page</h1>
       {user && <SideDrawer />}
       <Box d="flex" justifyContent="space-between" w="100%" h="91.5vh" p="10px">
