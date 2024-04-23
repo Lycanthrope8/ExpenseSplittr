@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo, useCallback } from "react";
 import {
   GoogleMap,
   Marker,
@@ -17,7 +17,19 @@ import {
 //     const home: Array<LatlngLiteral> = [];
 // }
 export const Map = () => {
-  const center = { lat: 40.7128, lng: -74.006 };
+  const mapRef = useRef(null);
+  const center = useMemo(() => ({ lat: 43, lng: -80 }), []);
+  const options = useMemo(
+    () => ({
+      mapId: "92273de6b6ac3dd1",
+      disableDefaultUI: true,
+      clickableIcons: false,
+    }),
+    []
+  );
+  const onLoad = useCallback((map) => {
+    mapRef.current = map;
+  }, []);
   return (
     <div className="flex">
       <div className="controls w-[20%] p-1 bg-black text-text">
@@ -25,24 +37,12 @@ export const Map = () => {
       </div>
       <div className="map w-[80%] h-[20vh]">
         <GoogleMap
-          id="marker-example"
           zoom={10}
-          mapContainerStyle={{
-            height: "100%",
-            width: "100%",
-          }}
-          center={{
-            lat: 40.7128,
-            lng: -74.006,
-          }}
-        >
-          <Marker
-            position={{
-              lat: 40.7128,
-              lng: -74.006,
-            }}
-          />
-        </GoogleMap>
+          center={center}
+          mapContainerClassName="width-full h-full"
+          options={options}
+          onLoad={onLoad}
+        ></GoogleMap>
       </div>
     </div>
   );

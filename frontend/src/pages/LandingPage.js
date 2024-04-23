@@ -62,7 +62,7 @@ const LandingPage = () => {
       t1.to(box.current, {
         opacity: 0,
         display: "none",
-        duration: 2,
+        duration: 1,
         delay: 0.3,
       });
     }, box);
