@@ -1,5 +1,5 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
+import React from "react";
 // import "./index.css";
 import "./indextw.css";
 import App from "./App";
@@ -14,10 +14,10 @@ import { HomeTaskProvider } from "./context/HomeTaskContext";
 import { DebtCreditProvider } from "./context/DebtCreditContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-      {/* <ThemeProvider> */}
       <ProfileContextProvider>
         <HomeContextProvider>
           <PersonalExpenseProvider>
@@ -33,7 +33,6 @@ root.render(
           </PersonalExpenseProvider>
         </HomeContextProvider>
       </ProfileContextProvider>
-      {/* </ThemeProvider> */}
     </AuthContextProvider>
   </React.StrictMode>
 );

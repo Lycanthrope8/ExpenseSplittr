@@ -1,7 +1,9 @@
-import { useState,  useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProfileContext } from "../context/ProfileContext";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useLoadScript } from "@react-google-maps/api";
+import { Map } from "../components/Map";
 import { Checkbox } from "@mui/material";
 import grey from "@mui/material/colors/grey";
 
@@ -73,20 +75,27 @@ const CreateHomeForm = () => {
           type: "UPDATE_PROFILE",
           payload: { homeId: json.savedHome.home_id },
         });
-        navigate("/home/createHome/uploadImages", { state: { homeId: json.savedHome.home_id } });  // Redirect to home page after successful creation
+        navigate("/home/createHome/uploadImages", {
+          state: { homeId: json.savedHome.home_id },
+        }); // Redirect to home page after successful creation
       }
     } catch (error) {
       setError("Error creating Home");
       setButtonLabel("Create Home"); // Change button label back to "Create Home" in case of error
     }
   };
-
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.MAPAPIKEY,
+    libraries: ["places"],
+  });
   return (
     <div className="flex flex-col justify-center text-text">
       <h1 className="text-center text-4xl font-bold mb-8">Create Home</h1>
+      <Map />
       <form
-      className="grid lg:grid-cols-2 m-4 gap-8 lg:w-2/3 sm:w-3/4 sm:grid-cols-1 mx-auto"
-      onSubmit={handleSubmit}>
+        className="grid lg:grid-cols-2 m-4 gap-8 lg:w-2/3 sm:w-3/4 sm:grid-cols-1 mx-auto"
+        onSubmit={handleSubmit}
+      >
         {/* Input fields */}
         {/* Name */}
         <div className="flex items-center justify-between lg:col-span-1 sm:col-span-1">
@@ -165,9 +174,12 @@ const CreateHomeForm = () => {
               type="checkbox"
               name="utilitiesIncluded"
               checked={utilitiesIncluded}
-              sx={{color: grey[300],
-                '&.Mui-checked': {
-                color: grey[300],}}}
+              sx={{
+                color: grey[300],
+                "&.Mui-checked": {
+                  color: grey[300],
+                },
+              }}
               size="large"
               onChange={(e) => setUtilitiesIncluded(e.target.checked)}
             />
@@ -181,9 +193,12 @@ const CreateHomeForm = () => {
               type="checkbox"
               name="furnished"
               checked={furnished}
-              sx={{color: grey[300],
-                '&.Mui-checked': {
-                color: grey[300],}}}
+              sx={{
+                color: grey[300],
+                "&.Mui-checked": {
+                  color: grey[300],
+                },
+              }}
               size="large"
               onChange={(e) => setFurnished(e.target.checked)}
             />
@@ -197,9 +212,12 @@ const CreateHomeForm = () => {
               type="checkbox"
               name="petsAllowed"
               checked={petsAllowed}
-              sx={{color: grey[300],
-                '&.Mui-checked': {
-                color: grey[300],}}}
+              sx={{
+                color: grey[300],
+                "&.Mui-checked": {
+                  color: grey[300],
+                },
+              }}
               size="large"
               onChange={(e) => setPetsAllowed(e.target.checked)}
             />
@@ -213,9 +231,12 @@ const CreateHomeForm = () => {
               type="checkbox"
               name="smokingAllowed"
               checked={smokingAllowed}
-              sx={{color: grey[500],
-                '&.Mui-checked': {
-                color: grey[500],}}}
+              sx={{
+                color: grey[500],
+                "&.Mui-checked": {
+                  color: grey[500],
+                },
+              }}
               size="large"
               onChange={(e) => setSmokingAllowed(e.target.checked)}
             />
@@ -232,7 +253,7 @@ const CreateHomeForm = () => {
             className="w-4/6 p-2 bg-transparent text-text border-1 border-border rounded-md"
           />
         </div>
-        
+
         {/* House Rules */}
         <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
           <label className="text-text text-2xl mr-4">House Rules:</label>

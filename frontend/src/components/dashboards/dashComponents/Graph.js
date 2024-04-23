@@ -10,10 +10,12 @@ import {
   Title,
   Tooltip,
   Legend,
+  scales,
+  layouts,
 } from "chart.js";
 import { Line, Doughnut, Bar } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import moment from "moment";
+import moment, { min } from "moment";
 
 ChartJS.register(
   CategoryScale,
@@ -98,10 +100,10 @@ export const Graph = ({ expenses }) => {
           "rgb(54, 162, 235)",
         ],
         hoverOffset: 30,
-        datalabels: {
-          align: "end",
-          anchor: "end",
-        },
+        // datalabels: {
+        //   align: "end",
+        //   anchor: "end",
+        // },
         borderWidth: 1,
       },
     ],
@@ -120,6 +122,7 @@ export const Graph = ({ expenses }) => {
       },
       datalabels: {
         color: "hsl(0, 0%, 98%)",
+        anchor: "center",
         display: function (context) {
           return context;
         },
@@ -134,9 +137,14 @@ export const Graph = ({ expenses }) => {
       },
     },
   };
+
   const barOptions = {
-    aspectRatio: 1 | 2,
+    // aspectRatio: 1 | 2,
+    maintainAspectRatio: false,
     responsive: true,
+    layout: {
+      padding: 30,
+    },
     plugins: {
       labels: {
         render: "value",
@@ -146,6 +154,9 @@ export const Graph = ({ expenses }) => {
       },
       datalabels: {
         color: "hsl(0, 0%, 98%)",
+        clip: false,
+        anchor: "end",
+        align: "top",
         display: function (context) {
           return context;
         },
@@ -196,14 +207,14 @@ export const Graph = ({ expenses }) => {
   };
 
   return (
-    <div className="col-span-2 grid grid-cols-2 gap-4 text-text flex-1">
-      <div className="col-span-2 p-8 rounded-lg bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900">
+    <div className="col-span-2 grid grid-cols-2 gap-4 text-text">
+      <div className="pt-8 h-full col-span-2 rounded-lg bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900">
         <Bar options={barOptions} data={doughnutData} />
       </div>
-      <div className="col-span-1 p-8 rounded-lg backdrop-blur-md bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900">
+      <div className="p-8 rounded-lg backdrop-blur-md bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900">
         <Line options={options} data={weeklyData} />
       </div>
-      <div className="col-span-1 p-8 rounded-lg bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900">
+      <div className="p-8 rounded-lg bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900">
         <Line options={options} data={monthlyData} />
       </div>
     </div>

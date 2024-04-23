@@ -1,4 +1,4 @@
-import React, { useState   } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 // import CircularProgress from '@mui/material/CircularProgress';
@@ -19,21 +19,21 @@ export const HomeLess = () => {
 
   return (
     <div>
-      <div className="p-8 flex items-center justify-evenly">
+      <div className="p-8 h-screen flex items-center justify-evenly">
         <Link
-          className="px-28 py-20 text-2xl font-bold bg-secondary text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
+          className="px-28 py-20 text-2xl font-bold bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900 text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
           to="/home/createHome"
         >
           Create Home
         </Link>
         <button
-          className="px-28 py-20 text-2xl font-bold bg-secondary text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
+          className="px-28 py-20 text-2xl font-bold bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900 text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
           onClick={handleJoinClick}
         >
           Join Home
         </button>
         <Link
-          className="px-28 py-20 text-2xl font-bold bg-secondary text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
+          className="px-28 py-20 text-2xl font-bold bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900 text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
           to="/home/exploreHomes/"
         >
           Explore Homes

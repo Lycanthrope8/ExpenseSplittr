@@ -87,7 +87,7 @@ const HomeTaskForm = ({ tasks, setSortedTasks, sortOption, homeMembers }) => {
             value={title}
             placeholder="Title @..."
             onChange={(e) => {
-              console.log(e.target.value.strip(" "));
+              // console.log(e.target.value.strip(" "));
               setTitle(e.target.value);
             }}
             style={{

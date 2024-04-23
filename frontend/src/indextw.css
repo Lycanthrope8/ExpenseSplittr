@@ -10,7 +10,13 @@
     url(https://example.com/MaterialIcons-Regular.woff) format("woff"),
     url(https://example.com/MaterialIcons-Regular.ttf) format("truetype");
 }
-
+/* body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+} */
 body {
   margin: 0;
   padding: 0;
@@ -22,9 +28,10 @@ body {
   opacity: 0.8;
   background-image: radial-gradient(#202020 0.75px, #09090b 0.75px);
   background-size: 15px 15px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 ::-webkit-scrollbar {
+  display: none;
   width: 12px;
   height: 12px;
 }
