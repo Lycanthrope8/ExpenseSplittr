@@ -65,7 +65,7 @@ mongoose.connect(process.env.MONGO_URI)
     io.on("connection", (socket) => {
       console.log("Connected to socket.io");
       socket.on("setup", (userData) => {
-        console.log("UserData:",userData);
+        // console.log("UserData:",userData);
         socket.join(userData.userId);
         socket.emit("connected");
       });
@@ -79,12 +79,12 @@ mongoose.connect(process.env.MONGO_URI)
 
       socket.on("new message", (newMessageRecieved) => {
         var chat = newMessageRecieved.chat;
-        console.log("chat:", chat)
+        // console.log("chat:", chat)
         if (!chat.users) return console.log("chat.users not defined");
 
         chat.users.forEach((user) => {
           
-          console.log("user:", user )
+          // console.log("user:", user )
           console.log("newMessageRecieved.sender._id", newMessageRecieved.sender._id)
           if (user._id == newMessageRecieved.sender._id) return;
 
