@@ -34,10 +34,6 @@ const LandingPage = () => {
     navigate("/homeDashboard");
   };
 
-  const handleChatClick = () => {
-    navigate("/chat");
-  };
-
   const box = useRef();
 
   useLayoutEffect(() => {
@@ -62,7 +58,7 @@ const LandingPage = () => {
       t1.to(box.current, {
         opacity: 0,
         display: "none",
-        duration: 2,
+        duration: 1,
         delay: 0.3,
       });
     }, box);
@@ -84,7 +80,7 @@ const LandingPage = () => {
     <>
       <div
         ref={box}
-        className={`z-50 absolute flex gap-8 items-center justify-center top-0 left-0 h-screen w-screen bg-blue-gray-300/80 backdrop-blur-sm`}
+        className={`z-50 absolute flex gap-8 items-center justify-center top-0 left-0 h-screen w-screen bg-blue-gray-300/30 backdrop-blur-sm`}
       >
         <div className="flex flex-col text-text animate-mouse">
           <span className="material-symbols-outlined text-6xl">
@@ -99,13 +95,6 @@ const LandingPage = () => {
           Scroll to change dashboard
         </h1>
       </div>
-
-      <button
-        className="absolute top-10 z-40 bg-red-300 px-4 py-2 rounded-md"
-        onClick={handleChatClick}
-      >
-        CHAT
-      </button>
       {/* <div ref={box} className="flex items-center h-screen raceswrapper">
         <div className="races flex h-[50vh]">
           <h1 className="race1 w-screen bg-blue-100">RACE1</h1>
@@ -120,10 +109,9 @@ const LandingPage = () => {
           <div>Loading...</div>
         ) : (
           <div
-            className={`dashes w-full h-full grid grid-cols-2  transition-transform ease-in-out duration-300 ${
-              homeSwitch ? "translate-x-[-100vw]" : "translate-x-[0]"
-            }`}
-            // ${homeSwitch ? "translate-y-0" : "translate-y-[-50%]"}
+            className={`dashes w-full h-full grid grid-cols-2  transition-transform ease-in-out duration-300 ${homeSwitch ? "translate-x-[-100vw]" : "translate-x-[0]"
+              }`}
+          // ${homeSwitch ? "translate-y-0" : "translate-y-[-50%]"}
           >
             {profile.homeId ? (
               <div

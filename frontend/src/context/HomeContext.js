@@ -29,14 +29,14 @@ export const HomeContextProvider = ({ children }) => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
         const preResponse = await fetch(`/profile/${user.userId}`, {
-            headers: { Authorization: `Bearer ${user.token}` },
-          });
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
         const preData = await preResponse.json();
         const homeId = preData.homeId;
         const response = await fetch(`/home/${homeId}`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
-       
+
         if (!response.ok) {
           throw new Error("Failed to fetch profile");
         }
@@ -48,7 +48,7 @@ export const HomeContextProvider = ({ children }) => {
       }
     };
     fetchHome();
-  }, []); 
+  }, []);
 
   return (
     <HomeContext.Provider value={{ ...state, dispatch }}>
