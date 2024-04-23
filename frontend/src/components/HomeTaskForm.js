@@ -61,7 +61,7 @@ const HomeTaskForm = ({ tasks, setSortedTasks, sortOption, homeMembers }) => {
     }
   };
   // console.log(title.match(/[A-Za-z0-9]*@?\w+/g));
-  console.log(title.match(/[^(]+(?=\))/g));
+  // console.log(title);
   return (
     <form
       className="create flex flex-col h-max bg-main-dark-bg border-1 border-border text-white p-4 rounded-2xl"
@@ -88,7 +88,8 @@ const HomeTaskForm = ({ tasks, setSortedTasks, sortOption, homeMembers }) => {
             value={title}
             placeholder="Title @..."
             onChange={(e) => {
-              setTitle(e.target.value);
+              console.log(e.target.value);
+              setTitle((e.target.value).replace(/\@\[(.*?)\]\(.*?\)/g, '($1)'));
             }}
             style={{
               control: {
