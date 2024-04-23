@@ -13,6 +13,7 @@ const homeRoutes = require('./routes/home')
 const debtorCreditorRoutes = require('./routes/debtorCreditor')
 const adminRoutes = require('./routes/admin')
 const chatRoutes = require('./routes/chatRoutes')
+const messageRoutes = require('./routes/messageRoutes')
 const cors = require('cors')
 // express app
 const app = express()
@@ -32,6 +33,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 // routes
 app.use('/api/user', userRoutes)
 app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
 app.use('/api/personalExpenses', personalExpenseRoutes)
 app.use('/api/personalTasks', personalTaskRoutes)
 app.use('/api/homeTasks', homeTaskRoutes)
