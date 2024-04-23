@@ -26,86 +26,86 @@ function App() {
   const { user } = useAuthContext();
   return (
     <div className="App">
-        {/* <Navbar /> */}
-        <div className="flex">
-          {user ? <Sidebar /> : null}
-          <div className="pages flex-1">
-            <Routes>
-              <Route
-                path="/personalDashboard/"
-                element={user ? <PersonalDashboard /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/homeDashboard/"
-                element={user ? <Home /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/chat/"
-                element={user ? <ChatPage /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/home/createHome/"
-                element={user ? <CreateHome /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/home/createHome/uploadImages/"
-                element={user ? <UploadImagesHome /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/home/exploreHomes/"
-                element={user ? <ExploreAllHome /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/home/:id"
-                element={user ? <HomeDetails /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/homedetails/:id"
-                element={user ? <JoinedHomeDetails /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/homedetailsOwner/:id"
-                element={user ? <HomeDetailsOwner /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/homedetailsOwner/:id/requests/profile/:userId"
-                element={user ? <RequestedMemberProfilePage /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/api/debtorCreditor/:id"
-                element={user ? <DebtorCreditor /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/"
-                element={user ? <LandingPage /> : <Navigate to="/login" />}
-              />
-              <Route
-                path="/login"
-                element={!user ? <Login /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/signup"
-                element={!user ? <Signup /> : <Navigate to="/" />}
-              />
-              <Route
-                path="/profile/:userId"
-                element={
-                  user ? (
-                    <ProfileContextProvider>
-                      <Profile />
-                    </ProfileContextProvider>
-                  ) : (
-                    <Navigate to="/login" />
-                  )
-                }
-              />
-              <Route path="/admin"
-                element={user ? <Admin /> : <Navigate to="/" />}
-              />
-            </Routes>
-          </div>
+      {/* <Navbar /> */}
+      <div className="flex">
+        {user ? <Sidebar /> : null}
+        <div className="pages flex-1">
+          <Routes>
+            <Route
+              path="/personalDashboard/"
+              element={user ? <PersonalDashboard /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/homeDashboard/"
+              element={user ? <Home /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/chat/"
+              element={user ? <ChatPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/home/createHome/"
+              element={user ? <CreateHome /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/home/createHome/uploadImages/"
+              element={user ? <UploadImagesHome /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/home/exploreHomes/"
+              element={user ? <ExploreAllHome /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/home/:id"
+              element={user ? <HomeDetails /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/homedetails/:id"
+              element={user ? <JoinedHomeDetails /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/homedetailsOwner/:id"
+              element={user ? <HomeDetailsOwner /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/homedetailsOwner/:id/requests/profile/:userId"
+              element={user ? <RequestedMemberProfilePage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/api/debtorCreditor/:id"
+              element={user ? <DebtorCreditor /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/"
+              element={user ? <LandingPage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/login"
+              element={!user ? <Login /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/signup"
+              element={!user ? <Signup /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/profile/:userId"
+              element={
+                user ? (
+                  <ProfileContextProvider>
+                    <Profile />
+                  </ProfileContextProvider>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route path="/admin"
+              element={user ? <Admin /> : <Navigate to="/" />}
+            />
+          </Routes>
         </div>
-      
+      </div>
+
     </div>
   );
 }

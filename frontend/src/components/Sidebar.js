@@ -20,13 +20,16 @@ const Sidebar = ({ active }) => {
   const handleHomeClick = () => {
     navigate("/");
   };
+  const handleChatClick = () => {
+    navigate("/chat");
+  };
 
   const handleClick = () => {
     logout();
   };
   return (
     <div
-      className="inline-flex h-screen py-2 z-50"
+      className="inline-flex h-screen py-2 z-50 sticky top-0 left-0"
       onMouseEnter={() => setExpanded((curr) => !curr)}
       onMouseLeave={() => {
         setExpanded((curr) => !curr);
@@ -45,30 +48,26 @@ const Sidebar = ({ active }) => {
                         `}
           >
             <span
-              className={`mb-[-8px] transition-all ${
-                expanded ? "text-2xl" : "text-4xl"
-              }`}
+              className={`mb-[-8px] transition-all ${expanded ? "text-2xl" : "text-4xl"
+                }`}
             >
               E
             </span>
             <h1
-              className={`flex items-center text-2xl overflow-hidden mb-[-8px] transition-all ${
-                expanded ? "w-[85px]" : "w-0"
-              }`}
+              className={`flex items-center text-2xl overflow-hidden mb-[-8px] transition-all ${expanded ? "w-[85px]" : "w-0"
+                }`}
             >
               xpense
             </h1>
             <span
-              className={`mb-[-8px] transition-all ${
-                expanded ? "text-2xl" : "text-4xl"
-              }`}
+              className={`mb-[-8px] transition-all ${expanded ? "text-2xl" : "text-4xl"
+                }`}
             >
               S
             </span>
             <h1
-              className={`flex items-center text-2xl overflow-hidden mb-[-8px] transition-all ${
-                expanded ? "w-[60px]" : "w-0"
-              }`}
+              className={`flex items-center text-2xl overflow-hidden mb-[-8px] transition-all ${expanded ? "w-[60px]" : "w-0"
+                }`}
             >
               plittr
             </h1>
@@ -76,56 +75,67 @@ const Sidebar = ({ active }) => {
           <li
             onClick={handleHomeClick}
             className={`flex items-center justify-evenly text-text px-4 py-4 my-1 font-medium rounded-md cursor-pointer transition-color
-                        ${
-                          active
-                            ? "bg-blue-gray-800 text-white"
-                            : "hover:bg-blue-gray-800 hover:text-white"
-                        }
+                        ${active
+                ? "bg-blue-gray-800 text-white"
+                : "hover:bg-blue-gray-800 hover:text-white"
+              }
                         `}
           >
             <span className="material-symbols-rounded text-4xl">home</span>
             <h1
-              className={`flex items-center text-lg overflow-hidden mb-[-8px] transition-all ${
-                expanded ? "w-32 ml-3" : "w-0"
-              }`}
+              className={`flex items-center text-lg overflow-hidden mb-[-8px] transition-all ${expanded ? "w-32 ml-3" : "w-0"
+                }`}
             >
               Home
             </h1>
           </li>
           <li
             className={`flex items-center justify-evenly text-text px-4 py-4 my-1 font-medium rounded-md cursor-pointer transition-color
-                        ${
-                          active
-                            ? "bg-blue-gray-800 text-white"
-                            : "hover:bg-blue-gray-800 hover:text-white"
-                        }
+                        ${active
+                ? "bg-blue-gray-800 text-white"
+                : "hover:bg-blue-gray-800 hover:text-white"
+              }
                         `}
           >
             <span className="material-symbols-rounded text-4xl">add_task</span>
             <h1
-              className={`flex items-center text-lg overflow-hidden mb-[-8px] transition-all ${
-                expanded ? "w-32 ml-3" : "w-0"
-              }`}
+              className={`flex items-center text-lg overflow-hidden mb-[-8px] transition-all ${expanded ? "w-32 ml-3" : "w-0"
+                }`}
             >
               Task
             </h1>
           </li>
           <li
             className={`flex items-center justify-evenly text-text px-4 py-4 my-1 font-medium rounded-md cursor-pointer transition-color
-                        ${
-                          active
-                            ? "bg-blue-gray-800 text-white"
-                            : "hover:bg-blue-gray-800 hover:text-white"
-                        }
+                        ${active
+                ? "bg-blue-gray-800 text-white"
+                : "hover:bg-blue-gray-800 hover:text-white"
+              }
                         `}
           >
             <FontAwesomeIcon icon={faBangladeshiTakaSign} size="2xl" />
             <h1
-              className={`flex items-center text-lg overflow-hidden mb-[-8px] transition-all ${
-                expanded ? "w-32 ml-3" : "w-0"
-              }`}
+              className={`flex items-center text-lg overflow-hidden mb-[-8px] transition-all ${expanded ? "w-32 ml-3" : "w-0"
+                }`}
             >
               Expenses
+            </h1>
+          </li>
+          <li
+            onClick={handleChatClick}
+            className={`flex items-center justify-evenly text-text px-4 py-4 my-1 font-medium rounded-md cursor-pointer transition-color
+                        ${active
+                ? "bg-blue-gray-800 text-white"
+                : "hover:bg-blue-gray-800 hover:text-white"
+              }
+                        `}
+          >
+            <span className="material-symbols-rounded text-4xl">chat</span>
+            <h1
+              className={`flex items-center text-lg overflow-hidden mb-[-8px] transition-all ${expanded ? "w-32 ml-3" : "w-0"
+                }`}
+            >
+              Chat
             </h1>
           </li>
         </ul>
@@ -134,9 +144,8 @@ const Sidebar = ({ active }) => {
             <div className="flex items-center justify-start text-text p-4 font-medium rounded-md cursor-pointer transition-color">
               <ProfileBadge user={user} />
               <div
-                className={`flex items-center justify-between overflow-hidden transition-all static ${
-                  expanded ? "w-32 ml-3" : "w-0"
-                }`}
+                className={`flex items-center justify-between overflow-hidden transition-all static ${expanded ? "w-32 ml-3" : "w-0"
+                  }`}
               >
                 <span
                   className={`text-md overflow-hidden transition-all mb-[-4px]`}
@@ -152,11 +161,10 @@ const Sidebar = ({ active }) => {
                 </span>
                 {expanded && (
                   <div
-                    className={`absolute ml-1 left-0 bg-secondary w-max rounded-md transition-all ${
-                      more
-                        ? "bottom-24 z-0 opacity-1"
-                        : "bottom-4 z-[-1] opacity-0"
-                    }`}
+                    className={`absolute ml-1 left-0 bg-secondary w-max rounded-md transition-all ${more
+                      ? "bottom-24 z-0 opacity-1"
+                      : "bottom-4 z-[-1] opacity-0"
+                      }`}
                   >
                     <li
                       className={`flex text-xl items-center px-20 py-2 overflow-hidden rounded-tl-md rounded-tr-md hover:bg-tertiary-dark-bg transition-all`}

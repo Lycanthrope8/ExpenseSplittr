@@ -60,7 +60,8 @@ const HomeTaskForm = ({ tasks, setSortedTasks, sortOption, homeMembers }) => {
       dispatch({ type: "CREATE_TASK", payload: json });
     }
   };
-  console.log(title[0]);
+  // console.log(title.match(/[A-Za-z0-9]*@?\w+/g));
+  console.log(title.match(/[^(]+(?=\))/g));
   return (
     <form
       className="create flex flex-col h-max bg-main-dark-bg border-1 border-border text-white p-4 rounded-2xl"
@@ -87,7 +88,6 @@ const HomeTaskForm = ({ tasks, setSortedTasks, sortOption, homeMembers }) => {
             value={title}
             placeholder="Title @..."
             onChange={(e) => {
-              // console.log(e.target.value.strip(" "));
               setTitle(e.target.value);
             }}
             style={{
@@ -140,11 +140,6 @@ const HomeTaskForm = ({ tasks, setSortedTasks, sortOption, homeMembers }) => {
                 },
               },
             }}
-            // className={
-            //   emptyFields.includes("title")
-            //     ? "error"
-            //     : "p-2 bg-transparent text-text w-full border-1 border-border rounded-md"
-            // }
           >
             <Mention trigger="@" data={members} />
           </MentionsInput>
