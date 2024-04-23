@@ -88,7 +88,6 @@ const HomeTaskForm = ({ tasks, setSortedTasks, sortOption, homeMembers }) => {
             value={title}
             placeholder="Title @..."
             onChange={(e) => {
-              console.log(e.target.value);
               setTitle((e.target.value).replace(/\@\[(.*?)\]\(.*?\)/g, '($1)'));
             }}
             style={{

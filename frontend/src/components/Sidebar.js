@@ -132,7 +132,7 @@ const Sidebar = ({ active }) => {
           >
             <span className="material-symbols-rounded text-4xl">chat</span>
             <h1
-              className={`flex items-center text-lg overflow-hidden mb-[-8px] transition-all ${expanded ? "w-32 ml-3" : "w-0"
+              className={`flex items-center text-lg overflow-hidden transition-all ${expanded ? "w-32 ml-3" : "w-0"
                 }`}
             >
               Chat
