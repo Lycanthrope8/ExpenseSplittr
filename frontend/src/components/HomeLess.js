@@ -42,7 +42,7 @@ export const HomeLess = () => {
           Explore Homes
         </Link>
         {/* {enteredCode && ( */}
-        <div className={`z-0 ml-[-8px] absolute flex w-full items-center justify-center transition-all ease-out ${enteredCode ? "translate-y-40" : "translate-y-0"}`}>
+        <div className={`z-0 ml-[-12px] absolute flex w-full items-center justify-center transition-all ease-out ${enteredCode ? "translate-y-40" : "translate-y-0"}`}>
           <input
             type="text"
             placeholder="Enter Code"
