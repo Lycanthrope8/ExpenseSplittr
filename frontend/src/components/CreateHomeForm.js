@@ -111,7 +111,7 @@ const CreateHomeForm = () => {
   };
   console.log(value, { status, data });
   return (
-    <div className="flex flex-col justify-center text-text">
+    <div className="flex flex-col justify-center text-text pt-4">
       <h1 className="text-center text-4xl font-bold mb-8">Create Home</h1>
 
       <div className="grid grid-cols-12 px-40">
@@ -143,14 +143,14 @@ const CreateHomeForm = () => {
               placeholder="Location"
               className="w-full p-2 bg-transparent text-text border-1 border-border rounded-md"
             />
-            <Combobox onSelect={() => {}}>
+            {/* <Combobox onSelect={() => {}}>
               <ComboboxInput
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 placeholder="Location"
                 className="w-full p-2 bg-transparent text-text border-1 border-border rounded-md"
               />
-            </Combobox>
+            </Combobox> */}
           </div>
           {/* Accommodation Type */}
           <div className="flex items-center justify-between lg:col-span-2 sm:col-span-1">
