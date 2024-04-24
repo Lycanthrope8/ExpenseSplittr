@@ -10,6 +10,8 @@ export const HomeLess = () => {
 
 
   const handleJoinClick = () => {
+    console.log("Join Clicked");
+    console.log(enteredCode);
     setEnteredCode(!enteredCode);
   };
 
@@ -27,10 +29,11 @@ export const HomeLess = () => {
           Create Home
         </Link>
         <button
-          className="px-28 py-20 text-2xl font-bold bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900 text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
+          className="relative px-28 py-20 text-2xl font-bold bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900 text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
           onClick={handleJoinClick}
         >
           Join Home
+
         </button>
         <Link
           className="px-28 py-20 text-2xl font-bold bg-gradient-to-bl from-blue-gray-800 via-blue-gray-900 to-blue-gray-900 text-text rounded-lg hover:opacity-90 hover:rounded-3xl transition-all ease-out duration-300"
@@ -38,24 +41,25 @@ export const HomeLess = () => {
         >
           Explore Homes
         </Link>
+        {enteredCode && (
+          <div className={`absolute flex w-full items-center justify-center transition-all ease-out ${enteredCode ? "top-[65%]" : "top-[50%]"}`}>
+            <input
+              type="text"
+              placeholder="Enter Code"
+              onChange={(e) => setCodeText(e.target.value)}
+              className={`w-70 mr-2 border-2 border-border bg-transparent text-text text-lg rounded-md p-2 focus:outline-none`}
+              required
+            />
+            <button
+              onClick={handleSeeDetails}
+              className="px-2 py-3 h-full text-sm bg-secondary text-text text-secondary rounded-lg hover:opacity-80"
+            >
+              See Details
+            </button>
+          </div>
+        )}
       </div>
-      {enteredCode && (
-        <div className="flex justify-center">
-          <input
-            type="text"
-            placeholder="Enter Code"
-            onChange={(e) => setCodeText(e.target.value)}
-            className="w-60 mr-2 border-2 border-border bg-transparent text-text text-lg rounded-md p-2 focus:outline-none"
-            required
-          />
-          <button
-            onClick={handleSeeDetails}
-            className="px-2 py-1 text-sm bg-secondary text-text text-secondary rounded-lg hover:opacity-80"
-          >
-            See Details
-          </button>
-        </div>
-      )}
+
     </div>
   );
 };
