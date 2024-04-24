@@ -10,7 +10,7 @@ export const CreateHome = () => {
 
   // Check if any required fields in the profile are empty
   const isProfileIncomplete = !profile.address || !profile.age || !profile.gender || !profile.name || !profile.phone || !profile.userId;
- 
+
   return (
     <CreateHomeContextProvider>
       {isProfileIncomplete ? (

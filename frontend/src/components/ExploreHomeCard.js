@@ -10,7 +10,7 @@ const ExploreHomeCard = ({ home }) => {
   };
 
   return (
-    <div className="w-max p-8 m-4 space-y-4 rounded-lg bg-secondary text-text"onClick={handleClick}>
+    <div className="w-max p-8 m-4 space-y-4 rounded-lg bg-secondary text-text cursor-pointer" onClick={handleClick}>
       <h2 className="text-4xl border-b-1 ">{home.name}</h2>
       <p>Location: {home.location}</p>
       <p>Accommodation Type: {home.accommodationType}</p>
@@ -21,13 +21,13 @@ const ExploreHomeCard = ({ home }) => {
       <p>Utilities Included: {home.utilitiesIncluded ? "Yes" : "No"}</p>
       <p>Move In Date: {new Date(home.moveInDate).toLocaleDateString()}</p>
       {home.images && home.images.length > 0 && (
-        <div>
+        <div className="flex">
           {home.images.map((image, index) => (
             <img
               key={index}
               src={`/${image}`}
               alt={`Home ${home.name}`}
-              style={{ maxWidth: "100px", marginRight: "10px" }}
+              style={{ maxWidth: "120px", marginRight: "10px" }}
             />
           ))}
         </div>
