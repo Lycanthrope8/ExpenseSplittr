@@ -74,18 +74,6 @@ const ProfileForm = ({ onPictureChange }) => {
         },
       });
 
-      // const homeResponse = await fetch(`/home/updateHome/currentMembers/${user.userId}`, {
-      //   method: "PATCH",
-      //   body: JSON.stringify({
-      //     userId: user.userId,
-      //     name: name
-      //   }),
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Authorization: `Bearer ${user.token}`,
-      //   },
-      // });
-
       const json = await response.json();
       if (!response.ok) {
         setError(json.error);
@@ -195,7 +183,7 @@ const ProfileForm = ({ onPictureChange }) => {
           />
         </div>
         <button
-          className="col-span-2 mt-2 p-2 bg-accent text-zinc-800 rounded-2xl w-full hover:opacity-90"
+          className="col-span-2 mt-2 p-4  text-est rounded-lg border-1 border-border w-full hover:opacity-90"
           type="submit">Update Profile</button>
         {error && <div className="error">{error}</div>}
         <div className="col-span-1">

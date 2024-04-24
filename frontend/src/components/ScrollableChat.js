@@ -11,7 +11,7 @@ import { ChatState } from "../context/ChatContext";
 
 const ScrollableChat = ({ messages }) => {
   const { user } = ChatState();
-  
+
   // Function to compute the style object based on message and user
   const getMessageStyle = (message, index) => {
     // Compute backgroundColor based on sender
@@ -46,8 +46,8 @@ const ScrollableChat = ({ messages }) => {
             <div style={{ display: "flex" }} key={message._id}>
               {(isSameSender(messages, message, i, user.userId) ||
                 isLastMessage(messages, i, user.userId)) && (
-                <Tooltip label={message.sender.name} placement="bottom-start" hasArrow>
-                  {/* <Avatar
+                  <Tooltip label={message.sender.name} placement="bottom-start" hasArrow>
+                    {/* <Avatar
                     mt="7px"
                     mr={1}
                     size="sm"
@@ -55,9 +55,9 @@ const ScrollableChat = ({ messages }) => {
                     name={message.sender.name}
                     src={message.sender.pic}
                   /> */}
-                  {<p>{message.sender.email}</p>}
-                </Tooltip>
-              )}
+                    {<p>{message.sender.email}</p>}
+                  </Tooltip>
+                )}
               <span style={style}>
                 {message.content}
               </span>
