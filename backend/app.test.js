@@ -1,59 +1,40 @@
 const request = require('supertest');
-const mongoose = require('mongoose');
-const app = require('./server'); // Assuming your server file is named server.js
+const express = require('express');
+const router = require('./routes/user');
 
-// Before running tests, connect to the database
-beforeAll(async () => {
-  await mongoose.connect(process.env.MONGO_URI_TEST, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true
-  });
-});
+// Mock the controller functions
+jest.mock('./controllers/userController', () => ({
+  loginUser: jest.fn(),
+  signupUser: jest.fn(),
+  getAllUsers: jest.fn(),
+}));
 
-// After running tests, disconnect from the database
-afterAll(async () => {
-  await mongoose.disconnect();
-});
+const app = express();
+app.use(express.json());
+app.use('/', router);
 
-describe('Server Routes', () => {
-  it('GET /api/user should return status code 200', async () => {
-    const response = await request(app).get('/api/user');
-    expect(response.statusCode).toBe(200);
-  });
+describe('User Routes', () => {
+  // Test loginUser route
+  // Test signupUser route
 
-  // Add more route tests as needed
-});
+  // Test getAllUsers route
+  describe('GET /getalluser', () => {
+    it('should call getAllUsers controller', async () => {
+      // Mocking a valid JWT token
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjJiNDFkNGY5NWJiNzZmN2NhOWEzMGEiLCJpYXQiOjE3MTQxMTA5MzIsImV4cCI6MTcxNDE5NzMzMn0.hjf4uboz0CWrgNBiyUOB21hm64h0OXkvHSW4_GTqVUM';
 
-describe('Socket Connection', () => {
-  let server;
-  let ioClient;
+      await request(app)
+        .get('/getalluser')
+        .set('Authorization', `Bearer ${token}`);
 
-  // Before each test, start the server and connect a socket client
-  beforeEach(done => {
-    server = app.listen(() => {
-      const port = server.address().port;
-      ioClient = require('socket.io-client')(`http://localhost:${port}`);
-      ioClient.on('connect', done);
+      expect(require('./controllers/userController').getAllUsers).toHaveBeenCalled();
+    });
+
+    it('should return 401 without authentication', async () => {
+      const response = await request(app)
+        .get('/getalluser');
+
+      expect(response.status).toBe(401);
     });
   });
-
-  // After each test, disconnect the socket client and close the server
-  afterEach(done => {
-    if (ioClient.connected) {
-      ioClient.disconnect();
-    }
-    server.close(done);
-  });
-
-  it('should connect to socket server', done => {
-    ioClient.on('connect', () => {
-      expect(ioClient.connected).toBe(true);
-      done();
-    });
-  });
-
-  // Add more socket tests as needed
 });
-
