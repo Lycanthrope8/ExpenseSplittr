@@ -18,7 +18,7 @@ describe('User Controller', () => {
       json: jest.fn(),
     };
 
-    const mockUser = { _id: '123', email: 'jubayer@gmail.com' };
+    const mockUser = { _id: '6628921e911517dd540e833a', email: 'jubayer@gmail.com' };
     User.login.mockResolvedValue(mockUser);
 
     await loginUser(req, res);
