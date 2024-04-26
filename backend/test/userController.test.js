@@ -2,8 +2,8 @@ const userController = require('../controllers/userController');
 const userModel = require('../models/userModel'); // Add this line to import userModel
 
 jest.mock('../models/userModel', () => ({
-  login: jest.fn(),
-  signup: jest.fn(),
+  loginUser: jest.fn(),
+  signupUser: jest.fn(),
   get: jest.fn(),
 }));
 
@@ -12,39 +12,39 @@ describe('User Controller', () => {
     jest.clearAllMocks();
   });
 
-  describe('login', () => {
-    it('should login user successfully', async () => {
-      const mockUser = { _id: '662b41d4f95bb76f7ca9a30c', email: '  [email protected]', password: 'password' };
-      userModel.login.mockResolvedValue(mockUser);
+  describe('loginUser', () => {
+    it('should loginUser user successfully', async () => {
+      const mockUser = { _id: '662b41d4f95bb76f7ca9a30c', email: 'jahin8@gmail.com', password: 'abc123ABC!' };
+      userModel.loginUser.mockResolvedValue(mockUser);
 
-      const req = { body: { email: '  [email protected]', password: 'password' } };
+      const req = { body: { email: 'jahin8@gmail.com', password: 'abc123ABC!' } };
       const res = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
 
-      await userController.login(req, res);
+      await userController.loginUser(req, res);
 
-      expect(userModel.login).toHaveBeenCalledWith('  [email protected]', 'password');
+      expect(userModel.loginUser).toHaveBeenCalledWith('jahin8@gmail.com', 'abc123ABC!');
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({ userId: mockUser._id, email: mockUser.email, token: expect.any(String) });
     });
   });
 
-  describe('signup', () => {
-    it('should signup user successfully', async () => {
-      const mockUser = { _id: '662b41d4f95bb76f7ca9a30c', email: '  [email protected]', password: 'password' };
-      userModel.signup.mockResolvedValue(mockUser);
+  describe('signupUser', () => {
+    it('should signupUser user successfully', async () => {
+      const mockUser = { _id: '662b41d4f95bb76f7ca9a30b', email:'jahin9@gmail.com', password: 'abc123ABC!' };
+      userModel.signupUser.mockResolvedValue(mockUser);
 
-      const req = { body: { email: '  [email protected]', password: 'password' } };
+      const req = { body: { email: 'jahin9@gmail.com', password: 'abc123ABC!' } };
       const res = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       };
 
-      await userController.signup(req, res);
+      await userController.signupUser(req, res);
 
-      expect(userModel.signup).toHaveBeenCalledWith('  [email protected]', 'password');
+      expect(userModel.signupUser).toHaveBeenCalledWith('jahin9@gmail.com', 'abc123ABC!');
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({ userId: mockUser._id, email: mockUser.email, token: expect.any(String) });
     });
