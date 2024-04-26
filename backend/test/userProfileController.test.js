@@ -1,5 +1,7 @@
 const { getUserProfile, createUserProfile, updateUserProfile } = require('../controllers/userProfileController');
+
 const UserProfile = require('../models/userProfileModel');
+
 
 // Mocking the UserProfile model
 jest.mock('../models/userProfileModel', () => ({
@@ -7,6 +9,8 @@ jest.mock('../models/userProfileModel', () => ({
   create: jest.fn(),
   findOneAndUpdate: jest.fn(),
 }));
+
+
 
 describe('User Profile Controller', () => {
   afterEach(() => {

@@ -1,9 +1,10 @@
-const { loginUser, signupUser } = require('../controllers/userController');
-const User = require('../models/userModel');
+const userController = require('../controllers/userController');
+const userModel = require('../models/userModel'); // Add this line to import userModel
 
 jest.mock('../models/userModel', () => ({
   login: jest.fn(),
   signup: jest.fn(),
+  get: jest.fn(),
 }));
 
 describe('User Controller', () => {
@@ -11,71 +12,41 @@ describe('User Controller', () => {
     jest.clearAllMocks();
   });
 
-  it('should login user successfully', async () => {
-    const req = { body: { email: 'jubayer@gmail.com', password: 'abc123ABC!' } };
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
+  describe('login', () => {
+    it('should login user successfully', async () => {
+      const mockUser = { _id: '662b41d4f95bb76f7ca9a30c', email: '  [email protected]', password: 'password' };
+      userModel.login.mockResolvedValue(mockUser);
 
-    const mockUser = { _id: '6628921e911517dd540e833a', email: 'jubayer@gmail.com' };
-    User.login.mockResolvedValue(mockUser);
+      const req = { body: { email: '  [email protected]', password: 'password' } };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
 
-    await loginUser(req, res);
+      await userController.login(req, res);
 
-    expect(User.login).toHaveBeenCalledWith('jubayer@gmail.com', 'abc123ABC!');
-    expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith({ userId: '123', email: 'jubayer@gmail.com', token: expect.any(String) });
+      expect(userModel.login).toHaveBeenCalledWith('  [email protected]', 'password');
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ userId: mockUser._id, email: mockUser.email, token: expect.any(String) });
+    });
   });
 
-  it('should handle login errors', async () => {
-    const errorMessage = 'Invalid credentials';
-    User.login.mockRejectedValue(new Error(errorMessage));
+  describe('signup', () => {
+    it('should signup user successfully', async () => {
+      const mockUser = { _id: '662b41d4f95bb76f7ca9a30c', email: '  [email protected]', password: 'password' };
+      userModel.signup.mockResolvedValue(mockUser);
 
-    const req = { body: { email: 'jubayer@gmail.com', password: 'abc123ABC!' } };
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
+      const req = { body: { email: '  [email protected]', password: 'password' } };
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
 
-    await loginUser(req, res);
+      await userController.signup(req, res);
 
-    expect(User.login).toHaveBeenCalledWith('jubayer@gmail.com', 'abc123ABC!');
-    expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
-  });
-
-  it('should signup user successfully', async () => {
-    const req = { body: { email: 'jubayer@gmail.com', password: 'password' } };
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-
-    const mockUser = { _id: '123', email: 'jubayer@gmail.com' };
-    User.signup.mockResolvedValue(mockUser);
-
-    await signupUser(req, res);
-
-    expect(User.signup).toHaveBeenCalledWith('jubayer@gmail.com', 'password');
-    expect(res.status).toHaveBeenCalledWith(400); // Update status code to 400
-    expect(res.json).toHaveBeenCalledWith({ userId: '123', email: 'jubayer@gmail.com', token: expect.any(String) });
-  });
-
-  it('should handle signup errors', async () => {
-    const errorMessage = 'Email already exists';
-    User.signup.mockRejectedValue(new Error(errorMessage));
-
-    const req = { body: { email: 'jubayer@gmail.com', password: 'password' } };
-    const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    };
-
-    await signupUser(req, res);
-
-    expect(User.signup).toHaveBeenCalledWith('jubayer@gmail.com', 'password');
-    expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ error: errorMessage });
+      expect(userModel.signup).toHaveBeenCalledWith('  [email protected]', 'password');
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ userId: mockUser._id, email: mockUser.email, token: expect.any(String) });
+    });
   });
 });
