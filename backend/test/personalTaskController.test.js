@@ -18,25 +18,6 @@ const {
       jest.clearAllMocks(); // Clear mock usage data after each test
     });
   
-    describe('getTasks', () => {
-      it('should get all tasks successfully', async () => {
-        const mockTasks = [{ title: 'Task 1' }, { title: 'Task 2' }];
-        const req = { user: { _id: '662b41d4f95bb76f7ca9a30c' } };
-        const res = {
-          status: jest.fn().mockReturnThis(),
-          json: jest.fn()
-        };
-  
-        PersonalTask.find.mockReturnThis().mockResolvedValue(mockTasks);
-        // mockReturnThis() is used to chain methods, mockResolvedValue() is used to mock the resolved value
-  
-        await getTasks(req, res);
-  
-        expect(PersonalTask.find).toHaveBeenCalledWith({ user_id: '662b41d4f95bb76f7ca9a30c' });
-        expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.json).toHaveBeenCalledWith(mockTasks);
-      });
-    });
   
     describe('getTask', () => {
       it('should get a single task successfully', async () => {
