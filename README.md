@@ -24,7 +24,7 @@ Want to run ExpenseSplitte locally? Follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/expensesplitte.git
+    git clone https://github.com/Lycanthrope8/ExpenseSplittr.git
     cd expensesplitte
     ```
 2. Install dependencies:
