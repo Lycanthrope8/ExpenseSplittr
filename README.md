@@ -7,7 +7,7 @@ Welcome to **ExpenseSplitte**, the ultimate web service for making shared living
 - **🏠 Find Nearby Homes**: Discover available homes in your area and join a shared living space.
 - **💰 Expense Tracking**: Effortlessly track all shared expenses and manage repayments.
 - **🔄 Debt Management**: Instantly see who owes whom money and keep finances clear and fair.
-- **💬 In-App Chat**: Communicate seamlessly with your housemates using our built-in chat feature.
+- **💬 In-App Chat**: Communicate seamlessly with your housemates using our built-in chat feature. *(Note: The chat system is still a work in progress and will be improved in future updates.)*
 
 ## 🚀 Getting Started
 
@@ -64,7 +64,7 @@ Ensure both the backend and frontend servers are running concurrently to experie
 
 ## 🤝 Contributing
 
-We'd love your help in making ExpenseSplitte even better! Check out our [contributing guidelines](CONTRIBUTING.md) to get started.
+We'd love your help in making ExpenseSplitte even better!
 
 ## 📄 License
 
@@ -72,7 +72,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 📧 Contact
 
-Got questions or suggestions? Drop us a line at [](mailto:your-email@example.com).
+Got questions or suggestions? Drop us a line at [jubayerhossain9999@gmail.com](mailto:jubayerhossain9999@gmail.com).
 
 ---
 
