@@ -34,9 +34,9 @@ Want to run ExpenseSplitte locally? Follow these steps:
     ```bash
     cd backend
     ```
-2. Install dependencies:
+2. Install dependencies forcefully:
     ```bash
-    npm install
+    npm install --force
     ```
 3. Start the backend server:
     ```bash
@@ -49,9 +49,9 @@ Want to run ExpenseSplitte locally? Follow these steps:
     ```bash
     cd frontend
     ```
-2. Install dependencies:
+2. Install dependencies forcefully:
     ```bash
-    npm install
+    npm install --force
     ```
 3. Start the frontend development server:
     ```bash
@@ -72,7 +72,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 📧 Contact
 
-Got questions or suggestions? Drop us a line at [your-email@example.com](mailto:your-email@example.com).
+Got questions or suggestions? Drop us a line at [](mailto:your-email@example.com).
 
 ---
 
