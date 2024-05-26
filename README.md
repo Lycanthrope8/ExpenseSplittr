@@ -22,19 +22,45 @@ Getting started with ExpenseSplitte is easy and quick:
 
 Want to run ExpenseSplitte locally? Follow these steps:
 
-1. Clone the repository:
+### Prerequisites
+
+- Node.js
+- npm or yarn
+- MongoDB (for the backend)
+
+### Backend Setup
+
+1. Navigate to the `backend` directory:
     ```bash
-    git clone https://github.com/Lycanthrope8/ExpenseSplittr.git
-    cd expensesplitte
+    cd backend
     ```
 2. Install dependencies:
     ```bash
     npm install
     ```
-3. Start the development server:
+3. Start the backend server:
     ```bash
     npm start
     ```
+
+### Frontend Setup
+
+1. Navigate to the `frontend` directory:
+    ```bash
+    cd frontend
+    ```
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+3. Start the frontend development server:
+    ```bash
+    npm start
+    ```
+
+### Run the Full Application
+
+Ensure both the backend and frontend servers are running concurrently to experience the full functionality of ExpenseSplitte.
 
 ## 🤝 Contributing
 
