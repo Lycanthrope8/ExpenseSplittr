@@ -1,4 +1,4 @@
-# ExpenseSplitte
+# ExpenseSplittr
 
 Welcome to **ExpenseSplitte**, the ultimate web service for making shared living hassle-free! Designed with bachelors in mind, ExpenseSplitte helps you easily find nearby homes, track shared expenses, and keep everything organized. Say goodbye to awkward money conversations and hello to a smoother, more transparent living experience!
 
