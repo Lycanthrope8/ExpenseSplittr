@@ -80,8 +80,8 @@
     "web-vitals": "^3.5.2"
   },
   "overrides": {
-  "react-notification-badge": {
-    "react": "^18.2.0"
+    "react-notification-badge": {
+      "react-dom": "^18.2.0"
+    }
   }
-}
 }
