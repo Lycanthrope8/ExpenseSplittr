@@ -29,6 +29,7 @@ app.use((req, res, next) => {
 });
 
 // Serve static files from the 'uploads' directory
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // routes
