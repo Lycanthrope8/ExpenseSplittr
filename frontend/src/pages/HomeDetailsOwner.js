@@ -92,7 +92,7 @@ export const HomeDetailsOwner = () => {
   return (
     <>
       <div className="text-text text-2xl">
-        <button onClick={handleShowPendingRequests}>
+        <button onClick={handleShowPendingRequests} className="mt-2">
           {showPendingRequests ? (
             <h1 className="ml-2 flex items-center">
               <span className="material-symbols-outlined">arrow_back</span>

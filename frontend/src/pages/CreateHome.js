@@ -15,7 +15,7 @@ export const CreateHome = () => {
     <CreateHomeContextProvider>
       {isProfileIncomplete ? (
         <div>
-          <p className='text-text text-4xl'>Complete your profile before creating home.</p>
+          <p className='flex h-screen text-text text-4xl justify-center items-center'>Complete your profile before creating home.</p>
 
         </div>
       ) : (

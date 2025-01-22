@@ -45,18 +45,18 @@ const createHome = async (req, res) => {
       images,
       houseRules,
       owner_id,
-      currentMembers: {userId: userProfile.userId, name: userProfile.name}
+      currentMembers: { userId: userProfile.userId, name: userProfile.name }
     });
-    
+
 
     // Save the new home to the database
     const savedHome = await newHome.save();
     console.log("Home Created Successfully");
-    
-    
+
+
     // Updating the user's userProfile with the homeId
     const user = await UserProfile.findOne({ userId: owner_id });
-    user.homeId = savedHome.home_id; 
+    user.homeId = savedHome.home_id;
     const updatedUser = await user.save();
     console.log("User Updated Successfully");
 
@@ -146,8 +146,8 @@ const updateMembersById = async (req, res) => {
   const userId = req.params.id;
   try {
     const result = await Home.findOneAndUpdate(
-      { 'currentMembers.userId' : userId },
-      { $set : { 'currentMembers.$' : req.body } },
+      { 'currentMembers.userId': userId },
+      { $set: { 'currentMembers.$': req.body } },
       { new: true }
     );
     console.log(result);
@@ -155,7 +155,7 @@ const updateMembersById = async (req, res) => {
       res.status(200).json(result);
     }
     else {
-      res.status(404).json({ error: "Member not found"});
+      res.status(404).json({ error: "Member not found" });
     }
   } catch (error) {
     console.error("Error updating members:", error);
@@ -212,7 +212,7 @@ const acceptUserRequest = async (req, res) => {
   }
 };
 
-const rejectUserRequest = async (req,res) => {
+const rejectUserRequest = async (req, res) => {
   const { userId, homeId } = req.body;
   try {
     const result = await Home.rejectUserRequest(userId, homeId);
