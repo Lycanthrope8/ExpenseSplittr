@@ -1,3 +1,5 @@
 1. If user is in a home then It should not be accepted
 2. Complete profile before creating or sending Join Req to home
 3. mention image type size etc for home images and cancel option
+4. Chat system design
+5. Making the the chat system realtime
