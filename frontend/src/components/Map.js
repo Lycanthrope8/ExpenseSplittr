@@ -1,21 +1,8 @@
 import { useState, useRef, useMemo, useCallback } from "react";
 import {
-  GoogleMap,
-  Marker,
-  DirectionsRenderer,
-  Circle,
-  MarkerClusterer,
+  GoogleMap
 } from "@react-google-maps/api";
 import { Places } from './Places';
-// import Distance from './Distance';
-
-// const LatLngLiteral = google.maps.LatLngLiteral;
-// const DirectionsResult = google.maps.DirectionsResult;
-// const MapOptions = google.maps.MapOptions;
-
-// const generateHomes = (position: LatLngLiteral) => {
-//     const home: Array<LatlngLiteral> = [];
-// }
 export const Map = (props) => {
   const { isLoaded } = props;
   const [home, setHome] = useState(null);

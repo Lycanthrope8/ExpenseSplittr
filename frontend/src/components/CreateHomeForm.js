@@ -6,31 +6,18 @@ import { useLoadScript } from "@react-google-maps/api";
 import { Map } from "../components/Map";
 import { Checkbox } from "@mui/material";
 import grey from "@mui/material/colors/grey";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
+import usePlacesAutocomplete from "use-places-autocomplete";
 
 const CreateHomeForm = () => {
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
-  const [buttonLabel, setButtonLabel] = useState("Create Home"); // State for button label
+  const [buttonLabel, setButtonLabel] = useState("Create Home");
   const { user } = useAuthContext();
   const { dispatch } = useContext(ProfileContext);
   const navigate = useNavigate();
   const {
-    ready,
     value,
-    setValue,
-    suggestions: { status, data },
-    clearSuggestions,
+    suggestions: { status, data }
   } = usePlacesAutocomplete();
 
   const [name, setName] = useState("");
@@ -60,7 +47,7 @@ const CreateHomeForm = () => {
       setError("You must be logged in to create your Home");
       return;
     }
-    setButtonLabel("Creating"); // Change button label to "Creating"
+    setButtonLabel("Creating");
     const userId = user.userId;
     const formData = {
       name,
@@ -93,7 +80,7 @@ const CreateHomeForm = () => {
       if (!response.ok) {
         setError(json.error);
         setEmptyFields(json.emptyFields);
-        setButtonLabel("Create Home"); // Change button label back to "Create Home"
+        setButtonLabel("Create Home"); 
       } else {
         setError(null);
         dispatch({

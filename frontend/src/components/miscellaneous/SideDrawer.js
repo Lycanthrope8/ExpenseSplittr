@@ -5,7 +5,6 @@ import { Box, Text } from "@chakra-ui/react";
 import {
   Menu,
   MenuButton,
-  MenuDivider,
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
@@ -17,15 +16,12 @@ import {
   DrawerOverlay,
 } from "@chakra-ui/modal";
 import { Tooltip } from "@chakra-ui/tooltip";
-import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
-import { Avatar } from "@chakra-ui/avatar";
-import { useNavigate } from "react-router-dom";
+import { BellIcon} from "@chakra-ui/icons";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 import ChatLoading from "../ChatLoading";
 import { Spinner } from "@chakra-ui/spinner";
-import ProfileModal from "./ProfileModal";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
 import { getSender } from "../../config/ChatLogics";
@@ -48,7 +44,6 @@ function SideDrawer() {
   } = ChatState();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const navigate = useNavigate();
 
   
 

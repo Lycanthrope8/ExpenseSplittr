@@ -1,11 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import {  useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ProfileBadge from "./ProfileBadge";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { ProfileContext } from "../context/ProfileContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBangladeshiTakaSign } from "@fortawesome/free-solid-svg-icons";
-import { create } from "@mui/material/styles/createTransitions";
 import { useLogout } from "../hooks/useLogout";
 
 const Sidebar = ({ active }) => {
@@ -15,7 +14,6 @@ const Sidebar = ({ active }) => {
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
   const [more, setMore] = useState(false);
-  const SidebarContext = createContext();
 
   const handleHomeClick = () => {
     navigate("/");
@@ -26,7 +24,6 @@ const Sidebar = ({ active }) => {
 
   const handleClick = () => {
     logout();
-    // navigate("/");
   };
   return (
     <div
@@ -40,8 +37,6 @@ const Sidebar = ({ active }) => {
       <div
         className={`h-full flex flex-col bg-blue-gray-900 rounded-lg shadow-sm`}
       >
-        {/* <SidebarContext.Provider value={{expanded}}> */}
-        {/* {expanded ? <span className='material-symbols-rounded'>chevron_right</span> : <span className='material-symbols-rounded'>chevron_left</span>} */}
         <ul className="flex-1 p-3 space-y-4">
           <li
             onClick={handleHomeClick}

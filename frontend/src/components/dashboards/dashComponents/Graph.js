@@ -10,12 +10,10 @@ import {
   Title,
   Tooltip,
   Legend,
-  scales,
-  layouts,
 } from "chart.js";
-import { Line, Doughnut, Bar } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import moment, { min } from "moment";
+import moment from "moment";
 
 ChartJS.register(
   CategoryScale,
@@ -100,46 +98,41 @@ export const Graph = ({ expenses }) => {
           "rgb(54, 162, 235)",
         ],
         hoverOffset: 30,
-        // datalabels: {
-        //   align: "end",
-        //   anchor: "end",
-        // },
         borderWidth: 1,
       },
     ],
   };
 
-  const doughnutOptions = {
-    maintainAspectRatio: false,
-    responsive: true,
-    radius: 120,
-    plugins: {
-      labels: {
-        render: "value",
-      },
-      legend: {
-        display: false,
-      },
-      datalabels: {
-        color: "hsl(0, 0%, 98%)",
-        anchor: "center",
-        display: function (context) {
-          return context;
-        },
-        formatter: function (value, context) {
-          return "৳ " + value;
-        },
-        font: {
-          family: "Axiforma",
-          size: "16px",
-          weight: "bold",
-        },
-      },
-    },
-  };
+  // const doughnutOptions = {
+  //   maintainAspectRatio: false,
+  //   responsive: true,
+  //   radius: 120,
+  //   plugins: {
+  //     labels: {
+  //       render: "value",
+  //     },
+  //     legend: {
+  //       display: false,
+  //     },
+  //     datalabels: {
+  //       color: "hsl(0, 0%, 98%)",
+  //       anchor: "center",
+  //       display: function (context) {
+  //         return context;
+  //       },
+  //       formatter: function (value, context) {
+  //         return "৳ " + value;
+  //       },
+  //       font: {
+  //         family: "Axiforma",
+  //         size: "16px",
+  //         weight: "bold",
+  //       },
+  //     },
+  //   },
+  // };
 
   const barOptions = {
-    // aspectRatio: 1 | 2,
     maintainAspectRatio: false,
     responsive: true,
     layout: {
@@ -188,7 +181,6 @@ export const Graph = ({ expenses }) => {
         data: weeklyAmounts,
         fill: true,
         backgroundColor: "rgba(0,0,0,0)",
-        // borderColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: "#00a8cc",
       },
     ],
