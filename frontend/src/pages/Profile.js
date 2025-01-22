@@ -14,7 +14,7 @@ const Profile = () => {
   useEffect(() => {
     if (profile) {
       setLoading(false);
-      setProfilePictureUrl(profile.avatar || 'http://localhost:4000/uploads/profilePictures/default.jpg');
+      setProfilePictureUrl(profile.avatar || `${process.env.REACT_APP_BACKENDURL}/uploads/profilePictures/default.jpg`);
     }
   }, [profile]);
 

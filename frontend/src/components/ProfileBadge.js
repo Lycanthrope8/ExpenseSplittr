@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { ProfileContext } from "../context/ProfileContext";
 import { Avatar } from "@mui/material";
 
@@ -14,7 +13,7 @@ const ProfileBadge = ({ user }) => {
       setLoading(false);
       setProfilePictureUrl(
         profile.avatar ||
-        `${process.env.BASEURL}/uploads/profilePictures/default.jpg`
+        `${process.env.REACT_APP_BACKENDURL}/uploads/profilePictures/default.jpg`
       );
     }
   }, [profile]);

@@ -57,7 +57,7 @@ mongoose.connect(process.env.MONGO_URI)
     const io = require("socket.io")(server, {
       pingTimeout: 60000,
       cors: {
-        origin: "http://localhost:3000",
+        origin: process.env.REACT_APP_BACKENDURL,
         // credentials: true,
       },
     });
@@ -83,7 +83,7 @@ mongoose.connect(process.env.MONGO_URI)
         if (!chat.users) return console.log("chat.users not defined");
 
         chat.users.forEach((user) => {
-          
+
           // console.log("user:", user )
           console.log("newMessageRecieved.sender._id", newMessageRecieved.sender._id)
           if (user._id == newMessageRecieved.sender._id) return;
