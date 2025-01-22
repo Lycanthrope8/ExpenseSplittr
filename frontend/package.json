@@ -78,5 +78,10 @@
   "devDependencies": {
     "tailwindcss": "^3.4.1",
     "web-vitals": "^3.5.2"
+  },
+  "overrides": {
+  "react-notification-badge": {
+    "react": "^18.2.0"
   }
+}
 }
