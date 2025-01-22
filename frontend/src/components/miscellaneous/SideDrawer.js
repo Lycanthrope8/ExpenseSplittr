@@ -16,14 +16,14 @@ import {
   DrawerOverlay,
 } from "@chakra-ui/modal";
 import { Tooltip } from "@chakra-ui/tooltip";
-import { BellIcon} from "@chakra-ui/icons";
+import { BellIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
 import ChatLoading from "../ChatLoading";
 import { Spinner } from "@chakra-ui/spinner";
-import NotificationBadge from "react-notification-badge";
-import { Effect } from "react-notification-badge";
+// import NotificationBadge from "react-notification-badge";
+// import { Effect } from "react-notification-badge";
 import { getSender } from "../../config/ChatLogics";
 import UserListItem from "../userAvatar/UserListItem";
 import { ChatState } from "../../context/ChatContext";
@@ -45,7 +45,7 @@ function SideDrawer() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  
+
 
   const handleSearch = async () => {
     if (!search) {
@@ -133,14 +133,13 @@ function SideDrawer() {
             </Text>
           </Button>
         </Tooltip>
-        
+        {/* <NotificationBadge
+                count={notification.length}
+                effect={Effect.SCALE}
+              /> */}
         <div>
           <Menu>
             <MenuButton p={1}>
-              <NotificationBadge
-                count={notification.length}
-                effect={Effect.SCALE}
-              />
               <BellIcon fontSize="2xl" m={1} />
             </MenuButton>
             <MenuList pl={2}>

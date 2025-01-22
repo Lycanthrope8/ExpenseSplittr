@@ -42,7 +42,6 @@
     "react-lottie": "^1.2.4",
     "react-mentions": "^4.4.10",
     "react-minimal-pie-chart": "^8.4.0",
-    "react-notification-badge": "^1.5.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-scrollable-feed": "^2.0.1",
@@ -78,10 +77,5 @@
   "devDependencies": {
     "tailwindcss": "^3.4.1",
     "web-vitals": "^3.5.2"
-  },
-  "overrides": {
-    "react-notification-badge": {
-      "react-dom": "^18.2.0"
-    }
   }
 }
