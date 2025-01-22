@@ -1,7 +1,7 @@
 
 const Home = require("../models/homeModel");
 const UserProfile = require("../models/userProfileModel");
-const upload = require("../middleware/homeMulterMiddleware");
+const upload = require("../middleware/homeMulterMiddleWare");
 
 const { nanoid } = require('nanoid');
 
